@@ -2,6 +2,9 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markdown2 import Markdown
 from yaml import load 
 import yaml
+import shutil
+import os
+from utils import rmdir
 
 env = Environment(
     loader=FileSystemLoader("templates"),
@@ -24,7 +27,12 @@ def render(env: Environment, name: str) -> None:
     with open(f'output/{name}.html', 'w') as f:
         f.write(rendered)
 
+
+
 def render_all():
+    if os.path.exists("output/static"):
+        rmdir("output/static")
+    shutil.copytree("static", "output/static")
     render(env, name="index")
 
 

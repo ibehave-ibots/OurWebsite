@@ -10,19 +10,29 @@
 
 <html> 
 
-    <head></head>
+    <head>
+        <title> {{ data.title }} </title>
+    </head>
 
     <body>
 
         <h1> {{ data.title }} </h1>
 
-        <ul>
+        
+        <div>
+            <h2>Team Members</h2>
             {% for name in data.names %}
-            <li>{{ name }}</li>
+            <div> <img src={{ name.image }} alt="{{ name.name }}" width="200", height="200">  {{ name.name }}</div>
             {% endfor %}
-        </ul>
+        </div>
 
-        {{ data.content | safe}}
+        <div>
+            <h2> Our History </h2>
+            {{ data.content | safe}}
+
+        </div>
+
+        
     </body>
 
 </html>
