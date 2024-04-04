@@ -1,2 +1,0 @@
-
-{{ data.greeting }}{{ data.sep }} {{ data.name }}{{ data.punctuation }}

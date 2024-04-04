@@ -16,8 +16,9 @@
 
         <h1>About Us</h1>
         <ul>
-            <li>{{data.name1}}</li>
-            <li>{{data.name2}}</li>
+            {% for name in data.names %}
+            <li>{{ name }}</li>
+            {% endfor %}
         </ul>
 
 
