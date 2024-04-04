@@ -14,14 +14,15 @@
 
     <body>
 
-        <h1>About Us</h1>
+        <h1> {{ data.title }} </h1>
+
         <ul>
             {% for name in data.names %}
             <li>{{ name }}</li>
             {% endfor %}
         </ul>
 
-
+        {{ data.content | safe}}
     </body>
 
 </html>
