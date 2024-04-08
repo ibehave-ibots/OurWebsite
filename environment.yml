@@ -9,6 +9,7 @@ dependencies:
       - jinja2
       - markdown2
       - PyYAML
+      - Pillow
 
 
 

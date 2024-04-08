@@ -5,11 +5,14 @@ import yaml
 import shutil
 import os
 from utils import rmdir
+from image_processing import resize_image
+
 
 env = Environment(
     loader=FileSystemLoader("templates"),
     autoescape=select_autoescape()
 )
+env.filters['resize'] = resize_image
 
 def render(env: Environment, name: str) -> None:
     template = env.get_template(f'{name}.html')
@@ -35,6 +38,8 @@ def render_all():
     shutil.copytree("static", "output/static")
     render(env, name="index")
 
+
+    
 
 if __name__ == '__main__':
     render_all()

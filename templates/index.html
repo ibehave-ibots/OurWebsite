@@ -22,20 +22,22 @@
                 {% for name in data.names %}
                 <div class="card" style="height: 100%">
                     <div class="card-image">
-                      <figure class="image is-3by3">
+                      <figure class="image is-10x10">
                         <img
-                          src="{{ name.image }}"
+                          src="{{ name.image | resize((200, 200)) }}"
                           alt="{{ name.name }}"
+                          class="is-rounded"
                         />
                       </figure>
                     </div>
                     <div class="card-content">
                       <div class="media">
                         <div class="media-left">
-                          <figure class="image is-48x48">
+                          <figure class="image ">
                             <img
-                              src="{{ name.image }}"
+                              src="{{ name.image | resize((48, 48)) }}"
                               alt="{{ name.name }}"
+                              
                             />
                           </figure>
                         </div>
@@ -46,10 +48,10 @@
                       </div>
                   
                       <div class="content">
-                        {{ name.description}}
+                        <!-- {{ name.description}}
                         {% for link in name.links %}
                             <a href="{{ link.url }}">{{ link.text }}</a>
-                        {% endfor %}
+                        {% endfor %} -->
                       </div>
                     </div>
                   </div>
