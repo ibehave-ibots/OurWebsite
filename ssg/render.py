@@ -4,8 +4,8 @@ from yaml import load
 import yaml
 import shutil
 import os
-from utils import rmdir
-from image_processing import resize_image
+from .utils import rmdir
+from .image_processing import resize_image
 
 
 env = Environment(
