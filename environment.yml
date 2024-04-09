@@ -10,6 +10,7 @@ dependencies:
       - markdown2
       - PyYAML
       - Pillow
+      - pytest
 
 
 
