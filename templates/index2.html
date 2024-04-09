@@ -1,0 +1,293 @@
+{% extends "base.html" %}
+{% block body %}
+
+<!-- Navigation Bar -->
+
+<section class="is-relative">
+    <nav class="navbar py-2" role="navigation" aria-label="navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          <img class="image" src="asitrastudio-assets/logos/logo-asi.svg" alt="">
+        </a>
+        <button class="is-hidden-desktop is-inline-flex is-align-items-center is-justify-content-center navbar-menu-open navbar-burger" href="#">
+          <svg width="38" height="16" viewbox="0 0 44 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="44" height="2" rx="1" fill="black"></rect><rect y="14" width="44" height="2" rx="1" fill="black"></rect></svg>
+        </button>
+      </div>
+      <div class="navbar-menu" id="navExample">
+        <div class="navbar-end">
+          <a class="navbar-item">About</a><a class="navbar-item">Services</a><a class="navbar-item">Projects</a><a class="navbar-item">Contact us</a>
+          <div class="navbar-item">
+            <a class="button is-outlined is-rounded is-dark is-flex is-align-items-center" href="#">
+              <span class="mr-3">Get consulation</span>
+              <svg class="is-rotate-45" width="10" height="11" viewbox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 1.5L1 9.5" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M9 8.83571V1.5H1.66429" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="is-hidden navbar-side is-fixed is-top-0 is-bottom-0 is-left-0 has-mw-sm" style="width: 75%; z-index: 9999;">
+      <div class="navbar-backdrop is-fixed is-inset-0 has-background-dark" style="opacity: 75%; z-index: 50;"></div>
+      <aside class="menu is-relative is-flex is-flex-direction-column pb-6 px-6 has-background-white" style="width: 100%; height: 100%; z-index: 50; overflow-y: auto;">
+        <div class="is-flex is-align-items-center mb-10">
+          <a class="mr-auto mb-0" href="#">
+            <span class="navbar-item px-0 title is-5 has-text-dark">
+              <img src="asitrastudio-assets/logos/logo-asi.svg" alt="" style="height: 21px;" width="auto">
+            </span>
+          </a>
+          <button class="navbar-close button is-text p-0 mb-2" type="button" aria-label="Close">
+            <svg style="width: 18px; height: 18px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <ul class="menu-list is-size-7">
+          <li class="mb-2"><a href="#">About</a></li>
+          <li class="mb-2"><a href="#">Services</a></li>
+          <li class="mb-2"><a href="#">Projects</a></li>
+          <li class="mb-2"><a href="#">Contact us</a></li>
+        </ul>
+        <div class="mt-auto"><a class="button mb-3 is-fullwidth is-outlined is-rounded is-dark" href="#">Login</a><a class="button is-fullwidth is-rounded is-primary" href="#">Sign in</a></div>
+      </aside>
+    </div>
+  </section>
+
+<!-- Header -->
+<div class="is-relative pb-20">
+    <nav class="navbar py-5">
+      <div class="container is-fluid">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="#">
+            <span class="navbar-item px-0 title is-5 has-text-dark"></span>
+          </a>
+          <a class="navbar-menu-open navbar-burger" role="button" type="button" data-toggle="side-menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <div class="navbar-item is-hidden-mobile pl-0"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <img class="is-absolute is-left-0 is-top-0 mt-32 is-hidden-touch" src="zeus-assets/icons/dots/blue-dot-left-bars.svg" alt="">
+    <img class="is-absolute is-right-0 is-top-0 mt-80 is-hidden-touch" src="zeus-assets/icons/dots/yellow-dot-right.svg" alt="">
+    <img class="is-absolute is-left-0 is-bottom-0 is-hidden-desktop" src="zeus-assets/icons/dots/blue-dot-left-bars.svg" alt="">
+    <section class="is-relative section">
+      <div class="container has-text-centered">
+        <span class="is-size-7"></span>
+        <h2 class="has-mw-5xl mx-auto mt-8 mb-8 mb-12-desktop title is-1 is-size-2-mobile" contenteditable="false">iBehave iBOTS-Code</h2>
+        <p class="has-mw-3xl mx-auto mb-8 mb-12-desktop is-size-5 has-text-grey-dark" contenteditable="true">A good caption for iBOTS-Code</p>
+      </div>
+    </section>
+    <div class="is-hidden navbar-side is-fixed is-top-0 is-bottom-0 is-left-0 has-mw-md" style="width: 75%; z-index: 9999;">
+      <div class="navbar-backdrop is-fixed is-inset-0 has-background-dark" style="opacity: 75%; z-index: 50;"></div>
+      <aside class="menu is-relative is-flex is-flex-direction-column py-6 px-6 has-background-white" style="width: 100%; height: 100%; z-index: 50; overflow-y: auto;">
+        <div class="is-flex is-align-items-center mb-10">
+          <a class="mr-auto mb-0" href="#">
+            <span class="navbar-item px-0 title is-5 has-text-dark">
+              <img src="zeus-assets/logo/logo-zeus-red.svg" alt="" style="height: 28px;" width="auto">
+            </span>
+          </a>
+          <button class="navbar-close button is-text p-0 mb-2" type="button" aria-label="Close">
+            <svg style="width: 18px; height: 18px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <ul class="menu-list is-size-7">
+          <li class="mb-2"><a href="#">About</a></li>
+          <li class="mb-2"><a href="#">Company</a></li>
+          <li class="mb-2"><a href="#">Services</a></li>
+          <li class="mb-2"><a href="#">Testimonials</a></li>
+        </ul>
+        <div class="mt-auto">
+          <div class="py-6"><a class="button is-primary is-fullwidth" href="#">Contact Us</a></div>
+          <p class="mb-4 has-text-centered has-text-grey-dark">
+            <span>© 2021 All rights reserved.</span>
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+<!-- Courses -->
+<section class="section">
+    <div class="container">
+      <div class="columns is-multiline">
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <div class="mb-5 is-flex is-align-items-center">
+                  <span class="has-text-light is-inline-flex has-background-info is-justify-content-center is-align-items-center is-flex-shrink-0" style="border-radius: 50% !important; width: 40px; height: 40px;">
+                    <svg width="18" height="16" viewbox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14.8335 2.58333H9.60014L9.33348 1.75C9.1606 1.26102 8.83993 0.837918 8.41589 0.539299C7.99185 0.24068 7.48544 0.0813322 6.96681 0.0833316H3.16681C2.50377 0.0833316 1.86788 0.346724 1.39904 0.815565C0.930201 1.28441 0.666809 1.92029 0.666809 2.58333V13.4167C0.666809 14.0797 0.930201 14.7156 1.39904 15.1844C1.86788 15.6533 2.50377 15.9167 3.16681 15.9167H14.8335C15.4965 15.9167 16.1324 15.6533 16.6012 15.1844C17.0701 14.7156 17.3335 14.0797 17.3335 13.4167V5.08333C17.3335 4.42029 17.0701 3.78441 16.6012 3.31557C16.1324 2.84672 15.4965 2.58333 14.8335 2.58333ZM15.6668 13.4167C15.6668 13.6377 15.579 13.8496 15.4227 14.0059C15.2665 14.1622 15.0545 14.25 14.8335 14.25H3.16681C2.9458 14.25 2.73383 14.1622 2.57755 14.0059C2.42127 13.8496 2.33348 13.6377 2.33348 13.4167V2.58333C2.33348 2.36232 2.42127 2.15036 2.57755 1.99408C2.73383 1.8378 2.9458 1.75 3.16681 1.75H6.96681C7.14151 1.74955 7.31194 1.80401 7.454 1.9057C7.59606 2.00739 7.70257 2.15115 7.75848 2.31667L8.20848 3.68333C8.26438 3.84885 8.37089 3.99261 8.51295 4.0943C8.65501 4.19598 8.82544 4.25045 9.00014 4.25H14.8335C15.0545 4.25 15.2665 4.3378 15.4227 4.49408C15.579 4.65036 15.6668 4.86232 15.6668 5.08333V13.4167Z" fill="currentColor"></path>
+                    </svg>
+                  </span>
+                  <div class="ml-3">
+                    <h3 class="title mb-0" style="font-size: 12px;" contenteditable="false">Learning Projects</h3>
+                  </div>
+                </div>
+                <div contenteditable="false">
+                  <div class="mb-3 is-flex is-align-items-center has-text-grey-light">
+                    <span class="mr-2">
+                      <svg width="18" height="16" viewbox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.833 3.41668H12.333V2.58334C12.333 1.9203 12.0696 1.28442 11.6008 0.815577C11.1319 0.346736 10.496 0.0833435 9.83299 0.0833435H8.16632C7.50328 0.0833435 6.86739 0.346736 6.39855 0.815577C5.92971 1.28442 5.66632 1.9203 5.66632 2.58334V3.41668H3.16632C2.50328 3.41668 1.86739 3.68007 1.39855 4.14891C0.929713 4.61775 0.666321 5.25363 0.666321 5.91668V13.4167C0.666321 14.0797 0.929713 14.7156 1.39855 15.1844C1.86739 15.6533 2.50328 15.9167 3.16632 15.9167H14.833C15.496 15.9167 16.1319 15.6533 16.6008 15.1844C17.0696 14.7156 17.333 14.0797 17.333 13.4167V5.91668C17.333 5.25363 17.0696 4.61775 16.6008 4.14891C16.1319 3.68007 15.496 3.41668 14.833 3.41668ZM7.33299 2.58334C7.33299 2.36233 7.42079 2.15037 7.57707 1.99409C7.73335 1.83781 7.94531 1.75001 8.16632 1.75001H9.83299C10.054 1.75001 10.266 1.83781 10.4222 1.99409C10.5785 2.15037 10.6663 2.36233 10.6663 2.58334V3.41668H7.33299V2.58334ZM15.6663 13.4167C15.6663 13.6377 15.5785 13.8497 15.4222 14.0059C15.266 14.1622 15.054 14.25 14.833 14.25H3.16632C2.94531 14.25 2.73335 14.1622 2.57707 14.0059C2.42079 13.8497 2.33299 13.6377 2.33299 13.4167V9.20834H4.83299V10.0833C4.83299 10.3044 4.92079 10.5163 5.07707 10.6726C5.23335 10.8289 5.44531 10.9167 5.66632 10.9167C5.88733 10.9167 6.0993 10.8289 6.25558 10.6726C6.41186 10.5163 6.49965 10.3044 6.49965 10.0833V9.20834H11.4997V10.0833C11.4997 10.3044 11.5875 10.5163 11.7437 10.6726C11.9 10.8289 12.112 10.9167 12.333 10.9167C12.554 10.9167 12.766 10.8289 12.9222 10.6726C13.0785 10.5163 13.1663 10.3044 13.1663 10.0833V9.20834H15.6663V13.4167ZM15.6663 7.58334H2.33299V5.91668C2.33299 5.69566 2.42079 5.4837 2.57707 5.32742C2.73335 5.17114 2.94531 5.08334 3.16632 5.08334H14.833C15.054 5.08334 15.266 5.17114 15.4222 5.32742C15.5785 5.4837 15.6663 5.69566 15.6663 5.91668V7.58334Z" fill="#C2C9D2"></path>
+                      </svg>
+                    </span>
+                    <span style="font-size: 12px;">Shuffle.dev</span>
+                  </div>
+                  <div class="is-flex is-align-items-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <div class="mb-5 is-flex is-align-items-center">
+                  <span class="has-text-light is-inline-flex has-background-warning is-justify-content-center is-align-items-center is-flex-shrink-0" style="border-radius: 50% !important; width: 40px; height: 40px;">
+                    <svg width="18" height="16" viewbox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14.8335 2.58333H9.60014L9.33348 1.75C9.1606 1.26102 8.83993 0.837918 8.41589 0.539299C7.99185 0.24068 7.48544 0.0813322 6.96681 0.0833316H3.16681C2.50377 0.0833316 1.86788 0.346724 1.39904 0.815565C0.930201 1.28441 0.666809 1.92029 0.666809 2.58333V13.4167C0.666809 14.0797 0.930201 14.7156 1.39904 15.1844C1.86788 15.6533 2.50377 15.9167 3.16681 15.9167H14.8335C15.4965 15.9167 16.1324 15.6533 16.6012 15.1844C17.0701 14.7156 17.3335 14.0797 17.3335 13.4167V5.08333C17.3335 4.42029 17.0701 3.78441 16.6012 3.31557C16.1324 2.84672 15.4965 2.58333 14.8335 2.58333ZM15.6668 13.4167C15.6668 13.6377 15.579 13.8496 15.4227 14.0059C15.2665 14.1622 15.0545 14.25 14.8335 14.25H3.16681C2.9458 14.25 2.73383 14.1622 2.57755 14.0059C2.42127 13.8496 2.33348 13.6377 2.33348 13.4167V2.58333C2.33348 2.36232 2.42127 2.15036 2.57755 1.99408C2.73383 1.8378 2.9458 1.75 3.16681 1.75H6.96681C7.14151 1.74955 7.31194 1.80401 7.454 1.9057C7.59606 2.00739 7.70257 2.15115 7.75848 2.31667L8.20848 3.68333C8.26438 3.84885 8.37089 3.99261 8.51295 4.0943C8.65501 4.19598 8.82544 4.25045 9.00014 4.25H14.8335C15.0545 4.25 15.2665 4.3378 15.4227 4.49408C15.579 4.65036 15.6668 4.86232 15.6668 5.08333V13.4167Z" fill="currentColor"></path>
+                    </svg>
+                  </span>
+                  <div class="ml-3">
+                    <h3 class="title mb-0" style="font-size: 12px;" contenteditable="false">Tutorials</h3>
+                  </div>
+                </div>
+                <div>
+                  <div class="mb-3 is-flex is-align-items-center has-text-grey-light">
+                    <span class="mr-2">
+                      <svg width="18" height="16" viewbox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.833 3.41668H12.333V2.58334C12.333 1.9203 12.0696 1.28442 11.6008 0.815577C11.1319 0.346736 10.496 0.0833435 9.83299 0.0833435H8.16632C7.50328 0.0833435 6.86739 0.346736 6.39855 0.815577C5.92971 1.28442 5.66632 1.9203 5.66632 2.58334V3.41668H3.16632C2.50328 3.41668 1.86739 3.68007 1.39855 4.14891C0.929713 4.61775 0.666321 5.25363 0.666321 5.91668V13.4167C0.666321 14.0797 0.929713 14.7156 1.39855 15.1844C1.86739 15.6533 2.50328 15.9167 3.16632 15.9167H14.833C15.496 15.9167 16.1319 15.6533 16.6008 15.1844C17.0696 14.7156 17.333 14.0797 17.333 13.4167V5.91668C17.333 5.25363 17.0696 4.61775 16.6008 4.14891C16.1319 3.68007 15.496 3.41668 14.833 3.41668ZM7.33299 2.58334C7.33299 2.36233 7.42079 2.15037 7.57707 1.99409C7.73335 1.83781 7.94531 1.75001 8.16632 1.75001H9.83299C10.054 1.75001 10.266 1.83781 10.4222 1.99409C10.5785 2.15037 10.6663 2.36233 10.6663 2.58334V3.41668H7.33299V2.58334ZM15.6663 13.4167C15.6663 13.6377 15.5785 13.8497 15.4222 14.0059C15.266 14.1622 15.054 14.25 14.833 14.25H3.16632C2.94531 14.25 2.73335 14.1622 2.57707 14.0059C2.42079 13.8497 2.33299 13.6377 2.33299 13.4167V9.20834H4.83299V10.0833C4.83299 10.3044 4.92079 10.5163 5.07707 10.6726C5.23335 10.8289 5.44531 10.9167 5.66632 10.9167C5.88733 10.9167 6.0993 10.8289 6.25558 10.6726C6.41186 10.5163 6.49965 10.3044 6.49965 10.0833V9.20834H11.4997V10.0833C11.4997 10.3044 11.5875 10.5163 11.7437 10.6726C11.9 10.8289 12.112 10.9167 12.333 10.9167C12.554 10.9167 12.766 10.8289 12.9222 10.6726C13.0785 10.5163 13.1663 10.3044 13.1663 10.0833V9.20834H15.6663V13.4167ZM15.6663 7.58334H2.33299V5.91668C2.33299 5.69566 2.42079 5.4837 2.57707 5.32742C2.73335 5.17114 2.94531 5.08334 3.16632 5.08334H14.833C15.054 5.08334 15.266 5.17114 15.4222 5.32742C15.5785 5.4837 15.6663 5.69566 15.6663 5.91668V7.58334Z" fill="#C2C9D2"></path>
+                      </svg>
+                    </span>
+                    <span style="font-size: 12px;">Shuffle.dev</span>
+                  </div>
+                  <div class="is-flex is-align-items-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="card"></div>
+        </div>
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="card"></div>
+        </div>
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="card"></div>
+        </div>
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="card"></div>
+        </div>
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="card"></div>
+        </div>
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="card"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- Our mission -->
+<section class="section py-20">
+    <div class="container">
+        <span class="inline-block py-px px-2 mb-4 text-xs leading-5 text-green-500 bg-green-100 font-medium uppercase rounded-9xl">
+            <h2 class="mb-8 mb-16-desktop title is-1">Mission</h2>
+          </span>      <div class="columns is-vcentered">
+        <div class="column is-8 mb-3 mb-0-desktop">
+          <p class="mb-1 is-size-5 has-text-grey-dark">To Bring Modern Software and Data Engineering Practices into Neuroscience Research Groups through Team Collaboration</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Our team stuff -->
+
+<section class="py-24 bg-white current-highlight" style="background-image: url('flex-ui-assets/elements/pattern-white.svg'); background-position: center;">
+ 
+    <div class="container px-4 mx-auto">
+    <span class="inline-block py-px px-2 mb-4 text-xs leading-5 text-green-500 bg-green-100 font-medium uppercase rounded-9xl">
+      <h2 class="mb-8 mb-16-desktop title is-1">Team</h2>
+    </span>
+      <div class="flex flex-wrap -mx-4">
+        <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4 mb-10">
+          <div class="max-w-xs mx-auto md:ml-0">
+            <img class="w-24 h-24 mb-6 rounded-full" src="static/img/nick_200x200.jpg" alt="static\img\nick_200x200.jpg">
+            <h3 class="mb-1 text-lg text-coolGray-800 font-semibold">Dr. Nicholas Del Grosso</h3>
+            <span class="inline-block mb-4 text-lg font-medium text-green-500">iBOTS-Code</span>
+            <p class="mb-4 text-coolGray-500 font-medium">Here is a quote.</p>
+            <div class="flex items-center">
+              <a class="inline-block mr-5 text-coolGray-300 hover:text-coolGray-400" href="#">
+                <svg width="10" height="18" viewbox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M6.63494 17.7273V9.76602H9.3583L9.76688 6.66246H6.63494V4.68128C6.63494 3.78301 6.88821 3.17085 8.20297 3.17085L9.87712 3.17017V0.394238C9.5876 0.357335 8.59378 0.272728 7.43708 0.272728C5.0217 0.272728 3.3681 1.71881 3.3681 4.37391V6.66246H0.636475V9.76602H3.3681V17.7273H6.63494Z" fill="currentColor"></path>
+                </svg>
+              </a>
+              <a class="inline-block mr-5 text-coolGray-300 hover:text-coolGray-400" href="#">
+                <svg width="19" height="16" viewbox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.8181 2.14597C18.1356 2.44842 17.4032 2.65355 16.6336 2.74512C17.4194 2.27461 18.0208 1.5283 18.3059 0.641757C17.5689 1.07748 16.7553 1.39388 15.8885 1.56539C15.1943 0.824879 14.2069 0.363636 13.1118 0.363636C11.0108 0.363636 9.30722 2.06718 9.30722 4.16706C9.30722 4.46488 9.34083 4.75576 9.40574 5.03391C6.24434 4.87512 3.44104 3.36048 1.56483 1.05894C1.23686 1.61985 1.05028 2.27342 1.05028 2.97109C1.05028 4.29106 1.72243 5.45573 2.74225 6.13712C2.11877 6.11627 1.53237 5.94476 1.01901 5.65967V5.70718C1.01901 7.54979 2.33086 9.08761 4.07031 9.43761C3.75161 9.52336 3.41555 9.57088 3.06789 9.57088C2.82222 9.57088 2.58464 9.54655 2.35171 9.50018C2.8361 11.0125 4.24067 12.1123 5.90483 12.1424C4.6034 13.1622 2.96243 13.7683 1.1801 13.7683C0.873008 13.7683 0.570523 13.7498 0.272705 13.7162C1.95655 14.7974 3.95561 15.4278 6.10416 15.4278C13.1026 15.4278 16.928 9.63115 16.928 4.60397L16.9153 4.11145C17.6627 3.57833 18.3094 2.90851 18.8181 2.14597Z" fill="currentColor"></path>
+                </svg>
+              </a>
+              <a class="inline-block mr-5 text-coolGray-300 hover:text-coolGray-400" href="#">
+                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.6007 0.181818H14.3992C17.3874 0.181818 19.8184 2.61281 19.8182 5.60074V14.3993C19.8182 17.3872 17.3874 19.8182 14.3992 19.8182H5.6007C2.61276 19.8182 0.181885 17.3873 0.181885 14.3993V5.60074C0.181885 2.61281 2.61276 0.181818 5.6007 0.181818ZM14.3993 18.0759C16.4267 18.0759 18.0761 16.4266 18.0761 14.3993H18.076V5.60074C18.076 3.57348 16.4266 1.92405 14.3992 1.92405H5.6007C3.57343 1.92405 1.92412 3.57348 1.92412 5.60074V14.3993C1.92412 16.4266 3.57343 18.0761 5.6007 18.0759H14.3993ZM4.85721 10.0001C4.85721 7.16424 7.16425 4.85714 10.0001 4.85714C12.8359 4.85714 15.1429 7.16424 15.1429 10.0001C15.1429 12.8359 12.8359 15.1429 10.0001 15.1429C7.16425 15.1429 4.85721 12.8359 4.85721 10.0001ZM6.62805 10C6.62805 11.8593 8.14081 13.3719 10.0001 13.3719C11.8593 13.3719 13.3721 11.8593 13.3721 10C13.3721 8.14058 11.8594 6.6279 10.0001 6.6279C8.14069 6.6279 6.62805 8.14058 6.62805 10Z" fill="currentColor"></path>
+                </svg>
+              </a>
+              <a class="inline-block text-coolGray-300 hover:text-coolGray-400" href="#">
+                <svg width="18" height="18" viewbox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.2 0H1.8C0.81 0 0 0.81 0 1.8V16.2C0 17.19 0.81 18 1.8 18H16.2C17.19 18 18 17.19 18 16.2V1.8C18 0.81 17.19 0 16.2 0ZM5.4 15.3H2.7V7.2H5.4V15.3ZM4.05 5.67C3.15 5.67 2.43 4.95 2.43 4.05C2.43 3.15 3.15 2.43 4.05 2.43C4.95 2.43 5.67 3.15 5.67 4.05C5.67 4.95 4.95 5.67 4.05 5.67ZM15.3 15.3H12.6V10.53C12.6 9.81004 11.97 9.18 11.25 9.18C10.53 9.18 9.9 9.81004 9.9 10.53V15.3H7.2V7.2H9.9V8.28C10.35 7.56 11.34 7.02 12.15 7.02C13.86 7.02 15.3 8.46 15.3 10.17V15.3Z" fill="currentColor"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4 mb-10">
+          <div class="max-w-xs mx-auto md:ml-0">
+            <img class="w-24 h-24 mb-6 rounded-full" src="static/img/sangeetha_200x200.jpeg" alt="">
+            <h3 class="mb-1 text-lg text-coolGray-800 font-semibold">Dr. Sangeetha Nandakumar</h3>
+            <span class="inline-block mb-4 text-lg font-medium text-green-500">iBOTS-Code</span>
+            <p class="mb-4 text-coolGray-500 font-medium">Here is a quote.</p>
+            <div class="flex items-center">
+              <a class="inline-block mr-5 text-coolGray-300 hover:text-coolGray-400" href="#">
+                <svg width="10" height="18" viewbox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M6.63494 17.7273V9.76602H9.3583L9.76688 6.66246H6.63494V4.68128C6.63494 3.78301 6.88821 3.17085 8.20297 3.17085L9.87712 3.17017V0.394238C9.5876 0.357335 8.59378 0.272728 7.43708 0.272728C5.0217 0.272728 3.3681 1.71881 3.3681 4.37391V6.66246H0.636475V9.76602H3.3681V17.7273H6.63494Z" fill="currentColor"></path>
+                </svg>
+              </a>
+              <a class="inline-block mr-5 text-coolGray-300 hover:text-coolGray-400" href="#">
+                <svg width="19" height="16" viewbox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.8181 2.14597C18.1356 2.44842 17.4032 2.65355 16.6336 2.74512C17.4194 2.27461 18.0208 1.5283 18.3059 0.641757C17.5689 1.07748 16.7553 1.39388 15.8885 1.56539C15.1943 0.824879 14.2069 0.363636 13.1118 0.363636C11.0108 0.363636 9.30722 2.06718 9.30722 4.16706C9.30722 4.46488 9.34083 4.75576 9.40574 5.03391C6.24434 4.87512 3.44104 3.36048 1.56483 1.05894C1.23686 1.61985 1.05028 2.27342 1.05028 2.97109C1.05028 4.29106 1.72243 5.45573 2.74225 6.13712C2.11877 6.11627 1.53237 5.94476 1.01901 5.65967V5.70718C1.01901 7.54979 2.33086 9.08761 4.07031 9.43761C3.75161 9.52336 3.41555 9.57088 3.06789 9.57088C2.82222 9.57088 2.58464 9.54655 2.35171 9.50018C2.8361 11.0125 4.24067 12.1123 5.90483 12.1424C4.6034 13.1622 2.96243 13.7683 1.1801 13.7683C0.873008 13.7683 0.570523 13.7498 0.272705 13.7162C1.95655 14.7974 3.95561 15.4278 6.10416 15.4278C13.1026 15.4278 16.928 9.63115 16.928 4.60397L16.9153 4.11145C17.6627 3.57833 18.3094 2.90851 18.8181 2.14597Z" fill="currentColor"></path>
+                </svg>
+              </a>
+              <a class="inline-block mr-5 text-coolGray-300 hover:text-coolGray-400" href="#">
+                <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.6007 0.181818H14.3992C17.3874 0.181818 19.8184 2.61281 19.8182 5.60074V14.3993C19.8182 17.3872 17.3874 19.8182 14.3992 19.8182H5.6007C2.61276 19.8182 0.181885 17.3873 0.181885 14.3993V5.60074C0.181885 2.61281 2.61276 0.181818 5.6007 0.181818ZM14.3993 18.0759C16.4267 18.0759 18.0761 16.4266 18.0761 14.3993H18.076V5.60074C18.076 3.57348 16.4266 1.92405 14.3992 1.92405H5.6007C3.57343 1.92405 1.92412 3.57348 1.92412 5.60074V14.3993C1.92412 16.4266 3.57343 18.0761 5.6007 18.0759H14.3993ZM4.85721 10.0001C4.85721 7.16424 7.16425 4.85714 10.0001 4.85714C12.8359 4.85714 15.1429 7.16424 15.1429 10.0001C15.1429 12.8359 12.8359 15.1429 10.0001 15.1429C7.16425 15.1429 4.85721 12.8359 4.85721 10.0001ZM6.62805 10C6.62805 11.8593 8.14081 13.3719 10.0001 13.3719C11.8593 13.3719 13.3721 11.8593 13.3721 10C13.3721 8.14058 11.8594 6.6279 10.0001 6.6279C8.14069 6.6279 6.62805 8.14058 6.62805 10Z" fill="currentColor"></path>
+                </svg>
+              </a>
+              <a class="inline-block text-coolGray-300 hover:text-coolGray-400" href="#">
+                <svg width="18" height="18" viewbox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.2 0H1.8C0.81 0 0 0.81 0 1.8V16.2C0 17.19 0.81 18 1.8 18H16.2C17.19 18 18 17.19 18 16.2V1.8C18 0.81 17.19 0 16.2 0ZM5.4 15.3H2.7V7.2H5.4V15.3ZM4.05 5.67C3.15 5.67 2.43 4.95 2.43 4.05C2.43 3.15 3.15 2.43 4.05 2.43C4.95 2.43 5.67 3.15 5.67 4.05C5.67 4.95 4.95 5.67 4.05 5.67ZM15.3 15.3H12.6V10.53C12.6 9.81004 11.97 9.18 11.25 9.18C10.53 9.18 9.9 9.81004 9.9 10.53V15.3H7.2V7.2H9.9V8.28C10.35 7.56 11.34 7.02 12.15 7.02C13.86 7.02 15.3 8.46 15.3 10.17V15.3Z" fill="currentColor"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Our Projects -->
+
+
+{% endblock %}
