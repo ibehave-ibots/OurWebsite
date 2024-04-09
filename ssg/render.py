@@ -50,7 +50,7 @@ def render_all():
     if os.path.exists("output/static"):
         rmdir("output/static")
     shutil.copytree("static", "output/static")
-
+    
     # render all templates found in templates
     for path in Path('content').glob('*'):
         if path.is_dir():
