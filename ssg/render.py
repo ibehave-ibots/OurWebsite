@@ -1,10 +1,13 @@
+import html
+from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markdown2 import Markdown
 from yaml import load 
 import yaml
 import shutil
 import os
-from .utils import rmdir
+
+from .utils import rmdir, redirect_path
 from .image_processing import resize_image
 
 
@@ -12,22 +15,33 @@ env = Environment(
     loader=FileSystemLoader("templates"),
     autoescape=select_autoescape()
 )
-env.filters['resize'] = resize_image
+env.filters['resize'] = redirect_path('output')(resize_image)
 
-def render(env: Environment, name: str) -> None:
-    template = env.get_template(f'{name}.html')
 
-    with open(f'content/{name}.md') as f:
+def render(env: Environment, content_path: str, template_name: str) -> None:
+    template = env.get_template(f'{template_name}.html')
+
+    with open(content_path) as f:
         text = f.read()
-        yaml_text, markdown_text = text.split('---')
-        data = load(yaml_text, Loader=yaml.Loader)
+
+
+    data = {}
+    *yaml_texts, markdown_text = text.split('---')
+    if yaml_texts:
+        yaml_text = yaml_texts[0]
+        yaml_data = load(yaml_text, Loader=yaml.Loader)
+        data.update(yaml_data)
+
+    if markdown_text:
         markdowner = Markdown()
         content_html = markdowner.convert(markdown_text)
         data['content'] = content_html
 
-
+    
     rendered = template.render(data=data)
-    with open(f'output/{name}.html', 'w') as f:
+    output_path = Path('output') / '/'.join(content_path.with_suffix('.html').parts[1:][-2:])
+    output_path.parent.mkdir(exist_ok=True, parents=True)
+    with open(output_path, 'w') as f:
         f.write(rendered)
 
 
@@ -36,7 +50,14 @@ def render_all():
     if os.path.exists("output/static"):
         rmdir("output/static")
     shutil.copytree("static", "output/static")
-    render(env, name="index")
+
+    # render all templates found in templates
+    for path in Path('content').glob('*'):
+        if path.is_dir():
+            for file in path.glob('*.md'):
+                render(env, content_path=file, template_name=path.stem)
+        else:
+            render(env, content_path=path, template_name=path.stem)
 
 
     

@@ -1,11 +1,7 @@
 from PIL import Image
-from pathlib import Path, PurePosixPath
-
-from .utils import redirect_path
+from pathlib import Path
 
 
-
-@redirect_path('output')
 def resize_image(fname: str, res: tuple[int, int]) -> str:
     path = Path(fname)
     with Image.open(path) as img:
