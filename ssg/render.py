@@ -37,6 +37,7 @@ def render_all():
         rmdir("output/static")
     shutil.copytree("static", "output/static")
     render(env, name="index")
+    render(env, name="index2")
 
 
     
