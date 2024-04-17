@@ -1,0 +1,9 @@
+consulting_stats:
+  num_consulting_sessions: 30
+  num_of_clients: 30
+  which_labs_have_used_ibots: 30
+  total_hours_consulting: 30
+  testimonials:
+    - Sangeetha was calm
+    - Nick solved my problem!
+    - iBOTS is awesome!
