@@ -1,5 +1,8 @@
 from pathlib import Path, PurePosixPath
 import os
+from yaml import load 
+import yaml
+from markdown2 import Markdown
 
 def rmdir(start_directory: Path):
     """Recursively and permanently removes the specified directory, all of its
@@ -21,3 +24,11 @@ def redirect_path(prepend_path):
         return wrapper
     return decorator
 
+
+def parse_yaml(text):
+    return load(text, Loader=yaml.Loader)
+
+def parse_markdown(text):
+    markdowner = Markdown()
+    content_html = markdowner.convert(text)
+    return content_html
