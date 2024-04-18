@@ -6,13 +6,13 @@ from typing import NamedTuple
 from .utils import load_yaml, load_markdown
 
 
-class Content(NamedTuple):
+class Page(NamedTuple):
     text: str
 
     @classmethod
-    def from_path(cls, path) -> Content:
+    def from_path(cls, path) -> Page:
         text = Path(path).read_text()
-        return Content(text=text)
+        return Page(text=text)
     
     @property
     def data(self) -> dict:

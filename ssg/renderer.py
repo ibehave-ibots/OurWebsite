@@ -1,21 +1,15 @@
 from __future__ import annotations
 
-from functools import lru_cache
-from pprint import pprint
 from typing import Any, Callable, Iterable, NamedTuple
-import html
 from pathlib import Path
+import shutil
 
 import jinja2
 
-
-import shutil
-import os
-
-from .collections import extract_data
-from .utils import rmdir, redirect_path
-from .image_processing import resize_image
-from .parsers import Content
+from .data import extract_data
+from .utils import rmdir
+from .filters import redirect_path
+from .page import Page
 
 
 
@@ -59,7 +53,7 @@ class Renderer(NamedTuple):
     
     def _extract_data(self) -> dict:
         """Extract data from content file (both yaml and markdown) and yaml data collections."""
-        content = Content.from_path(self.content_path)
+        content = Page.from_path(self.content_path)
         collections_data = extract_data(self.data_dir)
         data = {} | content.data | collections_data | {'content': content.html}
         return data

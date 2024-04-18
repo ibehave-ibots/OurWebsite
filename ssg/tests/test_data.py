@@ -1,4 +1,4 @@
-from ssg.collections import extract_data
+from ssg.data import extract_data
 import pytest
 
 def test_find_single_file(tmp_path):

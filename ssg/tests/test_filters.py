@@ -1,5 +1,5 @@
 from pathlib import Path
-from ssg import utils
+from ssg import filters
 
 
 def test_path_prepend_decorator():
@@ -12,13 +12,13 @@ def test_path_prepend_decorator():
         return path
     
     A.path = None
-    new_fun = utils.redirect_path('output')(fun)
+    new_fun = filters.redirect_path('output')(fun)
     output = new_fun(Path('aa/bb'))
     assert A.path == Path('output/aa/bb')
     assert output == 'aa/bb'
 
     A.path = None
-    new_fun = utils.redirect_path('ddd')(fun)
+    new_fun = filters.redirect_path('ddd')(fun)
     output = new_fun(Path('cc/bb'))
     assert A.path == Path('ddd/cc/bb')
     assert output == 'cc/bb'
