@@ -2,15 +2,16 @@ from typing import Any
 from pathlib import Path
 from collections import defaultdict
 from pprint import pprint
-from yaml import load, Loader
+from .utils import load_yaml
 
-def extract(base_path: Path) -> dict[str, Any]:
+def extract_data(base_path: Path) -> dict[str, Any]:
+    base_path = Path(base_path)
     collections = defaultdict(dict)
     for path in base_path.glob('*.yaml'):
-        data = load(path.read_text(), Loader=Loader)
+        data = load_yaml(path.read_text())
         collections[path.stem] = data
     for path in base_path.glob('*/*.yaml'):
-        data = load(path.read_text(), Loader=Loader)
+        data = load_yaml(path.read_text())
         collections[path.parent.stem][path.stem] = data
     for path in base_path.glob('*/*'):
         if path.is_dir():
@@ -19,5 +20,5 @@ def extract(base_path: Path) -> dict[str, Any]:
 
 
 if __name__ == '__main__':
-    pprint(extract())
+    pprint(extract_data())
     

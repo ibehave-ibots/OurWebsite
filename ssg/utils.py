@@ -1,12 +1,14 @@
 from pathlib import Path, PurePosixPath
 import os
-from yaml import load 
+
 import yaml
-from markdown2 import Markdown
+import markdown2
 
 def rmdir(start_directory: Path):
     """Recursively and permanently removes the specified directory, all of its
     subdirectories, and every file contained in any of those folders."""
+    if not os.path.exists("output/static"):
+        return
     linux_path = PurePosixPath(start_directory)
     os.system(f"rm -Rf {linux_path}")
 
@@ -25,10 +27,9 @@ def redirect_path(prepend_path):
     return decorator
 
 
-def parse_yaml(text):
-    return load(text, Loader=yaml.Loader)
+def load_yaml(text: str):
+    return yaml.load(text, Loader=yaml.Loader)    
 
-def parse_markdown(text):
-    markdowner = Markdown()
-    content_html = markdowner.convert(text)
-    return content_html
+
+def load_markdown(text: str):
+    return markdown2.Markdown().convert(text)

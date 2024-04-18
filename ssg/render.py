@@ -1,65 +1,101 @@
-from typing import Any
+from __future__ import annotations
+
+from functools import lru_cache
+from pprint import pprint
+from typing import Any, Callable, Iterable, NamedTuple
 import html
 from pathlib import Path
-from jinja2 import Environment, FileSystemLoader, select_autoescape
-from markdown2 import Markdown
+
+import jinja2
+
 
 import shutil
 import os
-from .collections import extract
-from .utils import rmdir, redirect_path, parse_yaml
+
+from .collections import extract_data
+from .utils import rmdir, redirect_path
 from .image_processing import resize_image
-
-
-env = Environment(
-    loader=FileSystemLoader("templates"),
-    autoescape=select_autoescape()
-)
-env.filters['resize'] = redirect_path('output')(resize_image)
-
-
-def render(template: str, text: str, data: dict) -> None:
-    data = parse_yaml(text)
-    rendered = template.render(data=data)
-    return rendered
+from .parsers import Content
 
 
 
+class Renderer(NamedTuple):
+    content_path: Path
+    template_path: Path
+    output_dir: Path
+    data_dir: Path
+    filters: dict
+
+    @classmethod
+    def from_dirs(cls, content_dir, templates_dir, output_dir, data_dir, filters: dict[str, Callable[[str,], str]] = None) -> Iterable[Renderer]:
+        
+        for content_path in Path(content_dir).glob('*.md'):
+            templates_dir = Path(templates_dir)
+            template_path = templates_dir / content_path.with_suffix('.html').name
+            assert templates_dir.exists()
+                 
+            yield Renderer(
+                content_path = content_path,
+                template_path = template_path,
+                output_dir = Path(output_dir),
+                data_dir = Path(data_dir),
+                filters = filters if filters else {},
+            )
+
+    @property
+    def output_path(self) -> Path:
+        return self.output_dir / self.content_path.with_suffix('.html').name
+    
+    def _get_template(self) -> jinja2.Template:
+        env = jinja2.Environment(
+            loader=jinja2.FileSystemLoader(self.template_path.parent),
+            autoescape=jinja2.select_autoescape()
+        )
+        for name, fun in self.filters.items():
+            env.filters[name] = redirect_path(self.output_dir)(fun)
+
+        template = env.get_template(self.template_path.name)
+        return template
+    
+    def _extract_data(self) -> dict:
+        """Extract data from content file (both yaml and markdown) and yaml data collections."""
+        content = Content.from_path(self.content_path)
+        collections_data = extract_data(self.data_dir)
+        data = {} | content.data | collections_data | {'content': content.html}
+        return data
+    
+
+    def render(self) -> str:
+        """Create the rendered html."""
+        data = self._extract_data()
+        template = self._get_template()
+        html = template.render(**data)
+        return html
     
 
 
+def run_render_pipeline():
 
-def render_all():
-    collections = extract()
+    rmdir("output/static")
+    if Path('static').exists():
+        shutil.copytree("static", "output/static")
 
-    if os.path.exists("output/static"):
-        rmdir("output/static")
-    shutil.copytree("static", "output/static")
-    
-    # render all templates found in templates
-    for path in Path('collections').glob('*'):        
-        if path.is_dir():
-            for file in path.glob('*.yaml'):
-                template = env.get_template(f'consulting.html')
-                text = Path(file).read_text()
-                rendered = render(template=template, text=text, data=collections)
-                output_path = Path('output') / '/'.join(Path(file).with_suffix('.html').parts[1:][-2:])
-                output_path.parent.mkdir(exist_ok=True, parents=True)
-                with open(output_path, 'w') as f:
-                    f.write(rendered)
-        else:
-            template = env.get_template(f'consulting.html')
-            text = Path(path).read_text()
-            rendered = render(template=template, text=text, data=collections)
-            output_path = Path('output') / '/'.join(Path(path).with_suffix('.html').parts[1:][-2:])
-            output_path.parent.mkdir(exist_ok=True, parents=True)
-            with open(output_path, 'w') as f:
-                f.write(rendered)
-    
+
+    renderers = list(Renderer.from_dirs(
+        content_dir='./pages', 
+        templates_dir='./templates', 
+        output_dir='./output', 
+        data_dir='./data',
+    ))
+    for renderer in renderers:
+        rendered_html = renderer.render()
+        renderer.output_path.parent.mkdir(exist_ok=True, parents=True)
+        renderer.output_path.write_text(rendered_html)
+        
 
 
     
 
 if __name__ == '__main__':
-    render_all()
+    run_render_pipeline()
 
