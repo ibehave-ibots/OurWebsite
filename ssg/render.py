@@ -6,7 +6,7 @@ from markdown2 import Markdown
 
 import shutil
 import os
-from .extract_collections import extract_collections
+from .collections import extract
 from .utils import rmdir, redirect_path, parse_yaml
 from .image_processing import resize_image
 
@@ -30,7 +30,7 @@ def render(template: str, text: str, data: dict) -> None:
 
 
 def render_all():
-    collections = extract_collections()
+    collections = extract()
 
     if os.path.exists("output/static"):
         rmdir("output/static")
