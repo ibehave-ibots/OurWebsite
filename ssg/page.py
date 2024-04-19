@@ -2,18 +2,22 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import NamedTuple
+from dataclasses import dataclass, field
 
 import jinja2
 
 from .utils import load_yaml, load_markdown
 
 
-class Page(NamedTuple):
+@dataclass(frozen=True)
+class Page:
     text: str
-    extra_data: dict = {}
+    extra_data: dict = field(default_factory=dict)
 
     @classmethod
-    def from_path(cls, path, extra_data: dict = {}) -> Page:
+    def from_path(cls, path, extra_data: dict = None) -> Page:
+        if extra_data is None:
+            extra_data = {}
         text = Path(path).read_text()
         return Page(text=text, extra_data=extra_data)
     
