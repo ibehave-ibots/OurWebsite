@@ -10,8 +10,49 @@
     <aside></aside>
     <main>
         <article>
+            
+            <h1> {{ page.title }} </h1>
+            <section>
             {{ page.content | safe }}
+            </section>
+            
+            <section>
+                <h1> {{ page.statistics.title }} </h1>
+                {% for key, value in page.statistics.report.items() %}
+                <p><strong>{{key}}:</strong>{{ value }}</p>
+                {% endfor %}
+            </section>
+            
+            <section>
+                <h1> {{ page.session_booking.title }} </h1>
+                <p> {{ page.session_booking.description }} </p>
+                {% for consultant in page.session_booking.consultants %}
+                <article>
+                    <h1> {{ consultant.name }} </h1>
+                    <p>
+                        <div class="calendly-inline-widget" data-url="{{ consultant.booking_link }}" style="min-width:320px;height:700px;"></div>
+                        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>              
+                    </p>
+                </article>
+                
+                {% endfor %}
+                
+            </section>
+
+            <section>
+                <h1>{{ page.testimonials.title }} </h1>
+                {% for testimonial in page.testimonials.testimonials %}
+                <p>{{ testimonial }} </p>
+                {% endfor %}
+                
+            </section>
+
         </article>
+
+        
+        
+
+    
     </main>
     <footer></footer>
 </body>
