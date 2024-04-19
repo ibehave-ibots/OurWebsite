@@ -16,29 +16,36 @@ from .page import Page
 class Renderer(NamedTuple):
     content_path: Path
     template_path: Path
-    output_dir: Path
+    output_path: Path
     data_dir: Path
     filters: dict
 
     @classmethod
     def from_dirs(cls, content_dir, templates_dir, output_dir, data_dir, filters: dict[str, Callable[[str,], str]] = None) -> Iterable[Renderer]:
         
-        for content_path in Path(content_dir).glob('*.md'):
-            templates_dir = Path(templates_dir)
-            template_path = templates_dir / content_path.with_suffix('.html').name
-            assert templates_dir.exists()
+        templates_dir = Path(templates_dir)
+        base_content_dir = Path(content_dir)
+        for content_path in base_content_dir.glob('**/*.md'):
+            if content_path.parent == base_content_dir:
+                template_path = templates_dir / content_path.with_suffix('.html').name
+                output_path = Path(output_dir) / content_path.with_suffix('.html').name
+            elif content_path.name == '_index.md':
+                template_path = templates_dir / content_path.parent.with_suffix('.html').name
+                output_path = Path(output_dir) / content_path.parent.name / 'index.html'
+            else:
+                template_path = templates_dir / content_path.parent.parent.with_suffix('.html').with_stem(content_path.parent.stem[:-1])  # drop the 's' from the name
+                output_path = Path(output_dir) / content_path.parent.name / content_path.with_suffix('.html').name
+                
+            assert template_path.exists(), f"Looking for {template_path}"
                  
             yield Renderer(
                 content_path = content_path,
                 template_path = template_path,
-                output_dir = Path(output_dir),
+                output_path= output_path,
                 data_dir = Path(data_dir),
                 filters = filters if filters else {},
             )
 
-    @property
-    def output_path(self) -> Path:
-        return self.output_dir / self.content_path.with_suffix('.html').name
     
     def _get_template(self) -> jinja2.Template:
         env = jinja2.Environment(
@@ -61,12 +68,13 @@ class Renderer(NamedTuple):
         return data
     
 
-    def render(self) -> str:
-        """Create the rendered html."""
+    def render(self) -> None:
+        """Create the rendered html and save to the output path."""
         data = self._extract_data()
         template = self._get_template()
         html = template.render(**data)
-        return html
+        self.output_path.parent.mkdir(exist_ok=True, parents=True)
+        self.output_path.write_text(html)
     
 
 
@@ -84,9 +92,8 @@ def run_render_pipeline():
         data_dir='./data',
     ))
     for renderer in renderers:
-        rendered_html = renderer.render()
-        renderer.output_path.parent.mkdir(exist_ok=True, parents=True)
-        renderer.output_path.write_text(rendered_html)
+        print("rendering:", renderer.content_path, 'from', renderer.template_path, 'to', renderer.output_path)
+        renderer.render()
         
 
 
