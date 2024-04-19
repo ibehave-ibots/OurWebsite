@@ -29,10 +29,8 @@
                 {% for consultant in page.session_booking.consultants %}
                 <article>
                     <h1> {{ consultant.name }} </h1>
-                    <p>
-                        <div class="calendly-inline-widget" data-url="{{ consultant.booking_link }}" style="min-width:320px;height:700px;"></div>
-                        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>              
-                    </p>
+                    <p> {{ consultant.booking_link }} </p>
+
                 </article>
                 
                 {% endfor %}
