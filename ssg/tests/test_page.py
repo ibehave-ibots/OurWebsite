@@ -87,3 +87,16 @@ def test_jinja_templating_works_on_yaml_when_data_extracted():
 
 ## Markdown + Jinja Tests
 
+def test_jinja_templating_works_on_markdown():
+    text_in = """
+    # hello
+    You have {{ remaining }} unread messages from {{ total }} items.
+    """
+    data = {'remaining': 6, 'total': 10}
+    text_out = """
+    # hello
+    You have 6 unread messages from 10 items.
+    """
+
+    page = Page(text=text_in, extra_data=data)
+    assert page.markdown.strip() == text_out.strip()

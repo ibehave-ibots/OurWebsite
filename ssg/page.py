@@ -37,7 +37,8 @@ class Page:
     @property
     def markdown(self) -> str:
         *_, md_text = self.text.split('---')
-        return md_text.strip()
+        md_text_with_data = jinja2.Environment().from_string(md_text).render(**self.extra_data)
+        return md_text_with_data.strip()
         
     @property
     def html(self) -> str:
