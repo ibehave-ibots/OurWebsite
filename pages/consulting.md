@@ -18,10 +18,10 @@ session_booking:
           booking_link: https://calendly.com/sangeethank/short-chat
 testimonials:
     title: Testimonials
-    testimonials:
-        - Sangeetha was calm...
-        - Nick solved my problem!
-        - iBOTS is awesome!
+    testimonials: 
+        {% for testimonial in data.testimonials.consulting %}
+        - {{ testimonial }}
+        {% endfor %}
 ---
 
 # Description

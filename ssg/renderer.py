@@ -53,10 +53,10 @@ class Renderer(NamedTuple):
     
     def _extract_data(self) -> dict:
         """Extract data from content file (both yaml and markdown) and yaml data collections."""
-        content = Page.from_path(self.content_path)
         collections_data = extract_data(self.data_dir)
+        content = Page.from_path(self.content_path, extra_data=collections_data)
         data = {}
-        data['page'] = content.data| {'content': content.html}
+        data['page'] = content.data | {'content': content.html}
         data['data'] = collections_data
         return data
     
