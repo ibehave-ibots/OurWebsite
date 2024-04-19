@@ -21,6 +21,8 @@ class Page:
         text = Path(path).read_text()
         return Page(text=text, extra_data=extra_data)
     
+    
+
     @property
     def data(self) -> dict:
         *yamls, _ = self.text.split('---')
@@ -28,14 +30,14 @@ class Page:
             return {}
         
         yaml = yamls[0]
-        yaml_with_data = jinja2.Environment().from_string(yaml).render(data=self.extra_data)
+        yaml_with_data = jinja2.Environment().from_string(yaml).render(**self.extra_data)
         data = load_yaml(yaml_with_data)
         return data
 
     @property
     def markdown(self) -> str:
         *_, md_text = self.text.split('---')
-        return md_text
+        return md_text.strip()
         
     @property
     def html(self) -> str:
