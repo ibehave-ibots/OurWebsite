@@ -55,7 +55,9 @@ class Renderer(NamedTuple):
         """Extract data from content file (both yaml and markdown) and yaml data collections."""
         content = Page.from_path(self.content_path)
         collections_data = extract_data(self.data_dir)
-        data = {} | content.data | collections_data | {'content': content.html}
+        data = {}
+        data['page'] = content.data| {'content': content.html}
+        data['data'] = collections_data
         return data
     
 

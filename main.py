@@ -1,5 +1,5 @@
 
-from ssg.renderer import run_render_pipeline
+from ssg.server import build_server
 
 
-run_render_pipeline()
+build_server()
