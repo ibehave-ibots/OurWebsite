@@ -21,3 +21,8 @@ Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
 {% endfor %}
 
 ## External Resources
+<ul>
+{% for resource in data.teaching_materials.external_resources %}
+    <li> <a href="{{ resource }}">{{ resource }}</a> </li>
+{% endfor %}
+</ul>
