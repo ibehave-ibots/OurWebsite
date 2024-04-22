@@ -1,0 +1,1 @@
+1. Loading images from path in YAML (Logo path in organizations.yaml does not render in output html)
