@@ -1,4 +1,4 @@
-title: Partners
+title: Organizations
 partners: 
     {% for partner in data.organizations.partners %}
     - {{ partner }}
