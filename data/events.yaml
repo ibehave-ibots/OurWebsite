@@ -1,0 +1,9 @@
+clubs:
+  - club: Code Explorers
+    date: 18-04-2024
+    start_time: 12:30 pm
+    end_time: 01:30 pm
+  - club: Another Club
+    date: 19-04-2024
+    start_time: 10:00 am
+    end_time: 11:30 am

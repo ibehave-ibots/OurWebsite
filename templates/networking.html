@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Networking</title>
+</head>
+<body>
+    <header></header>
+    <nav></nav>
+    <aside></aside>
+    <main>
+        <article>
+            <h1> {{ page.title }} </h1>
+            
+            <section>
+                <h1> {{ page.clubs.title }} </h1>
+                {% for schedule in page.clubs.schedule %}
+                <p>{{ page.clubs.schedule | safe }}</p>
+                {% endfor %}
+            </section>
+
+        </article>
+
+        
+        
+
+    
+    </main>
+    <footer></footer>
+</body>
+</html>
