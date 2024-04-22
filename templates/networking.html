@@ -14,8 +14,8 @@
             
             <section>
                 <h1> {{ page.clubs.title }} </h1>
-                {% for schedule in page.clubs.schedule %}
-                <p>{{ page.clubs.schedule | safe }}</p>
+                {% for club in page.clubs.schedule %}
+                <p>{{ club | safe }}</p>
                 {% endfor %}
             </section>
 
