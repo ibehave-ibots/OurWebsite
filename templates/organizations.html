@@ -12,6 +12,22 @@
         <article>
             
             <h1> {{ page.title }} </h1>
+            <section>
+                {{ content | safe }}
+            </section>
+
+            <h1> {{ Partners }} </h1>
+            <section>
+                {% for partner in page.partners %}
+                <p>{{ partner | safe }}</p>
+                {% endfor %}
+
+            </section>
+
+            <h1> {{ Sponsors }} </h1>
+            <section>
+
+            </section>
 
         </article>
 
