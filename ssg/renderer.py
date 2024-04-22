@@ -10,7 +10,7 @@ import jinja2
 
 from .data import extract_data
 from .utils import rmdir
-from .filters import redirect_path
+from .filters import redirect_path, resize_image, date
 from .page import Page
 
 
@@ -51,16 +51,19 @@ class Renderer:
                 data_dir = Path(data_dir),
                 filters = filters if filters else {},
             )
-
-    
-    def _get_template(self) -> jinja2.Template:
+    def get_environment(self) -> jinja2.Environment:
         env = jinja2.Environment(
             loader=jinja2.FileSystemLoader(self.template_path.parent),
             autoescape=jinja2.select_autoescape()
         )
         for name, fun in self.filters.items():
-            env.filters[name] = redirect_path(self.output_dir)(fun)
+            env.filters[name] = fun
+        
+        return env
 
+    
+    def _get_template(self) -> jinja2.Template:
+        env = self.get_environment()
         template = env.get_template(self.template_path.name)
         return template
     
@@ -69,7 +72,7 @@ class Renderer:
             pages_data = {}
         collections_data = extract_data(self.data_dir)
         
-        extra_data = {'data': collections_data, 'pages': pages_data}
+        extra_data = {'data': collections_data, 'pages': pages_data, }
         page = Page.from_path(self.content_path, extra_data=extra_data)
         return page
 
@@ -78,7 +81,6 @@ class Renderer:
         if self._data is None:
             self._data = extract_data(self.data_dir)
         return self._data.copy()
-
 
     def render(self, extra_data: dict = None) -> None:
         """Create the rendered html and save to the output path."""
@@ -121,12 +123,19 @@ def run_render_pipeline():
         templates_dir='./templates', 
         output_dir='./output', 
         data_dir='./data',
+        filters={
+            'resize': redirect_path('./output')(resize_image), 
+            'date': date,
+        }
     ))
     all_pages_data = Renderer.extract_multiple_pages(renderers=renderers, content_dir='./pages')
     for renderer in renderers:
         print("rendering:", renderer.content_path, 'from', renderer.template_path, 'to', renderer.output_path)
         data = renderer.extract_data()        
         page = renderer.extract_page(pages_data=all_pages_data)
+        env = renderer.get_environment()
+        md_text = page.markdown_section
+
         renderer.render(extra_data={'content': page.html, 'page': page.data, 'pages': all_pages_data, 'data': data})
         
 

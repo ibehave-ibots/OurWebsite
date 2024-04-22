@@ -35,9 +35,15 @@ class Page:
         return data
 
     @property
-    def markdown(self) -> str:
+    def markdown_section(self) -> str:
         *_, md_text = self.text.split('---')
-        md_text_with_data = jinja2.Environment().from_string(md_text).render(**self.extra_data)
+        return md_text
+
+    @property
+    def markdown(self) -> str:
+        md_text = self.markdown_section
+        data = self.extra_data | {'page': self.data }
+        md_text_with_data = jinja2.Environment().from_string(md_text).render(**data)
         return md_text_with_data.strip()
         
     @property

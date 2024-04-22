@@ -1,3 +1,11 @@
+upcoming_workshops:
+  - name: aa
+    date: 2223
+  - name: bb
+    date: 3344
+
+---
+
 # Workshops
 
 ## Subscribe for Announcements
@@ -26,13 +34,16 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
 
 ## Upcoming Workshops
 
+{% for workshop in page.upcoming_workshops %}
+  - {{ workshop.name }}: {{ workshop.date }}
+{% endfor %}
 
-o	Upcoming Workshops: <Workshops>
+
 
 ## Past Workshops
 
 {% for name, workshop in pages.workshops.items() %}
-  - [**{{ name }}**]({{ k }}.html): {{ workshop.hours }}
+  - [**{{ name }}**]({{ k }}.html): {{ workshop.date }}
 {% endfor %}
 
 
