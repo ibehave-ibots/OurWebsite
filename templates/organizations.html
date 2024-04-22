@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Consulting</title>
+<title>Organization</title>
 </head>
 <body>
     <header></header>
@@ -30,6 +30,7 @@
             <section>
                 {% for sponsor in page.sponsors %}
                 <h2>{{ sponsor.name }}</h2>
+                <img src="sponsor.logo">
                 <p>{{ sponsor.description }}</p>
                 <a href="{{ sponsor.website }}">{{ sponsor.website }}</a>
                 <p>{{ sponsor.email }}</p>
@@ -37,10 +38,6 @@
             </section>
 
         </article>
-
-        
-        
-
     
     </main>
     <footer></footer>
