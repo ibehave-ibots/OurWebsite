@@ -101,7 +101,7 @@ class Renderer:
             if page_path.parent == content_dir:
                 pages_data[page_path.stem] = page.data
             elif page_path.parent.parent == content_dir:
-                if page_path.stem == '_index':
+                if page_path.stem == '_index': # todo: have a nice structure that includes the collection's index page.
                     continue
                 pages_data[page_path.parent.name][page_path.stem] = page.data
             else:
