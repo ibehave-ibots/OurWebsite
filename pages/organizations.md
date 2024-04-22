@@ -1,7 +1,10 @@
 title: Organizations
 partners: 
     {% for partner in data.organizations.partners %}
-    - {{ partner }}
+    - Partner: {{ partner.name }}
+    - Website: {{ partner.url }}
+    - Email: {{ partner.email }}
+    - Description: {{ partner.description }}
     {% endfor %}
 
 sponsors: 
