@@ -9,7 +9,10 @@ partners:
 
 sponsors: 
     {% for sponsor in data.organizations.sponsors %}
-    - {{ sponsor }}
+    - name: {{ sponsor.name }}
+      website: {{ sponsor.url }}
+      email: {{ sponsor.email }}
+      description: {{ sponsor.description }}
     {% endfor %}
 
 

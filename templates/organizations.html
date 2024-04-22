@@ -28,12 +28,12 @@
 
             <h1> {{ Sponsors }} </h1>
             <section>
-                <section>
-                    {% for sponsor in page.sponsors %}
-                    <p>{{ sponsor | safe }}</p>
-                    {% endfor %}
-                </section>
-    
+                {% for sponsor in page.sponsors %}
+                <h2>{{ sponsor.name }}</h2>
+                <p>{{ sponsor.description }}</p>
+                <a href="{{ sponsor.website }}">{{ sponsor.website }}</a>
+                <p>{{ sponsor.email }}</p>
+                {% endfor %}        
             </section>
 
         </article>

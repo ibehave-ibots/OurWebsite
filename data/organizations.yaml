@@ -17,4 +17,7 @@ partners:
     description: They are iBehave
 
 sponsors:
-  - iBehave
+  - name: iBehave
+    url: ibehavehere@link.com
+    email: email4@gmail.com
+    description: They are iBehave
