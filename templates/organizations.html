@@ -19,7 +19,10 @@
             <h1> {{ Partners }} </h1>
             <section>
                 {% for partner in page.partners %}
-                <p>{{ partner | safe }}</p>
+                <h2>{{ partner.name }}</h2>
+                <p>{{ partner.description }}</p>
+                <a href="{{ partner.website }}">{{ partner.website }}</a>
+                <p>{{ partner.email }}</p>
                 {% endfor %}
             </section>
 
