@@ -1,1 +1,2 @@
 1. Loading images from path in YAML (Logo path in organizations.yaml does not render in output html)
+2. Work with people_consolidated.yaml instead of separate yaml files? (With this we can have current, past, and other people sections that we need for about us)
