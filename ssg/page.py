@@ -16,11 +16,11 @@ class Page:
 
     @classmethod
     def from_path(cls, path, extra_data: dict = None) -> Page:
+        path = Path(path)
         if extra_data is None:
             extra_data = {}
-        text = Path(path).read_text()
-        return Page(text=text, extra_data=extra_data)
-    
+        text = path.read_text()
+        return Page(text=text, extra_data=extra_data, )
     
 
     @property

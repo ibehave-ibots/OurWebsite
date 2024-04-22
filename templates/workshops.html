@@ -2,7 +2,8 @@
     <head>
 
     </head>
+    <h1>Total Workshops: {{ pages.workshops | length }}</h1>
     <body>
-        {{ page.content }}
+        {{ content | safe }}
     </body>
 </html>

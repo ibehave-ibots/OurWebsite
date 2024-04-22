@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections import defaultdict
+from dataclasses import dataclass
 from typing import Any, Callable, Iterable, NamedTuple
 from pathlib import Path
 import shutil
@@ -13,12 +15,16 @@ from .page import Page
 
 
 
-class Renderer(NamedTuple):
+@dataclass(frozen=False)
+class Renderer:
     content_path: Path
     template_path: Path
     output_path: Path
     data_dir: Path
     filters: dict
+    _data: dict = None
+    
+        
 
     @classmethod
     def from_dirs(cls, content_dir, templates_dir, output_dir, data_dir, filters: dict[str, Callable[[str,], str]] = None) -> Iterable[Renderer]:
@@ -58,25 +64,51 @@ class Renderer(NamedTuple):
         template = env.get_template(self.template_path.name)
         return template
     
-    def _extract_data(self) -> dict:
-        """Extract data from content file (both yaml and markdown) and yaml data collections."""
+    def extract_page(self, pages_data: dict = None) -> Page:
+        if pages_data is None:
+            pages_data = {}
         collections_data = extract_data(self.data_dir)
-        content = Page.from_path(self.content_path, extra_data={'data': collections_data})
-        data = {}
-        data['page'] = content.data | {'content': content.html}
-        data['data'] = collections_data
-        return data
-    
+        
+        extra_data = {'data': collections_data, 'pages': pages_data}
+        page = Page.from_path(self.content_path, extra_data=extra_data)
+        return page
 
-    def render(self) -> None:
+
+    def extract_data(self) -> dict:
+        if self._data is None:
+            self._data = extract_data(self.data_dir)
+        return self._data.copy()
+
+
+    def render(self, extra_data: dict = None) -> None:
         """Create the rendered html and save to the output path."""
-        data = self._extract_data()
+        if extra_data is None:
+            extra_data = {}
+        
         template = self._get_template()
-        html = template.render(**data)
+        html = template.render(**extra_data)
         self.output_path.parent.mkdir(exist_ok=True, parents=True)
         self.output_path.write_text(html)
     
 
+    @staticmethod
+    def extract_multiple_pages(renderers: list[Renderer], content_dir: Path) -> dict:
+        content_dir = Path(content_dir)
+        pages_data = defaultdict(dict)
+        for renderer in renderers:
+            page = renderer.extract_page()
+            page_path = renderer.content_path
+            if page_path.parent == content_dir:
+                pages_data[page_path.stem] = page.data
+            elif page_path.parent.parent == content_dir:
+                if page_path.stem == '_index':
+                    continue
+                pages_data[page_path.parent.name][page_path.stem] = page.data
+            else:
+                raise IOError("Multi-nested page folders not supported")
+        return dict(pages_data)
+
+            
 
 def run_render_pipeline():
 
@@ -84,16 +116,18 @@ def run_render_pipeline():
     if Path('static').exists():
         shutil.copytree("static", "output/static")
 
-
     renderers = list(Renderer.from_dirs(
         content_dir='./pages', 
         templates_dir='./templates', 
         output_dir='./output', 
         data_dir='./data',
     ))
+    all_pages_data = Renderer.extract_multiple_pages(renderers=renderers, content_dir='./pages')
     for renderer in renderers:
         print("rendering:", renderer.content_path, 'from', renderer.template_path, 'to', renderer.output_path)
-        renderer.render()
+        data = renderer.extract_data()        
+        page = renderer.extract_page(pages_data=all_pages_data)
+        renderer.render(extra_data={'content': page.html, 'page': page.data, 'pages': all_pages_data, 'data': data})
         
 
 
