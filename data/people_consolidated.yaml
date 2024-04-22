@@ -13,3 +13,8 @@ past:
   - name: Past Two
     email: 
 
+other:
+  - name: Other One
+    email: other@one.com
+  - name: Other Two
+    email: other@two.com

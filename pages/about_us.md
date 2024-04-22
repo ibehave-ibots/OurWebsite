@@ -29,3 +29,11 @@ Nunc est ante, ornare at tortor luctus, dapibus euismod est. Vivamus elementum f
     <li> Email: {{ person.email }} </li>
 </ul>
 {% endfor %}
+
+<h3> Our Favorite People </h3>
+{% for person in data.people_consolidated.other %}
+<h4> {{ person.name }} </h4>
+<ul>
+    <li> Email: {{ person.email }} </li>
+</ul>
+{% endfor %}
