@@ -1,7 +1,20 @@
 partners:
-  - iBOTS Make
-  - Electronics Lab
-  - Julich Group
-  - iBehave
+  - name: iBOTS Make
+    url: makehere@link.com
+    email: email1@gmail.com
+    description: They are iBOTS Make
+  - name: Electronics Lab
+    url: electronicshere@link.com
+    email: email2@gmail.com
+    description: They are Electronics Lab
+  - name: Julich Group
+    url: julichhere@link.com
+    email: email3@gmail.com
+    description: They are Julich Group
+  - name: iBehave
+    url: ibehavehere@link.com
+    email: email4@gmail.com
+    description: They are iBehave
+
 sponsors:
   - iBehave
