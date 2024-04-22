@@ -24,6 +24,11 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
 
 ![Registration System](/static/images/early-registration-concept.png)
 
+## Upcoming Workshops
+
+
+o	Upcoming Workshops: <Workshops>
+
 ## Past Workshops
 
 {% for name, workshop in pages.workshops.items() %}
@@ -31,10 +36,13 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
 {% endfor %}
 
 
+## Statistics
 
-·	Workshops:
-o	Who it’s For
-o	Statistics: <group.statistics | workshops>
-o	Upcoming Workshops: <Workshops>
-o	Past Workshops: <Workshops>
-o	Interested in Organizing or Teaching a Workshop? Contact Us!
+  - Num Workshops: {{ pages.workshops | length }}
+
+
+## Interested in Organizing or Teaching a Workshop? Contact Us!
+
+Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor dapibus. Duis neque purus, tempus hendrerit dapibus a, vehicula non ante. Praesent semper tellus nec pulvinar maximus.
+
+{{ data.group.email }}
