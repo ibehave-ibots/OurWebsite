@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Consulting</title>
+<title>Organization</title>
 </head>
 <body>
     <header></header>
@@ -19,25 +19,25 @@
             <h1> {{ Partners }} </h1>
             <section>
                 {% for partner in page.partners %}
-                <p>{{ partner | safe }}</p>
+                <h2>{{ partner.name }}</h2>
+                <p>{{ partner.description }}</p>
+                <a href="{{ partner.website }}">{{ partner.website }}</a>
+                <p>{{ partner.email }}</p>
                 {% endfor %}
             </section>
 
             <h1> {{ Sponsors }} </h1>
             <section>
-                <section>
-                    {% for sponsor in page.sponsors %}
-                    <p>{{ sponsor | safe }}</p>
-                    {% endfor %}
-                </section>
-    
+                {% for sponsor in page.sponsors %}
+                <h2>{{ sponsor.name }}</h2>
+                <img src="sponsor.logo">
+                <p>{{ sponsor.description }}</p>
+                <a href="{{ sponsor.website }}">{{ sponsor.website }}</a>
+                <p>{{ sponsor.email }}</p>
+                {% endfor %}        
             </section>
 
         </article>
-
-        
-        
-
     
     </main>
     <footer></footer>
