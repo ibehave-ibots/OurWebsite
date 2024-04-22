@@ -30,7 +30,7 @@
             <section>
                 {% for sponsor in page.sponsors %}
                 <h2>{{ sponsor.name }}</h2>
-                <img src="sponsor.logo">
+                <img src="{{ sponsor.logo }}" alt={{ sponsor.logo }}>
                 <p>{{ sponsor.description }}</p>
                 <a href="{{ sponsor.website }}">{{ sponsor.website }}</a>
                 <p>{{ sponsor.email }}</p>
