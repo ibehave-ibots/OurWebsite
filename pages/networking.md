@@ -14,6 +14,12 @@ clubs:
       url: {{ club.host_org.url }}
     summary: {{ club.summary }} 
     target_audience: {{ club.target_audience }}
+    people: 
+    {% for person in club.people %}
+      - name: {{ person.name }}
+        role: {{ person.role }}
+        url: {{ person.url }}
+    {% endfor %}
   {% endfor %}
 
 ---
