@@ -8,7 +8,7 @@ In this hands-on workshop, we will explore the Python and Pandas data analysis e
 
 At the end of each session, interactive Jupyter notebooks that explore the tools introduced the day will be available for independent learning and review, with teachers available to answer questions.  People of all skill levels, experiences, and backgrounds are welcome!
 
-Workshop Dates:
+**Workshop Dates:**
 
   -  Nov. 6, 2023: 9:00-12:30
   -  Nov. 7, 2023: 9:00-12:30
@@ -17,7 +17,7 @@ Workshop Dates:
   - Nov. 10, 2023: 9:00-12:30
 
 
-Assessment & Credits:
+**Assessment & Credits:**
 
 - No exams
 - Get a certificate (80% attendance)
