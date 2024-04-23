@@ -38,7 +38,7 @@ conferences:
     summary: {{ conference.summary }} 
     target_audience: {{ conference.target_audience }}
     people: 
-    {% for person in club.people %}
+    {% for person in conference.people %}
       - name: {{ person.name }}
         role: {{ person.role }}
         url: {{ person.url }}
