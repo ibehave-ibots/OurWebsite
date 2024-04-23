@@ -16,20 +16,20 @@
                 {{ content | safe }}
             </section>
 
-            <h1> {{ Partners }} </h1>
+            <h1> Partners </h1>
             <section>
                 {% for partner in page.partners %}
-                <h2>{{ partner.name }}</h2>
+                <h3>{{ partner.name }}</h3>
                 <p>{{ partner.description }}</p>
                 <a href="{{ partner.website }}">{{ partner.website }}</a>
                 <p>{{ partner.email }}</p>
                 {% endfor %}
             </section>
 
-            <h1> {{ Sponsors }} </h1>
+            <h1> Sponsors </h1>
             <section>
                 {% for sponsor in page.sponsors %}
-                <h2>{{ sponsor.name }}</h2>
+                <h3>{{ sponsor.name }}</h3>
                 <img src="{{ sponsor.logo }}" alt={{ sponsor.logo }}>
                 <p>{{ sponsor.description }}</p>
                 <a href="{{ sponsor.website }}">{{ sponsor.website }}</a>
