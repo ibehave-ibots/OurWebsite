@@ -32,7 +32,25 @@
                     <p>If you are interested, <a href="{{ club.registration_url }}">Register Here!</a></p>
                 {% endfor %}
             </section>
-            
+
+            <section>
+                <h2>Conferences</h2>
+                {% for conference in page.clubs %}
+                    <h3> {{ club.name }} </h3>
+                    <p> {{ club.summary }} </p>
+                    <p>When: {{ club.date }} </p>
+                    <p>What time: {{ club.start }} to {{ club.end }}</p>
+                    <p>Where: 
+                        <ul>
+                            <li>In person: {{ club.location.inperson }}</li>
+                            <li>Remote: <a href="{{ club.location.remote }}">{{ club.location.remote }}</a> </li>
+                        </ul>
+                    </p>
+                    <p>Who is it for: {{ club.target_audience }}</p>
+                    <p>If you are interested, <a href="{{ club.registration_url }}">Register Here!</a></p>
+                {% endfor %}
+            </section>
+           
         </article>
 
         

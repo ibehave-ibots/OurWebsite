@@ -23,4 +23,27 @@ clubs:
     registration_url: {{ club.registration_url }}
   {% endfor %}
 
+conferences:
+  {% for conference in data.events.conferences %}
+  - name: {{ conference.conference }}
+    date: {{ conference.date }}
+    start: {{ conference.start_time }}
+    end: {{ conference.end_time }}
+    location:
+      inperson: {{ conference.location.inperson }}
+      remote: {{ conference.location.remote }}
+    host_org:
+      name: {{ conference.host_org.name }}
+      url: {{ conference.host_org.url }}
+    summary: {{ conference.summary }} 
+    target_audience: {{ conference.target_audience }}
+    people: 
+    {% for person in club.people %}
+      - name: {{ person.name }}
+        role: {{ person.role }}
+        url: {{ person.url }}
+    {% endfor %}
+    registration_url: {{ conference.registration_url }}
+  {% endfor %}
+
 ---
