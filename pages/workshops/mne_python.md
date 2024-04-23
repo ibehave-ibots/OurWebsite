@@ -11,15 +11,16 @@ In this hands-on workshop, led by a contributor to the MNE source code and an au
 By the course's end, you’ll have an understanding of how to install and setup a Python environment with MNE and be able to write analysis notebooks on standard (M)EEG data.  And, who knows? Some requested features and discoveries during the course may appear in future versions of MNE and MNE-Connectivity!  
 Intended Participants: This workshop is ideal for Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI). No prior programming experience required.
 
-Duration: 15 hrs over 2.5 days
+**Duration:** 15 hrs over 2.5 days
 
-Dates (Times):
-· 07.02.2024, 14h00-17h00
-· 08.02.2024,  9h30-17h00
-· 09.02.2024,  9h30-17h00
+**Dates (Times):**
 
-Workshop Format: Online, Hands-On Course
+- 07.02.2024, 14h00-17h00
+- 08.02.2024,  9h30-17h00
+- 09.02.2024,  9h30-17h00
 
-Workshop Preparation: Software installation instructions will be sent before the start of the course.
+**Workshop Format:** Online, Hands-On Course
+
+**Workshop Preparation:** Software installation instructions will be sent before the start of the course.
 
 At the end of the course, participants who attend at least 80% of the course will receive certificates of participation.
