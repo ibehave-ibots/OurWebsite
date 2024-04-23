@@ -1,6 +1,12 @@
+title: Intro to (M)EEG Analysis with MNE-Python
 hours: 15
 date: 2024-02-07
----
+main_instructor: Thomas Binns
+assistants:
+    - Sangeetha Nandakumar
+    - Nicholas Del Grosso
+github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/mne_course
+--- 
 
 ##  Intro to (M)EEG Analysis with MNE-Python
 

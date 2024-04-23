@@ -1,5 +1,8 @@
+title: Intro to File- and Database-oriented Neuroscience Data Management With Python, SQL, and HDF5
 hours: 15
 date: 2023-02-22
+main_instructor: Nicholas Del Grosso
+github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/data-management
 ---
 
 ## Intro to File- and Database-oriented Neuroscience Data Management With Python, SQL, and HDF5

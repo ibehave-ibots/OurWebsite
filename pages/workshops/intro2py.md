@@ -1,8 +1,15 @@
+title: Intro to Python and Pandas for Neuroscientists
 hours: 15
 date: 2023-11-10
+main_instructor: Mohammad Bashiri
+assistants:
+    - Ben Hastings
+    - Nicholas Del Grosso
+    - Sangeetha Nandakumar
+github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro-to-python-and-pandas
 --- 
 
-# Intro to Python
+# Intro to Python and Pandas for Neuroscientists
 
 In this hands-on workshop, we will explore the Python and Pandas data analysis ecosystem in depth, applying them to data analysis from the world of neuroscience!  Morning collaboration sessions see participants working in small teams, collaborating to learn new skills and share their perspectives in a diverse environment.  
 

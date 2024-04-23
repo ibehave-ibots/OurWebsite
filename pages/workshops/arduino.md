@@ -1,3 +1,4 @@
+title: Fundamental Programming Skills for Experimental Science with Arduino
 hours: 15
 date: 2023-02-19
 main_instructor: Nicholas Del Grosso

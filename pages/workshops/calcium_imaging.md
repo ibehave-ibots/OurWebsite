@@ -1,5 +1,10 @@
+title: Intro to Calcium Imaging Analysis with Python and CaImAn
 hours: 15
 date: 2023-02-28
+main_instructor: Sangeetha Nandakumar
+assistants:
+    - Oliver Barndstedt
+github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro_to_calcium_imaging
 ---
 
 ## Intro to Calcium Imaging Analysis with Python and CaImAn
