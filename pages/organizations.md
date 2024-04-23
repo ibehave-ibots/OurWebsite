@@ -13,6 +13,7 @@ sponsors:
       website: {{ sponsor.url }}
       email: {{ sponsor.email }}
       description: {{ sponsor.description }}
+      logo: {{ sponsor.logo }}
     {% endfor %}
 
 
