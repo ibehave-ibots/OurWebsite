@@ -4,13 +4,12 @@ from collections import defaultdict
 from typing import NamedTuple
 from pathlib import Path
 
-from ssg.pages import find_pages, get_page_collection, load_markdown, read_content_text, read_frontmatter_text, update_pages_data
 
 from .templates import JinjaRenderer
 from .data import extract_global_data
-from .utils import copydir, load_yaml, write_text
+from .utils import copydir, write_text
 from .filters import redirect_path, resize_image
-from .pages import find_pages, read_content_text, read_frontmatter_text, get_page_collection, render_frontmatter, update_pages_data, load_markdown
+from .pages import find_pages, read_content_text, get_page_collection, render_frontmatter, update_pages_data, load_markdown
 
 
 
