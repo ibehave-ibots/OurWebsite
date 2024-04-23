@@ -1,9 +1,7 @@
-<html>
-    <head>
+{% extends "blocks/base.html" %}
 
-    </head>
-    <h1>Total Workshops: {{ pages.workshops | length }}</h1>
-    <body>
+{% block title %}  Workshops {% endblock %}
+
+{% block body %}
         {{ content | safe }}
-    </body>
-</html>
+{% endblock %}

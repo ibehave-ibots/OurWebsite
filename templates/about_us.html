@@ -1,51 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>About Us</title>
-</head>
-<body>
-    <header></header>
-    <nav></nav>
-    <aside></aside>
-    <main>
-        <article>
-            
-            <h1> {{ page.title }} </h1>
-            <section>
-            {{ content | safe }}
-            </section>
+{% extends "blocks/base.html" %}
 
-            <section>
-                <h2> The iBOTS Team </h2>
-                <h3> Current </h3>
-                {% for person in page.current %}
-                    <h4> {{ person.name}} </h4>
-                    <p>Email: {{ person.email }}</p>
-                    <p><a href="{{ person.booking_url }}">Booking Link</a></p>
-                {% endfor %}
+{% block title %} About Us {% endblock %}
 
-                <h3> Past </h3>
-                {% for person in page.past %}
-                    <h4> {{ person.name}} </h4>
-                    <p>Email: {{ person.email }}</p>
-                {% endfor %}
+{% block body %}
 
-                <h3> Our Favorite People </h3>
-                {% for person in page.other %}
-                    <h4> {{ person.name}} </h4>
-                    <p>Email: {{ person.email }}</p>
-                {% endfor %}
-
-            </section>
-            
-        </article>
-
+<header></header>
+<nav></nav>
+<aside></aside>
+<main>
+    <article>
         
-        
+        <h1> {{ page.title }} </h1>
+        <section>
+        {{ content | safe }}
+        </section>
 
-    
-    </main>
-    <footer></footer>
-</body>
-</html>
+        <section>
+            <h2> The iBOTS Team </h2>
+            <h3> Current </h3>
+            {% for person in page.current %}
+                <h4> {{ person.name}} </h4>
+                <p>Email: {{ person.email }}</p>
+                <p><a href="{{ person.booking_url }}">Booking Link</a></p>
+            {% endfor %}
+
+            <h3> Past </h3>
+            {% for person in page.past %}
+                <h4> {{ person.name}} </h4>
+                <p>Email: {{ person.email }}</p>
+            {% endfor %}
+
+            <h3> Our Favorite People </h3>
+            {% for person in page.other %}
+                <h4> {{ person.name}} </h4>
+                <p>Email: {{ person.email }}</p>
+            {% endfor %}
+
+        </section>
+        
+    </article>
+
+</main>
+<footer></footer>
+
+{% endblock %}
