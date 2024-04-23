@@ -1,5 +1,9 @@
 hours: 15
 date: 2023-02-19
+main_instructor: Nicholas Del Grosso
+assistants:
+    - Benjamin Escribano
+github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/arduino-programming
 --- 
 
 ## Fundamental Programming Skills for Experimental Science with Arduino
