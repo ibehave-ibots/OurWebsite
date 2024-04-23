@@ -4,9 +4,7 @@ from collections import defaultdict
 from typing import Iterable, NamedTuple
 from pathlib import Path
 
-import jinja2
-
-from ssg.templates import build_environment, render_in_place, render_named_template
+from .templates import JinjaRenderer
 
 from .data import extract_data
 from .utils import copydir, load_yaml, load_markdown, write_text
@@ -87,7 +85,7 @@ class HTMLRenderJob(NamedTuple):
     content_html: str
 
 
-def extract_pages_data(env, data, pages_dir='./pages', ignore_names: list[str] = ['_index.md']):
+def extract_pages_data(renderer: JinjaRenderer, data, pages_dir='./pages', ignore_names: list[str] = ['_index.md']):
     render_data = {'data': data}
     pages = defaultdict(dict)
     page_path: Path
@@ -95,7 +93,7 @@ def extract_pages_data(env, data, pages_dir='./pages', ignore_names: list[str] =
         if page_path.name not in ignore_names:
             page_templated_yaml = read_frontmatter_text(page_path)
             if page_templated_yaml:
-                page_yaml = render_in_place(env=env, template_text=page_templated_yaml, **render_data)
+                page_yaml = renderer.render_in_place(template_text=page_templated_yaml, **render_data)
                 page_data = load_yaml(page_yaml)
             else:
                 page_data = {}
@@ -107,13 +105,13 @@ def extract_pages_data(env, data, pages_dir='./pages', ignore_names: list[str] =
 
 
 
-def extract_page_and_content_data(env: jinja2.Environment, page_path: Path, data: dict, pages_data: dict, include_names = ['_index.md']) -> HTMLRenderJob:
+def extract_page_and_content_data(renderer: JinjaRenderer, page_path: Path, data: dict, pages_data: dict, include_names = ['_index.md']) -> HTMLRenderJob:
         # Render YAML Frontmatter
         page_templated_yaml = read_frontmatter_text(page_path)
         render_data = {'data': data}
         if page_path.name in include_names:
             render_data['pages'] = pages_data
-        page_yaml = render_in_place(env=env, template_text=page_templated_yaml, **render_data)
+        page_yaml = renderer.render_in_place(template_text=page_templated_yaml, **render_data)
 
         # Load Frontmatter Data
         page_data = load_yaml(page_yaml)
@@ -121,7 +119,7 @@ def extract_page_and_content_data(env: jinja2.Environment, page_path: Path, data
 
         # Render Markdown content
         page_templated_md = read_content_text(md_path=page_path)
-        page_md = render_in_place(env=env, template_text=page_templated_md, **render_data)
+        page_md = renderer.render_in_place(template_text=page_templated_md, **render_data)
 
         # Convert Markdown to HTML
         content_html = load_markdown(page_md)
@@ -136,27 +134,24 @@ def extract_page_and_content_data(env: jinja2.Environment, page_path: Path, data
 
 def run_render_pipeline():
 
-    env = build_environment(
-        template_dir='./templates', 
+    renderer = JinjaRenderer.from_path(
+        templates_dir='./templates', 
         filters={
             'resize': redirect_path('./output')(resize_image), 
         },
     )
 
 
-    data = extract_data('./data')
-    pages = extract_pages_data(env, data)
-    copydir(src="./static", target="./output/static")
-    
+    data = extract_data(base_path='./data')
+    pages = extract_pages_data(renderer=renderer, data=data, pages_dir='./pages')   
     for page_path in find_pages('./pages'):
-        job: HTMLRenderJob = extract_page_and_content_data(env=env, page_path=page_path, data=data, pages_data=pages)
+        job: HTMLRenderJob = extract_page_and_content_data(renderer=renderer, page_path=page_path, data=data, pages_data=pages)
         
         # Build HTML Page
         collection_name = get_page_collection(base_path='./pages', md_path=job.page_path)
         template_name = get_template_name(collection_name=collection_name, md_name=job.page_path.name)
 
-        page_html = render_named_template(
-            env=env, 
+        page_html = renderer.render_named_template(
             template_name=template_name,
             **{
                 'data': data,
@@ -165,13 +160,11 @@ def run_render_pipeline():
                 'pages': pages
             },
         )
-
-
         rel_output_path = get_relative_output_path(collection_name=collection_name, md_name=job.page_path.name)
         
         write_text(base_dir='./output', file_path=rel_output_path, text=page_html)
 
-
+    copydir(src="./static", target="./output/static")
 
 
 
