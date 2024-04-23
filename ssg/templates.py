@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from datetime import datetime, date
-from typing import Callable, NamedTuple
+from typing import Any, Callable, NamedTuple
 import jinja2
 
 
@@ -12,8 +12,8 @@ class JinjaRenderer(NamedTuple):
     env: jinja2.Environment
 
     @classmethod
-    def from_path(cls, templates_dir: Path, filters: dict[str, Callable]) -> JinjaRenderer:
-        env = _build_environment(template_dir=templates_dir, filters=filters)
+    def from_path(cls, templates_dir: Path, filters: dict[str, Callable], globals: dict[str, Any]) -> JinjaRenderer:
+        env = _build_environment(template_dir=templates_dir, filters=filters, globals=globals)
         
         return JinjaRenderer(env=env)
 
@@ -36,15 +36,13 @@ def _render_named_template(env: jinja2.Environment, template_name: str, **data) 
     return rendered
 
 
-def _build_environment(template_dir: Path, filters: dict[str, Callable]) -> jinja2.Environment:
+def _build_environment(template_dir: Path, filters: dict[str, Callable], globals: dict[str, Any]) -> jinja2.Environment:
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(template_dir),
         autoescape=jinja2.select_autoescape()
     )
-    for name, fun in filters.items():
-        env.filters[name] = fun
-    env.globals['today'] = date.today()
-    env.globals['now'] = datetime.now()
+    env.filters.update(filters)
+    env.globals.update(globals)
     env.trim_blocks = True
     env.lstrip_blocks = True
     

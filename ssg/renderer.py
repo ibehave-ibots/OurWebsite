@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from datetime import date, datetime
 from typing import NamedTuple
 from pathlib import Path
 
@@ -53,12 +54,16 @@ def extract_pages_data(renderer: JinjaRenderer, data, pages_dir='./pages', ignor
         
 
 def run_render_pipeline():
-
+    
     renderer = JinjaRenderer.from_path(
         templates_dir='./templates', 
         filters={
             'resize': redirect_path('./output')(resize_image), 
         },
+        globals={
+            'today': date.today(),
+            'now': datetime.now(),
+        }
     )
 
 
