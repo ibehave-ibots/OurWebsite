@@ -1,0 +1,26 @@
+hours: 15
+date: 2023-02-19
+--- 
+
+## Fundamental Programming Skills for Experimental Science with Arduino
+
+Arduino microcontrollers are commonly used in neuroscience experiments as sensors or input devices; for example, to record a subject’s decision via a button press. The easy-to-learn Arduino ecosystem offers a fantastic opportunity to sharpen your programming skills while electrifying the real world with your creations!
+
+In this three-day workshop, we will learn how to write clearly-structured and easily-understandable programs in C++ that run on Arduino microcontrollers. You will learn C++ program structure and concepts, process flow control and debugging.  We will show you how to use Github version control to easily track changes made to your code and to collaborate seamlessly with others.  On the last day of the course, we’ll invite you to join us in Bonn at our Makerspace to work with Arduino devices, exploring along the way how to write fast, efficient code in real-world situations, including an introduction to the techniques of multiprocessing and memory optimisation.
+
+By the end of this workshop, you will be able to build your own Arduino sensors, expanding your experimental data collection opportunities and connecting with the open-source maker world in science!
+
+Prerequisites: Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with previous coding experience in any language such as Matlab, Python, or R.
+
+Duration: 20 hrs over 3 days
+
+Dates (Times):
+·	19.02.2024, 9h30-17h00 (Online)
+·	20.02.2024, 9h30-17h00 (Online)
+·	21.02.2024, 10h00-16h00 (In-Person at Our Makerspace at the Life & Brain in Uniklinikum Bonn)
+
+Workshop Format: Online on Zoom, with in-person component on last day. Hands-On Course. 
+
+Workshop Preparation: Software installation instructions will be sent before the start of the course.
+
+At the end of the course, participants who attend at least 80% of the course will receive certificates of participation.
