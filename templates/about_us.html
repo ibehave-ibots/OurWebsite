@@ -18,11 +18,25 @@
 
             <section>
                 <h2> The iBOTS Team </h2>
+                <h3> Current </h3>
                 {% for person in page.current %}
-                    <h3> {{ person.name}} </h3>
+                    <h4> {{ person.name}} </h4>
                     <p>Email: {{ person.email }}</p>
                     <p><a href="{{ person.booking_url }}">Booking Link</a></p>
                 {% endfor %}
+
+                <h3> Past </h3>
+                {% for person in page.past %}
+                    <h4> {{ person.name}} </h4>
+                    <p>Email: {{ person.email }}</p>
+                {% endfor %}
+
+                <h3> Our Favorite People </h3>
+                {% for person in page.other %}
+                    <h4> {{ person.name}} </h4>
+                    <p>Email: {{ person.email }}</p>
+                {% endfor %}
+
             </section>
             
         </article>
