@@ -50,7 +50,25 @@
                     <p>If you are interested, <a href="{{ conference.registration_url }}">Register Here!</a></p>
                 {% endfor %}
             </section>
-           
+
+            <section>
+                <h2>Seminars</h2>
+                {% for seminar in page.seminars %}
+                    <h3> {{ seminar.name }} </h3>
+                    <p> {{ seminar.summary }} </p>
+                    <p>When: {{ seminar.date }} </p>
+                    <p>What time: {{ seminar.start }} to {{ seminar.end }}</p>
+                    <p>Where: 
+                        <ul>
+                            <li>In person: {{ seminar.location.inperson }}</li>
+                            <li>Remote: <a href="{{ seminar.location.remote }}">{{ seminar.location.remote }}</a> </li>
+                        </ul>
+                    </p>
+                    <p>Who is it for: {{ seminar.target_audience }}</p>
+                    <p>If you are interested, <a href="{{ seminar.registration_url }}">Register Here!</a></p>
+                {% endfor %}
+            </section>
+
         </article>
 
         

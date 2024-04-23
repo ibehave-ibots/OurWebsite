@@ -46,4 +46,27 @@ conferences:
     registration_url: {{ conference.registration_url }}
   {% endfor %}
 
+seminars:
+  {% for seminar in data.seminars %}
+  - name: {{ seminar.seminar }}
+    date: {{ seminar.date }}
+    start: {{ seminar.start_time }}
+    end: {{ seminar.end_time }}
+    location:
+      inperson: {{ seminar.location.inperson }}
+      remote: {{ seminar.location.remote }}
+    host_org:
+      name: {{ seminar.host_org.name }}
+      url: {{ seminar.host_org.url }}
+    summary: {{ seminar.summary }} 
+    target_audience: {{ seminar.target_audience }}
+    people: 
+    {% for person in seminar.people %}
+      - name: {{ person.name }}
+        role: {{ person.role }}
+        url: {{ person.url }}
+    {% endfor %}
+    registration_url: {{ seminar.registration_url }}
+  {% endfor %}
+
 ---
