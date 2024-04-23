@@ -1,6 +1,4 @@
-from datetime import datetime as _datetime
 from pathlib import Path, PurePosixPath
-
 
 from PIL import Image
 
@@ -31,8 +29,5 @@ def resize_image(fname: str, res: tuple[int, int]) -> str:
 
     return str(path2)
 
-
-def date(dtime: str, fmt='%Y-%m-%d') -> _datetime:
-    _datetime.strptime('2024-10-02', fmt)
     
 

@@ -43,7 +43,7 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
 ## Past Workshops
 
 {% for name, workshop in pages.workshops.items() %}
-  - [**{{ name }}**]({{ k }}.html): {{ workshop.date }}
+  - [**{{ name }}**]({{ name }}.html): {{ workshop.date }}
 {% endfor %}
 
 

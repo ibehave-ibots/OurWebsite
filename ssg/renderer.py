@@ -9,108 +9,139 @@ import shutil
 import jinja2
 
 from .data import extract_data
-from .utils import rmdir
-from .filters import redirect_path, resize_image, date
-from .page import Page
+from .utils import rmdir, load_yaml, load_markdown
+from .filters import redirect_path, resize_image
 
 
 
-@dataclass(frozen=False)
-class Renderer:
-    content_path: Path
-    template_path: Path
-    output_path: Path
-    data_dir: Path
-    filters: dict
-    _data: dict = None
+def find_pages(base_path: Path) -> Iterable[Path]:
+    for path in Path(base_path).glob('**/*.md'):
+        yield path
+
+
+def read_frontmatter_text(md_path: Path) -> str:
+    text = Path(md_path).read_text()
+    *frontmatters, _ = text.split('---')
+    frontmatter = frontmatters[0] if frontmatters else ''
+    return frontmatter
     
+def read_content_text(md_path: Path) -> str:
+    text = Path(md_path).read_text()
+    *_, md_text = text.split('---')
+    content = md_text if md_text.strip() else ''
+    return content
         
 
-    @classmethod
-    def from_dirs(cls, content_dir, templates_dir, output_dir, data_dir, filters: dict[str, Callable[[str,], str]] = None) -> Iterable[Renderer]:
+def render_in_place(template_text: str, env: jinja2.Environment = jinja2.Environment(), **data) -> str:
+    rendered = env.from_string(template_text).render(**data)
+    return rendered
+
+
+def get_page_collection(base_path: Path, md_path: Path) -> str | None:
+    rel_path = Path(md_path).relative_to(base_path)
+    match rel_path.parts:
+        case (): 
+            raise ValueError("md_path must be a file inside base_path")
+        case (name,): 
+            return None
+        case (coll, name): 
+            return coll
+        case _: 
+            raise NotImplementedError("Multi-Nested collections not surrently supported")
+    
+
+def get_relative_output_path(collection_name: str | None, md_name: str) -> Path:
+    if md_name[0] == '_':
+        md_name = md_name[1:]
+    html_name = str(Path(md_name).with_suffix('.html'))
+    match collection_name, html_name:
+        case None, _: 
+            return Path(html_name)
+        case '', _: 
+            return Path(html_name)
+        case _: 
+            return Path(collection_name) / html_name
         
-        templates_dir = Path(templates_dir)
-        base_content_dir = Path(content_dir)
-        for content_path in base_content_dir.glob('**/*.md'):
-            if content_path.parent == base_content_dir:
-                template_path = templates_dir / content_path.with_suffix('.html').name
-                output_path = Path(output_dir) / content_path.with_suffix('.html').name
-            elif content_path.name == '_index.md':
-                template_path = templates_dir / content_path.parent.with_suffix('.html').name
-                output_path = Path(output_dir) / content_path.parent.name / 'index.html'
+
+def get_template_name(collection_name: str | None, md_name: str) -> str:
+    match collection_name, md_name:
+        case None, _:
+            return str(Path(md_name).with_suffix('.html'))
+        case '', _: 
+            return str(Path(md_name).with_suffix('.html'))
+        case coll, '_index.md': 
+            return f"{coll}.html"
+        case coll, _:
+            assert coll[-1] == 's', "collection names should start with s, dumb rule I know but here we are."
+            return f"{coll[:-1]}.html"
+
+
+def render_named_template(env: jinja2.Environment, template_name: str, **data) -> str:
+    return env.get_template(template_name).render(**data)
+
+
+
+def update_pages(pages: dict, collection_name: str, page_name: str, page_data: dict) -> dict:
+    new_pages = pages.copy()
+    name = Path(page_name).stem
+    if collection_name:
+        new_pages[collection_name][name] = page_data        
+    else:
+        new_pages[name] = page_data
+    return new_pages
+        
+
+class HTMLRenderJob(NamedTuple):
+    page_path: Path
+    page_data: dict
+    content_html: str
+
+
+def extract_pages_data(env, data, pages_dir='./pages', ignore_names: list[str] = ['_index.md']):
+    render_data = {'data': data}
+    pages = defaultdict(dict)
+    page_path: Path
+    for page_path in find_pages(pages_dir):
+        if page_path.name not in ignore_names:
+            page_templated_yaml = read_frontmatter_text(page_path)
+            if page_templated_yaml:
+                page_yaml = render_in_place(env=env, template_text=page_templated_yaml, **render_data)
+                page_data = load_yaml(page_yaml)
             else:
-                template_path = templates_dir / content_path.parent.parent.with_suffix('.html').with_stem(content_path.parent.stem[:-1])  # drop the 's' from the name
-                output_path = Path(output_dir) / content_path.parent.name / content_path.with_suffix('.html').name
-                
-            assert template_path.exists(), f"Looking for {template_path}"
-                 
-            yield Renderer(
-                content_path = content_path,
-                template_path = template_path,
-                output_path= output_path,
-                data_dir = Path(data_dir),
-                filters = filters if filters else {},
-            )
-    def get_environment(self) -> jinja2.Environment:
-        env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(self.template_path.parent),
-            autoescape=jinja2.select_autoescape()
+                page_data = {}
+            collection_name = get_page_collection(base_path=pages_dir, md_path=page_path)
+            pages = update_pages(pages, collection_name=collection_name, page_name=page_path.name, page_data=page_data)
+    pages = dict(pages)
+    return pages
+        
+
+def extract_page_and_content_data(env, data, pages) -> Iterable[HTMLRenderJob]:
+    for page_path in find_pages('./pages'):
+        # Render YAML Frontmatter
+        page_templated_yaml = read_frontmatter_text(page_path)
+        render_data = {'data': data}
+        if page_path.name == '_index.md':
+            render_data['pages'] = pages
+        page_yaml = render_in_place(env=env, template_text=page_templated_yaml, **render_data)
+
+        # Load Frontmatter Data
+        page_data = load_yaml(page_yaml)
+        render_data['page'] = page_data
+
+        # Render Markdown content
+        page_templated_md = read_content_text(md_path=page_path)
+        page_md = render_in_place(env=env,template_text=page_templated_md, **render_data)
+
+        # Convert Markdown to HTML
+        content_html = load_markdown(page_md)
+
+        job = HTMLRenderJob(
+            page_path=page_path,
+            page_data=page_data,
+            content_html=content_html
         )
-        for name, fun in self.filters.items():
-            env.filters[name] = fun
+        yield job
         
-        return env
-
-    
-    def _get_template(self) -> jinja2.Template:
-        env = self.get_environment()
-        template = env.get_template(self.template_path.name)
-        return template
-    
-    def extract_page(self, pages_data: dict = None) -> Page:
-        if pages_data is None:
-            pages_data = {}
-        collections_data = extract_data(self.data_dir)
-        
-        extra_data = {'data': collections_data, 'pages': pages_data, }
-        page = Page.from_path(self.content_path, extra_data=extra_data)
-        return page
-
-
-    def extract_data(self) -> dict:
-        if self._data is None:
-            self._data = extract_data(self.data_dir)
-        return self._data.copy()
-
-    def render(self, extra_data: dict = None) -> None:
-        """Create the rendered html and save to the output path."""
-        if extra_data is None:
-            extra_data = {}
-        
-        template = self._get_template()
-        html = template.render(**extra_data)
-        self.output_path.parent.mkdir(exist_ok=True, parents=True)
-        self.output_path.write_text(html)
-    
-
-    @staticmethod
-    def extract_multiple_pages(renderers: list[Renderer], content_dir: Path) -> dict:
-        content_dir = Path(content_dir)
-        pages_data = defaultdict(dict)
-        for renderer in renderers:
-            page = renderer.extract_page()
-            page_path = renderer.content_path
-            if page_path.parent == content_dir:
-                pages_data[page_path.stem] = page.data
-            elif page_path.parent.parent == content_dir:
-                if page_path.stem == '_index': # todo: have a nice structure that includes the collection's index page.
-                    continue
-                pages_data[page_path.parent.name][page_path.stem] = page.data
-            else:
-                raise IOError("Multi-nested page folders not supported")
-        return dict(pages_data)
-
-            
 
 def run_render_pipeline():
 
@@ -118,29 +149,51 @@ def run_render_pipeline():
     if Path('static').exists():
         shutil.copytree("static", "output/static")
 
-    renderers = list(Renderer.from_dirs(
-        content_dir='./pages', 
-        templates_dir='./templates', 
-        output_dir='./output', 
-        data_dir='./data',
-        filters={
-            'resize': redirect_path('./output')(resize_image), 
-            'date': date,
+
+    env = jinja2.Environment(
+        loader=jinja2.FileSystemLoader('./templates'),
+        autoescape=jinja2.select_autoescape()
+    )
+    filters={
+        'resize': redirect_path('./output')(resize_image), 
+    }
+    for name, fun in filters.items():
+        env.filters[name] = fun
+
+
+    data = extract_data('./data')
+    pages = extract_pages_data(env, data)
+    html_render_jobs = extract_page_and_content_data(env, data, pages)
+
+
+    # Build HTML Page
+    for job in html_render_jobs:
+
+        collection_name = get_page_collection(base_path='./pages', md_path=job.page_path)
+        template_name = get_template_name(collection_name=collection_name, md_name=job.page_path.name)
+
+        render_data = {
+            'data': data,
+            'content': job.content_html,
+            'page': job.page_data,
+            'pages': pages
         }
-    ))
-    all_pages_data = Renderer.extract_multiple_pages(renderers=renderers, content_dir='./pages')
-    for renderer in renderers:
-        print("rendering:", renderer.content_path, 'from', renderer.template_path, 'to', renderer.output_path)
-        data = renderer.extract_data()        
-        page = renderer.extract_page(pages_data=all_pages_data)
-        env = renderer.get_environment()
-        md_text = page.markdown_section
+        page_html = render_named_template(
+            env=env, 
+            template_name=template_name,
+            **render_data
+        )
 
-        renderer.render(extra_data={'content': page.html, 'page': page.data, 'pages': all_pages_data, 'data': data})
-        
+        rel_output_path = get_relative_output_path(collection_name=collection_name, md_name=job.page_path.name)
+        output_path = Path('./output').joinpath(rel_output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(page_html)
 
 
-    
+
+
+
+
 
 if __name__ == '__main__':
     run_render_pipeline()
