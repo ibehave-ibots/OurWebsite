@@ -12,34 +12,47 @@ def find_pages(base_path: Path) -> Iterable[Path]:
         yield path
 
 
-def read_frontmatter_text(md_path: Path) -> str:
+## YAML Frontmatter ##
+
+def render_frontmatter(renderer: JinjaRenderer, page_path: Path, **render_data) -> dict:
+    templated_yaml = _read_frontmatter_text(md_path=page_path)
+    if not templated_yaml:
+        return {}
+    
+    yaml = renderer.render_in_place(template_text=templated_yaml, **render_data)
+    page_data = _load_frontmatter(yaml)
+    return page_data
+
+
+def _read_frontmatter_text(md_path: Path) -> str:
     text = Path(md_path).read_text()
     *frontmatters, _ = text.split('---')
     frontmatter = frontmatters[0] if frontmatters else ''
     return frontmatter
 
 
-def load_frontmatter(text: str) -> Any:
+def _load_frontmatter(text: str) -> Any:
     return utils.load_yaml(text=text)
 
 
-def render_frontmatter(renderer: JinjaRenderer, page_path: Path, **render_data) -> dict:
-    templated_yaml = read_frontmatter_text(md_path=page_path)
-    if not templated_yaml:
-        return {}
-    
-    yaml = renderer.render_in_place(template_text=templated_yaml, **render_data)
-    page_data = load_frontmatter(yaml)
-    return page_data
-    
-        
+## Markdown Content ##
+
+def render_content_to_html(renderer: JinjaRenderer, page_path: Path, **render_data) -> str:
+    page_templated_md = _read_content_text(md_path=page_path)
+    page_md = renderer.render_in_place(template_text=page_templated_md, **render_data)
+    content_html = _load_markdown(page_md)
+    return content_html
 
 
-def read_content_text(md_path: Path) -> str:
+def _read_content_text(md_path: Path) -> str:
     text = Path(md_path).read_text()
     *_, md_text = text.split('---')
     content = md_text if md_text.strip() else ''
     return content
+
+
+def _load_markdown(text: str):
+    return markdown2.Markdown().convert(text)
 
 
 def get_page_collection(base_path: Path, md_path: Path) -> str | None:
@@ -66,6 +79,5 @@ def update_pages_data(pages: dict, collection_name: str, page_name: str, page_da
 
 
 
-def load_markdown(text: str):
-    return markdown2.Markdown().convert(text)
+
 

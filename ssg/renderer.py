@@ -9,7 +9,7 @@ from .templates import JinjaRenderer
 from .data import extract_global_data
 from .utils import copydir, write_text
 from .filters import redirect_path, resize_image
-from .pages import find_pages, read_content_text, get_page_collection, render_frontmatter, update_pages_data, load_markdown
+from .pages import find_pages, render_content_to_html, get_page_collection, render_frontmatter, update_pages_data
 
 
 
@@ -70,12 +70,8 @@ def extract_page_and_content_data(renderer: JinjaRenderer, page_path: Path, data
         render_data['page'] = page_data
 
         # Render Markdown content
-        page_templated_md = read_content_text(md_path=page_path)
-        page_md = renderer.render_in_place(template_text=page_templated_md, **render_data)
-
-        # Convert Markdown to HTML
-        content_html = load_markdown(page_md)
-
+        content_html = render_content_to_html(renderer=renderer, page_path=page_path, **render_data)
+        
         job = HTMLRenderJob(
             page_path=page_path,
             page_data=page_data,
