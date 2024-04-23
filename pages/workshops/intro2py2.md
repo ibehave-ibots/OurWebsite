@@ -1,5 +1,12 @@
+title: Intro to Data Analysis with Python and Pandas
 hours: 15
 date: 2023-11-17
+main_instructor: Sangeetha Nandakumar
+assistants:
+    - Ben Hastings
+    - Mohammad Bashiri
+    - Nicholas Del Grosso
+github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro-to-python-and-pandas2
 --- 
 
 ##  Intro to Data Analysis with Python and Pandas

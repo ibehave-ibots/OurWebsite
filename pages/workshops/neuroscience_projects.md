@@ -1,5 +1,10 @@
+title: Developing Neuroscience Data Analysis Projects with Python, Git, and Snakemake
 hours: 15
 date: 2024-02-26
+main_instructor: Mohammad Bashiri
+assistants:
+    - Ogulcan Cingulier
+github_repo: https://github.com/ibehave-ibots/iBOTS-Developing-Data-Analysis-Projects
 --- 
 
 ## Developing Neuroscience Data Analysis Projects with Python, Git, and Snakemake

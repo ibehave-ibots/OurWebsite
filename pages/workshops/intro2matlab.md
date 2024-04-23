@@ -1,5 +1,10 @@
+title: Intro to Neuroscience Data Analysis with Matlab
 hours: 15
 date: 2023-11-27
+main_instructor: Ben Hastings
+assistants:
+    - Nicholas Del Grosso
+github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/Intro-to-matlab
 --- 
 
 ##  Intro to Neuroscience Data Analysis with Matlab
