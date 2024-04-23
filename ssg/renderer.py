@@ -20,22 +20,20 @@ def get_relative_output_path(collection_name: str | None, md_name: str) -> Path:
     match collection_name, html_name:
         case None, _: 
             return Path(html_name)
-        case '', _: 
-            return Path(html_name)
         case _: 
             return Path(collection_name) / html_name
         
 
 def get_template_name(collection_name: str | None, md_name: str) -> str:
     match collection_name, md_name:
+        case None, '_index.md': 
+            return f"index.html"
         case None, _:
-            return str(Path(md_name).with_suffix('.html'))
-        case '', _: 
             return str(Path(md_name).with_suffix('.html'))
         case coll, '_index.md': 
             return f"{coll}.html"
         case coll, _:
-            assert coll[-1] == 's', "collection names should start with s, dumb rule I know but here we are."
+            assert coll[-1] == 's', "collection names should end with an s, dumb rule I know but here we are."
             return f"{coll[:-1]}.html"
 
 
