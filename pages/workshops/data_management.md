@@ -15,8 +15,8 @@ Prerequisites: This workshop is ideal for Neuroscience Researchers at any level 
 Duration: 15 hrs over 2.5 days
 
 Dates (Times):
-·	22.02.2024,  9h30-17h00
-·	23.02.2024,  9h30-17h00
+- 22.02.2024,  9h30-17h00
+- 23.02.2024,  9h30-17h00
 
 Workshop Format: Online, Hands-On Course. 
 
