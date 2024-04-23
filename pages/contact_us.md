@@ -16,8 +16,10 @@ Morbi id mattis orci. Maecenas elit sapien, viverra in urna eu, ornare finibus e
 
 ## Contact Details
 Name: {{ data.people.nick.name }}
+
 Email: {{ data.people.nick.email }}
-Booking link: {{ data.people.nick.booking_url }}
+
+<a href="{{ data.people.nick.booking_url }}">Book a short chat!</a>
 
 ## Stay Up to Date
 [Join Our Mailing List]({{ data.group.mailing_list_subscribe_url }})
