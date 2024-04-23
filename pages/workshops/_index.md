@@ -30,7 +30,7 @@ Pellentesque lobortis luctus augue non bibendum. Vivamus non tortor id augue tem
 
 Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor dapibus. Duis neque purus, tempus hendrerit dapibus a, vehicula non ante. Praesent semper tellus nec pulvinar maximus.
 
-![Registration System](/static/images/early-registration-concept.png)
+![Registration System](../../static/images/early-registration-concept.png)
 
 ## Upcoming Workshops
 
