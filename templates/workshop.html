@@ -1,9 +1,28 @@
 <html>
     <head></head>
     <body>
-        <h1>Workshop </h1>
+        <h1>page.title</h1>
         <section>
             {{ content | safe }}
+        </section>
+        
+        <section>
+            <h2>Instructors</h2>
+            <ul>
+                <li>Main instructor: {{ page.main_instructor }}</li>
+                <li>Teaching assistants: 
+                    <ul>
+                        {% for person in page.assistants %}
+                            <li>{{ person }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Course Materials</h2>
+            <p>Find course materials here: <a href="{{ page.github_repo }}">{{ page.title }}</a></p>
         </section>
     </body>
 </html>
