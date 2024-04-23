@@ -19,6 +19,7 @@
                 <h2>Clubs</h2>
                 {% for club in page.clubs %}
                     <h3> {{ club.name }} </h3>
+                    <p> {{ club.summary }} </p>
                     <p>When: {{ club.date }} </p>
                     <p>What time: {{ club.start }} to {{ club.end }}</p>
                     <p>Where: 
@@ -27,6 +28,7 @@
                             <li>Remote: <a href="{{ club.location.remote }}">{{ club.location.remote }}</a> </li>
                         </ul>
                     </p>
+                    <p>Who is it for: {{ club.target_audience }}</p>
                 {% endfor %}
             </section>
             
