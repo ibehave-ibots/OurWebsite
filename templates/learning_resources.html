@@ -19,13 +19,16 @@
             <section>
                 <h2>Our Materials </h2>
                 {% for our_material in page.our_materials %}
-                <h4> {{ our_material.name }} </h4>
-                <p><a href="{{ our_material.notebook_filepath }}">{{ our_material.notebook_filepath }}</a></p>
-                <ul>
-                {% for technology in our_material.technologies %}
-                    <li>{{ technology }}</li>
-                {% endfor %}    
-                </ul>  
+                <h3> {{ our_material.name }} </h3>
+                <p><a href="{{ our_material.filepath }}">{{ our_material.filepath }}</a></p>
+                <section>
+                    <strong>Technologies Used</strong>
+                    <ul>
+                        {% for technology in our_material.technologies %}
+                            <li>{{ technology }}</li>
+                        {% endfor %}    
+                        </ul>          
+                </section>
                 {% endfor %}
             </section>
 
