@@ -1,6 +1,6 @@
 title: Organizations
 partners: 
-    {% for partner in data.organizations.partners %}
+    {% for partner in data.partners %}
     - name: {{ partner.name }}
       website: {{ partner.url }}
       email: {{ partner.email }}
@@ -8,7 +8,7 @@ partners:
     {% endfor %}
 
 sponsors: 
-    {% for sponsor in data.organizations.sponsors %}
+    {% for sponsor in data.sponsors %}
     - name: {{ sponsor.name }}
       website: {{ sponsor.url }}
       email: {{ sponsor.email }}

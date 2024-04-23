@@ -1,4 +1,3 @@
-partners:
   - name: iBOTS Make
     url: makehere@link.com
     email: email1@gmail.com
@@ -15,10 +14,3 @@ partners:
     url: ibehavehere@link.com
     email: email4@gmail.com
     description: They are iBehave
-
-sponsors:
-  - name: iBehave
-    url: ibehavehere@link.com
-    email: email4@gmail.com
-    description: They are iBehave
-    logo: /static/images/iBehave_Logo.png
