@@ -10,16 +10,17 @@ In this workshop, discover the power of database management systems, a game-chan
 
 By the course's end, you'll be adept at writing Python scripts to create and extract data from databases, query large databases in SQL, store complex data in HDF5, manage your work with Git, and publish your projects on GitHub.
 
-Prerequisites: This workshop is ideal for Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with some background in data analysis using Matlab, Python, or R.
+**Prerequisites:** This workshop is ideal for Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with some background in data analysis using Matlab, Python, or R.
 
-Duration: 15 hrs over 2.5 days
+**Duration:** 15 hrs over 2.5 days
 
-Dates (Times):
+**Dates (Times):**
+
 - 22.02.2024,  9h30-17h00
 - 23.02.2024,  9h30-17h00
 
-Workshop Format: Online, Hands-On Course. 
+**Workshop Format:** Online, Hands-On Course. 
 
-Workshop Preparation: Software installation instructions will be sent before the start of the course.
+**Workshop Preparation:** Software installation instructions will be sent before the start of the course.
 
 At the end of the course, participants who attend at least 80% of the course will receive certificates of participation.
