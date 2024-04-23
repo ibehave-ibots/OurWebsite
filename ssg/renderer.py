@@ -37,10 +37,6 @@ def get_template_name(collection_name: str | None, md_name: str) -> str:
             return f"{coll[:-1]}.html"
 
 
-class HTMLRenderJob(NamedTuple):
-    page_path: Path
-    page_data: dict
-    content_html: str
 
 
 def extract_pages_data(renderer: JinjaRenderer, data, pages_dir='./pages', ignore_names: list[str] = ['_index.md']):
@@ -56,30 +52,6 @@ def extract_pages_data(renderer: JinjaRenderer, data, pages_dir='./pages', ignor
     return pages
         
 
-
-
-def extract_page_and_content_data(renderer: JinjaRenderer, page_path: Path, data: dict, pages_data: dict, include_names = ['_index.md']) -> HTMLRenderJob:
-        # Render YAML Frontmatter
-        render_data = {'data': data}
-        if page_path.name in include_names:
-            render_data['pages'] = pages_data
-
-        page_data = render_frontmatter(renderer=renderer, page_path=page_path, **render_data)
-
-        # Load Frontmatter Data
-        render_data['page'] = page_data
-
-        # Render Markdown content
-        content_html = render_content_to_html(renderer=renderer, page_path=page_path, **render_data)
-        
-        job = HTMLRenderJob(
-            page_path=page_path,
-            page_data=page_data,
-            content_html=content_html
-        )
-        return job
-        
-
 def run_render_pipeline():
 
     renderer = JinjaRenderer.from_path(
@@ -93,22 +65,29 @@ def run_render_pipeline():
     global_data = extract_global_data(base_path='./data')
     pages_data = extract_pages_data(renderer=renderer, data=global_data, pages_dir='./pages')   
     for page_path in find_pages('./pages'):
-        job: HTMLRenderJob = extract_page_and_content_data(renderer=renderer, page_path=page_path, data=global_data, pages_data=pages_data)
+        
+        render_data = {'data': global_data}
+        if page_path.name in ['_index.md']:
+            render_data['pages'] = pages_data
+
+        page_data = render_frontmatter(renderer=renderer, page_path=page_path, **render_data)
+        render_data['page'] = page_data
+        content_html = render_content_to_html(renderer=renderer, page_path=page_path, **render_data)
         
         # Build HTML Page
-        collection_name = get_page_collection(base_path='./pages', md_path=job.page_path)
-        template_name = get_template_name(collection_name=collection_name, md_name=job.page_path.name)
+        collection_name = get_page_collection(base_path='./pages', md_path=page_path)
+        template_name = get_template_name(collection_name=collection_name, md_name=page_path.name)
 
         page_html = renderer.render_named_template(
             template_name=template_name,
             **{
                 'data': global_data,
-                'content': job.content_html,
-                'page': job.page_data,
+                'content': content_html,
+                'page': page_data,
                 'pages': pages_data
             },
         )
-        rel_output_path = get_relative_output_path(collection_name=collection_name, md_name=job.page_path.name)
+        rel_output_path = get_relative_output_path(collection_name=collection_name, md_name=page_path.name)
         
         write_text(base_dir='./output', file_path=rel_output_path, text=page_html)
 
