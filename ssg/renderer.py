@@ -10,7 +10,7 @@ from .templates import JinjaRenderer
 from .data import extract_global_data
 from .utils import copydir, load_yaml, write_text
 from .filters import redirect_path, resize_image
-from .pages import find_pages, read_content_text, read_frontmatter_text, get_page_collection, update_pages_data, load_markdown
+from .pages import find_pages, read_content_text, read_frontmatter_text, get_page_collection, render_frontmatter, update_pages_data, load_markdown
 
 
 
@@ -52,12 +52,7 @@ def extract_pages_data(renderer: JinjaRenderer, data, pages_dir='./pages', ignor
     page_path: Path
     for page_path in find_pages(pages_dir):
         if page_path.name not in ignore_names:
-            page_templated_yaml = read_frontmatter_text(page_path)
-            if page_templated_yaml:
-                page_yaml = renderer.render_in_place(template_text=page_templated_yaml, **render_data)
-                page_data = load_yaml(page_yaml)
-            else:
-                page_data = {}
+            page_data = render_frontmatter(renderer=renderer, page_path=page_path, **render_data)
             collection_name = get_page_collection(base_path=pages_dir, md_path=page_path)
             pages = update_pages_data(pages, collection_name=collection_name, page_name=page_path.name, page_data=page_data)
     pages = dict(pages)
@@ -68,14 +63,13 @@ def extract_pages_data(renderer: JinjaRenderer, data, pages_dir='./pages', ignor
 
 def extract_page_and_content_data(renderer: JinjaRenderer, page_path: Path, data: dict, pages_data: dict, include_names = ['_index.md']) -> HTMLRenderJob:
         # Render YAML Frontmatter
-        page_templated_yaml = read_frontmatter_text(page_path)
         render_data = {'data': data}
         if page_path.name in include_names:
             render_data['pages'] = pages_data
-        page_yaml = renderer.render_in_place(template_text=page_templated_yaml, **render_data)
+
+        page_data = render_frontmatter(renderer=renderer, page_path=page_path, **render_data)
 
         # Load Frontmatter Data
-        page_data = load_yaml(page_yaml)
         render_data['page'] = page_data
 
         # Render Markdown content

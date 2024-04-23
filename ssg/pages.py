@@ -3,6 +3,7 @@ from typing import Any, Iterable
 
 import markdown2
 
+from .templates import JinjaRenderer
 from . import utils
 
 
@@ -16,6 +17,22 @@ def read_frontmatter_text(md_path: Path) -> str:
     *frontmatters, _ = text.split('---')
     frontmatter = frontmatters[0] if frontmatters else ''
     return frontmatter
+
+
+def load_frontmatter(text: str) -> Any:
+    return utils.load_yaml(text=text)
+
+
+def render_frontmatter(renderer: JinjaRenderer, page_path: Path, **render_data) -> dict:
+    templated_yaml = read_frontmatter_text(md_path=page_path)
+    if not templated_yaml:
+        return {}
+    
+    yaml = renderer.render_in_place(template_text=templated_yaml, **render_data)
+    page_data = load_frontmatter(yaml)
+    return page_data
+    
+        
 
 
 def read_content_text(md_path: Path) -> str:
@@ -47,8 +64,6 @@ def update_pages_data(pages: dict, collection_name: str, page_name: str, page_da
         new_pages[name] = page_data
     return new_pages
 
-def load_yaml(text: str) -> Any:
-    return utils.load_yaml(text=text)
 
 
 def load_markdown(text: str):
