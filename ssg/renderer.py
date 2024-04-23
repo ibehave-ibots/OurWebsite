@@ -14,7 +14,7 @@ from .pages import find_pages, render_content_to_html, get_page_collection, rend
 
 
 
-def get_relative_output_path(collection_name: str | None, md_name: str) -> Path:
+def _get_relative_output_path(collection_name: str | None, md_name: str) -> Path:
     if md_name[0] == '_':
         md_name = md_name[1:]
     html_name = str(Path(md_name).with_suffix('.html'))
@@ -25,7 +25,7 @@ def get_relative_output_path(collection_name: str | None, md_name: str) -> Path:
             return Path(collection_name) / html_name
         
 
-def get_template_name(collection_name: str | None, md_name: str) -> str:
+def _get_template_name(collection_name: str | None, md_name: str) -> str:
     match collection_name, md_name:
         case None, '_index.md': 
             return f"index.html"
@@ -40,21 +40,8 @@ def get_template_name(collection_name: str | None, md_name: str) -> str:
 
 
 
-def extract_pages_data(renderer: JinjaRenderer, data, pages_dir='./pages', ignore_names: list[str] = ['_index.md']):
-    render_data = {'data': data}
-    pages = defaultdict(dict)
-    page_path: Path
-    for page_path in find_pages(pages_dir):
-        if page_path.name not in ignore_names:
-            page_data = render_frontmatter(renderer=renderer, page_path=page_path, **render_data)
-            collection_name = get_page_collection(base_path=pages_dir, md_path=page_path)
-            pages = update_pages_data(pages, collection_name=collection_name, page_name=page_path.name, page_data=page_data)
-    pages = dict(pages)
-    return pages
-        
-
 def run_render_pipeline():
-    
+
     renderer = JinjaRenderer.from_path(
         templates_dir='./templates', 
         filters={
@@ -66,9 +53,21 @@ def run_render_pipeline():
         }
     )
 
-
+    ## Get Data from './data'
     global_data = extract_global_data(base_path='./data')
-    pages_data = extract_pages_data(renderer=renderer, data=global_data, pages_dir='./pages')   
+
+    ## Get All Pages except collection _index.md files from './pages'
+    render_data = {'data': global_data}
+    pages_data = defaultdict(dict)
+    page_path: Path
+    for page_path in find_pages('./pages'):
+        if page_path.name not in ['_index.md']:
+            page_data = render_frontmatter(renderer=renderer, page_path=page_path, **render_data)
+            collection_name = get_page_collection(base_path='./pages', md_path=page_path)
+            pages_data = update_pages_data(pages_data, collection_name=collection_name, page_name=page_path.name, page_data=page_data)
+    pages_data = dict(pages_data)
+
+    ## Render Each Page to HTML and write to './output'
     for page_path in find_pages('./pages'):
         
         render_data = {'data': global_data}
@@ -81,7 +80,7 @@ def run_render_pipeline():
         
         # Build HTML Page
         collection_name = get_page_collection(base_path='./pages', md_path=page_path)
-        template_name = get_template_name(collection_name=collection_name, md_name=page_path.name)
+        template_name = _get_template_name(collection_name=collection_name, md_name=page_path.name)
 
         page_html = renderer.render_named_template(
             template_name=template_name,
@@ -92,7 +91,7 @@ def run_render_pipeline():
                 'pages': pages_data
             },
         )
-        rel_output_path = get_relative_output_path(collection_name=collection_name, md_name=page_path.name)
+        rel_output_path = _get_relative_output_path(collection_name=collection_name, md_name=page_path.name)
         
         write_text(base_dir='./output', file_path=rel_output_path, text=page_html)
 
