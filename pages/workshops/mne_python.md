@@ -6,8 +6,15 @@ assistants:
     - Sangeetha Nandakumar
     - Nicholas Del Grosso
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/mne_course
-summary: Would you like to learn more about (M)EEG analysis and programming in Python? By the course's end, you’ll have an understanding of how to install and setup a Python environment with MNE and be able use it to analyze your (M)EEG data.
+summary: |
+    Would you like to learn more about (M)EEG analysis and programming in Python? By the course's end, you’ll have an understanding of how to install and setup a Python environment with MNE and be able use it to analyze your (M)EEG data.
 registration_link: https://us02web.zoom.us/meeting/register/tZ0uf-utqj0vGdI5V0ouc_qthEQJyvejqqRU
+format: online
+class_size: 25
+preparation_instructions: |
+    Software installation instructions will be sent before the start of the course.
+certificate_criteria: | 
+    At the end of the course, participants who attend at least 80% of the course certificates of participation.
 --- 
 
 ##  Intro to (M)EEG Analysis with MNE-Python

@@ -5,7 +5,12 @@ main_instructor: Nicholas Del Grosso
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/data-management
 summary: What is all this hype about databases, and how can I use them to make my analysis work simpler?  In this workshop, you’ll build databases and query them in Python and SQL using DuckDB, store complex data in HDF5, and host it with Git and GitHub.
 registration_link: https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
-
+format: online
+class_size: 25
+preparation_instructions: |
+    Software installation instructions will be sent before the start of the course.
+certificate_criteria: | 
+    At the end of the course, participants who attend at least 80% of the course certificates of participation.
 ---
 
 ## Intro to File- and Database-oriented Neuroscience Data Management With Python, SQL, and HDF5

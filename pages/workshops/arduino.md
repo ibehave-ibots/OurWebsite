@@ -7,6 +7,12 @@ assistants:
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/arduino-programming
 summary: The easy-to-learn Arduino ecosystem offers a fantastic opportunity to sharpen your programming skills. In this workshop, you will build your own Arduino sensors while electrifying the real world with your creations! 
 registration_link: https://us02web.zoom.us/meeting/register/tZcudOmrqzwuHtdRkRA_pZ5LFb1FGOaHZObz
+format: hybrid (2 Days online and 1 Day in-person in Bonn's UKB Campus)
+class_size: 25
+preparation_instructions: |
+    Software installation instructions will be sent before the start of the course.
+certificate_criteria: | 
+    At the end of the course, participants who attend at least 80% of the course certificates of participation.
 
 
 --- 

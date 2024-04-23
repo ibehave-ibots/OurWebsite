@@ -14,6 +14,12 @@ summary: |
     where you'll discover how Matlab simplifies the analysis and visualization of
     electrophysiology data from a mouse behavioral experiment.
 registration_link: https://us02web.zoom.us/meeting/register/tZYrdOigrzMrHNKc5ktkYUsIUfyNX14JnGBD#/registration
+format: online
+class_size: 25
+preparation_instructions: |
+    Software installation instructions will be sent before the start of the course.
+certificate_criteria: | 
+    At the end of the course, participants who attend at least 80% of the course certificates of participation.
 --- 
 
 ##  Intro to Neuroscience Data Analysis with Matlab

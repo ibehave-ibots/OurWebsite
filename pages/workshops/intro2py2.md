@@ -7,8 +7,15 @@ assistants:
     - Mohammad Bashiri
     - Nicholas Del Grosso
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro-to-python-and-pandas2
-summary:  In this hands-on workshop, we will explore the Python and Pandas data analysis ecosystem in depth, applying them to data analysis of a real-world electrophysiology neuroscience experiment! Collaboration sessions see participants working in small teams, collaborating to learn new skills and share their perspectives in a diverse environment.  Libraries like Numpy, XArray, Seaborn, Pingouin, and Matplotlib will help span the data analysis path between processed neuroscience data and final results.
+summary:  | 
+    In this hands-on workshop, we will explore the Python and Pandas data analysis ecosystem in depth, applying them to data analysis of a real-world electrophysiology neuroscience experiment! Collaboration sessions see participants working in small teams, collaborating to learn new skills and share their perspectives in a diverse environment.  Libraries like Numpy, XArray, Seaborn, Pingouin, and Matplotlib will help span the data analysis path between processed neuroscience data and final results.
 registration_link: https://us02web.zoom.us/j/86906426337?pwd=S2owMUowSGpSb1FiNzh3N3JGdUk0Zz09
+format: online
+class_size: 25
+preparation_instructions: |
+    Software installation instructions will be sent before the start of the course.
+certificate_criteria: | 
+    At the end of the course, participants who attend at least 80% of the course certificates of participation.
 --- 
 
 ##  Intro to Data Analysis with Python and Pandas
