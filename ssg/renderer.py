@@ -1,14 +1,15 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from dataclasses import dataclass
-from typing import Any, Callable, Iterable, NamedTuple
+from typing import Iterable, NamedTuple
 from pathlib import Path
 
 import jinja2
 
+from ssg.templates import build_environment, render_in_place, render_named_template
+
 from .data import extract_data
-from .utils import copydir, rmdir, load_yaml, load_markdown
+from .utils import copydir, load_yaml, load_markdown, write_text
 from .filters import redirect_path, resize_image
 
 
@@ -30,11 +31,6 @@ def read_content_text(md_path: Path) -> str:
     content = md_text if md_text.strip() else ''
     return content
         
-
-def render_in_place(template_text: str, env: jinja2.Environment = jinja2.Environment(), **data) -> str:
-    rendered = env.from_string(template_text).render(**data)
-    return rendered
-
 
 def get_page_collection(base_path: Path, md_path: Path) -> str | None:
     rel_path = Path(md_path).relative_to(base_path)
@@ -73,11 +69,6 @@ def get_template_name(collection_name: str | None, md_name: str) -> str:
         case coll, _:
             assert coll[-1] == 's', "collection names should start with s, dumb rule I know but here we are."
             return f"{coll[:-1]}.html"
-
-
-def render_named_template(env: jinja2.Environment, template_name: str, **data) -> str:
-    return env.get_template(template_name).render(**data)
-
 
 
 def update_pages(pages: dict, collection_name: str, page_name: str, page_data: dict) -> dict:
@@ -130,7 +121,7 @@ def extract_page_and_content_data(env: jinja2.Environment, page_path: Path, data
 
         # Render Markdown content
         page_templated_md = read_content_text(md_path=page_path)
-        page_md = render_in_place(env=env,template_text=page_templated_md, **render_data)
+        page_md = render_in_place(env=env, template_text=page_templated_md, **render_data)
 
         # Convert Markdown to HTML
         content_html = load_markdown(page_md)
@@ -142,18 +133,6 @@ def extract_page_and_content_data(env: jinja2.Environment, page_path: Path, data
         )
         return job
         
-
-def build_environment(template_dir: Path, filters: dict[str, Callable]) -> jinja2.Environment:
-    env = jinja2.Environment(
-        loader=jinja2.FileSystemLoader(template_dir),
-        autoescape=jinja2.select_autoescape()
-    )
-    for name, fun in filters.items():
-        env.filters[name] = fun
-    return env
-
-
-    
 
 def run_render_pipeline():
 
@@ -169,7 +148,6 @@ def run_render_pipeline():
     pages = extract_pages_data(env, data)
     copydir(src="./static", target="./output/static")
     
-    
     for page_path in find_pages('./pages'):
         job: HTMLRenderJob = extract_page_and_content_data(env=env, page_path=page_path, data=data, pages_data=pages)
         
@@ -177,22 +155,22 @@ def run_render_pipeline():
         collection_name = get_page_collection(base_path='./pages', md_path=job.page_path)
         template_name = get_template_name(collection_name=collection_name, md_name=job.page_path.name)
 
-        render_data = {
-            'data': data,
-            'content': job.content_html,
-            'page': job.page_data,
-            'pages': pages
-        }
         page_html = render_named_template(
             env=env, 
             template_name=template_name,
-            **render_data
+            **{
+                'data': data,
+                'content': job.content_html,
+                'page': job.page_data,
+                'pages': pages
+            },
         )
 
+
         rel_output_path = get_relative_output_path(collection_name=collection_name, md_name=job.page_path.name)
-        output_path = Path('./output').joinpath(rel_output_path)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_text(page_html)
+        
+        write_text(base_dir='./output', file_path=rel_output_path, text=page_html)
+
 
 
 
