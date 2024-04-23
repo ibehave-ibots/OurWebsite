@@ -1,10 +1,4 @@
-upcoming_workshops:
-  - name: aa
-    date: 2223
-  - name: bb
-    date: 3344
 
----
 
 # Workshops
 
@@ -34,8 +28,10 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
 
 ## Upcoming Workshops
 
-{% for workshop in page.upcoming_workshops %}
-  - {{ workshop.name }}: {{ workshop.date }}
+{% for name, workshop in pages.workshops.items() %}
+  {% if workshop.date >= today %}
+  - [**{{ name }}**]({{ name }}.html): {{ workshop.date }}
+  {% endif %}
 {% endfor %}
 
 
@@ -43,7 +39,9 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
 ## Past Workshops
 
 {% for name, workshop in pages.workshops.items() %}
+  {% if workshop.date < today %}
   - [**{{ name }}**]({{ name }}.html): {{ workshop.date }}
+  {% endif %}
 {% endfor %}
 
 

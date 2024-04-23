@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from datetime import datetime, date
 from typing import Callable, NamedTuple
 import jinja2
 
@@ -13,6 +14,7 @@ class JinjaRenderer(NamedTuple):
     @classmethod
     def from_path(cls, templates_dir: Path, filters: dict[str, Callable]) -> JinjaRenderer:
         env = _build_environment(template_dir=templates_dir, filters=filters)
+        
         return JinjaRenderer(env=env)
 
     def render_in_place(self, template_text: str, **data) -> str:
@@ -41,6 +43,8 @@ def _build_environment(template_dir: Path, filters: dict[str, Callable]) -> jinj
     )
     for name, fun in filters.items():
         env.filters[name] = fun
+    env.globals['today'] = date.today()
+    env.globals['now'] = datetime.now()
     return env
 
 
