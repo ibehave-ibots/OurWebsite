@@ -17,7 +17,7 @@ All sessions are held remotely via Zoom.
 People of all skill levels, experiences, and backgrounds are welcome!
 
 
-Workshop Dates:
+**Workshop Dates:**
 
 - Nov. 27, 2023: 9:00-13:00, 14:00- 16:00
 - Nov. 28, 2023: 9:00-13:00, 14:00- 16:00
@@ -26,7 +26,7 @@ Workshop Dates:
 - Dec. 1, 2023: 9:00-13:00, 14:00- 16:00
 
 
-Assessment & Credits:
+**Assessment & Credits:**
 
 - No exams
 - Certificate for > 80% attendance
