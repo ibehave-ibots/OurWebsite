@@ -1,19 +1,26 @@
 title: About Us
 current:
-    {% for person in data.people_consolidated.current %}
+    {% for person in data.people.values() %}
+    {% if person.role == "current" %}
     - name: {{ person.name }}
       email: {{ person.email }}
       booking_url: {{ person.booking_url }}
+    {% endif %}
     {% endfor %}
 past:
-    {% for person in data.people_consolidated.past %}
+    {% for person in data.people.values() %}
+    {% if person.role == "past" %}
     - name: {{ person.name }}
       email: {{ person.email }}
+    {% endif %}
     {% endfor %}
+
 other:
-    {% for person in data.people_consolidated.other %}
+    {% for person in data.people.values() %}
+    {% if person.role == "other" %}
     - name: {{ person.name }}
       email: {{ person.email }}
+    {% endif %}
     {% endfor %}
 
 ---

@@ -1,2 +1,26 @@
 mailing_list_subscribe_url: https://listen.uni-bonn.de/wws/subscribe/ibehave.ibots-news
 email: Nicholas.Grosso@ukbonn.de
+booking_link: booking@calendly.com
+address: Venusberg Campus 1
+milestones:
+  - date: 2023-01-01 
+    name: Milestone 1
+    summary: This is when milestone 1 happened
+    icon: static\images\iBehave_Logo.png
+consulting_stats:
+  num_consulting_sessions: 30
+  num_of_clients: 10
+  which_labs_have_used_ibots: 5
+  total_hours_consulting: 100
+  testimonials:
+    - Awesome!
+    - Great!
+    - Wow!
+workshop_stats:
+  num_workshops: 9
+  num_of_students: 180
+  total_teaching_hours: 125
+  testimonials:
+    - Great teaching!
+    - Nice materials!
+    - Good interactions!
