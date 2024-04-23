@@ -4,7 +4,7 @@ from collections import defaultdict
 from .utils import load_yaml
 
 
-def extract_data(base_path: Path) -> dict[str, Any]:
+def extract_global_data(base_path: Path) -> dict[str, Any]:
     base_path = Path(base_path)
     collections = defaultdict(dict)
     for path in base_path.glob('*.yaml'):

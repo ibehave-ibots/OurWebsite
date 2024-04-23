@@ -1,4 +1,4 @@
-from ssg.data import extract_data
+from ssg.data import extract_global_data
 import pytest
 
 def test_find_single_file(tmp_path):
@@ -9,7 +9,7 @@ def test_find_single_file(tmp_path):
     """
     tmp_path.joinpath(fname).write_text(yaml)
 
-    data = extract_data(tmp_path)
+    data = extract_global_data(tmp_path)
     dogs = data['dogs']
     assert dogs['a'] == 3
     assert dogs['b'] == 5
@@ -30,7 +30,7 @@ def test_find_all_single_files(tmp_path):
     """
     tmp_path.joinpath(fname).write_text(yaml)
 
-    data = extract_data(tmp_path)
+    data = extract_global_data(tmp_path)
     assert data['cats']['a'] == 3
     assert data['cats']['b'] == 5
     assert data['birds']['d'] == 5
@@ -56,7 +56,7 @@ def test_find_single_nested_files(tmp_path):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(yaml)
 
-    data = extract_data(tmp_path)
+    data = extract_global_data(tmp_path)
     assert data['animals']['cats']['a'] == 3
     assert data['animals']['cats']['b'] == 5
     assert data['animals']['bees']['e'] == 3
@@ -75,6 +75,6 @@ def test_doesnt_supported_multinested_files(tmp_path):
     path.write_text(yaml)
 
     with pytest.raises(NotImplementedError):
-        extract_data(tmp_path)
+        extract_global_data(tmp_path)
         
 

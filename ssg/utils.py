@@ -2,7 +2,6 @@ from pathlib import Path, PurePosixPath
 import os
 
 import yaml
-import markdown2
 import shutil
 
 
@@ -32,5 +31,3 @@ def load_yaml(text: str):
     return yaml.load(text, Loader=yaml.Loader)    
 
 
-def load_markdown(text: str):
-    return markdown2.Markdown().convert(text)
