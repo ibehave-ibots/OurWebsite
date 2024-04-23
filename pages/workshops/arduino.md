@@ -10,7 +10,7 @@ In this three-day workshop, we will learn how to write clearly-structured and ea
 
 By the end of this workshop, you will be able to build your own Arduino sensors, expanding your experimental data collection opportunities and connecting with the open-source maker world in science!
 
-Prerequisites: Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with previous coding experience in any language such as Matlab, Python, or R.
+**Prerequisites:** Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with previous coding experience in any language such as Matlab, Python, or R.
 
 **Duration:** 20 hrs over 3 days
 

@@ -11,17 +11,18 @@ In this workshop, we will first explore the concepts behind the pre-processing a
 By the end of the workshop, we will be able use Python to perform basic image operations, gain a better understanding of some techniques that go behind calcium imaging analysis, and become more confident customizing the wide variety of options in CaImAn to suit our calcium imaging data.
 
 
-Prerequisites: Some Prior Experience with Matlab, Python, or R
+**Prerequisites:** Some Prior Experience with Matlab, Python, or R
 
-Duration: 15 hrs over 2.5 days
+**Duration:** 15 hrs over 2.5 days
 
-Dates (Times):
-· 28.02.2024, 14h00-17h00
-· 29.02.2024, 9h30-17h00
-· 01.03.2024, 9h30-17h00
+**Dates (Times):**
 
-Workshop Format: Online on Zoom, Hands-On Course. 25 Participants Max.
+- 28.02.2024, 14h00-17h00
+- 29.02.2024, 9h30-17h00
+- 01.03.2024, 9h30-17h00
 
-Workshop Preparation: Software installation instructions will be sent before the start of the course.
+**Workshop Format:** Online on Zoom, Hands-On Course. 25 Participants Max.
+
+**Workshop Preparation:** Software installation instructions will be sent before the start of the course.
 
 At the end of the course, participants who attend at least 80% of the course certificates of participation.
