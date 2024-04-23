@@ -3,6 +3,8 @@ import os
 
 import yaml
 import markdown2
+import shutil
+
 
 def rmdir(start_directory: Path):
     """Recursively and permanently removes the specified directory, all of its
@@ -12,7 +14,12 @@ def rmdir(start_directory: Path):
     linux_path = PurePosixPath(start_directory)
     os.system(f"rm -Rf {linux_path}")
 
-
+def copydir(src: Path, target: Path) -> None:
+    src = Path(src)
+    target = Path(target)
+    rmdir(target)
+    shutil.copytree(src, target, dirs_exist_ok=True)
+    
 
 def load_yaml(text: str):
     return yaml.load(text, Loader=yaml.Loader)    

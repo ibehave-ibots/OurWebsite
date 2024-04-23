@@ -4,12 +4,11 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import Any, Callable, Iterable, NamedTuple
 from pathlib import Path
-import shutil
 
 import jinja2
 
 from .data import extract_data
-from .utils import rmdir, load_yaml, load_markdown
+from .utils import copydir, rmdir, load_yaml, load_markdown
 from .filters import redirect_path, resize_image
 
 
@@ -117,7 +116,7 @@ def extract_pages_data(env, data, pages_dir='./pages', ignore_names: list[str] =
 
 
 
-def extract_page_and_content_data(env: jinja2.Environment, page_path: Path, data: dict, pages_data: dict, include_names = ['_index.md']) -> Iterable[HTMLRenderJob]:
+def extract_page_and_content_data(env: jinja2.Environment, page_path: Path, data: dict, pages_data: dict, include_names = ['_index.md']) -> HTMLRenderJob:
         # Render YAML Frontmatter
         page_templated_yaml = read_frontmatter_text(page_path)
         render_data = {'data': data}
@@ -144,36 +143,37 @@ def extract_page_and_content_data(env: jinja2.Environment, page_path: Path, data
         return job
         
 
-def run_render_pipeline():
-
-    rmdir("output/static")
-    if Path('static').exists():
-        shutil.copytree("static", "output/static")
-
-
+def build_environment(template_dir: Path, filters: dict[str, Callable]) -> jinja2.Environment:
     env = jinja2.Environment(
-        loader=jinja2.FileSystemLoader('./templates'),
+        loader=jinja2.FileSystemLoader(template_dir),
         autoescape=jinja2.select_autoescape()
     )
-    filters={
-        'resize': redirect_path('./output')(resize_image), 
-    }
     for name, fun in filters.items():
         env.filters[name] = fun
+    return env
+
+
+    
+
+def run_render_pipeline():
+
+    env = build_environment(
+        template_dir='./templates', 
+        filters={
+            'resize': redirect_path('./output')(resize_image), 
+        },
+    )
 
 
     data = extract_data('./data')
     pages = extract_pages_data(env, data)
+    copydir(src="./static", target="./output/static")
     
-    html_render_jobs = []
+    
     for page_path in find_pages('./pages'):
         job: HTMLRenderJob = extract_page_and_content_data(env=env, page_path=page_path, data=data, pages_data=pages)
-        html_render_jobs.append(job)
-
-
-    # Build HTML Page
-    for job in html_render_jobs:
-
+        
+        # Build HTML Page
         collection_name = get_page_collection(base_path='./pages', md_path=job.page_path)
         template_name = get_template_name(collection_name=collection_name, md_name=job.page_path.name)
 
