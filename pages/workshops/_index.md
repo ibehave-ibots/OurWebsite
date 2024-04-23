@@ -24,13 +24,23 @@ Pellentesque lobortis luctus augue non bibendum. Vivamus non tortor id augue tem
 
 Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor dapibus. Duis neque purus, tempus hendrerit dapibus a, vehicula non ante. Praesent semper tellus nec pulvinar maximus.
 
-![Registration System](../../static/images/early-registration-concept.png)
+![Registration System](/static/images/early-registration-concept.png)
 
 ## Upcoming Workshops
 
 {% for name, workshop in pages.workshops.items() %}
   {% if workshop.date >= today %}
-  - [**{{ name }}**]({{ name }}.html): {{ workshop.date }}
+### [**{{ workshop.title }}**]({{ name }}.html)
+  - Start Date: {{ workshop.date }}
+  - Instructor: {{ workshop.main_instructor }}
+  - Duration: {{ workshop.hours }} Hours
+{% if workshop.assistants %}
+  - Teaching assistants: {{ workshop.assistants | join(', ')}}
+{% endif %}
+  
+
+{{ workshop.summary }}
+
   {% endif %}
 {% endfor %}
 
@@ -38,9 +48,20 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
 
 ## Past Workshops
 
+
 {% for name, workshop in pages.workshops.items() %}
   {% if workshop.date < today %}
-  - [**{{ name }}**]({{ name }}.html): {{ workshop.date }}
+### [**{{ workshop.title }}**]({{ name }}.html)
+  - Start Date: {{ workshop.date }}
+  - Instructor: {{ workshop.main_instructor }}
+  - Duration: {{ workshop.hours }} Hours
+{% if workshop.assistants %}
+  - Teaching assistants: {{ workshop.assistants | join(', ')}}
+{% endif %}
+  
+
+{{ workshop.summary }}
+
   {% endif %}
 {% endfor %}
 

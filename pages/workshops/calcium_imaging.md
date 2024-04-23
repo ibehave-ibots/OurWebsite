@@ -5,6 +5,8 @@ main_instructor: Sangeetha Nandakumar
 assistants:
     - Oliver Barndstedt
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro_to_calcium_imaging
+summary: CaImAn is a popular Python package for processing and extracting calcium imaging data. In this workshop, we’ll use Python and CaImAn to perform basic image operations, understand some techniques behind calcium imaging analysis, and run calcium imaging analyses.
+
 ---
 
 ## Intro to Calcium Imaging Analysis with Python and CaImAn

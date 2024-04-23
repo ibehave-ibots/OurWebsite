@@ -22,7 +22,12 @@
 
         <section>
             <h2>Course Materials</h2>
+            {% if page.github_repo %}
             <p>Find course materials here: <a href="{{ page.github_repo }}">{{ page.title }}</a></p>
+
+            {% else %}
+            <p>Not yet available</p>
+            {% endif %}
         </section>
     </body>
 </html>

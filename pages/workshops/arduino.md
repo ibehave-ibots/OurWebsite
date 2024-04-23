@@ -5,6 +5,9 @@ main_instructor: Nicholas Del Grosso
 assistants:
     - Benjamin Escribano
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/arduino-programming
+summary: The easy-to-learn Arduino ecosystem offers a fantastic opportunity to sharpen your programming skills. In this workshop, you will build your own Arduino sensors while electrifying the real world with your creations! 
+
+
 --- 
 
 ## Fundamental Programming Skills for Experimental Science with Arduino
