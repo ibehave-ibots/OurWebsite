@@ -1,4 +1,20 @@
 title: About Us
+current:
+    {% for person in data.people_consolidated.current %}
+    - name: {{ person.name }}
+      email: {{ person.email }}
+      booking_url: {{ person.booking_url }}
+    {% endfor %}
+past:
+    {% for person in data.people_consolidated.past %}
+    - name: {{ person.name }}
+      email: {{ person.email }}
+    {% endfor %}
+other:
+    {% for person in data.people_consolidated.other %}
+    - name: {{ person.name }}
+      email: {{ person.email }}
+    {% endfor %}
 
 ---
 ## What is an RSE?
@@ -10,30 +26,3 @@ Morbi id mattis orci. Maecenas elit sapien, viverra in urna eu, ornare finibus e
 ## What We Do?
 Nunc est ante, ornare at tortor luctus, dapibus euismod est. Vivamus elementum facilisis varius. Cras in ipsum tempus tellus aliquam blandit. Morbi vitae metus non felis accumsan pretium. Integer enim lacus, dapibus at tincidunt nec, porta eget ex. Proin ultricies commodo nibh, in pellentesque magna sodales ac. Cras feugiat purus vel augue tincidunt, ut dignissim odio efficitur. Aliquam iaculis, quam non lobortis posuere, metus dolor pharetra metus, non suscipit eros nunc ut quam. Donec id suscipit sapien. Praesent vel elementum nisi, vulputate blandit arcu. Donec purus ex, eleifend in tellus in, dictum pretium erat. Ut non purus id metus hendrerit faucibus in id risus. Aliquam erat volutpat. Curabitur suscipit risus nec justo volutpat, posuere auctor turpis vulputate. Aenean ornare faucibus arcu, sed scelerisque diam fermentum sit amet.
 
-## The iBOTS Team
-
-<h3> Current </h3>
-
-{% for person in data.people_consolidated.current %}
-<h4> {{ person.name }} </h4>
-<ul>
-    <li> Email: {{ person.email }} </li>
-    <li> <a href="{{ person.booking_url }}">Booking Link</a> </li>
-</ul>
-{% endfor %}
-
-<h3> Past </h3>
-{% for person in data.people_consolidated.past %}
-<h4> {{ person.name }} </h4>
-<ul>
-    <li> Email: {{ person.email }} </li>
-</ul>
-{% endfor %}
-
-<h3> Our Favorite People </h3>
-{% for person in data.people_consolidated.other %}
-<h4> {{ person.name }} </h4>
-<ul>
-    <li> Email: {{ person.email }} </li>
-</ul>
-{% endfor %}
