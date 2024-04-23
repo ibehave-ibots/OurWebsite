@@ -4,6 +4,7 @@ date: 2023-02-22
 main_instructor: Nicholas Del Grosso
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/data-management
 summary: What is all this hype about databases, and how can I use them to make my analysis work simpler?  In this workshop, you’ll build databases and query them in Python and SQL using DuckDB, store complex data in HDF5, and host it with Git and GitHub.
+registration_link: https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
 
 ---
 

@@ -6,6 +6,7 @@ assistants:
     - Ogulcan Cingulier
 github_repo: https://github.com/ibehave-ibots/iBOTS-Developing-Data-Analysis-Projects
 summary: It is becoming critical to make neuroscience analysis workflows robust, reproducible, and scalable. In this workshop, we will use Snakemake to develop complex data analysis pipelines while collaborating with other researchers, enabling your analysis to grow along with your data.
+registration_link: https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
 
 --- 
 

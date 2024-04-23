@@ -13,6 +13,7 @@ summary: |
     Matlab, this workshop is tailored for you. Dive into an interactive program
     where you'll discover how Matlab simplifies the analysis and visualization of
     electrophysiology data from a mouse behavioral experiment.
+registration_link: https://us02web.zoom.us/meeting/register/tZYrdOigrzMrHNKc5ktkYUsIUfyNX14JnGBD#/registration
 --- 
 
 ##  Intro to Neuroscience Data Analysis with Matlab

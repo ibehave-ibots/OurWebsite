@@ -45,6 +45,9 @@ def _build_environment(template_dir: Path, filters: dict[str, Callable]) -> jinj
         env.filters[name] = fun
     env.globals['today'] = date.today()
     env.globals['now'] = datetime.now()
+    env.trim_blocks = True
+    env.lstrip_blocks = True
+    
     return env
 
 

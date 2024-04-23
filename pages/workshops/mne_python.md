@@ -7,6 +7,7 @@ assistants:
     - Nicholas Del Grosso
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/mne_course
 summary: Would you like to learn more about (M)EEG analysis and programming in Python? By the course's end, you’ll have an understanding of how to install and setup a Python environment with MNE and be able use it to analyze your (M)EEG data.
+registration_link: https://us02web.zoom.us/meeting/register/tZ0uf-utqj0vGdI5V0ouc_qthEQJyvejqqRU
 --- 
 
 ##  Intro to (M)EEG Analysis with MNE-Python

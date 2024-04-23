@@ -34,6 +34,7 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
   - Start Date: {{ workshop.date }}
   - Instructor: {{ workshop.main_instructor }}
   - Duration: {{ workshop.hours }} Hours
+  - Registration Link: [{{ workshop.registration_link }}]({{ workshop.registration_link }})
 {% if workshop.assistants %}
   - Teaching assistants: {{ workshop.assistants | join(', ')}}
 {% endif %}
