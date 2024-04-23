@@ -1,0 +1,38 @@
+- club: Code Explorers
+  date: 18-04-2024
+  start_time: 12:30 pm
+  end_time: 01:30 pm
+  location:
+    inperson:
+    remote: joinusherezoom.com
+  host_org:
+    name: iBOTS
+    url: ibots.com
+  summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in dolor commodo, eleifend orci quis, gravida nisi. Aenean erat dolor, finibus non augue a, maximus posuere urna. Cras augue eros, finibus et tempus eget, faucibus ut lorem. Nullam molestie risus in sapien venenatis, non tincidunt neque malesuada. In ex metus, maximus ut orci ac, lobortis tincidunt nibh. Maecenas quis urna egestas eros vehicula maximus. Morbi ullamcorper massa ut enim scelerisque blandit. Nunc libero ligula, porttitor a ultrices et, imperdiet a diam. Vivamus varius semper placerat. Sed sagittis id augue sed rhoncus.
+  target_audience: Anyone who wants to learn coding
+  people:
+    - name: Sangeetha Nandakumar
+      role: Organizer
+      url: ibots.com
+    - name: Anoushka Jain
+      role: Organizer
+      url:
+  registration_url: codeexplorers.register.com
+
+- club: Another Club
+  date: 19-04-2024
+  start_time: 10:00 am
+  end_time: 11:30 am
+  location:
+    inperson: Venusberg Campus
+    remote: 
+  host_org:
+    name: Not-iBOTS
+    url: 
+  summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in dolor commodo, eleifend orci quis, gravida nisi. Aenean erat dolor, finibus non augue a, maximus posuere urna. Cras augue eros, finibus et tempus eget, faucibus ut lorem. Nullam molestie risus in sapien venenatis, non tincidunt neque malesuada. In ex metus, maximus ut orci ac, lobortis tincidunt nibh. Maecenas quis urna egestas eros vehicula maximus. Morbi ullamcorper massa ut enim scelerisque blandit. Nunc libero ligula, porttitor a ultrices et, imperdiet a diam. Vivamus varius semper placerat. Sed sagittis id augue sed rhoncus.
+  target_audience: PIs and Postdocs
+  people:
+    - name: Another Person
+      role: Attendee
+      url: another@person.com
+  registration_url: register_here.com

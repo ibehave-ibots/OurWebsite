@@ -1,7 +1,7 @@
 
 title: Networking
 clubs:
-  {% for club in data.events.clubs %}
+  {% for club in data.clubs %}
   - name: {{ club.club }}
     date: {{ club.date }}
     start: {{ club.start_time }}
@@ -24,7 +24,7 @@ clubs:
   {% endfor %}
 
 conferences:
-  {% for conference in data.events.conferences %}
+  {% for conference in data.conferences %}
   - name: {{ conference.conference }}
     date: {{ conference.date }}
     start: {{ conference.start_time }}

@@ -1,0 +1,17 @@
+- conference: Bonn Brain
+  date: 23-07-2024 - 25-07-2024
+  start_time: 9:30 am
+  end_time: 07:30 pm
+  location:
+    inperson: Venusberg iBOTS Campus
+    remote: 
+  host_org:
+    name: Uni-Bonn
+    url: https://www.uni-bonn.de/en
+  summary: BonnBrain³ stands at the forefront of cutting-edge scientific inquiry, uniting experts from diverse fields in a premier international conference focused on unraveling the complexities of states, behavior, neural circuits, and codes. This interdisciplinary scientific gathering prioritizes the presentation of groundbreaking and unpublished research, fostering insightful discussions after each talk and nurturing informal interactions among scientists at all career stages.
+  target_audience: Studens, Postdocs, PIs, Industry
+  people:
+    - name: Brain Team
+      role: Organizer
+      url: 
+  registration_url: https://bonnbrain.de/
