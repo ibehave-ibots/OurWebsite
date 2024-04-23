@@ -1,8 +1,8 @@
 from typing import Any
 from pathlib import Path
 from collections import defaultdict
-from pprint import pprint
 from .utils import load_yaml
+
 
 def extract_data(base_path: Path) -> dict[str, Any]:
     base_path = Path(base_path)
@@ -19,6 +19,3 @@ def extract_data(base_path: Path) -> dict[str, Any]:
     return dict(collections)
 
 
-if __name__ == '__main__':
-    pprint(extract_data())
-    
