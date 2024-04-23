@@ -19,7 +19,9 @@
             <section>
                 <h2> The iBOTS Team </h2>
                 {% for person in page.current %}
-                    <h3> {{ person.name }} </h3>
+                    <h3> {{ person.name}} </h3>
+                    <p>Email: {{ person.email }}</p>
+                    <p><a href="{{ person.booking_url }}">Booking Link</a></p>
                 {% endfor %}
             </section>
             
