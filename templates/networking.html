@@ -11,14 +11,10 @@
     <main>
         <article>
             <h1> {{ page.title }} </h1>
-            
             <section>
-                <h1> {{ page.clubs.title }} </h1>
-                {% for club in page.clubs.schedule %}
-                <p>{{ club | safe }}</p>
-                {% endfor %}
+                {{ content | safe }}
             </section>
-
+            
         </article>
 
         

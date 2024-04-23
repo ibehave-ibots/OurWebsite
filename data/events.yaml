@@ -4,7 +4,7 @@ clubs:
     start_time: 12:30 pm
     end_time: 01:30 pm
     location_inperson:
-    location_remote: joinushere@zoom.com
+    location_remote: joinusherezoom.com
     host_org_name: iBOTS
     host_org_url: ibots@ibehave.com    
       
@@ -12,6 +12,8 @@ clubs:
     date: 19-04-2024
     start_time: 10:00 am
     end_time: 11:30 am
+    location_inperson: Venusberg Campus
+    location_remote: anotherclubzoom.com
     host_org_name: Not-iBOTS
     host_org_url: not.ibots@ibehave.com    
 
