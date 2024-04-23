@@ -10,17 +10,18 @@ In this workshop, you will gain hands-on experience in crafting modular code scr
 
 By the end of this workshop, you'll be able to develop and manage complex data analysis pipelines, ensuring that your projects are not only advanced in their execution but also sustainable in the long term - your future self will thank you for it!
 
-Prerequisites: Some prior experience with Matlab, Python, or R.
+**Prerequisites:** Some prior experience with Matlab, Python, or R.
 
-Duration: 15 hrs over 2.5 days
+**Duration:** 15 hrs over 2.5 days
 
-Dates (Times):
+**Dates (Times):**
+
 - 26.02.2024, 9h30-17h00
 - 27.02.2024, 9h30-17h00
 - 28.02.2024, 9h30-12h30
 
-Workshop Format: Online on Zoom, Hands-On Course.
+**Workshop Format:** Online on Zoom, Hands-On Course.
 
-Workshop Preparation: Software installation instructions will be sent before the start of the course.
+**Workshop Preparation:** Software installation instructions will be sent before the start of the course.
 
 At the end of the course, participants who attend at least 80% of the course will receive certificates of participation.
