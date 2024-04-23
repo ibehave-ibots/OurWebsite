@@ -29,7 +29,7 @@
                 {% for consultant in page.session_booking.consultants %}
                 <article>
                     <h1> {{ consultant.name }} </h1>
-                    <p> {{ consultant.booking_link }} </p>
+                    <p> <a href="{{ consultant.booking_link }}">{{ consultant.booking_link }}</a> </p>
 
                 </article>
                 
