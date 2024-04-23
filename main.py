@@ -10,6 +10,9 @@ parser.add_argument('--cmd', choices=['serve', 'render'], default='serve')
 
 args = parser.parse_args()
 
+
+run_render_pipeline()
+
 match args.cmd:
     case 'serve':
         build_server()
