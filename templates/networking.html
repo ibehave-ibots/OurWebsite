@@ -14,6 +14,26 @@
             <section>
                 {{ content | safe }}
             </section>
+
+            <section>
+                <h2>Clubs</h2>
+                {% for club in page.clubs %}
+                    <h3> {{ club.name }} </h3>
+                    <p>When: {{ club.date }} </p>
+                    <p>What time: {{ club.start }} to {{ club.end }}</p>
+                    <p>Where: 
+                        <ul>
+                            {% if club.location.inperson is not none %}
+                                <li>In person: {{ club.location.inperson }}</li>
+                            {% endif %}
+
+                            {% if club.location.remote is not none %}
+                                <li>In person: {{ club.location.remote }}</li>
+                            {% endif %}
+                        </ul>
+                    </p>
+                {% endfor %}
+            </section>
             
         </article>
 
