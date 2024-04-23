@@ -12,15 +12,16 @@ By the end of this workshop, you will be able to build your own Arduino sensors,
 
 Prerequisites: Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with previous coding experience in any language such as Matlab, Python, or R.
 
-Duration: 20 hrs over 3 days
+**Duration:** 20 hrs over 3 days
 
-Dates (Times):
-·	19.02.2024, 9h30-17h00 (Online)
-·	20.02.2024, 9h30-17h00 (Online)
-·	21.02.2024, 10h00-16h00 (In-Person at Our Makerspace at the Life & Brain in Uniklinikum Bonn)
+**Dates (Times):**
 
-Workshop Format: Online on Zoom, with in-person component on last day. Hands-On Course. 
+- 19.02.2024, 9h30-17h00 (Online)
+- 20.02.2024, 9h30-17h00 (Online)
+- 21.02.2024, 10h00-16h00 (In-Person at Our Makerspace at the Life & Brain in Uniklinikum Bonn)
 
-Workshop Preparation: Software installation instructions will be sent before the start of the course.
+**Workshop Format:** Online on Zoom, with in-person component on last day. Hands-On Course. 
+
+**Workshop Preparation:** Software installation instructions will be sent before the start of the course.
 
 At the end of the course, participants who attend at least 80% of the course will receive certificates of participation.
