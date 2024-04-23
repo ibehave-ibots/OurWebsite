@@ -115,13 +115,14 @@ def extract_pages_data(env, data, pages_dir='./pages', ignore_names: list[str] =
     return pages
         
 
-def extract_page_and_content_data(env, data, pages) -> Iterable[HTMLRenderJob]:
-    for page_path in find_pages('./pages'):
+
+
+def extract_page_and_content_data(env: jinja2.Environment, page_path: Path, data: dict, pages_data: dict, include_names = ['_index.md']) -> Iterable[HTMLRenderJob]:
         # Render YAML Frontmatter
         page_templated_yaml = read_frontmatter_text(page_path)
         render_data = {'data': data}
-        if page_path.name == '_index.md':
-            render_data['pages'] = pages
+        if page_path.name in include_names:
+            render_data['pages'] = pages_data
         page_yaml = render_in_place(env=env, template_text=page_templated_yaml, **render_data)
 
         # Load Frontmatter Data
@@ -140,7 +141,7 @@ def extract_page_and_content_data(env, data, pages) -> Iterable[HTMLRenderJob]:
             page_data=page_data,
             content_html=content_html
         )
-        yield job
+        return job
         
 
 def run_render_pipeline():
@@ -163,7 +164,11 @@ def run_render_pipeline():
 
     data = extract_data('./data')
     pages = extract_pages_data(env, data)
-    html_render_jobs = extract_page_and_content_data(env, data, pages)
+    
+    html_render_jobs = []
+    for page_path in find_pages('./pages'):
+        job: HTMLRenderJob = extract_page_and_content_data(env=env, page_path=page_path, data=data, pages_data=pages)
+        html_render_jobs.append(job)
 
 
     # Build HTML Page
