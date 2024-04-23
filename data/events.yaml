@@ -18,6 +18,7 @@ clubs:
       - name: Anoushka Jain
         role: Organizer
         url:
+    registration_url: codeexplorers.register.com
 
       
   - club: Another Club
@@ -36,5 +37,5 @@ clubs:
       - name: Another Person
         role: Attendee
         url: another@person.com
-        
+    registration_url: register_here.com
 

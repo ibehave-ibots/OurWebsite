@@ -20,6 +20,7 @@ clubs:
         role: {{ person.role }}
         url: {{ person.url }}
     {% endfor %}
+    registration_url: {{ club.registration_url }}
   {% endfor %}
 
 ---
