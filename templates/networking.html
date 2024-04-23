@@ -23,13 +23,8 @@
                     <p>What time: {{ club.start }} to {{ club.end }}</p>
                     <p>Where: 
                         <ul>
-                            {% if club.location.inperson is not none %}
-                                <li>In person: {{ club.location.inperson }}</li>
-                            {% endif %}
-
-                            {% if club.location.remote is not none %}
-                                <li>In person: {{ club.location.remote }}</li>
-                            {% endif %}
+                            <li>In person: {{ club.location.inperson }}</li>
+                            <li>Remote: <a href="{{ club.location.remote }}">{{ club.location.remote }}</a> </li>
                         </ul>
                     </p>
                 {% endfor %}
