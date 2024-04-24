@@ -15,8 +15,14 @@ consulting:
     {% for testimonial in data.group.consulting_stats.testimonials %}
         - {{ testimonial }}
     {% endfor %}
-
-
+workshop:
+    n_workshops: {{ data.group.workshop_stats.num_workshops }}
+    n_students: {{ data.group.workshop_stats.num_of_students }}
+    total_hours: {{ data.group.workshop_stats.total_teaching_hours }}
+    testimonials:
+    {% for testimonial in data.group.workshop_stats.testimonials %}
+        - {{ testimonial }}
+    {% endfor %}
 
 ---
 
