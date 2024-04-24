@@ -6,6 +6,18 @@ milestones:
       summary: {{ milestone.summary }}
       icon: {{ milestone.icon }}
     {% endfor %}
+consulting: 
+    {% for stat in data.group.consulting_stats %}
+    num_sessions: {{ stat.num_consulting_sessions }}
+    num_clients: {{ stat.num_of_clients }}
+    num_labs: {{ stat.which_labs_have_used_ibots }}
+    total_hours: {{ stat.total_hours_consulting }}
+    testimonials:
+        {% for testimonial in stat.testimonials %}
+        - testimonial
+        {% endfor %}
+    {% endfor %}
+
 ---
 
 ## Our Mission
