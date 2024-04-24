@@ -1,11 +1,21 @@
 title: Intro to File- and Database-oriented Neuroscience Data Management With Python, SQL, and HDF5
 hours: 15
 date: 2023-02-22
+sessions:
+- date: 22.02.2024
+  start_time: 9h30
+  end_time: 17h00
+  location: online
+- date: 23.02.2024
+  start_time: 9h30
+  end_time: 17h00
+  location: online
+duration: 15 hrs over 2.5 days
 main_instructor: Nicholas Del Grosso
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/data-management
 summary: What is all this hype about databases, and how can I use them to make my analysis work simpler?  In this workshop, you’ll build databases and query them in Python and SQL using DuckDB, store complex data in HDF5, and host it with Git and GitHub.
 registration_link: https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
-format: online
+format: Online, Hands-On Course. 
 class_size: 25
 preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
@@ -23,15 +33,16 @@ By the course's end, you'll be adept at writing Python scripts to create and ext
 
 **Prerequisites:** This workshop is ideal for Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with some background in data analysis using Matlab, Python, or R.
 
-**Duration:** 15 hrs over 2.5 days
+**Duration:** {{ page.duration }}
 
 **Dates (Times):**
 
-- 22.02.2024,  9h30-17h00
-- 23.02.2024,  9h30-17h00
+{% for session in page.sessions %}
+- {{ session.date }}, {{ session.start_time }}-{{ session.end_time}} ({{ session.location }})
+{% endfor %}
 
-**Workshop Format:** Online, Hands-On Course. 
+**Workshop Format:** {{ page.format }}
 
-**Workshop Preparation:** Software installation instructions will be sent before the start of the course.
+**Workshop Preparation:** {{ page.preparation_instructions }}
 
-At the end of the course, participants who attend at least 80% of the course will receive certificates of participation.
+{{ page.certificate_criteria }}

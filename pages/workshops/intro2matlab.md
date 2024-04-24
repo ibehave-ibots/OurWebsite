@@ -1,6 +1,27 @@
 title: Intro to Neuroscience Data Analysis with Matlab
-hours: 15
+duration: 30
 date: 2023-11-27
+sessions: 
+    - date: 11.27.2023
+      start_time: 9h00
+      end_time: 16h00
+      location: online
+    - date: 11.28.2023
+      start_time: 9h00
+      end_time: 16h00
+      location: online
+    - date: 11.29.2023
+      start_time: 9h00
+      end_time: 16h00
+      location: online
+    - date: 11.30.2023
+      start_time: 9h00
+      end_time: 16h00
+      location: online
+    - date: 12.01.2023
+      start_time: 9h00
+      end_time: 16h00
+      location: online
 main_instructor: Ben Hastings
 assistants:
     - Nicholas Del Grosso
@@ -14,7 +35,9 @@ summary: |
     where you'll discover how Matlab simplifies the analysis and visualization of
     electrophysiology data from a mouse behavioral experiment.
 registration_link: https://us02web.zoom.us/meeting/register/tZYrdOigrzMrHNKc5ktkYUsIUfyNX14JnGBD#/registration
-format: online
+format: All sessions are held remotely via Zoom.
+audience: |
+    People of all skill levels, experiences, and backgrounds are welcome!
 class_size: 25
 preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
@@ -32,22 +55,19 @@ Afternoons are reserved for independent learning and review through interactive 
 
 You will learn the strengths of Matlab through the analysis of electrophysiology data from a behavioral experiment, as well as data visualisation techniques that can be applied to any dataset.
 
-All sessions are held remotely via Zoom.
+{{ page.format }}
 
-People of all skill levels, experiences, and backgrounds are welcome!
+{{ page.audience }}
 
 
 **Workshop Dates:**
 
-- Nov. 27, 2023: 9:00-13:00, 14:00- 16:00
-- Nov. 28, 2023: 9:00-13:00, 14:00- 16:00
-- Nov. 29, 2023: 9:00-13:00, 14:00- 16:00
-- Nov. 30, 2023: 9:00-13:00, 14:00- 16:00
-- Dec. 1, 2023: 9:00-13:00, 14:00- 16:00
+{% for session in page.sessions %}
+- {{ session.date }}, {{ session.start_time }}-{{ session.end_time}} ({{ session.location }})
+{% endfor %}
 
 
 **Assessment & Credits:**
 
-- No exams
-- Certificate for > 80% attendance
-- 30 hours of coursework, equivalent to 1.0 ECTS credit
+- {{ page.certificate_criteria }}
+- {{ page.duration }} hours

@@ -1,11 +1,32 @@
 title: Intro to Python and Pandas for Neuroscientists
-hours: 15
+hours: 22
 date: 2023-11-10
+sessions:
+  - date: 11.06.2023
+    start_time: 09h00
+    end_time: 12h30
+    location: online
+  - date: 11.07.2023
+    start_time: 09h00
+    end_time: 12h30
+    location: online
+  - date: 11.08.2023
+    start_time: 09h00
+    end_time: 12h30
+    location: online
+  - date: 11.09.2023
+    start_time: 09h00
+    end_time: 12h30
+    location: online
+  - date: 11.10.2023
+    start_time: 09h00
+    end_time: 12h30
+    location: online
 main_instructor: Mohammad Bashiri
 assistants:
-    - Ben Hastings
-    - Nicholas Del Grosso
-    - Sangeetha Nandakumar
+  - Ben Hastings
+  - Nicholas Del Grosso
+  - Sangeetha Nandakumar
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro-to-python-and-pandas
 summary: |
   In this hands-on workshop, we will explore the Python and Pandas data analysis ecosystem in depth, applying them to data analysis of a real-world electrophysiology neuroscience experiment! Collaboration sessions see participants working in small teams, collaborating to learn new skills and share their perspectives in a diverse environment.  Libraries like Numpy, XArray, Seaborn, Pingouin, and Matplotlib will help span the data analysis path between processed neuroscience data and final results.
@@ -26,15 +47,12 @@ At the end of each session, interactive Jupyter notebooks that explore the tools
 
 **Workshop Dates:**
 
-  -  Nov. 6, 2023: 9:00-12:30
-  -  Nov. 7, 2023: 9:00-12:30
-  -  Nov. 8, 2023: 9:00-12:30
-  -  Nov. 9, 2023: 9:00-12:30
-  - Nov. 10, 2023: 9:00-12:30
-
+{% for session in page.sessions %}
+- {{ session.date }}, {{ session.start_time }}-{{ session.end_time}} ({{ session.location }})
+{% endfor %}
 
 **Assessment & Credits:**
 
 - No exams
-- Get a certificate (80% attendance)
-- 22 hours of coursework, equivalent to 0.75 ECTS credit
+- {{ page.certificate_criteria }}
+- {{ page.duration }} hours 
