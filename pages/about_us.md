@@ -16,7 +16,7 @@ past:
     {% endfor %}
 other:
     {% for person in data.people.values() %}
-    {% if person.role == "other" %}
+    {% if person.role not in ["past", "current"] %}
     - name: {{ person.name }}
       email: {{ person.email }}
     {% endif %}
