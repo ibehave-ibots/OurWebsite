@@ -1,3 +1,11 @@
+title: Home
+milestones:
+    {% for milestone in data.group.milestones %}
+    - date: {{ milestone.date }}
+      name: {{ milestone.name }}
+      summary: {{ milestone.summary }}
+      icon: {{ milestone.icon }}
+    {% endfor %}
 ---
 
 ## Our Mission

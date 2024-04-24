@@ -5,8 +5,12 @@ address: Venusberg Campus 1
 milestones:
   - date: 2023-01-01 
     name: Milestone 1
-    summary: This is when milestone 1 happened
+    summary: We did a lot of things on this day and it had positive impact on a lot of people.
     icon: static\images\iBehave_Logo.png
+  - date: 2023-02-01 
+    name: Milestone 2
+    summary: A lot more things happened! 
+    icon: static\images\iBehave_Logo.png    
 consulting_stats:
   num_consulting_sessions: 30
   num_of_clients: 10
