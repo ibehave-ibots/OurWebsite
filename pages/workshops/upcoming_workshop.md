@@ -13,7 +13,7 @@ instructors:
 github_repo: |
     www.github.com 
 registration_link:  |
-    www.zoom.us
+    https://www.zoom.us
 format: online
 class_size: 25
 perequisites: |

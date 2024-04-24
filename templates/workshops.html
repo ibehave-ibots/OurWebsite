@@ -3,5 +3,49 @@
 {% block title %}  Workshops {% endblock %}
 
 {% block body %}
-        {{ content | safe }}
+{{ content | safe }}
+
+<section>
+  <h1>Upcoming Workshops</h1>  
+  {% for wshop in page.upcoming_workshops %}
+  <article>
+    <h1>{{ wshop.title }} </h1>
+    <ul>
+          <li><strong>Start Date:</strong> {{ wshop.start_date }}</li>
+          <li><strong>Instructor:</strong> {{ wshop.instructor }}</li>
+          <li><strong>Duration:</strong> {{ wshop.duration }} </li>
+          <li><a href="{{ wshop.registration_link }}"><strong>Register Now!</strong></a></li>
+    </ul>
+          <!-- {{ page.upcoming_workshops }} -->
+  </article>
+  {% endfor %}
+</section>
+
+<section>
+  <h1>Past Workshops</h1>
+  {% for wshop in page.past_workshops %}
+  <article>
+    <h1><a href="{{ wshop.id }}.html">{{ wshop.title }}</a> </h1>
+      <ul>
+          <li><strong>Start Date:</strong> {{ wshop.start_date }}</li>
+          <li><strong>Instructor:</strong> {{ wshop.instructor }}</li>
+          <li><strong>Duration:</strong> {{ wshop.duration }} </li>
+          <li><a href="{{ wshop.registration_link }}"><strong>Register Now!</strong></a></li>
+    </ul>
+          <!-- {{ page.upcoming_workshops }} -->
+  </article>
+  {% endfor %}
+</section>
+
+
+<section>
+  <h1>Statistics</h1>
+  <ul>
+  {% for stat in page.statistics %}
+    <li><strong>{{ stat.name }}:</strong> {{ stat.value }} {{ stat.unit }} </li>
+  {% endfor %}
+  </ul>
+</section>
+
+
 {% endblock %}

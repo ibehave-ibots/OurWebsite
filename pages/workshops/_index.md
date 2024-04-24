@@ -1,5 +1,36 @@
 contact_email: {{ data.group.email }}
 mailing_list_link: {{ data.group.mailing_list_subscribe_url }}
+
+upcoming_workshops:
+{% for wshop_id, workshop in pages.workshops.items() %}
+  {% if workshop.sessions[0].date >= today %}
+  - id: {{ wshop_id }}
+    title: {{ workshop.title }}
+    start_date: {{ workshop.sessions[0].date }}
+    instructor: {{ workshop.instructors[0].name }}
+    duration: {{ workshop.hours }}
+    registration_link: {{ workshop.registration_link }}
+    summary: {{ workshop.summary }}
+{% endif %}
+{% endfor %}
+
+past_workshops:
+{% for wshop_id, workshop in pages.workshops.items() %}
+  {% if workshop.sessions[0].date < today %}
+  - id: {{ wshop_id }}
+    title: {{ workshop.title }}
+    start_date: {{ workshop.sessions[0].date }}
+    instructor: {{ workshop.instructors[0].name }}
+    duration: {{ workshop.hours }}
+    registration_link: {{ workshop.registration_link }}
+    summary: {{ workshop.summary }}
+{% endif %}
+{% endfor %}
+
+statistics:
+  - name: Number of Workshops
+    value: {{ pages.workshops | length }}
+    units: workshops
 ---
 
 # Workshops
@@ -27,46 +58,6 @@ Pellentesque lobortis luctus augue non bibendum. Vivamus non tortor id augue tem
 Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor dapibus. Duis neque purus, tempus hendrerit dapibus a, vehicula non ante. Praesent semper tellus nec pulvinar maximus.
 
 ![Registration System](/static/images/early-registration-concept.png)
-
-## Upcoming Workshops
-
-{% for name, workshop in pages.workshops.items() %}
-  {% if workshop.sessions[0].date >= today %}
-### [**{{ workshop.title }}**]({{ name }}.html)
-  - Start Date: {{ workshop.sessions[0].date }}
-  - Instructor: {{ workshop.main_instructor }}
-  - Duration: {{ workshop.hours }} Hours
-  - Registration Link: [{{ workshop.registration_link }}]({{ workshop.registration_link }})
-{% if workshop.assistants %}
-  - Teaching assistants: {{ workshop.assistants | join(', ')}}
-{% endif %}
-  
-
-{{ workshop.summary }}
-
-  {% endif %}
-{% endfor %}
-
-
-
-## Past Workshops
-
-
-{% for name, workshop in pages.workshops.items() %}
-  {% if workshop.sessions[0].date < today %}
-### [**{{ workshop.title }}**]({{ name }}.html)
-  - Start Date: {{ workshop.sessions[0].date }}
-  - Instructor: {{ workshop.main_instructor }}
-  - Duration: {{ workshop.hours }} Hours
-{% if workshop.assistants %}
-  - Teaching assistants: {{ workshop.assistants | join(', ')}}
-{% endif %}
-  
-
-{{ workshop.summary }}
-
-  {% endif %}
-{% endfor %}
 
 
 ## Statistics

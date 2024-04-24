@@ -15,7 +15,7 @@ sessions:
       start_time: 9h30
       end_time: 12h30
       location: online
-trainers:
+instructors:
   - name: {{ data.people.mohammad.name }}
     role: instructor
   - name: {{ data.people.ogulcan.name }}
