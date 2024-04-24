@@ -1,5 +1,5 @@
 title: Contact Us
-
+booking_link: {{ data.people.nick.booking_url }}
 ---
 
 ## Collaborate With Us
@@ -24,7 +24,7 @@ Name: {{ data.people.nick.name }}
 
 Email: {{ data.people.nick.email }}
 
-<a href="{{ data.people.nick.booking_url }}">Book a short chat!</a>
+<a href="{{ page.booking_link }}">Book a short chat!</a>
 
 ## Stay Up to Date
 [Join Our Mailing List]({{ data.group.mailing_list_subscribe_url }})
