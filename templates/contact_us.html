@@ -12,13 +12,28 @@
             
             <h1> {{ page.title }} </h1>
             <section>
-            {{ content | safe }}
+                {{ content | safe }}
+            </section>
+
+            <section>
+                <h1> Contact Details</h1>
+                <p><strong>Name:</strong> {{ page.contact_name }}</p>
+                <p><strong>Email:</strong> {{ page.contact_email }}</p>
+                <p><a href="{{ page.booking_link }}">Book a short chat!</a></p>                
+            </section>
+
+            <section>
+                <h1>Stay Up to Date</h1>
+                <p><a href="{{ page.mailing_list_link }}">Join Our Mailing List</a></p>
+
+            
             </section>
             
         </article>
 
         
-        
+    
+    
 
     
     </main>

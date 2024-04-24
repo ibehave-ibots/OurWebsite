@@ -43,14 +43,11 @@ def run_render_pipeline():
     for page_path in find_pages('./pages'):
         
         frontmatter_data = {'data': global_data}
-        content_data = {}
         if page_path.name in ['_index.md']:
             frontmatter_data['pages'] = pages_data
-            content_data['pages'] = pages_data
 
         page_data = render_frontmatter(renderer=renderer, page_path=page_path, **frontmatter_data)
-        content_data['page'] = page_data
-        content_html = render_content_to_html(renderer=renderer, page_path=page_path, **content_data)
+        content_html = render_content_to_html(renderer=renderer, page_path=page_path)
         
         # Build HTML Page
         collection_name = get_page_collection(base_path='./pages', md_path=page_path)

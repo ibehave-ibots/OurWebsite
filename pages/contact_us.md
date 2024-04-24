@@ -21,13 +21,3 @@ Nunc est ante, ornare at tortor luctus, dapibus euismod est. Vivamus elementum f
 ### Software Development
 
 Morbi id mattis orci. Maecenas elit sapien, viverra in urna eu, ornare finibus eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non tristique lacus, nec dapibus dui. Sed volutpat tempor nunc, et ullamcorper arcu ullamcorper in. Nulla facilisis in sapien ut porttitor. Mauris commodo sollicitudin nibh a cursus. Proin porttitor dictum libero vel rhoncus. Vestibulum enim enim, iaculis in massa eu, vulputate laoreet nulla.
-
-## Contact Details
-Name: {{ page.contact_name }}
-
-Email: {{ page.contact_email }}
-
-<a href="{{ page.booking_link }}">Book a short chat!</a>
-
-## Stay Up to Date
-[Join Our Mailing List]({{ page.mailing_list_link }})

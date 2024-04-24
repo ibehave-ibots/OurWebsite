@@ -1,3 +1,4 @@
+title: Workshops
 contact_email: {{ data.group.email }}
 mailing_list_link: {{ data.group.mailing_list_subscribe_url }}
 
@@ -33,12 +34,6 @@ statistics:
     units: workshops
 ---
 
-# Workshops
-
-## Subscribe for Announcements
-
-To get announcements of upcoming workshops and be the first to register for them, [Join Our Mailing List]({{ page.mailing_list_link }})
-
 ## Description
 
 Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor dapibus. Duis neque purus, tempus hendrerit dapibus a, vehicula non ante. Praesent semper tellus nec pulvinar maximus.
@@ -60,13 +55,7 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
 ![Registration System](/static/images/early-registration-concept.png)
 
 
-## Statistics
-
-  - Num Workshops: {{ pages.workshops | length }}
-
 
 ## Interested in Organizing or Teaching a Workshop? Contact Us!
 
 Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor dapibus. Duis neque purus, tempus hendrerit dapibus a, vehicula non ante. Praesent semper tellus nec pulvinar maximus.
-
-{{ page.contact_email }}
