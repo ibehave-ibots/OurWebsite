@@ -12,7 +12,7 @@ consulting:
     n_labs: {{ data.group.consulting_stats.which_labs_have_used_ibots }}
     total_hours: {{ data.group.consulting_stats.total_hours_consulting }}
     testimonials:
-    {% for testimonial in data.group.consulting_stats.testimonials %}
+    {% for testimonial in data.testimonials.consulting %}
         - {{ testimonial }}
     {% endfor %}
 workshop:
@@ -20,7 +20,7 @@ workshop:
     n_students: {{ data.group.workshop_stats.num_of_students }}
     total_hours: {{ data.group.workshop_stats.total_teaching_hours }}
     testimonials:
-    {% for testimonial in data.group.workshop_stats.testimonials %}
+    {% for testimonial in data.testimonials.workshop %}
         - {{ testimonial }}
     {% endfor %}
 
