@@ -1,10 +1,12 @@
-
+contact_email: {{ data.group.email }}
+mailing_list_link: {{ data.group.mailing_list_subscribe_url }}
+---
 
 # Workshops
 
 ## Subscribe for Announcements
 
-To get announcements of upcoming workshops and be the first to register for them, [Join Our Mailing List]({{ data.group.mailing_list_subscribe_url }})
+To get announcements of upcoming workshops and be the first to register for them, [Join Our Mailing List]({{ page.mailing_list_link }})
 
 ## Description
 
@@ -76,4 +78,4 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
 
 Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor dapibus. Duis neque purus, tempus hendrerit dapibus a, vehicula non ante. Praesent semper tellus nec pulvinar maximus.
 
-{{ data.group.email }}
+{{ page.contact_email }}

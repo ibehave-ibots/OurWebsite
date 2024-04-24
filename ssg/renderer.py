@@ -42,27 +42,27 @@ def run_render_pipeline():
     ## Render Each Page to HTML and write to './output'
     for page_path in find_pages('./pages'):
         
-        render_data = {'data': global_data}
+        frontmatter_data = {'data': global_data}
+        content_data = {}
         if page_path.name in ['_index.md']:
-            render_data['pages'] = pages_data
+            frontmatter_data['pages'] = pages_data
+            content_data['pages'] = pages_data
 
-        page_data = render_frontmatter(renderer=renderer, page_path=page_path, **render_data)
-        render_data['page'] = page_data
-        content_html = render_content_to_html(renderer=renderer, page_path=page_path, **render_data)
+        page_data = render_frontmatter(renderer=renderer, page_path=page_path, **frontmatter_data)
+        content_data['page'] = page_data
+        content_html = render_content_to_html(renderer=renderer, page_path=page_path, **content_data)
         
         # Build HTML Page
         collection_name = get_page_collection(base_path='./pages', md_path=page_path)
         template_name, rel_output_path = _get_template_name_and_output_path(collection_name=collection_name, md_name=page_path.name)
         
-        page_html = renderer.render_named_template(
-            template_name=template_name,
-            **{
-                'data': global_data,
-                'content': content_html,
-                'page': page_data,
-                'pages': pages_data
-            },
-        )        
+        html_data = {
+            'data': global_data,
+            'content': content_html,
+            'page': page_data,
+            'pages': pages_data
+        }
+        page_html = renderer.render_named_template(template_name=template_name, **html_data)        
         write_text(base_dir='./output', file_path=rel_output_path, text=page_html)
 
     copydir(src="./static", target="./output/static")
