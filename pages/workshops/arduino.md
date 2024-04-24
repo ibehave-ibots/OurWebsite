@@ -15,9 +15,11 @@ sessions:
       end_time: 16h00 
       location: In-Person at Our Makerspace at the Life & Brain in Uniklinikum Bonn
 duration: 20 hrs over 3 days
-main_instructor: Nicholas Del Grosso
-assistants:
-    - Benjamin Escribano
+instructors:
+    - name: {{ data.people.nick.name }}
+      role: instructor
+    - name: {{ data.people.ben2.name }}
+      role: assistant
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/arduino-programming
 summary: The easy-to-learn Arduino ecosystem offers a fantastic opportunity to sharpen your programming skills. In this workshop, you will build your own Arduino sensors while electrifying the real world with your creations! 
 registration_link: https://us02web.zoom.us/meeting/register/tZcudOmrqzwuHtdRkRA_pZ5LFb1FGOaHZObz
@@ -39,6 +41,12 @@ Arduino microcontrollers are commonly used in neuroscience experiments as sensor
 In this three-day workshop, we will learn how to write clearly-structured and easily-understandable programs in C++ that run on Arduino microcontrollers. You will learn C++ program structure and concepts, process flow control and debugging.  We will show you how to use Github version control to easily track changes made to your code and to collaborate seamlessly with others.  On the last day of the course, we’ll invite you to join us in Bonn at our Makerspace to work with Arduino devices, exploring along the way how to write fast, efficient code in real-world situations, including an introduction to the techniques of multiprocessing and memory optimisation.
 
 By the end of this workshop, you will be able to build your own Arduino sensors, expanding your experimental data collection opportunities and connecting with the open-source maker world in science!
+
+**Trainers**
+
+{% for person in page.instructors %}
+  - {{ person.name }}: {{ person.role }}
+{% endfor %}
 
 **Prerequisites:** {{ page.prerequisites }}
 

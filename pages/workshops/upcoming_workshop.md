@@ -1,7 +1,9 @@
 title: Upcoming Workshop Test
 hours: 15
 date: 2028-02-19
-main_instructor: Nicholas Del Grosso
+instructors:
+  - name: {{ data.people.nick.name }}
+    role: instructor
 github_repo: 
 summary: |
     In this upcoming workshop, we will learn about upcoming things! These will be useful for blah blah blah!

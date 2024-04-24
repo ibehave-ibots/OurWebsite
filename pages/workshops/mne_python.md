@@ -14,10 +14,13 @@ sessions:
       start_time: 9h30
       end_time: 17h00
       location: online
-main_instructor: Thomas Binns
-assistants:
-    - Sangeetha Nandakumar
-    - Nicholas Del Grosso
+instructors:
+  - name: {{ data.people.thomas.name }}
+    role: instructor
+  - name: {{ data.people.sangeetha.name }}
+    role: assistant
+  - name: {{ data.people.nick.name }}
+    role: assistant
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/mne_course
 summary: |
     Would you like to learn more about (M)EEG analysis and programming in Python? By the course's end, you’ll have an understanding of how to install and setup a Python environment with MNE and be able use it to analyze your (M)EEG data.

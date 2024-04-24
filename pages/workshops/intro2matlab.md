@@ -22,9 +22,11 @@ sessions:
       start_time: 9h00
       end_time: 16h00
       location: online
-main_instructor: Ben Hastings
-assistants:
-    - Nicholas Del Grosso
+instructors:
+  - name: {{ data.people.ben_h.name }}
+    role: instructor
+  - name: {{ data.people.nick.name }}
+    role: assistant
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/Intro-to-matlab
 summary: |
     Matlab is not just another programming language. It's a powerful tool, widely
@@ -59,6 +61,11 @@ You will learn the strengths of Matlab through the analysis of electrophysiology
 
 {{ page.audience }}
 
+**Trainers**
+
+{% for person in page.instructors %}
+  - {{ person.name }}: {{ person.role }}
+{% endfor %}
 
 **Workshop Dates:**
 

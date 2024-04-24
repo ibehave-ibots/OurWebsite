@@ -1,5 +1,5 @@
 title: Intro to File- and Database-oriented Neuroscience Data Management With Python, SQL, and HDF5
-hours: 15
+duration: 15 hrs
 date: 2023-02-22
 sessions:
 - date: 22.02.2024
@@ -10,8 +10,9 @@ sessions:
   start_time: 9h30
   end_time: 17h00
   location: online
-duration: 15 hrs over 2.5 days
-main_instructor: Nicholas Del Grosso
+instructors:
+  - name: {{ data.people.nick.name }}
+    role: instructor
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/data-management
 summary: What is all this hype about databases, and how can I use them to make my analysis work simpler?  In this workshop, you’ll build databases and query them in Python and SQL using DuckDB, store complex data in HDF5, and host it with Git and GitHub.
 registration_link: https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
@@ -30,6 +31,12 @@ Neuroscience is evolving rapidly, with experimental data becoming increasingly c
 In this workshop, discover the power of database management systems, a game-changer in neuroscience research. We will dive into the world of SQL and learn about DuckDB SQL engine, which makes it easy to apply industry-standard data organization methods to research data as a relational database – no server management needed! You'll also gain hands-on experience with HDF5 and JSON for key-value data storage and learn how to  combine various management techniques for optimal convenience and performance by building hybrid database systems. 
 
 By the course's end, you'll be adept at writing Python scripts to create and extract data from databases, query large databases in SQL, store complex data in HDF5, manage your work with Git, and publish your projects on GitHub.
+
+**Trainers**
+
+{% for person in page.instructors %}
+  - {{ person.name }}: {{ person.role }}
+{% endfor %}
 
 **Prerequisites:** This workshop is ideal for Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with some background in data analysis using Matlab, Python, or R.
 
