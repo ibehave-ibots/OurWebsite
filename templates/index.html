@@ -32,21 +32,32 @@
             <h2> Statistics </h2>
             <section>
                 <h3>Consulting</h3>
-                <ul>
-                    <p>Number of consulting sessions: {{ page.consulting.n_sessions }}</p>
-                    <p>Number of researchers: {{ page.consulting.n_clients }}</p>
-                    <p>Number of labs: {{ page.consulting.n_labs }}</p>
-                    <p>Total consulting time: {{ page.consulting.total_hours }} Hours</p>
-                    <p>Hear from the researchers...
-                        <ul>
-                            {% for testimonial in page.consulting.testimonials %}
-                            <li>{{ testimonial }}</li>
-                            {% endfor %}
-                        </ul>
-                    </p>
+                <p>Number of consulting sessions: {{ page.consulting.n_sessions }}</p>
+                <p>Number of researchers: {{ page.consulting.n_clients }}</p>
+                <p>Number of labs: {{ page.consulting.n_labs }}</p>
+                <p>Total consulting time: {{ page.consulting.total_hours }} Hours</p>
+                <p>Hear from the researchers...
+                    <ul>
+                        {% for testimonial in page.consulting.testimonials %}
+                        <li>{{ testimonial }}</li>
+                        {% endfor %}
+                    </ul>
+                </p>
 
-                </ul>
+                <h3>Workshops</h3>
+                <p>Number of workshops: {{ page.workshop.n_workshops }}</p>
+                <p>Number of students: {{ page.workshop.n_students }}</p>
+                <p>Total teaching time: {{ page.workshop.total_hours }} Hours</p>
+                <p>Hear from the students...
+                    <ul>
+                        {% for testimonial in page.workshop.testimonials %}
+                        <li>{{ testimonial }}</li>
+                        {% endfor %}
+                    </ul>
+                </p>
+
             </section>
+
 
         </article>
 

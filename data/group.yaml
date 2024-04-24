@@ -16,15 +16,7 @@ consulting_stats:
   num_of_clients: 10
   which_labs_have_used_ibots: 5
   total_hours_consulting: 100
-  testimonials:
-    - Awesome!
-    - Great!
-    - Wow!
 workshop_stats:
   num_workshops: 9
   num_of_students: 180
   total_teaching_hours: 125
-  testimonials:
-    - Great teaching!
-    - Nice materials!
-    - Good interactions!
