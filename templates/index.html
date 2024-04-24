@@ -32,11 +32,7 @@
             <h2> Statistics </h2>
             <section>
                 <h3>Consulting</h3>
-                {% for stat in page.consulting %}
-                Number of Clients: {{ stat.num_clients }}
-                Number of Labs: {{ stat.num_labs }}
-                Total Hours: {{ stat.total_hours }} Hours
-                {% endfor %}
+                <p>{{ page.consulting.n_sessions }}</p>
             </section>
 
         </article>
