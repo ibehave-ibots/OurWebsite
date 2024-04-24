@@ -3,15 +3,15 @@ summary: |
     Would you like to learn more about (M)EEG analysis and programming in Python? By the course's end, you’ll have an understanding of how to install and setup a Python environment with MNE and be able use it to analyze your (M)EEG data.
 duration: 15
 sessions:
-    - date: 2024-07-02
+    - date: 2024-02-07
       start_time: 14h00
       end_time: 17h00
       location: online
-    - date: 2024-08-02
+    - date: 2024-02-08
       start_time: 9h30
       end_time: 17h00
       location: online
-    - date: 2024-09-02
+    - date: 2024-02-09
       start_time: 9h30
       end_time: 17h00
       location: online

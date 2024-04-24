@@ -1,12 +1,6 @@
 title: Intro to Neuroscience Data Analysis with Matlab
 summary: |
-    Matlab is not just another programming language. It's a powerful tool, widely
-    recognized and utilized, especially in the realm of neuroscience. With its
-    extensive suite of data-science tools, Matlab has transformed the way we
-    analyze and visualize data. Whether you're a newbie or just curious about
-    Matlab, this workshop is tailored for you. Dive into an interactive program
-    where you'll discover how Matlab simplifies the analysis and visualization of
-    electrophysiology data from a mouse behavioral experiment.
+    Matlab is not just another programming language. It's a powerful tool, widely recognized and utilized, especially in the realm of neuroscience. With its extensive suite of data-science tools, Matlab has transformed the way we analyze and visualize data. Whether you're a newbie or just curious about Matlab, this workshop is tailored for you. Dive into an interactive program where you'll discover how Matlab simplifies the analysis and visualization of electrophysiology data from a mouse behavioral experiment.
 hours: 30
 sessions: 
     - date: 2023-11-27
