@@ -28,8 +28,8 @@ registration_link: |
     https://us02web.zoom.us/meeting/register/tZ0uf-utqj0vGdI5V0ouc_qthEQJyvejqqRU
 format: Online, Hands-On Course
 class_size: 25
-audience: |
-    This workshop is ideal for Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI). No prior programming experience required.
+perequisites: |
+    People of all skill levels, experiences, and backgrounds are welcome!
 preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
 certificate_criteria: | 

@@ -20,6 +20,8 @@ registration_link: |
     https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
 format: Online, Hands-On Course. 
 class_size: 25
+prerequisites:  |
+    Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with previous coding experience in any language such as Matlab, Python, or R.
 preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
 certificate_criteria: | 

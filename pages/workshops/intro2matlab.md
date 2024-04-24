@@ -39,7 +39,7 @@ github_repo:  |
 registration_link:  |
     https://us02web.zoom.us/meeting/register/tZYrdOigrzMrHNKc5ktkYUsIUfyNX14JnGBD#/registration
 format: All sessions are held remotely via Zoom.
-audience: |
+perequisites: |
     People of all skill levels, experiences, and backgrounds are welcome!
 class_size: 25
 preparation_instructions: |

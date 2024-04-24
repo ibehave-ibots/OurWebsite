@@ -20,16 +20,20 @@ instructors:
       role: instructor      
     - name: {{ data.people.oliver.name }}
       role: assistant
-github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro_to_calcium_imaging
-
-registration_link: https://us02web.zoom.us/meeting/register/tZYuduiqqT0iHtcRAQa9i94dZnrVIfjw0OLc#/registration
+github_repo:  |
+    https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro_to_calcium_imaging
+registration_link: |
+    https://us02web.zoom.us/meeting/register/tZYuduiqqT0iHtcRAQa9i94dZnrVIfjw0OLc#/registration
 format: Online on Zoom, Hands-On Course.
 class_size: 25
+prerequisites:  |
+    Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with previous coding experience in any language such as Matlab, Python, or R.
 preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
 certificate_criteria: | 
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
-prerequisites: Some Prior Experience with Matlab, Python, or R
+prerequisites:  |
+    Some Prior Experience with Matlab, Python, or R
 ---
 
 ## {{ page.title }}

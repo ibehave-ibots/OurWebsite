@@ -16,6 +16,8 @@ registration_link:  |
     www.zoom.us
 format: online
 class_size: 25
+perequisites: |
+    People of all skill levels, experiences, and backgrounds are welcome!
 preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
 certificate_criteria: | 

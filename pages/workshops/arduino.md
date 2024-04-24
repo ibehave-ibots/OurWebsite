@@ -26,7 +26,8 @@ registration_link: |
     https://us02web.zoom.us/meeting/register/tZcudOmrqzwuHtdRkRA_pZ5LFb1FGOaHZObz
 format: hybrid (2 Days online and 1 Day in-person in Bonn's UKB Campus)
 class_size: 25
-prerequisites: Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with previous coding experience in any language such as Matlab, Python, or R.
+prerequisites:  |
+    Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with previous coding experience in any language such as Matlab, Python, or R.
 preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
 certificate_criteria: | 

@@ -26,6 +26,8 @@ registration_link: |
     https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
 format: online
 class_size: 25
+perequisites: |
+    People of all skill levels, experiences, and backgrounds are welcome!
 preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
 certificate_criteria: | 
