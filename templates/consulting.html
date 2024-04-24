@@ -17,8 +17,11 @@
             
             <section>
                 <h1> {{ page.statistics.title }} </h1>
+                <dl>
                 {% for key, value in page.statistics.report.items() %}
-                <p><strong>{{key}}:</strong>{{ value }}</p>
+                <dt>{{key}}</dt>
+                <dd>{{ value }}</dd>
+                </dl>
                 {% endfor %}
             </section>
             
