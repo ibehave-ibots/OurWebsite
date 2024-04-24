@@ -1,4 +1,6 @@
 title: Fundamental Programming Skills for Experimental Science with Arduino
+summary: |
+    The easy-to-learn Arduino ecosystem offers a fantastic opportunity to sharpen your programming skills. In this workshop, you will build your own Arduino sensors while electrifying the real world with your creations! 
 hours: 15
 sessions:
     - date: 2024-02-19
@@ -19,7 +21,6 @@ instructors:
     - name: {{ data.people.ben2.name }}
       role: assistant
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/arduino-programming
-summary: The easy-to-learn Arduino ecosystem offers a fantastic opportunity to sharpen your programming skills. In this workshop, you will build your own Arduino sensors while electrifying the real world with your creations! 
 registration_link: https://us02web.zoom.us/meeting/register/tZcudOmrqzwuHtdRkRA_pZ5LFb1FGOaHZObz
 format: hybrid (2 Days online and 1 Day in-person in Bonn's UKB Campus)
 class_size: 25

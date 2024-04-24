@@ -1,5 +1,13 @@
 title: Intro to Neuroscience Data Analysis with Matlab
-duration: 30
+summary: |
+    Matlab is not just another programming language. It's a powerful tool, widely
+    recognized and utilized, especially in the realm of neuroscience. With its
+    extensive suite of data-science tools, Matlab has transformed the way we
+    analyze and visualize data. Whether you're a newbie or just curious about
+    Matlab, this workshop is tailored for you. Dive into an interactive program
+    where you'll discover how Matlab simplifies the analysis and visualization of
+    electrophysiology data from a mouse behavioral experiment.
+hours: 30
 sessions: 
     - date: 2023-11-27
       start_time: 9h00
@@ -27,14 +35,6 @@ instructors:
   - name: {{ data.people.nick.name }}
     role: assistant
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/Intro-to-matlab
-summary: |
-    Matlab is not just another programming language. It's a powerful tool, widely
-    recognized and utilized, especially in the realm of neuroscience. With its
-    extensive suite of data-science tools, Matlab has transformed the way we
-    analyze and visualize data. Whether you're a newbie or just curious about
-    Matlab, this workshop is tailored for you. Dive into an interactive program
-    where you'll discover how Matlab simplifies the analysis and visualization of
-    electrophysiology data from a mouse behavioral experiment.
 registration_link: https://us02web.zoom.us/meeting/register/tZYrdOigrzMrHNKc5ktkYUsIUfyNX14JnGBD#/registration
 format: All sessions are held remotely via Zoom.
 audience: |

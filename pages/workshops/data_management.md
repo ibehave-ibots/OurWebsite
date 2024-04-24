@@ -1,4 +1,6 @@
 title: Intro to File- and Database-oriented Neuroscience Data Management With Python, SQL, and HDF5
+summary: |
+    What is all this hype about databases, and how can I use them to make my analysis work simpler?  In this workshop, you’ll build databases and query them in Python and SQL using DuckDB, store complex data in HDF5, and host it with Git and GitHub.
 hours: 15
 sessions:
 - date: 2024-02-22
@@ -13,7 +15,6 @@ instructors:
   - name: {{ data.people.nick.name }}
     role: instructor
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/data-management
-summary: What is all this hype about databases, and how can I use them to make my analysis work simpler?  In this workshop, you’ll build databases and query them in Python and SQL using DuckDB, store complex data in HDF5, and host it with Git and GitHub.
 registration_link: https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
 format: Online, Hands-On Course. 
 class_size: 25
