@@ -17,8 +17,15 @@
 
             <section id="contact-details">
                 <h1> Contact Details</h1>
-                <p><strong>Name:</strong> {{ page.contact_name }}</p>
-                <p><strong>Email:</strong> {{ page.contact_email }}</p>
+                <address>
+                    <dl>
+                        <dt>Name</dt>
+                        <dd>{{ page.contact_name }}</dd>
+
+                        <dt>Email</dt>
+                        <dd>{{ page.contact_email }}</dd>
+                    </dl>
+                </address>
                 <p><a href="{{ page.booking_link }}">Book a short chat!</a></p>                
             </section>
 
