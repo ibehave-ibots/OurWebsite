@@ -33,17 +33,37 @@
 
     <section>
         <h1>Course Format</h1>
-        <ul>
-            <li><strong>Format:</strong> {{ page.format}}</li>
-            <li><strong>Duration: </strong>{{ page.hours }} hours over {{ page.sessions | length }} sessions.</li>
-        </ul>
+
+        <dl>
+            <dt>Format</dt>
+            <dd>{{ page.format }}</dd>
+            
+            <dt>Duration</dt>
+            <dd>{{ page.hours }} hours</dd>
+            <dd>{{ page.sessions | length }} sessions</dd>
+            
+        </dl>
     </section>
 
     <section>
         <h1>Session Dates</h1>
         <ul>
         {% for session in page.sessions %}
-            <li>{{ session.date }}, {{ session.start_time }}-{{ session.end_time}} ({{ session.location }})</li>
+            <li>
+                <dl>
+                    <dt>Date</dt>
+                    <dd>{{ session.date }}</dd>
+
+                    <dt>Start Time</dt>
+                    <dd>{{ session.start_time }}</dd>
+
+                    <dt>End Time</dt>
+                    <dd>{{ session.end_time }}</dd>
+
+                    <dt>Location</dt>
+                    <dd>{{ session.location }} </dd>
+                </dl>
+            </li>
         {% endfor %}
         </ul>
     </section>
