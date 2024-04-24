@@ -34,8 +34,10 @@ instructors:
     role: instructor
   - name: {{ data.people.nick.name }}
     role: assistant
-github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/Intro-to-matlab
-registration_link: https://us02web.zoom.us/meeting/register/tZYrdOigrzMrHNKc5ktkYUsIUfyNX14JnGBD#/registration
+github_repo:  |
+    https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/Intro-to-matlab
+registration_link:  |
+    https://us02web.zoom.us/meeting/register/tZYrdOigrzMrHNKc5ktkYUsIUfyNX14JnGBD#/registration
 format: All sessions are held remotely via Zoom.
 audience: |
     People of all skill levels, experiences, and backgrounds are welcome!

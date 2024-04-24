@@ -32,8 +32,10 @@ instructors:
     role: assistant
   - name: {{ data.people.sangeetha.name }}
     role: assistant
-github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro-to-python-and-pandas
-registration_link: https://us02web.zoom.us/j/86906426337?pwd=S2owMUowSGpSb1FiNzh3N3JGdUk0Zz09
+github_repo:  |
+    https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro-to-python-and-pandas
+registration_link:  |
+    https://us02web.zoom.us/j/86906426337?pwd=S2owMUowSGpSb1FiNzh3N3JGdUk0Zz09
 format: online
 class_size: 25
 preparation_instructions: |

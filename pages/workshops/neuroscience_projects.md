@@ -20,8 +20,10 @@ trainers:
     role: instructor
   - name: {{ data.people.ogulcan.name }}
     role: assistant
-github_repo: https://github.com/ibehave-ibots/iBOTS-Developing-Data-Analysis-Projects
-registration_link: https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
+github_repo: |
+    https://github.com/ibehave-ibots/iBOTS-Developing-Data-Analysis-Projects
+registration_link: |
+    https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
 format: online
 class_size: 25
 preparation_instructions: |

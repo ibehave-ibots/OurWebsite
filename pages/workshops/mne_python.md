@@ -22,8 +22,10 @@ instructors:
     role: assistant
   - name: {{ data.people.nick.name }}
     role: assistant
-github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/mne_course
-registration_link: https://us02web.zoom.us/meeting/register/tZ0uf-utqj0vGdI5V0ouc_qthEQJyvejqqRU
+github_repo:  |
+    https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/mne_course
+registration_link: |
+    https://us02web.zoom.us/meeting/register/tZ0uf-utqj0vGdI5V0ouc_qthEQJyvejqqRU
 format: Online, Hands-On Course
 class_size: 25
 audience: |

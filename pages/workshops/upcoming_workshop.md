@@ -10,8 +10,10 @@ sessions:
 instructors:
   - name: {{ data.people.nick.name }}
     role: instructor
-github_repo: 
-registration_link: something@zoom.us
+github_repo: |
+    www.github.com 
+registration_link:  |
+    www.zoom.us
 format: online
 class_size: 25
 preparation_instructions: |

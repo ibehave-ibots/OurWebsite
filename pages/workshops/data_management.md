@@ -14,8 +14,10 @@ sessions:
 instructors:
   - name: {{ data.people.nick.name }}
     role: instructor
-github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/data-management
-registration_link: https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
+github_repo: |
+    https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/data-management
+registration_link: |
+    https://us02web.zoom.us/meeting/register/tZctcuCoqTwtE927LBOm_u8zlNJIQbxZeONv#/registration
 format: Online, Hands-On Course. 
 class_size: 25
 preparation_instructions: |

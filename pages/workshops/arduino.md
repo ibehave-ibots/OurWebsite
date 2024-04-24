@@ -20,8 +20,10 @@ instructors:
       role: instructor
     - name: {{ data.people.ben2.name }}
       role: assistant
-github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/arduino-programming
-registration_link: https://us02web.zoom.us/meeting/register/tZcudOmrqzwuHtdRkRA_pZ5LFb1FGOaHZObz
+github_repo: |
+    https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/arduino-programming
+registration_link: |
+    https://us02web.zoom.us/meeting/register/tZcudOmrqzwuHtdRkRA_pZ5LFb1FGOaHZObz
 format: hybrid (2 Days online and 1 Day in-person in Bonn's UKB Campus)
 class_size: 25
 prerequisites: Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with previous coding experience in any language such as Matlab, Python, or R.
