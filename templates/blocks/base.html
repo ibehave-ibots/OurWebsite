@@ -1,24 +1,34 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     {% block head %}
     <meta charset="UTF-8">
-    <title> iBOTS - {% block title %}{% endblock %}</title>
-    <nav>
-        <a href="about_us.html">About Us</a>
-        <a href="consulting.html">Consulting</a>
-        <a href="contact_us.html">Contact Us</a>
-        <a href="learning_resources.html">Learning Resources</a>
-        <a href="networking.html">Networking</a>
-        <a href="organizations.html">Organizations</a>
-        <a href="/workshops">Workshops</a>
-
-    </nav>
+    <title>iBOTS - {% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
+
 <body>
-{% block body %}
-{% endblock %}
+    <header>
+        <img src="/static/images/iBehave_Logo.png" alt="iBehave Logo">
+        <nav>
+            <a href="/index.html">Home</a>
+            <a href="/about_us.html">About Us</a>
+            <a href="/consulting.html">Consulting</a>
+            <a href="/workshops">Workshops</a>
+            <a href="/contact_us.html">Contact Us</a>
+            <a href="/learning_resources.html">Learning Resources</a>
+            <a href="/networking.html">Networking</a>
+            <a href="/organizations.html">Organizations</a>
+        </nav>
+        <hr>
+    </header>
+
+    {% block body %}
+    {% endblock %}
+
+    <footer>
+        <hr>
+        {% include "blocks/navbar.html" %}
+    </footer>
 </body>
 </html>
