@@ -3,8 +3,49 @@
 {% block title %} {{ page.title }} {% endblock %}
 
 {% block body %}
+
+    <header></header>
+    <nav></nav>
+    <aside></aside>
     <main>
-        {{ content | safe }}
+        <article>
+            
+            <h1> {{ page.title }} </h1>
+            <section>
+            {{ content | safe }}
+            </section>
+            
+            <h2> Our History </h2>
+            <section>
+                {% for milestone in page.milestones %}
+                <h3> {{ milestone.name }} </h3>
+                {{ milestone.date }}
+                {{ milestone.summary }}
+                {% endfor %}
+            </section>
+
+            <h2> Events Calendar </h2>
+            <section>
+                Our calendar goes here!
+            </section>
+
+            <h2> Statistics </h2>
+            <section>
+                <h3>Consulting</h3>
+                {% for stat in page.consulting %}
+                Number of Clients: {{ stat.num_clients }}
+                Number of Labs: {{ stat.num_labs }}
+                Total Hours: {{ stat.total_hours }} Hours
+                {% endfor %}
+            </section>
+
+        </article>
+
+        
+        
+
+    
     </main>
+    <footer></footer>
 
 {% endblock %}
