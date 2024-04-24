@@ -18,7 +18,7 @@ certificate_criteria: |
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
 --- 
 
-## Developing Neuroscience Data Analysis Projects with Python, Git, and Snakemake
+## {{ page.title }}
 
 As neuroscience evolves with increasingly large data sets, complex analyses, and bigger teams, building robust, reproducible, and scalable analysis workflows becomes essential in order to develop large computational science projects and keep them sustainable over time. 
 

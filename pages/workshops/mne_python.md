@@ -35,7 +35,7 @@ certificate_criteria: |
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
 --- 
 
-##  Intro to (M)EEG Analysis with MNE-Python
+## {{ page.title }}
 
 Do you have EEG or MEG data, and would like to use Python to analyze it?  Would you like to learn more about (M)EEG analysis, plus a little Python programming?  With over 150 researchers contributing to its open project, the rapidly-growing MNE-Python library is just the package to learn!  
 

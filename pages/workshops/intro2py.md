@@ -43,7 +43,7 @@ certificate_criteria: |
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
 --- 
 
-# Intro to Python and Pandas for Neuroscientists
+## {{ page.title }}
 
 In this hands-on workshop, we will explore the Python and Pandas data analysis ecosystem in depth, applying them to data analysis from the world of neuroscience!  Morning collaboration sessions see participants working in small teams, collaborating to learn new skills and share their perspectives in a diverse environment.  
 

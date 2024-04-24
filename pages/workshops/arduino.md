@@ -34,7 +34,7 @@ certificate_criteria: |
 
 --- 
 
-## Fundamental Programming Skills for Experimental Science with Arduino
+## {{ page.title }}
 
 Arduino microcontrollers are commonly used in neuroscience experiments as sensors or input devices; for example, to record a subject’s decision via a button press. The easy-to-learn Arduino ecosystem offers a fantastic opportunity to sharpen your programming skills while electrifying the real world with your creations!
 

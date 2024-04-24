@@ -16,4 +16,4 @@ certificate_criteria: |
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
 --- 
 
-## Upcoming Workshop Test
+## {{ page.title }}
