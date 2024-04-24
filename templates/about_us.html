@@ -11,33 +11,9 @@
     <article>
         
         <h1> {{ page.title }} </h1>
-        <section>
+        <section id="rse-description">
         {{ content | safe }}
-        </section>
-
-        <section>
-            <h2> The iBOTS Team </h2>
-            <h3> Current Members </h3>
-            {% for person in page.current %}
-                <h4> {{ person.name}} </h4>
-                <p>Email: {{ person.email }}</p>
-                <p><a href="{{ person.booking_url }}">Booking Link</a></p>
-            {% endfor %}
-
-            <h3> Past Members </h3>
-            {% for person in page.past %}
-                <h4> {{ person.name}} </h4>
-                <p>Email: {{ person.email }}</p>
-            {% endfor %}
-
-            <h3> Collaborators </h3>
-            {% for person in page.other %}
-                <h4> {{ person.name}} </h4>
-                <p>Email: {{ person.email }}</p>
-            {% endfor %}
-
-        </section>
-        
+        </section>        
     </article>
 
 </main>

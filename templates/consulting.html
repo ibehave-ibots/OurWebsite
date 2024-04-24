@@ -11,7 +11,7 @@
         <article>
             
             <h1> {{ page.title }} </h1>
-            <section>
+            <section id="description">
             {{ content | safe }}
             </section>
             
@@ -22,7 +22,7 @@
                 {% endfor %}
             </section>
             
-            <section>
+            <section id="book-a-session">
                 <h1> {{ page.session_booking.title }} </h1>
                 <p> {{ page.session_booking.description }} </p>
                 {% for consultant in page.session_booking.consultants %}

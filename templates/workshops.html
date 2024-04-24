@@ -15,7 +15,7 @@
   {{ content | safe }}
   </section>
   
-  <section>
+  <section id="upcoming-workshops">
     <h1>Upcoming Workshops</h1>  
     {% for wshop in page.upcoming_workshops %}
     <article>
@@ -31,7 +31,7 @@
     {% endfor %}
   </section>
   
-  <section>
+  <section id="past-workshops">
     <h1>Past Workshops</h1>
     {% for wshop in page.past_workshops %}
     <article>

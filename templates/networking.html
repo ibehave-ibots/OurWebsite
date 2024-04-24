@@ -13,7 +13,7 @@
                 {{ content | safe }}
             </section>
 
-            <section>
+            <section id="clubs">
                 <h2>Clubs</h2>
                 {% for club in page.clubs %}
                     <h3> {{ club.name }} </h3>
@@ -31,7 +31,7 @@
                 {% endfor %}
             </section>
 
-            <section>
+            <section id="conferences">
                 <h2>Conferences</h2>
                 {% for conference in page.conferences %}
                     <h3> {{ conference.name }} </h3>
@@ -49,7 +49,7 @@
                 {% endfor %}
             </section>
 
-            <section>
+            <section id="seminars">
                 <h2>Seminars</h2>
                 {% for seminar in page.seminars %}
                     <h3> {{ seminar.name }} </h3>
