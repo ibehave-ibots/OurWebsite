@@ -36,7 +36,6 @@ certificate_criteria: |
 
 --- 
 
-## {{ page.title }}
 
 Arduino microcontrollers are commonly used in neuroscience experiments as sensors or input devices; for example, to record a subject’s decision via a button press. The easy-to-learn Arduino ecosystem offers a fantastic opportunity to sharpen your programming skills while electrifying the real world with your creations!
 
@@ -44,7 +43,3 @@ In this three-day workshop, we will learn how to write clearly-structured and ea
 
 By the end of this workshop, you will be able to build your own Arduino sensors, expanding your experimental data collection opportunities and connecting with the open-source maker world in science!
 
-
-**Workshop Preparation:** {{ page.preparation_instructions }} 
-
-{{ page.certificate_criteria }}

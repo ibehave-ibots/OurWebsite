@@ -24,4 +24,4 @@ certificate_criteria: |
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
 --- 
 
-## {{ page.title }}
+(This isn't a real course... it's just a placeholder.)

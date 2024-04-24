@@ -42,8 +42,6 @@ certificate_criteria: |
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
 --- 
 
-## {{ page.title }}
-
 In this hands-on workshop, we will explore Matlab ecosystem, with applications to data analysis from the world of neuroscience.
 
 Morning collaboration sessions see participants working in small teams, collaborating to learn new skills and share their perspectives in a diverse environment.
@@ -51,25 +49,3 @@ Morning collaboration sessions see participants working in small teams, collabor
 Afternoons are reserved for independent learning and review through interactive materials designed to reinforce the key concepts via problem-solving challenges. During this time, an open Zoom session will be available for questions and discussion.
 
 You will learn the strengths of Matlab through the analysis of electrophysiology data from a behavioral experiment, as well as data visualisation techniques that can be applied to any dataset.
-
-{{ page.format }}
-
-{{ page.audience }}
-
-**Trainers**
-
-{% for person in page.instructors %}
-  - {{ person.name }}: {{ person.role }}
-{% endfor %}
-
-**Workshop Dates:**
-
-{% for session in page.sessions %}
-- {{ session.date }}, {{ session.start_time }}-{{ session.end_time}} ({{ session.location }})
-{% endfor %}
-
-
-**Assessment & Credits:**
-
-- {{ page.certificate_criteria }}
-- {{ page.duration }} hours

@@ -49,15 +49,20 @@
     </section>
 
     <section>
-        <h2>Course Preparation</h2>        
+        <h1>Course Preparation</h1>        
         <p>{{ page.preparation_instructions }}</p>
     </section>
     
     {% if page.github_repo %}
     <section>
-        <h2>Course Materials</h2>        
+        <h1>Course Materials</h1>        
         <p>Find course materials here: <a href="{{ page.github_repo }}">{{ page.title }}</a></p>
     </section>
     {% endif %}
+
+    <section>
+        <h1>Participation Certificates</h1>
+        <p>{{ page.certificate_criteria }}</p>
+    </section>
 
 {% endblock %}

@@ -36,33 +36,8 @@ prerequisites:  |
     Some Prior Experience with Matlab, Python, or R
 ---
 
-## {{ page.title }}
-
 Calcium imaging is a popular and powerful technique for probing the activity of individual neurons with unprecedented detail. To process and extract these neuronal signals, Python has a wide ecosystem of tools, including CaImAn, a popular workflow package for analyzing calcium imaging data. From image de-noising and artefact reduction to cell segmentation and neuronal signal source extraction, CaImAn will help in getting more control over the quality and efficiency of processing and analysis. 
 
 In this workshop, we will first explore the concepts behind the pre-processing and processing stages involved in calcium imaging with popular Python packages like Numpy, OpenCV, and Matplotlib. With this background knowledge, we will then use CaImAn and its powerful customization capabilities that will enable us to quickly and efficiently get data ready for analysis. Further, we will dive into advanced topics that appear in real-world situations, including connecting to a GPU for high-performance processing and managing TIFF image data using the Tifffile Python package.
 
 By the end of the workshop, we will be able use Python to perform basic image operations, gain a better understanding of some techniques that go behind calcium imaging analysis, and become more confident customizing the wide variety of options in CaImAn to suit our calcium imaging data.
-
-**Trainers**
-
-{% for person in page.instructors %}
-  - {{ person.name }}: {{ person.role }}
-{% endfor %}
-
-**Prerequisites:** {{ page.prerequisites }} 
-
-**Duration:** {{ page.duration }}
-
-**Dates (Times):**
-
-{% for session in page.sessions %}
-- {{ session.date }}, {{ session.start_time }}-{{ session.end_time}} ({{ session.location }})
-{% endfor %}
-
-
-**Workshop Format:** {{ page.format }} {{ page.class_size }} Participants Max.
-
-**Workshop Preparation:** {{ page.preparation_instructions }}
-
-{{ page.certificate_criteria }}

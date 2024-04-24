@@ -46,26 +46,6 @@ certificate_criteria: |
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
 --- 
 
-## {{ page.title }}
-
 In this hands-on workshop, we will explore the Python and Pandas data analysis ecosystem in depth, applying them to data analysis from the world of neuroscience!  Morning collaboration sessions see participants working in small teams, collaborating to learn new skills and share their perspectives in a diverse environment.  
 
 At the end of each session, interactive Jupyter notebooks that explore the tools introduced the day will be available for independent learning and review, with teachers available to answer questions.  People of all skill levels, experiences, and backgrounds are welcome!
-
-**Trainers**
-
-{% for person in page.instructors %}
-  - {{ person.name }}: {{ person.role }}
-{% endfor %}
-
-**Workshop Dates:**
-
-{% for session in page.sessions %}
-- {{ session.date }}, {{ session.start_time }}-{{ session.end_time}} ({{ session.location }})
-{% endfor %}
-
-**Assessment & Credits:**
-
-- No exams
-- {{ page.certificate_criteria }}
-- {{ page.duration }} hours 
