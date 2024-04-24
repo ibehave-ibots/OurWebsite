@@ -9,7 +9,13 @@ milestones:
 consulting: 
     n_sessions: {{ data.group.consulting_stats.num_consulting_sessions}}
     n_clients: {{ data.group.consulting_stats.num_of_clients}}
-    
+    n_labs: {{ data.group.consulting_stats.which_labs_have_used_ibots }}
+    total_hours: {{ data.group.consulting_stats.total_hours_consulting }}
+    testimonials:
+    {% for testimonial in data.group.consulting_stats.testimonials %}
+        - {{ testimonial }}
+    {% endfor %}
+
 
 
 ---
