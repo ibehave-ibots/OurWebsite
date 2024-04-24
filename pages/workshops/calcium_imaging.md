@@ -1,18 +1,33 @@
 title: Intro to Calcium Imaging Analysis with Python and CaImAn
 hours: 15
 date: 2023-02-28
+sessions:
+    - date: 28.02.2024
+      start_time: 14h00
+      end_time: 17h00
+      location: online
+    - date: 29.02.2024
+      start_time: 9h30
+      end_time: 17h00
+      location: online
+    - date: 01.03.2024
+      start_time: 9h30
+      end_time: 17h00
+      location: online
 main_instructor: Sangeetha Nandakumar
 assistants:
     - Oliver Barndstedt
 github_repo: https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro_to_calcium_imaging
 summary: CaImAn is a popular Python package for processing and extracting calcium imaging data. In this workshop, we’ll use Python and CaImAn to perform basic image operations, understand some techniques behind calcium imaging analysis, and run calcium imaging analyses.
 registration_link: https://us02web.zoom.us/meeting/register/tZYuduiqqT0iHtcRAQa9i94dZnrVIfjw0OLc#/registration
-format: online
+format: Online on Zoom, Hands-On Course.
 class_size: 25
 preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
 certificate_criteria: | 
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
+prerequisites: Some Prior Experience with Matlab, Python, or R
+duration: 15 hrs over 2.5 days
 ---
 
 ## Intro to Calcium Imaging Analysis with Python and CaImAn
@@ -24,18 +39,19 @@ In this workshop, we will first explore the concepts behind the pre-processing a
 By the end of the workshop, we will be able use Python to perform basic image operations, gain a better understanding of some techniques that go behind calcium imaging analysis, and become more confident customizing the wide variety of options in CaImAn to suit our calcium imaging data.
 
 
-**Prerequisites:** Some Prior Experience with Matlab, Python, or R
+**Prerequisites:** {{ page.prerequisites }} 
 
-**Duration:** 15 hrs over 2.5 days
+**Duration:** {{ page.duration }}
 
 **Dates (Times):**
 
-- 28.02.2024, 14h00-17h00
-- 29.02.2024, 9h30-17h00
-- 01.03.2024, 9h30-17h00
+{% for session in page.sessions %}
+- {{ session.date }}, {{ session.start_time }}-{{ session.end_time}} ({{ session.location }})
+{% endfor %}
 
-**Workshop Format:** Online on Zoom, Hands-On Course. 25 Participants Max.
 
-**Workshop Preparation:** Software installation instructions will be sent before the start of the course.
+**Workshop Format:** {{ page.format }} {{ page.class_size }} Participants Max.
 
-At the end of the course, participants who attend at least 80% of the course certificates of participation.
+**Workshop Preparation:** {{ page.preparation_instructions }}
+
+{{ page.certificate_criteria }}

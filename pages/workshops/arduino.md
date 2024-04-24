@@ -1,6 +1,20 @@
 title: Fundamental Programming Skills for Experimental Science with Arduino
 hours: 15
 date: 2023-02-19
+sessions:
+    - date: 19.02.2024
+      start_time: 9h30
+      end_time: 17h00 
+      location: online
+    - date: 20.02.2024
+      start_time: 9h30
+      end_time: 17h00
+      location: online
+    - date: 21.02.2024
+      start_time: 10h00
+      end_time: 16h00 
+      location: In-Person at Our Makerspace at the Life & Brain in Uniklinikum Bonn
+duration: 20 hrs over 3 days
 main_instructor: Nicholas Del Grosso
 assistants:
     - Benjamin Escribano
@@ -9,6 +23,7 @@ summary: The easy-to-learn Arduino ecosystem offers a fantastic opportunity to s
 registration_link: https://us02web.zoom.us/meeting/register/tZcudOmrqzwuHtdRkRA_pZ5LFb1FGOaHZObz
 format: hybrid (2 Days online and 1 Day in-person in Bonn's UKB Campus)
 class_size: 25
+prerequisites: Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with previous coding experience in any language such as Matlab, Python, or R.
 preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
 certificate_criteria: | 
@@ -25,18 +40,18 @@ In this three-day workshop, we will learn how to write clearly-structured and ea
 
 By the end of this workshop, you will be able to build your own Arduino sensors, expanding your experimental data collection opportunities and connecting with the open-source maker world in science!
 
-**Prerequisites:** Neuroscience Researchers at any level (Masters, PhD Candidate, Postdoc, PI) with previous coding experience in any language such as Matlab, Python, or R.
+**Prerequisites:** {{ page.prerequisites }}
 
-**Duration:** 20 hrs over 3 days
+**Duration:** {{ page.duration }}
 
 **Dates (Times):**
 
-- 19.02.2024, 9h30-17h00 (Online)
-- 20.02.2024, 9h30-17h00 (Online)
-- 21.02.2024, 10h00-16h00 (In-Person at Our Makerspace at the Life & Brain in Uniklinikum Bonn)
+{% for session in page.sessions %}
+- {{ session.date }}, {{ session.start_time }}-{{ session.end_time}} ({{ session.location }})
+{% endfor %}
 
-**Workshop Format:** Online on Zoom, with in-person component on last day. Hands-On Course. 
+**Workshop Format:** {{ page.format }}
 
-**Workshop Preparation:** Software installation instructions will be sent before the start of the course.
+**Workshop Preparation:** {{ page.preparation_instructions }} 
 
-At the end of the course, participants who attend at least 80% of the course will receive certificates of participation.
+{{ page.certificate_criteria }}

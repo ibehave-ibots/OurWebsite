@@ -14,7 +14,6 @@ past:
       email: {{ person.email }}
     {% endif %}
     {% endfor %}
-
 other:
     {% for person in data.people.values() %}
     {% if person.role == "other" %}
