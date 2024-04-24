@@ -13,7 +13,7 @@ from .pages import find_pages, render_content_to_html, get_page_collection, rend
 
 
 def run_render_pipeline():
-
+    copydir(src="./static", target="./output/static")
     renderer = JinjaRenderer.from_path(
         templates_dir='./templates', 
         filters={
@@ -62,7 +62,7 @@ def run_render_pipeline():
         page_html = renderer.render_named_template(template_name=template_name, **html_data)        
         write_text(base_dir='./output', file_path=rel_output_path, text=page_html)
 
-    copydir(src="./static", target="./output/static")
+    
 
 
 
