@@ -1,24 +1,23 @@
 title: Intro to Data Analysis with Python and Pandas
 hours: 15
-date: 2023-11-17
 sessions:
-    - date: 11.13.2023
+    - date: 2023-11-13
       start_time: 9h00
       end_time: 12h30
       location: online
-    - date: 11.14.2023
+    - date: 2023-11-14
       start_time: 9h00
       end_time: 12h30
       location: online
-    - date: 11.15.2023
+    - date: 2023-11-15
       start_time: 9h00
       end_time: 12h30
       location: online
-    - date: 11.16.2023
+    - date: 2023-11-16
       start_time: 9h00
       end_time: 12h30
       location: online
-    - date: 11.17.2023
+    - date: 2023-11-17
       start_time: 9h00
       end_time: 12h30
       location: online

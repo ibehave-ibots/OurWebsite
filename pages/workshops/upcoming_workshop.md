@@ -1,6 +1,10 @@
 title: Upcoming Workshop Test
 hours: 15
-date: 2028-02-19
+sessions:
+    - date: 2028-02-19
+      start_time: 9h30
+      end_time: 14:00
+      location: online
 instructors:
   - name: {{ data.people.nick.name }}
     role: instructor

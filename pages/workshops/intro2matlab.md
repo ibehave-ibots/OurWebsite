@@ -1,24 +1,23 @@
 title: Intro to Neuroscience Data Analysis with Matlab
 duration: 30
-date: 2023-11-27
 sessions: 
-    - date: 11.27.2023
+    - date: 2023-11-27
       start_time: 9h00
       end_time: 16h00
       location: online
-    - date: 11.28.2023
+    - date: 2023-11-28
       start_time: 9h00
       end_time: 16h00
       location: online
-    - date: 11.29.2023
+    - date: 2023-11-29
       start_time: 9h00
       end_time: 16h00
       location: online
-    - date: 11.30.2023
+    - date: 2023-11-30
       start_time: 9h00
       end_time: 16h00
       location: online
-    - date: 12.01.2023
+    - date: 2023-12-01
       start_time: 9h00
       end_time: 16h00
       location: online

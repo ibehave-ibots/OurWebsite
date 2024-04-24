@@ -31,9 +31,9 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
 ## Upcoming Workshops
 
 {% for name, workshop in pages.workshops.items() %}
-  {% if workshop.date >= today %}
+  {% if workshop.sessions[0].date >= today %}
 ### [**{{ workshop.title }}**]({{ name }}.html)
-  - Start Date: {{ workshop.date }}
+  - Start Date: {{ workshop.sessions[0].date }}
   - Instructor: {{ workshop.main_instructor }}
   - Duration: {{ workshop.hours }} Hours
   - Registration Link: [{{ workshop.registration_link }}]({{ workshop.registration_link }})
@@ -53,9 +53,9 @@ Morbi iaculis tincidunt convallis. Curabitur et diam convallis justo porttitor d
 
 
 {% for name, workshop in pages.workshops.items() %}
-  {% if workshop.date < today %}
+  {% if workshop.sessions[0].date < today %}
 ### [**{{ workshop.title }}**]({{ name }}.html)
-  - Start Date: {{ workshop.date }}
+  - Start Date: {{ workshop.sessions[0].date }}
   - Instructor: {{ workshop.main_instructor }}
   - Duration: {{ workshop.hours }} Hours
 {% if workshop.assistants %}

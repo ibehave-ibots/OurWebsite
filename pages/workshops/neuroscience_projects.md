@@ -1,6 +1,18 @@
 title: Developing Neuroscience Data Analysis Projects with Python, Git, and Snakemake
 hours: 15
-date: 2024-02-26
+sessions:
+    - date: 2024-02-26
+      start_time: 9h30
+      end_time: 17h00
+      location: online
+    - date: 2024-02-27
+      start_time: 9h30
+      end_time: 17h00
+      location: online
+    - date: 2024-02-28
+      start_time: 9h30
+      end_time: 12h30
+      location: online
 trainers:
   - name: {{ data.people.mohammad.name }}
     role: instructor
@@ -38,9 +50,7 @@ By the end of this workshop, you'll be able to develop and manage complex data a
 
 **Dates (Times):**
 
-- 26.02.2024, 9h30-17h00
-- 27.02.2024, 9h30-17h00
-- 28.02.2024, 9h30-12h30
+
 
 **Workshop Format:** Online on Zoom, Hands-On Course.
 

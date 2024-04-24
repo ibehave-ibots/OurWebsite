@@ -1,17 +1,15 @@
 title: Intro to Calcium Imaging Analysis with Python and CaImAn
-duration: 15 hrs over 2.5 days
-
-date: 2023-02-28
+hours: 15
 sessions:
-    - date: 28.02.2024
+    - date: 2024-02-28
       start_time: 14h00
       end_time: 17h00
       location: online
-    - date: 29.02.2024
+    - date: 2024-02-29
       start_time: 9h30
       end_time: 17h00
       location: online
-    - date: 01.03.2024
+    - date: 2024-03-01
       start_time: 9h30
       end_time: 17h00
       location: online

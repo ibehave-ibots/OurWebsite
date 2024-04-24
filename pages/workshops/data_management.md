@@ -1,12 +1,11 @@
 title: Intro to File- and Database-oriented Neuroscience Data Management With Python, SQL, and HDF5
-duration: 15 hrs
-date: 2023-02-22
+hours: 15
 sessions:
-- date: 22.02.2024
+- date: 2024-02-22
   start_time: 9h30
   end_time: 17h00
   location: online
-- date: 23.02.2024
+- date: 2024-02-23
   start_time: 9h30
   end_time: 17h00
   location: online

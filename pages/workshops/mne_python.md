@@ -1,16 +1,15 @@
 title: Intro to (M)EEG Analysis with MNE-Python
 duration: 15
-date: 2024-02-07
 sessions:
-    - date: 07.02.2024
+    - date: 2024-07-02
       start_time: 14h00
       end_time: 17h00
       location: online
-    - date: 08.02.2024
+    - date: 2024-08-02
       start_time: 9h30
       end_time: 17h00
       location: online
-    - date: 09.02.2024
+    - date: 2024-09-02
       start_time: 9h30
       end_time: 17h00
       location: online

@@ -1,24 +1,23 @@
 title: Intro to Python and Pandas for Neuroscientists
 hours: 22
-date: 2023-11-10
 sessions:
-  - date: 11.06.2023
+  - date: 2023-11-06
     start_time: 09h00
     end_time: 12h30
     location: online
-  - date: 11.07.2023
+  - date: 2023-11-07
     start_time: 09h00
     end_time: 12h30
     location: online
-  - date: 11.08.2023
+  - date: 2023-11-08
     start_time: 09h00
     end_time: 12h30
     location: online
-  - date: 11.09.2023
+  - date: 2023-11-09
     start_time: 09h00
     end_time: 12h30
     location: online
-  - date: 11.10.2023
+  - date: 2023-11-10
     start_time: 09h00
     end_time: 12h30
     location: online

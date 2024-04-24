@@ -1,20 +1,18 @@
 title: Fundamental Programming Skills for Experimental Science with Arduino
 hours: 15
-date: 2023-02-19
 sessions:
-    - date: 19.02.2024
+    - date: 2024-02-19
       start_time: 9h30
       end_time: 17h00 
       location: online
-    - date: 20.02.2024
+    - date: 2024-02-20
       start_time: 9h30
       end_time: 17h00
       location: online
-    - date: 21.02.2024
+    - date: 2024-02-21
       start_time: 10h00
       end_time: 16h00 
       location: In-Person at Our Makerspace at the Life & Brain in Uniklinikum Bonn
-duration: 20 hrs over 3 days
 instructors:
     - name: {{ data.people.nick.name }}
       role: instructor
