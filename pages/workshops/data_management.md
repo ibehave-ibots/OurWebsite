@@ -24,7 +24,7 @@ certificate_criteria: |
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
 ---
 
-## Intro to File- and Database-oriented Neuroscience Data Management With Python, SQL, and HDF5
+## {{ page.title }}
 
 Neuroscience is evolving rapidly, with experimental data becoming increasingly complex. How can you seamlessly integrate vast and diverse datasets for insightful analysis and easy sharing? And how would your process improve if, instead of having to write long scripts, you could analyze data with just a few lines of code?
 

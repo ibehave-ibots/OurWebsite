@@ -47,7 +47,7 @@ certificate_criteria: |
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
 --- 
 
-##  Intro to Neuroscience Data Analysis with Matlab
+## {{ page.title }}
 
 In this hands-on workshop, we will explore Matlab ecosystem, with applications to data analysis from the world of neuroscience.
 

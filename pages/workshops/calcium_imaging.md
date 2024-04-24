@@ -32,7 +32,7 @@ certificate_criteria: |
 prerequisites: Some Prior Experience with Matlab, Python, or R
 ---
 
-## Intro to Calcium Imaging Analysis with Python and CaImAn
+## {{ page.title }}
 
 Calcium imaging is a popular and powerful technique for probing the activity of individual neurons with unprecedented detail. To process and extract these neuronal signals, Python has a wide ecosystem of tools, including CaImAn, a popular workflow package for analyzing calcium imaging data. From image de-noising and artefact reduction to cell segmentation and neuronal signal source extraction, CaImAn will help in getting more control over the quality and efficiency of processing and analysis. 
 
