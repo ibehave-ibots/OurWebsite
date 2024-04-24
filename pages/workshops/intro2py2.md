@@ -1,6 +1,27 @@
 title: Intro to Data Analysis with Python and Pandas
 hours: 15
 date: 2023-11-17
+sessions:
+    - date: 11.13.2023
+      start_time: 9h00
+      end_time: 12h30
+      location: online
+    - date: 11.14.2023
+      start_time: 9h00
+      end_time: 12h30
+      location: online
+    - date: 11.15.2023
+      start_time: 9h00
+      end_time: 12h30
+      location: online
+    - date: 11.16.2023
+      start_time: 9h00
+      end_time: 12h30
+      location: online
+    - date: 11.17.2023
+      start_time: 9h00
+      end_time: 12h30
+      location: online
 main_instructor: Sangeetha Nandakumar
 assistants:
     - Ben Hastings
@@ -27,15 +48,12 @@ At the end of each session, interactive Jupyter notebooks that explore the tools
 
 **Workshop Dates:**
 
-- Nov. 13, 2023: 9:00-12:30
-- Nov. 14, 2023: 9:00-12:30
-- Nov. 15, 2023: 9:00-12:30
-- Nov. 16, 2023: 9:00-12:30
-- Nov. 17, 2023: 9:00-12:30
-
+{% for session in page.sessions %}
+- {{ session.date }}, {{ session.start_time }}-{{ session.end_time}} ({{ session.location }})
+{% endfor %}
 
 **Assessment & Credits:**
 
 - No exams
-- Get a certificate (80% attendance)
-- 22 hours of coursework, equivalent to 0.75 ECTS credit
+- {{ page.certificate_criteria }}
+- {{ page.duration }} hours
