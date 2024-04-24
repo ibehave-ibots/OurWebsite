@@ -44,23 +44,6 @@ In this three-day workshop, we will learn how to write clearly-structured and ea
 
 By the end of this workshop, you will be able to build your own Arduino sensors, expanding your experimental data collection opportunities and connecting with the open-source maker world in science!
 
-**Trainers**
-
-{% for person in page.instructors %}
-  - {{ person.name }}: {{ person.role }}
-{% endfor %}
-
-**Prerequisites:** {{ page.prerequisites }}
-
-**Duration:** {{ page.duration }}
-
-**Dates (Times):**
-
-{% for session in page.sessions %}
-- {{ session.date }}, {{ session.start_time }}-{{ session.end_time}} ({{ session.location }})
-{% endfor %}
-
-**Workshop Format:** {{ page.format }}
 
 **Workshop Preparation:** {{ page.preparation_instructions }} 
 
