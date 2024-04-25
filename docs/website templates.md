@@ -9,7 +9,8 @@
 
 **Links to Components from CSS Frameworks**
 
-[All Bootstrap CSS Classes](https://www.w3schools.com/bootstrap/bootstrap_ref_all_classes.asp)
+[All Bootstrap CSS Classes: Run Examples](https://www.w3schools.com/bootstrap/bootstrap_ref_all_classes.asp)
+
 
 - [Bootstrap Navigation Bar](https://getbootstrap.com/docs/4.0/components/navbar/)
 - [Bootstrap Navigation Bar Toggler](https://getbootstrap.com/docs/4.0/components/navbar/#responsive-behaviors)
