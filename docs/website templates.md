@@ -28,3 +28,13 @@ Observations
 1. Navigation bar page has drop down feature on mouse hover
 2. Navigation bar is fixed when you scroll (always visible)
 
+
+## https://www.w3schools.com/w3css/tryw3css_templates_clothing_store.htm
+
+Observations
+1. Navigation column
+2. Sub-menus can be accessed with dropdown
+
+Components
+1. Sidebar
+2. Stylesheet: https://www.w3schools.com/w3css/4/w3.css
