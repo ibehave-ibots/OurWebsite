@@ -1,7 +1,17 @@
 # Templates
 
-CSS Modules
-https://purecss.io/layouts/
+CSS Frameworks
+- [Bootstrap Navigation Bar](https://getbootstrap.com/docs/4.0/components/navbar/)
+- [Bootstrap Navigation Bar Toggler](https://getbootstrap.com/docs/4.0/components/navbar/#responsive-behaviors)
+- [Bootstrap Fixed Navigation Bar](https://getbootstrap.com/docs/4.0/components/navbar/#placement)
+- [Pure](https://purecss.io/layouts/)
+
+
+## https://preview.keenthemes.com/jango/
+
+Observations
+1. Fixed horizontal navigation bar
+2. Pages dropdown on mouse hover
 
 ## https://html5up.net/hyperspace
 
