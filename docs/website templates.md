@@ -1,11 +1,21 @@
 # Templates
 
-CSS Frameworks
+**Main Components**
+- Navigation bar
+    - Fixed
+    - Toggles sub menus
+        - Dropdown button
+- Content
+
+**Links to Components from CSS Frameworks**
 - [Bootstrap Navigation Bar](https://getbootstrap.com/docs/4.0/components/navbar/)
 - [Bootstrap Navigation Bar Toggler](https://getbootstrap.com/docs/4.0/components/navbar/#responsive-behaviors)
 - [Bootstrap Fixed Navigation Bar](https://getbootstrap.com/docs/4.0/components/navbar/#placement)
+- [Bootstrap Dropdown Button](https://getbootstrap.com/docs/4.0/components/dropdowns/)
 - [Pure](https://purecss.io/layouts/)
 
+---
+---
 
 ## https://preview.keenthemes.com/jango/
 
