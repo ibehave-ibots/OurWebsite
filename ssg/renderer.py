@@ -41,7 +41,7 @@ def run_render_pipeline():
 
     ## Render Each Page to HTML and write to './output'
 
-    site_data = extract_global_data(base_path='./templates/data') # get data just used for the website, shouldn't be used in pages files
+    site_data = extract_global_data(base_path='./templates/site') # get data just used for the website, shouldn't be used in pages files
 
     for page_path in find_pages('./pages'):
         
