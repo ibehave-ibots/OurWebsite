@@ -1,95 +1,41 @@
 
-
-
 <nav class="header bg-body-tertiary shadow-sm navbar navbar-expand-lg">
     <div class="container-fluid">
 
-      <a class="navbar-brand" href="/index.html"><img src="/static/images/ibots.png" alt="iBOTS Logo" width="50px"></a>
+        <!-- Logo -->
+        <a class="navbar-brand" href="/index.html"><img src="/static/images/ibots.png" alt="iBOTS Logo" width="50px"></a>
 
+      <!-- Show/Hide Button -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Home -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
-            </li>
 
-            <!-- Link -->
-            <li class="nav-item">
-            <a class="nav-link" href="/consulting.html">Consulting</a>
-            </li>
+          <!-- Menu Items -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              
+              {% for header in site.navbar.menu %}
+                  {% if not header.children %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ header.url }}">{{ header.title }}</a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ header.title }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for item in header.children %}
+                            <li><a class="dropdown-item" href="{{ item.url }}">{{ item.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                  {% endif %}
+              {% endfor %}        
 
-          
-
-            <!-- Workshops -->
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Workshops
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/workshops">Workshops Overview</a></li>
-                <li><a class="dropdown-item" href="/workshops/#upcoming-workshops">Upcoming Workshops</a></li>
-                <li><a class="dropdown-item" href="/workshops/#past-workshops">Past Workshops</a></li>
-            </ul>
-            </li>
-
-
-            <!-- Learning Resources -->
-            <li class="nav-item">
-                <a class="nav-link" href="/learning_resources.html">Learning Resources</a>
-            </li>
-
-            <!-- Networking -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Networking
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/networking.html">Overview</a></li>
-                    <li><a class="dropdown-item" href="/networking.html#clubs">Clubs</a></li>
-                    <li><a class="dropdown-item" href="/networking.html#conferences">Conferences</a></li>
-                    <li><a class="dropdown-item" href="/networking.html#seminars">iBehave Seminars</a></li>
-                </ul>
-                </li>
-    
-            <!-- Workshops -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Organizations
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/organizations.html#partners">Partners</a></li>
-                    <li><a class="dropdown-item" href="/organizations.html#sponsors">Sponsors</a></li>
-                </ul>
-            </li>
-
-            <!-- About Us -->
-            <li class="nav-item">
-                <a class="nav-link" href="/about_us.html">About Us</a>
-            </li>
-
-            <!-- Contact Us -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Contact Us
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/contact_us.html#contact-details">Contact Details</a></li>
-                    <li><a class="dropdown-item" href="/contact_us.html#mailing-list">Mailing List</a></li>
-                    <li><a class="dropdown-item" href="/contact_us.html#ibots-team">Team Members</a></li>
-                </ul>
-            </li>
-        
-            
-        </ul>
-
-        
-
-        <!-- Book a Section -->
-        <a href="/consulting.html#book-a-session" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
-            Book a Consultant
+        <!-- Call to Action -->
+        <a href="{{ site.navbar.call_to_action.url }}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+            {{ site.navbar.call_to_action.title }} 
         </a>
       </div>
     </div>

@@ -9,97 +9,86 @@
 <body>
     <header>
 
-
-
 <nav class="header bg-body-tertiary shadow-sm navbar navbar-expand-lg">
     <div class="container-fluid">
 
-      <a class="navbar-brand" href="/index.html"><img src="/static/images/ibots.png" alt="iBOTS Logo" width="50px"></a>
+        <!-- Logo -->
+        <a class="navbar-brand" href="/index.html"><img src="/static/images/ibots.png" alt="iBOTS Logo" width="50px"></a>
 
+      <!-- Show/Hide Button -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Home -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
-            </li>
 
-            <!-- Link -->
-            <li class="nav-item">
-            <a class="nav-link" href="/consulting.html">Consulting</a>
-            </li>
-
-          
-
-            <!-- Workshops -->
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Workshops
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/workshops">Workshops Overview</a></li>
-                <li><a class="dropdown-item" href="/workshops/#upcoming-workshops">Upcoming Workshops</a></li>
-                <li><a class="dropdown-item" href="/workshops/#past-workshops">Past Workshops</a></li>
-            </ul>
-            </li>
-
-
-            <!-- Learning Resources -->
-            <li class="nav-item">
-                <a class="nav-link" href="/learning_resources.html">Learning Resources</a>
-            </li>
-
-            <!-- Networking -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Networking
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/networking.html">Overview</a></li>
-                    <li><a class="dropdown-item" href="/networking.html#clubs">Clubs</a></li>
-                    <li><a class="dropdown-item" href="/networking.html#conferences">Conferences</a></li>
-                    <li><a class="dropdown-item" href="/networking.html#seminars">iBehave Seminars</a></li>
-                </ul>
-                </li>
-    
-            <!-- Workshops -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Organizations
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/organizations.html#partners">Partners</a></li>
-                    <li><a class="dropdown-item" href="/organizations.html#sponsors">Sponsors</a></li>
-                </ul>
-            </li>
-
-            <!-- About Us -->
-            <li class="nav-item">
-                <a class="nav-link" href="/about_us.html">About Us</a>
-            </li>
-
-            <!-- Contact Us -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Contact Us
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/contact_us.html#contact-details">Contact Details</a></li>
-                    <li><a class="dropdown-item" href="/contact_us.html#mailing-list">Mailing List</a></li>
-                    <li><a class="dropdown-item" href="/contact_us.html#ibots-team">Team Members</a></li>
-                </ul>
-            </li>
-        
-            
-        </ul>
-
+          <!-- Menu Items -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Consulting
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/consulting.html">Description</a></li>
+                            <li><a class="dropdown-item" href="/consulting.html#book-a-session">Book a Session</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Workshops
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/workshops">Overview</a></li>
+                            <li><a class="dropdown-item" href="/workshops#upcoming-workshops">Upcoming Workshops</a></li>
+                            <li><a class="dropdown-item" href="/workshops#past-workshops">Past Workshops</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/learning_resources.html">Learning Resources</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Networking
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/networking.html">Overview</a></li>
+                            <li><a class="dropdown-item" href="/networking.html#clubs">Clubs</a></li>
+                            <li><a class="dropdown-item" href="/networking.html#conferences">Conferences</a></li>
+                            <li><a class="dropdown-item" href="/networking.html#seminars">iBehave Seminars</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Organizations
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/organizations.html">Overview</a></li>
+                            <li><a class="dropdown-item" href="/organizations.html#partners">Partners</a></li>
+                            <li><a class="dropdown-item" href="/organizations.html#sponsors">Sponsors</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/about_us.html">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Contact Us
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/contact_us.html">Overview</a></li>
+                            <li><a class="dropdown-item" href="/contact_us.html#contact-details">Contact Details</a></li>
+                            <li><a class="dropdown-item" href="/contact_us.html#mailing-list">Mailing List</a></li>
+                            <li><a class="dropdown-item" href="/contact_us.html#ibots-team">Team Members</a></li>
+                        </ul>
+                    </li>
         
 
-        <!-- Book a Section -->
+        <!-- Call to Action -->
         <a href="/consulting.html#book-a-session" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
-            Book a Consultant
+            Book a Consultant 
         </a>
       </div>
     </div>

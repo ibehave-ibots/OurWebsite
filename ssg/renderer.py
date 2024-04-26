@@ -40,6 +40,9 @@ def run_render_pipeline():
     pages_data = dict(pages_data)
 
     ## Render Each Page to HTML and write to './output'
+
+    site_data = extract_global_data(base_path='./site_data') # get data just used for the website, shouldn't be used in pages files
+
     for page_path in find_pages('./pages'):
         
         frontmatter_data = {'data': global_data}
@@ -55,6 +58,7 @@ def run_render_pipeline():
         
         html_data = {
             'data': global_data,
+            'site': site_data,
             'content': content_html,
             'page': page_data,
             'pages': pages_data

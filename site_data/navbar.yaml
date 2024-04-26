@@ -1,0 +1,59 @@
+call_to_action:
+  title: Book a Consultant
+  url: /consulting.html#book-a-session
+menu:
+  - title: Home
+    url: /index.html
+
+  - title: Consulting
+    children:
+      - title: Description
+        url: /consulting.html
+      - title: Book a Session
+        url: /consulting.html#book-a-session
+
+  - title: Workshops
+    children:
+      - title: Overview
+        url: /workshops
+      - title: Upcoming Workshops
+        url: /workshops#upcoming-workshops
+      - title: Past Workshops
+        url: /workshops#past-workshops
+
+  - title: Learning Resources
+    url: /learning_resources.html
+
+  - title: Networking  
+    children:
+      - title: Overview
+        url: /networking.html
+      - title: Clubs
+        url: /networking.html#clubs
+      - title: Conferences
+        url: /networking.html#conferences
+      - title: iBehave Seminars
+        url: /networking.html#seminars
+
+  - title: Organizations
+    children:
+      - title: Overview
+        url: /organizations.html
+      - title: Partners
+        url: /organizations.html#partners
+      - title: Sponsors
+        url: /organizations.html#sponsors
+
+  - title: About Us
+    url: /about_us.html
+
+  - title: Contact Us
+    children:
+      - title: Overview
+        url: /contact_us.html
+      - title: Contact Details
+        url: /contact_us.html#contact-details
+      - title: Mailing List
+        url: /contact_us.html#mailing-list
+      - title: Team Members
+        url: /contact_us.html#ibots-team
