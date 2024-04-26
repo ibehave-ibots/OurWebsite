@@ -59,8 +59,8 @@ def run_render_pipeline():
         html_data = {
             'data': global_data,
             'page': page_data,
-            'pages': pages_data,
             'content': content_html,
+            'pages': pages_data,
             'site': site_data,
         }
         page_html = renderer.render_named_template(template_name=template_name, **html_data)        
