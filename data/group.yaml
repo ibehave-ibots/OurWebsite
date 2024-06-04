@@ -12,10 +12,10 @@ milestones:
     summary: A lot more things happened! 
     icon: static\images\iBehave_Logo.png    
 consulting_stats:
-  num_consulting_sessions: 30
-  num_of_clients: 10
-  which_labs_have_used_ibots: 5
-  total_hours_consulting: 100
+  num_consulting_sessions: 119
+  num_of_clients: 29
+  which_labs_have_used_ibots: 12
+  total_hours_consulting: 191
 workshop_stats:
   num_workshops: 9
   num_of_students: 180

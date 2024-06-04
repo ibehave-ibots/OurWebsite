@@ -3,10 +3,10 @@ title: iBOTS Technology Consulting
 statistics:
     title: Statistics
     report:
-        labs_helped: 20
-        researchers_helped: 21
-        consulting_sessions: 22
-        consulting_hours: 220
+        labs_helped: {{ data.group.consulting_stats.which_labs_have_used_ibots }}
+        researchers_helped: {{ data.group.consulting_stats.num_of_clients }}
+        consulting_sessions: {{ data.group.consulting_stats.num_consulting_sessions }}
+        consulting_hours: {{ data.group.consulting_stats.total_hours_consulting }}
 session_booking:
     title: Book a Session
     description: |
