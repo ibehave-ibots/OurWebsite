@@ -11,6 +11,8 @@ dependencies:
       - PyYAML
       - Pillow
       - pytest
+      - webdav4
+      - fsspec
 
 
 
