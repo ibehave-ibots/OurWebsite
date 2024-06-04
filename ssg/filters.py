@@ -10,7 +10,7 @@ def redirect_path(prepend_path):
     """
     def decorator(fun):
         def wrapper(path, *args, **kwargs):
-            if path.startswith('/'):
+            if str(path).startswith('/'):
                 was_root = True
                 path = path[1:]
             else:

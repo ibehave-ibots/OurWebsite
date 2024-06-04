@@ -1,17 +1,33 @@
-from pathlib import Path, PurePosixPath
-import os
+from pathlib import Path
+import shutil
+from warnings import warn
 
 import yaml
-import shutil
 
 
 def rmdir(start_directory: Path):
     """Recursively and permanently removes the specified directory, all of its
     subdirectories, and every file contained in any of those folders."""
-    if not os.path.exists("output/static"):
+    
+    start_directory = Path(start_directory)
+    
+    if not start_directory.exists():
         return
-    linux_path = PurePosixPath(start_directory)
-    os.system(f"rm -Rf {linux_path}")
+
+    # walk through everything, deleting all the files
+    for path, dirnames, filenames in start_directory.walk(top_down=False):
+        for filename in filenames:
+            path.joinpath(filename).unlink()
+
+    # walk through everything again, deleting all the folders
+    for path, dirnames, filenames in start_directory.walk(top_down=False):
+        assert len(filenames) == 0 # all files should be already deleted.
+        try:
+            path.rmdir()
+        except PermissionError:
+            warn(f"permission denied for {str(path)}. Continuing anyway...")
+
+        
 
 
 def copydir(src: Path, target: Path) -> None:
