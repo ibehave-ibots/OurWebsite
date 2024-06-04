@@ -1,22 +1,23 @@
-mailing_list_subscribe_url: https://listen.uni-bonn.de/wws/subscribe/ibehave.ibots-news
-email: Nicholas.Grosso@ukbonn.de
-booking_link: booking@calendly.com
 address: Venusberg Campus 1
-milestones:
-  - date: 2023-01-01 
-    name: Milestone 1
-    summary: We did a lot of things on this day and it had positive impact on a lot of people.
-    icon: static\images\iBehave_Logo.png
-  - date: 2023-02-01 
-    name: Milestone 2
-    summary: A lot more things happened! 
-    icon: static\images\iBehave_Logo.png    
+booking_link: booking@calendly.com
 consulting_stats:
   num_consulting_sessions: 119
   num_of_clients: 29
-  which_labs_have_used_ibots: 12
   total_hours_consulting: 191
+  which_labs_have_used_ibots: 12
+email: Nicholas.Grosso@ukbonn.de
+mailing_list_subscribe_url: https://listen.uni-bonn.de/wws/subscribe/ibehave.ibots-news
+milestones:
+- date: 2023-01-01
+  icon: static\images\iBehave_Logo.png
+  name: Milestone 1
+  summary: We did a lot of things on this day and it had positive impact on a lot
+    of people.
+- date: 2023-02-01
+  icon: static\images\iBehave_Logo.png
+  name: Milestone 2
+  summary: A lot more things happened!
 workshop_stats:
-  num_workshops: 9
   num_of_students: 180
+  num_workshops: 9
   total_teaching_hours: 125
