@@ -1,0 +1,81 @@
+@import "../bootstrap-5.3.3/scss/bootstrap.scss";
+
+
+
+main {  
+    @extend .container;
+} 
+
+
+.ib-navbar {
+    // @extend .header;  // header wasn't found
+    @extend .bg-body-tertiary; 
+    @extend .shadow-sm;
+    @extend .navbar;
+    @extend .fixed-top;
+    @extend .navbar-expand-lg;
+
+    > div {
+        @extend .container-fluid;
+    }
+
+    &__brand {
+        @extend .navbar-brand;
+
+        > img {
+          width: 50px;  
+        };
+    }
+
+    &__items {
+        @extend .navbar-nav;
+        // @extend .me-auto;
+        // @extend .mb-2;
+        // @extend .mb-lg-0;
+        
+    }
+
+    &__single-item {
+        @extend .nav-item;
+
+        > a {
+            @extend .nav-link;
+        }
+    }
+
+    &__multi-item {
+        @extend .nav-item;
+        @extend .dropdown;
+
+        > a {
+            @extend .nav-link;
+            @extend .dropdown-toggle; 
+        }
+
+        > ul {
+            @extend .dropdown-menu;
+            
+            > li > a {
+                @extend .dropdown-item;
+            }
+        }
+    }
+
+    &__action-button {
+        @extend .btn;
+        @extend .btn-primary;
+        @extend .btn-sm;
+        // @extend .fs-sm;
+        @extend .rounded;
+        @extend .d-none;
+        @extend .d-lg-inline-flex;
+    }
+       
+}
+
+.ib-navbar__bottom_padding {
+    padding-top: 85px;
+}
+
+
+
