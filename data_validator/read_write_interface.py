@@ -32,7 +32,7 @@ class ConsultingSessionList(BaseModel):
         
         path.mkdir(parents=True, exist_ok=True)
         for session in self.sessions:
-            json_text = session.json()
+            json_text = session.model_dump_json()
             json_text_pretty = json.dumps(json.loads(json_text), indent=3)
             filename = session.name[:3] + session.consultant[:3] + session.date.strftime("%Y-%m-%d")
             path.joinpath(f'{filename}.json').write_text(json_text_pretty)
