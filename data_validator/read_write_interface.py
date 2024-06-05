@@ -31,7 +31,7 @@ class ConsultingSessionList(BaseModel):
             assert path.is_dir()
         
         path.mkdir(parents=True, exist_ok=True)
-        for session in enumerate(self.sessions):
+        for session in self.sessions:
             json_text = session.json()
             json_text_pretty = json.dumps(json.loads(json_text), indent=3)
             filename = session.name[:3] + session.consultant[:3] + session.date.strftime("%Y-%m-%d")
