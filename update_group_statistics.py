@@ -12,7 +12,8 @@ with open('data/group.yaml') as group_f:
     group = yaml.safe_load(group_f)
 
 fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(SANGEE_REPORT_USR, SANGEE_REPORT_PWD))
-print(fs.ls("/", detail=False))
+reports = fs.ls("/", detail=False)
+fs.download("/", ".", recursive=True)
 
 # with open('sangee_report.txt', 'r') as report:
 #     content = report.read()
