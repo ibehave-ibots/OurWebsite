@@ -2,11 +2,23 @@ import yaml
 from dotenv import load_dotenv
 import os
 from webdav4.fsspec import WebdavFileSystem
+from docx import Document
+from docx.oxml.ns import qn
 
 load_dotenv()
-
 SANGEE_REPORT_USR = os.getenv('SANGEE_REPORT_USR')
 SANGEE_REPORT_PWD = os.getenv('SANGEE_REPORT_PWD')
+
+def count_page_breaks(doc):
+    page_break_count = 0
+
+    for paragraph in doc.paragraphs:
+        for run in paragraph.runs:
+            if run._r.xpath('.//w:br[@w:type="page"]'):
+                page_break_count += 1
+
+    return page_break_count
+
 
 with open('data/group.yaml') as group_f:
     group = yaml.safe_load(group_f)
@@ -15,8 +27,10 @@ fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(SANG
 reports = fs.ls("/", detail=False)
 fs.download("/", ".", recursive=True)
 
-# with open('sangee_report.txt', 'r') as report:
-#     content = report.read()
+
+doc = Document('Sangee.docx.docx')
+page_break_count = count_page_breaks(doc)
+print(page_break_count)
 
 # num_short_chat = content.lower().count('type: short chat')
 # num_hands_on = content.lower().count('type: hands-on')
