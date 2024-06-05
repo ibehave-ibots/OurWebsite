@@ -1,13 +1,10 @@
+from pathlib import Path
 import yaml
-from dotenv import load_dotenv
-import os
-from webdav4.fsspec import WebdavFileSystem
+from scripts.data_downloader import download_data
 from docx import Document
 from docx.oxml.ns import qn
+from webdav4.fsspec import WebdavFileSystem
 
-load_dotenv()
-SANGEE_REPORT_USR = os.getenv('SANGEE_REPORT_USR')
-SANGEE_REPORT_PWD = os.getenv('SANGEE_REPORT_PWD')
 
 def count_page_breaks(doc, pattern='___'):
     page_break_count = 0
@@ -34,18 +31,18 @@ def count_page_breaks(doc, pattern='___'):
 
     return page_break_count, pages
 
-
 with open('../data/group.yaml') as group_f:
     group = yaml.safe_load(group_f)
 
-fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(SANGEE_REPORT_USR, SANGEE_REPORT_PWD))
-fs.download("/", "data_validator/raw_data", recursive=True)
-reports = fs.ls("/", detail=False)
+
+download_data()
+
+reports = [file for file in Path('raw_data/').iterdir() if file.is_file()]
 
 num_consulting_sessions = 0
 session_reports = []
 for report in reports:
-    doc = Document('data_validator/raw_data/' + report)
+    doc = Document(report)
     num_session, session_report = count_page_breaks(doc)
     num_consulting_sessions += num_session
     session_reports.extend(session_report)
