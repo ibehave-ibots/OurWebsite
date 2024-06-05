@@ -35,17 +35,17 @@ def count_page_breaks(doc, pattern='___'):
     return page_break_count, pages
 
 
-with open('data/group.yaml') as group_f:
+with open('../data/group.yaml') as group_f:
     group = yaml.safe_load(group_f)
 
 fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(SANGEE_REPORT_USR, SANGEE_REPORT_PWD))
+fs.download("/", "data_validator/raw_data", recursive=True)
 reports = fs.ls("/", detail=False)
-fs.download("/", ".", recursive=True)
 
 num_consulting_sessions = 0
 session_reports = []
 for report in reports:
-    doc = Document(report)
+    doc = Document('data_validator/raw_data/' + report)
     num_session, session_report = count_page_breaks(doc)
     num_consulting_sessions += num_session
     session_reports.extend(session_report)
@@ -61,7 +61,4 @@ for session_report in session_reports:
 total_hours_consulting = round(num_short_chat*0.75 + num_hands_on*2.5)
 group["consulting_stats"]["num_consulting_sessions"] = num_consulting_sessions
 group["consulting_stats"]["total_hours_consulting"] = total_hours_consulting
-
-with open('data/group.yaml', 'w') as update_group_f:
-    yaml.safe_dump(group, update_group_f, default_flow_style=False)
 
