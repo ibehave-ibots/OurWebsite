@@ -31,4 +31,3 @@ def test_get_method(results):
 
 def test_to_dict_method(results):
     assert results.to_dict()
-    
