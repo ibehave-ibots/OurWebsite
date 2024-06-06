@@ -1,12 +1,13 @@
+from docx import Document
+
+
 def count_page_breaks(doc, pattern='___'):
-    page_break_count = 0
     pages = []
     current_text = ""
 
     for paragraph in doc.paragraphs:
         for run in paragraph.runs:
             if run._r.xpath('.//w:br[@w:type="page"]'):
-                page_break_count += 1
                 if pattern in current_text:
                     pages.append(current_text.split(pattern)[0].strip())
                 else:
@@ -21,4 +22,13 @@ def count_page_breaks(doc, pattern='___'):
         else:
             pages.append(current_text.strip())
 
-    return page_break_count, pages
+    return pages
+
+def read_reports(reports):
+    session_reports = []
+    for report in reports:
+        doc = Document(report)
+        session_report = count_page_breaks(doc)
+        session_reports.extend(session_report)
+
+    return session_reports
