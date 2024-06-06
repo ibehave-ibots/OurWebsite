@@ -1,10 +1,10 @@
 
  
-<nav class="ib-navbar">
-    <div>
+<nav class="bg-body-tertiary shadow-sm navbar fixed-top navbar-expand-lg">
+    <div class="container-fluid">
 
         <!-- Logo -->
-        <a class="ib-navbar__brand" href="/index.html"><img src="/static/images/ibots.png" alt="iBOTS Logo"></a>
+        <a class="navbar-brand" href="/index.html"><img src="/static/images/ibots.png" alt="iBOTS Logo" width="50px"></a>
 
       <!-- Show/Hide Button ?? Is there a way to get this into the SASS file? -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,21 +14,21 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
           <!-- Menu Items -->
-          <ul class="ib-navbar__items">
+          <ul class="navbar-nav">
               
               {% for header in site.navbar.menu %}
                   {% if not header.children %}
-                    <li class="ib-navbar__single-item">
-                        <a aria-current="page" href="{{ header.url }}">{{ header.title }}</a>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ header.url }}">{{ header.title }}</a>
                     </li>
                   {% else %}
-                    <li class="ib-navbar__multi-item">  
-                        <a href="#" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li class="nav-item dropdown">  
+                        <a class="nav-link dropdown-toggle" href="#" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ header.title }}
                         </a>  
                         <ul class="dropdown-menu">
                             {% for item in header.children %}
-                            <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+                            <li><a class="dropdown-item" href="{{ item.url }}">{{ item.title }}</a></li>
                             {% endfor %}
                         </ul>
                     </li> 
@@ -36,7 +36,7 @@
               {% endfor %}        
 
         <!-- Call to Action -->
-        <a href="{{ site.navbar.call_to_action.url }}" class="ib-navbar__action-button" target="_blank" rel="noopener">
+        <a class="btn btn-primary btn-sm rounded d-none d-lg-inline-flex" href="{{ site.navbar.call_to_action.url }}" target="_blank" rel="noopener">
             {{ site.navbar.call_to_action.title }} 
         </a>
       </div>
@@ -44,5 +44,5 @@
 </nav>
 
 <!-- Padding for fixed navbar -->
-<div class="ib-navbar__bottom_padding"></div>
+<div style="padding-top: 85px;"></div>
 
