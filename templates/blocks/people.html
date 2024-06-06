@@ -1,0 +1,40 @@
+
+{% macro person_card(name, position, email, booking_url) %}
+<div class="card card-body card-hover bg-light border-0 text-center">
+    <img src="https://placehold.co/200x200" class="d-block rounded-circle mx-auto mb-3" width="162" alt="{{ name }}">
+    <h5 class="fw-medium fs-lg mb-1"> {{ name }}</h5>
+    <p class="fs-sm mb-3"> {{ position }} </p>
+    <div class="d-flex justify-content-center">
+        <a href="#" class="btn btn-icon btn-outline-secondary btn-facebook btn-sm me-2" aria-label="Facebook">
+            <i class="bx bxl-facebook"></i>
+        </a>
+        <a href="#" class="btn btn-icon btn-outline-secondary btn-dribbble btn-sm me-2" aria-label="Dribbble">
+            <i class="bx bxl-dribbble"></i>
+        </a>
+        <a href="#" class="btn btn-icon btn-outline-secondary btn-linkedin btn-sm" aria-label="LinkedIn">
+            <i class="bx bxl-linkedin"></i>
+        </a>
+    </div>
+</div>
+
+
+{% endmacro %}
+
+{% macro people_grid(people) %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 pb-lg-2 pb-xl-3">
+    {% for person in people %}
+    <div class="col">
+        <div class="position-relative">
+            {{ person_card(
+                name=person.name, 
+                position="Research Software Consultant", 
+                email=person.email, 
+                booking_url=person.booking_url,
+                )
+            }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endmacro %}
