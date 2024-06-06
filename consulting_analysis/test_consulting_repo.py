@@ -28,3 +28,7 @@ def test_get_method(results):
     assert results.get('a_b')
     assert not results.get('a_z')
     assert results.get('a_b').name == 'A B'
+
+def test_to_dict_method(results):
+    assert results.to_dict()
+    

@@ -85,8 +85,14 @@ class ConsultingResultRepo:
                 )
     
     def to_dict(self) -> Dict[Any, Any]:
-        return self._asdict()
-    
+        return {
+            'short_name': [result.short_name for result in self._consulting_results],
+            'name': [result.name for result in self._consulting_results],
+            'value': [result.value for result in self._consulting_results],
+            'units': [result.units for result in self._consulting_results],
+            'display_units': [result.display_units for result in self._consulting_results],
+        }
+        
     def save(self):
         path = Path(self.path)
         if path.exists():
