@@ -1,0 +1,38 @@
+
+{% macro course_card(title, registration_url, instructor, start_date, duration, registration_open = True, img_src="https://placehold.co/600x400") -%}
+<div class="col pb-1 pb-lg-3 mb-4">
+    <article class="card h-100 border-0 shadow-sm">
+        <div class="position-relative">
+            <a href="{{ registration_url }}" class="d-block position-absolute w-100 h-100 top-0 start-0" aria-label="Course link"></a>
+            {% if registration_open %}
+            <span class="badge bg-success position-absolute top-0 start-0 zindex-2 mt-3 ms-3">
+                Registration Open
+            </span>
+            {% endif %}
+            <a href="#" class="btn btn-icon btn-light bg-white border-white btn-sm rounded-circle position-absolute top-0 end-0 zindex-2 me-3 mt-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Save to Favorites" aria-label="Save to Favorites">
+                <i class="bx bx-bookmark"></i>
+            </a>
+            <img src="{{img_src}}" class="card-img-top" alt="Image">
+        </div>
+        <div class="card-body pb-3">
+            <h1 class="h5 mb-2">
+                <a href="{{ registration_url }}">
+                    {{ title }}
+                </a>
+            </h1>
+            <p class="fs-sm mb-2">
+                By {{ instructor }}
+            </p>
+            <p class="fs-lg fw-semibold tet-primary mb-0">
+                {{ start_date}}
+            </p>
+        </div>
+        <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
+            <div class="d-flex align-items-center me-4">
+                <i class="bx bx-time fs-xl me-1"></i>
+                {{ duration }} Hours
+            </div>
+        </div>
+    </article>
+</div>
+{%- endmacro %}

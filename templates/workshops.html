@@ -1,3 +1,4 @@
+{% from 'blocks/course_card.html' import course_card %}
 {% extends "blocks/base.html" %}
 
 {% block title %}  Workshops {% endblock %}
@@ -10,64 +11,56 @@
     <h1>Subscribe for Announcements</h1>
     <p>To get announcements of upcoming workshops and be the first to register for them, [Join Our Mailing List]({{ page.mailing_list_link }})</p>
   </section>
-
+  
   <section>
-  {{ content | safe }}
+    {{ content | safe }}
   </section>
   
+  
   <section id="upcoming-workshops">
+    
     <h1>Upcoming Workshops</h1>  
-    {% for wshop in page.upcoming_workshops %}
-    <article>
-      <h1>{{ wshop.title }} </h1>
-      <dl>
-            <dt>Start Date</dt>
-            <dd>{{ wshop.start_date }}</dd>
-
-            <dt>Instructor</dt>
-            <dd>{{ wshop.instructor }}</dd>
-
-            <dt>Duration</dt>
-            <dd>{{ wshop.duration }} Hours</dd>
-
-            <p><a href="{{ wshop.registration_link }}"><strong>Register Now!</strong></a></p>
-      </dl>
-            <!-- {{ page.upcoming_workshops }} -->
-    </article>
-    {% endfor %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-3 gx-md-4 mt-n2 mt-sm-0">
+      {% for wshop in page.upcoming_workshops %}
+      {{ course_card(
+        title = wshop.title, 
+        registration_url = wshop.registration_link, 
+        instructor = wshop.instructor, 
+        start_date = wshop.start_date, 
+        duration = wshop.duration, 
+        registration_open = True, 
+        img_src="https://placehold.co/600x400") 
+      }}
+      {% endfor %}
+    </div>
   </section>
   
   <section id="past-workshops">
     <h1>Past Workshops</h1>
-    {% for wshop in page.past_workshops %}
-    <article>
-      <h1><a href="{{ wshop.id }}.html">{{ wshop.title }}</a> </h1>
-      <dl>
-          <dt>Start Date</dt>
-          <dd>{{ wshop.start_date }}</dd>
-
-          <dt>Instructor</dt>
-          <dd>{{ wshop.instructor }}</dd>
-
-          <dt>Duration</dt>
-          <dd>{{ wshop.duration }} Hours</dd>
-
-          <p><a href="{{ wshop.registration_link }}"><strong>Register Now!</strong></a></p>
-      </dl>
-        <!-- {{ page.upcoming_workshops }} -->
-    </article>
-    {% endfor %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-3 gx-md-4 mt-n2 mt-sm-0">
+      {% for wshop in page.past_workshops %}
+      {{ course_card(
+        title = wshop.title, 
+        registration_url = wshop.registration_link, 
+        instructor = wshop.instructor, 
+        start_date = wshop.start_date, 
+        duration = wshop.duration, 
+        registration_open = False, 
+        img_src="https://placehold.co/600x400") 
+      }}
+      {% endfor %}
+    </div>
   </section>
   
   
   <section>
     <h1>Statistics</h1>
     <ul>
-    {% for stat in page.statistics %}
+      {% for stat in page.statistics %}
       <li><strong>{{ stat.name }}:</strong> {{ stat.value }} {{ stat.unit }} </li>
-    {% endfor %}
+      {% endfor %}
     </ul>
   </section>
-
+  
 </article>
 {% endblock %}
