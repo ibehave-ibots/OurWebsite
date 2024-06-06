@@ -1,6 +1,6 @@
 call_to_action:
-  title: Book a Consultant
-  url: /consulting.html#book-a-session
+  title: Join Our Mailing List!
+  url: https://listen.uni-bonn.de/wws/subscribe/ibehave.ibots-news
 menu:
   - title: Home
     url: /index.html
@@ -48,12 +48,4 @@ menu:
     url: /about_us.html
 
   - title: Contact Us
-    children:
-      - title: Overview
-        url: /contact_us.html
-      - title: Contact Details
-        url: /contact_us.html#contact-details
-      - title: Mailing List
-        url: /contact_us.html#mailing-list
-      - title: Team Members
-        url: /contact_us.html#ibots-team
+    url: /contact_us.html
