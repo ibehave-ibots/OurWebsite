@@ -24,6 +24,7 @@ def test_list_method(results):
     assert results_reports[0].display_units == 'Hz'
 
 
-# def test_get_method_returns_n_sess_when_called(results):
-#     n_sess = results.get('n_sess')
-#     assert n_sess
+def test_get_method(results):
+    assert results.get('a_b')
+    assert not results.get('a_z')
+    assert results.get('a_b').name == 'A B'
