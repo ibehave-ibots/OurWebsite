@@ -4,56 +4,47 @@
 
 {% block body %}
 
-    <header></header>
-    <nav></nav>
-    <aside></aside>
-    <main>
+<article>
+    
+    <h1> {{ page.title }} </h1>
+    <section id="description">
+    {{ content | safe }}
+    </section>
+    
+    <section>
+        <h1> {{ page.statistics.title }} </h1>
+        <dl>
+        {% for key, value in page.statistics.report.items() %}
+        <dt>{{key}}</dt>
+        <dd>{{ value }}</dd>
+        </dl>
+        {% endfor %}
+    </section>
+    
+    <section id="book-a-session">
+        <h1> {{ page.session_booking.title }} </h1>
+        <p> {{ page.session_booking.description }} </p>
+        {% for consultant in page.session_booking.consultants %}
         <article>
-            
-            <h1> {{ page.title }} </h1>
-            <section id="description">
-            {{ content | safe }}
-            </section>
-            
-            <section>
-                <h1> {{ page.statistics.title }} </h1>
-                <dl>
-                {% for key, value in page.statistics.report.items() %}
-                <dt>{{key}}</dt>
-                <dd>{{ value }}</dd>
-                </dl>
-                {% endfor %}
-            </section>
-            
-            <section id="book-a-session">
-                <h1> {{ page.session_booking.title }} </h1>
-                <p> {{ page.session_booking.description }} </p>
-                {% for consultant in page.session_booking.consultants %}
-                <article>
-                    <h1> {{ consultant.name }} </h1>
-                    <p> <a href="{{ consultant.booking_link }}">{{ consultant.booking_link }}</a> </p>
-
-                </article>
-                
-                {% endfor %}
-                
-            </section>
-
-            <section>
-                <h1>{{ page.testimonials.title }} </h1>
-                {% for testimonial in page.testimonials.testimonials %}
-                <p>{{ testimonial }} </p>
-                {% endfor %}
-                
-            </section>
+            <h1> {{ consultant.name }} </h1>
+            <p> <a href="{{ consultant.booking_link }}">{{ consultant.booking_link }}</a> </p>
 
         </article>
+        
+        {% endfor %}
+        
+    </section>
+
+    <section>
+        <h1>{{ page.testimonials.title }} </h1>
+        {% for testimonial in page.testimonials.testimonials %}
+        <p>{{ testimonial }} </p>
+        {% endfor %}
+        
+    </section>
+
+</article>
+
 
         
-        
-
-    
-    </main>
-    <footer></footer>
-
 {% endblock %}

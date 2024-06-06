@@ -3,48 +3,38 @@
 {% block title %} Learning Resources {% endblock %}
 
 {% block body %}
-    <header></header>
-    <nav></nav>
-    <aside></aside>
-    <main>
-        <article>
-            
-            <h1> {{ page.title }} </h1>
-            <section>
-            {{ content | safe }}
-            </section>
-            
-            <section>
-                <h2>Our Materials </h2>
-                {% for our_material in page.our_materials %}
-                <h3> {{ our_material.name }} </h3>
-                <p><a href="{{ our_material.filepath }}">{{ our_material.filepath }}</a></p>
-                <section>
-                    <strong>Technologies Used</strong>
-                    <ul>
-                        {% for technology in our_material.technologies %}
-                            <li>{{ technology }}</li>
-                        {% endfor %}    
-                        </ul>          
-                </section>
-                {% endfor %}
-            </section>
-
-            <section>
-                <h2> External Resources </h2>
-                <ul>
-                    {% for resource in page.external_resources %}
-                        <li> <a href="{{ resource }}">{{ resource }}</a> </li>
-                    {% endfor %}
-                </ul>                
-            </section>
-
-        </article>
-
-        
-        
-
+<articled>
     
-    </main>
-    <footer></footer>
+    <h1> {{ page.title }} </h1>
+    <section>
+    {{ content | safe }}
+    </section>
+    
+    <section>
+        <h2>Our Materials </h2>
+        {% for our_material in page.our_materials %}
+        <h3> {{ our_material.name }} </h3>
+        <p><a href="{{ our_material.filepath }}">{{ our_material.filepath }}</a></p>
+        <section>
+            <strong>Technologies Used</strong>
+            <ul>
+                {% for technology in our_material.technologies %}
+                    <li>{{ technology }}</li>
+                {% endfor %}    
+                </ul>          
+        </section>
+        {% endfor %}
+    </section>
+
+    <section>
+        <h2> External Resources </h2>
+        <ul>
+            {% for resource in page.external_resources %}
+                <li> <a href="{{ resource }}">{{ resource }}</a> </li>
+            {% endfor %}
+        </ul>                
+    </section>
+
+</article>
+
 {% endblock %}

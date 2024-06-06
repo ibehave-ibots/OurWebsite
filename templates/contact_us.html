@@ -4,69 +4,58 @@
 
 {% block body %}
 
-    <header></header>
-    <nav></nav>
-    <aside></aside>
-    <main>
-        <article>
-            
-            <h1> {{ page.title }} </h1>
-            <section>
-                {{ content | safe }}
-            </section>
-
-            <section id="contact-details">
-                <h1> Contact Details</h1>
-                <address>
-                    <dl>
-                        <dt>Name</dt>
-                        <dd>{{ page.contact_name }}</dd>
-
-                        <dt>Email</dt>
-                        <dd>{{ page.contact_email }}</dd>
-                    </dl>
-                </address>
-                <p><a href="{{ page.booking_link }}">Book a short chat!</a></p>                
-            </section>
-
-            <section id="mailing-list">
-                <h1>Stay Up to Date</h1>
-                <p><a href="{{ page.mailing_list_link }}">Join Our Mailing List</a></p>
-
-            
-            </section>
-
-            <section id="ibots-team">
-                <h2> The iBOTS Team </h2>
-                <h3> Current Members </h3>
-                {% for person in page.current %}
-                    <h4> {{ person.name}} </h4>
-                    <p>Email: {{ person.email }}</p>
-                    <p><a href="{{ person.booking_url }}">Booking Link</a></p>
-                {% endfor %}
+<article>
     
-                <h3> Past Members </h3>
-                {% for person in page.past %}
-                    <h4> {{ person.name}} </h4>
-                    <p>Email: {{ person.email }}</p>
-                {% endfor %}
-    
-                <h3> Collaborators </h3>
-                {% for person in page.other %}
-                    <h4> {{ person.name}} </h4>
-                    <p>Email: {{ person.email }}</p>
-                {% endfor %}
-    
-            </section>
-    
-        </article>
+    <h1> {{ page.title }} </h1>
+    <section>
+        {{ content | safe }}
+    </section>
 
-        
-    
-    
+    <section id="contact-details">
+        <h1> Contact Details</h1>
+        <address>
+            <dl>
+                <dt>Name</dt>
+                <dd>{{ page.contact_name }}</dd>
+
+                <dt>Email</dt>
+                <dd>{{ page.contact_email }}</dd>
+            </dl>
+        </address>
+        <p><a href="{{ page.booking_link }}">Book a short chat!</a></p>                
+    </section>
+
+    <section id="mailing-list">
+        <h1>Stay Up to Date</h1>
+        <p><a href="{{ page.mailing_list_link }}">Join Our Mailing List</a></p>
 
     
-    </main>
-    <footer></footer>
+    </section>
+
+    <section id="ibots-team">
+        <h2> The iBOTS Team </h2>
+        <h3> Current Members </h3>
+        {% for person in page.current %}
+            <h4> {{ person.name}} </h4>
+            <p>Email: {{ person.email }}</p>
+            <p><a href="{{ person.booking_url }}">Booking Link</a></p>
+        {% endfor %}
+
+        <h3> Past Members </h3>
+        {% for person in page.past %}
+            <h4> {{ person.name}} </h4>
+            <p>Email: {{ person.email }}</p>
+        {% endfor %}
+
+        <h3> Collaborators </h3>
+        {% for person in page.other %}
+            <h4> {{ person.name}} </h4>
+            <p>Email: {{ person.email }}</p>
+        {% endfor %}
+
+    </section>
+
+</article>
+
 
 {% endblock %}
