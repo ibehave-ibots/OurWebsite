@@ -102,5 +102,3 @@ class ConsultingResultRepo:
         for i, result in enumerate(self._consulting_results):
             json_text = result.model_dump_json(indent=3)
             path.joinpath(f'{i}.json').write_text(json_text)
-        
-        
