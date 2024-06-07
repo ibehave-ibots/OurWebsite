@@ -24,11 +24,12 @@ def count_page_breaks(doc, pattern='___'):
 
     return pages
 
-def read_reports(reports):
+def create_consolidated_report(reports):
     session_reports = []
     for report in reports:
         doc = Document(report)
         session_report = count_page_breaks(doc)
         session_reports.extend(session_report)
 
-    return session_reports
+    consolidated_report = ' '.join(session_reports)
+    return consolidated_report
