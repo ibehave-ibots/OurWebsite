@@ -99,6 +99,7 @@ class ConsultingResultRepo:
             assert path.is_dir()
         
         path.mkdir(parents=True, exist_ok=True)
-        for i, result in enumerate(self._consulting_results):
+        for result in self._consulting_results:
             json_text = result.model_dump_json(indent=3)
-            path.joinpath(f'{i}.json').write_text(json_text)
+            fname = result.short_name
+            path.joinpath(f'{fname}.json').write_text(json_text)
