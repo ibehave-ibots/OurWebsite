@@ -34,15 +34,8 @@ menu:
         url: /networking.html#conferences
       - title: iBehave Seminars
         url: /networking.html#seminars
-
-  - title: Organizations
-    children:
-      - title: Overview
-        url: /organizations.html
-      - title: Partners
-        url: /organizations.html#partners
-      - title: Sponsors
-        url: /organizations.html#sponsors
+      - title: Support Groups
+        url: /networking.html#partners
 
   - title: About Us
     url: /about_us.html

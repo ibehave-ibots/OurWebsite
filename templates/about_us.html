@@ -78,11 +78,21 @@
         
         <section class="container mb-5 py-lg-3 py-xl-4 py-xxl-5">
             <h3 class="h1 text-center pb-md-1 mb-1 mb-sm-3"> 
-                Collaborators 
+                Past Collaborators 
             </h3>
             {{ people_grid(people=page.people.past + page.people.other )}}
         </section>
         
+        <section id="sponsors">
+            <h1> Sponsors </h1>
+            {% for sponsor in page.sponsors %}
+            <h3>{{ sponsor.name }}</h3>
+            <img src="{{ sponsor.logo }}" alt="{{ sponsor.logo }}">
+            <p>{{ sponsor.description }}</p>
+            <a href="{{ sponsor.website }}">{{ sponsor.website }}</a>
+            <p>{{ sponsor.email }}</p>
+            {% endfor %}        
+        </section>
     </article>
     
 </main>

@@ -69,4 +69,11 @@ seminars:
     registration_url: {{ seminar.registration_url }}
   {% endfor %}
 
+partners: 
+    {% for partner in data.orgs.partners %}
+    - name: {{ partner.name }}
+      website: {{ partner.url }}
+      email: {{ partner.email }}
+      description: {{ partner.description }}
+    {% endfor %}
 ---

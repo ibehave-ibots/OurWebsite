@@ -78,6 +78,16 @@ people:
           email: {{ person.email }}
         {% endif %}
         {% endfor %}
+
+sponsors: 
+    {% for sponsor in data.orgs.sponsors %}
+    - name: {{ sponsor.name }}
+      website: {{ sponsor.url }}
+      email: {{ sponsor.email }}
+      description: {{ sponsor.description }}
+      logo: {{ sponsor.logo }}
+    {% endfor %}
+
 ---
 
 
