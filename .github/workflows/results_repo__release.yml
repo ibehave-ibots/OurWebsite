@@ -9,7 +9,8 @@
 name: Upload Python Package
 
 on:
-  release
+  release:
+    types: [published]
 
 permissions:
   contents: read
@@ -39,7 +40,7 @@ jobs:
         # Name of the artifact to upload.
         # Optional. Default is 'artifact'
         name: results_repo.tar
-        path: dist/ibots_results_repo-*.tar
+        path: ./consulting_analysis_results/dist/ibots_results_repo-*.tar
         if-no-files-found: error
     
       
