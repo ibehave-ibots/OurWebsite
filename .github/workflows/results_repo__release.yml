@@ -29,6 +29,7 @@ jobs:
       run: |
         cd consulting_analysis_results
         python -m pip install --upgrade pip
+        cd consulting_analysis_results
         pip install build
     - name: Build package
       run: python -m build
@@ -38,7 +39,7 @@ jobs:
         # Name of the artifact to upload.
         # Optional. Default is 'artifact'
         name: results_repo.tar
-        path: dist/ibots_results_repo-*.tar
+        path: consulting_analysis_results/dist/ibots_results_repo-*.tar
         if-no-files-found: error
     
       
