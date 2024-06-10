@@ -11,7 +11,7 @@ authors = [
 ]
 description = "Repository for analysis results for the iBOTS group (currently consulting analysis)"
 readme = "README.md"
-requires-python = "==3.12"
+requires-python = ">=3.12"
 classifiers = []
 dependencies = [
   "pydantic>=2.7"
