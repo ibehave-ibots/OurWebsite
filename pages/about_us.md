@@ -1,4 +1,8 @@
 title: About Us
+contact_name: {{ data.people.nick.name }}
+contact_email: {{ data.people.nick.email }}
+booking_link: {{ data.people.nick.booking_url }}
+mailing_list_link: {{ data.group.mailing_list_subscribe_url }}
 sections:
     - title: What is an RSE?
       image: https://placehold.co/600x600
@@ -32,7 +36,7 @@ sections:
         - title: Release Your Software
           sentence: aaa
           icon: icon.svg
-          
+
     - title: What Do We Do?
       image: https://placehold.co/600x600
       paragraphs: 
@@ -51,7 +55,29 @@ sections:
         - title: Teach One of Our Workshops
           sentence:
           icon: icon.svg
-    
+people:
+    current:
+        {% for person in data.people.values() %}
+        {% if person.role == "current" %}
+        - name: {{ person.name }}
+          email: {{ person.email }}
+          booking_url: {{ person.booking_url }}
+        {% endif %}
+        {% endfor %}
+    past:
+        {% for person in data.people.values() %}
+        {% if person.role == "past" %}
+        - name: {{ person.name }}
+          email: {{ person.email }}
+        {% endif %}
+        {% endfor %}
+    other:
+        {% for person in data.people.values() %}
+        {% if person.role not in ["past", "current"] %}
+        - name: {{ person.name }}
+          email: {{ person.email }}
+        {% endif %}
+        {% endfor %}
 ---
 
 
