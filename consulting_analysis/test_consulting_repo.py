@@ -23,6 +23,20 @@ def test_list_method(results):
     assert results_reports[0].units == 'Hertz'
     assert results_reports[0].display_units == 'Hz'
 
+def test_add_multiple_entries(results):
+    results.clear_all()
+    result_repo_add = {
+        'short_name': ['a_b', 'c_d'],
+        'name': ['A B', 'C D'],
+        'value': [2, 100],
+        'units': ['Hertz', 'Hertz'],
+        'display_units': ['Hz', 'Hz']
+    }
+    results.from_dict(result_repo_add)
+    results_reports = results.list()
+    assert len(results.list()) == 2
+    assert results_reports[0].short_name == 'a_b'
+
 
 def test_get_method(results):
     assert results.get('a_b')

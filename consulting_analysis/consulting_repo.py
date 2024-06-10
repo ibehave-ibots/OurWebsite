@@ -92,7 +92,25 @@ class ConsultingResultRepo:
             'units': [result.units for result in self._consulting_results],
             'display_units': [result.display_units for result in self._consulting_results],
         }
-        
+    
+    @requires_write_permission
+    def from_dict(self, report_dict: Dict[str, list]) -> None:
+        short_name = report_dict['short_name']
+        name = report_dict['name']
+        value = report_dict['value']
+        units = report_dict['units']
+        display_units = report_dict['display_units']
+        for idx, s_name in enumerate(short_name):
+            result = ConsultingResult(
+                short_name=s_name,
+                name=name[idx],
+                value=value[idx],
+                units=units[idx],
+                display_units=display_units[idx],
+            )
+            self._consulting_results.append(result)        
+
+
     def save(self):
         path = Path(self.path)
         if path.exists():

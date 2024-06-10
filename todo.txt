@@ -1,0 +1,1 @@
+make function to add multiple entries together
