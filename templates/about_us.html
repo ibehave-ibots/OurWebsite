@@ -1,17 +1,35 @@
-{% extends "blocks/base.html" %}
+{% from "macros/services.html" import service_description %}
 
-{% block title %} About Us {% endblock %}
-
-{% block body %}
-
+<main>
+    
+    {% extends "blocks/base.html" %}
+    
+    {% block title %} About Us {% endblock %}
+    
+    {% block body %}
+    
     <article>
-        
+
         <h1> {{ page.title }} </h1>
         <section id="rse-description">
-        {{ content | safe }}
+            {{ content | safe }}
         </section>        
-    </article>
 
+        {% for section in page.sections %}  
+        <section>
+            {{ service_description(
+                title=section.title,
+                img=section.image,
+                paragraphs=section.paragraphs,
+                features=section.features,
+                reverse_layout=loop.index % 2
+            ) }}
+        </section> 
+        {% endfor %}
+        
+        
+    </article>
+    
 </main>
 
 {% endblock %}
