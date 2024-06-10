@@ -18,6 +18,9 @@ jobs:
   deploy:
 
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./consulting_analysis_results
 
     steps:
     - uses: actions/checkout@v4
@@ -27,19 +30,16 @@ jobs:
         python-version: '3.x'
     - name: Install build dependencies
       run: |
-        cd consulting_analysis_results
         python -m pip install --upgrade pip
-        cd consulting_analysis_results
         pip install build
     - name: Build package
       run: python -m build
-      
     - uses: actions/upload-artifact@v4
       with:
         # Name of the artifact to upload.
         # Optional. Default is 'artifact'
         name: results_repo.tar
-        path: consulting_analysis_results/dist/ibots_results_repo-*.tar
+        path: dist/ibots_results_repo-*.tar
         if-no-files-found: error
     
       
