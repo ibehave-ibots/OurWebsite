@@ -1,5 +1,5 @@
 import os
-from .consulting_repo import ConsultingResultRepo
+from consulting_repo import ConsultingResultRepo
 import pytest
 
 os.environ['DB_WRITEMODE'] = '1'

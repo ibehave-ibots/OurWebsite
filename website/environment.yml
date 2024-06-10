@@ -1,0 +1,21 @@
+name: ibots-site
+channels:
+  - defaults
+dependencies: 
+  - python=3.12
+  - pip
+  - pip:
+      - livereload
+      - jinja2
+      - markdown2
+      - PyYAML
+      - Pillow
+      - pytest
+      - webdav4
+      - fsspec
+      - python-docx
+
+
+
+
+
