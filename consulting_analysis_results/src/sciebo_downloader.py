@@ -4,6 +4,8 @@ from webdav4.fsspec import WebdavFileSystem
 import pandas as pd
 from results_repo import ConsultingResultRepo
 import os
+from dotenv import load_dotenv
+
 
 @dataclass
 class ScieboConsultingStat:
@@ -14,8 +16,10 @@ class ScieboConsultingStat:
     display_unit: str
 
 
-def get_from_sciebo(usr: str = "fZKODDtYVAnP0pk") -> None:
-    fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(usr, ""))
+def get_from_sciebo() -> None:
+    load_dotenv()
+    USR = os.getenv('USR')
+    fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(USR, ""))
     fs.download("/", "consulting_data", recursive=True)    
 
 def from_xlsx(path: str = 'consulting_data/consulting_stats.xlsx') -> Dict[Any, Any]:
