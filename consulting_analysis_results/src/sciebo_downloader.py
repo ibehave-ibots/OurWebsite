@@ -30,8 +30,7 @@ def from_xlsx(path: str = 'consulting_data/consulting_stats.xlsx') -> Dict[Any, 
         'value':df['value'].values,
         'units':df['units'].values,
         'display_units':df['display_units'].values
-    }
-    
+    } 
     return consulting_stat_dict
 
 def sciebo_to_repo():
