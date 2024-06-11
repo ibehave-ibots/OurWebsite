@@ -10,4 +10,5 @@ def from_xlsx(path: str = 'consulting_data/consulting_stats.xlsx') -> Dict[str, 
     df = pd.read_excel(path)
     return df.to_dict()
 
+get_from_sciebo()
 from_xlsx()
