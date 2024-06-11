@@ -14,8 +14,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 classifiers = []
 dependencies = [
-  "pydantic>=2.7"
+  "pydantic>=2.7", "fsspec"
 ]
 
 [project.optional-dependencies]
 dev = ["pandas", "openpyxl", "pytest"]
+sciebo = ["webdav4", ]
