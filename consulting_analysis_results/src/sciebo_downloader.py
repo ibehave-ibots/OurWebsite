@@ -36,8 +36,8 @@ def sciebo_to_repo() -> ConsultingResultRepo:
     os.environ['DB_WRITEMODE'] = '1'
     consulting_stat_dict = from_sciebo()
     consulting_repo = ConsultingResultRepo.connect('consulting_data')
-    consulting_repo.from_dict(consulting_stat_dict)
+    consulting_repo.put_all(consulting_stat_dict)
     return consulting_repo
 
 cs = sciebo_to_repo()
-pprint(cs.get('num_researchers'))
+pprint(cs.list())

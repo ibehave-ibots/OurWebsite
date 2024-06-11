@@ -4,8 +4,11 @@ from dataclasses import dataclass, field
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict, NamedTuple, Tuple
+from typing import Any, Dict, NamedTuple, Tuple, TypedDict
+from warnings import warn
+from fsspec import filesystem
 from pprint import pprint
+import fsspec
 from pydantic import BaseModel
 import functools
 
@@ -24,8 +27,8 @@ class ConsultingResult(BaseModel):
     units: str
     display_units: str
 
-@dataclass(frozen=True)
-class ResultDTO:
+
+class ResultDict(TypedDict):
     short_name: str
     name: str
     value: float
@@ -34,25 +37,23 @@ class ResultDTO:
 
 @dataclass
 class ConsultingResultRepo:
-    _consulting_results: list[ConsultingResult] = field(repr=False)
-    path: Path
+    _consulting_results: dict[str, ConsultingResult] = field(repr=False)
+    path: fsspec.AbstractFileSystem
 
     @classmethod
-    def connect(cls, path, write_mode = False) -> ConsultingResultRepo:
-        path = Path(path)
-        results = []
-        for file in path.glob('*.json'):
-            result = ConsultingResult.model_validate_json(file.read_text())
-            results.append(result)
-        
+    def connect(cls, path: fsspec.AbstractFileSystem) -> ConsultingResultRepo:
+        results = {}      
         return ConsultingResultRepo(
             _consulting_results=results,
             path=path,
         )
 
     @requires_write_permission
-    def clear_all(self) -> None: 
+    def clear(self) -> None: 
         self._consulting_results.clear()
+    
+    def remove(self, s_name: str) -> None:
+        self._consulting_results.pop(s_name)
             
     @requires_write_permission
     def put(self, short_name: str, name: str, value: float, units: str, display_units: str) -> None:
@@ -63,61 +64,47 @@ class ConsultingResultRepo:
             units=units,
             display_units=display_units,
         )
-        self._consulting_results.append(result)
+        self._consulting_results[result.short_name] = result
 
-    def list(self) -> list[ResultDTO]:
+    def list(self) -> list[ResultDict]:
         results = []
-        for result in self._consulting_results:
-            r = self.get(result.short_name)
+        for result_short_name in self._consulting_results.keys():
+            r = self.get(result_short_name)
             results.append(r)
         return results
 
-    def get(self, s_name: str) -> ResultDTO:
-        for result in self._consulting_results:
-            if s_name in result.short_name:
-                return ResultDTO(
-                    short_name=result.short_name,
-                    name=result.name,
-                    value=result.value,
-                    units=result.units,
-                    display_units=result.display_units
-
-                )
-    
-    def to_dict(self) -> Dict[Any, Any]:
-        return {
-            'short_name': [result.short_name for result in self._consulting_results],
-            'name': [result.name for result in self._consulting_results],
-            'value': [result.value for result in self._consulting_results],
-            'units': [result.units for result in self._consulting_results],
-            'display_units': [result.display_units for result in self._consulting_results],
-        }
-    
-    @requires_write_permission
-    def from_dict(self, report_dict: Dict[str, list]) -> None:
-        short_name = report_dict['short_name']
-        name = report_dict['name']
-        value = report_dict['value']
-        units = report_dict['units']
-        display_units = report_dict['display_units']
-        for idx, s_name in enumerate(short_name):
-            result = ConsultingResult(
-                short_name=s_name,
-                name=name[idx],
-                value=value[idx],
-                units=units[idx],
-                display_units=display_units[idx],
-            )
-            self._consulting_results.append(result)        
-
-
-    def save(self):
-        path = Path(self.path)
-        if path.exists():
-            assert path.is_dir()
+    def get(self, s_name: str) -> ResultDict:
+        results = self._consulting_results
+        result: ResultDict = results[s_name].model_dump()
+        return result
         
-        path.mkdir(parents=True, exist_ok=True)
-        for result in self._consulting_results:
+    def push(self):
+        path = self.path
+        for file in path.glob('*.json'):
+            try:
+                path.rm(file)
+            except:
+                warn(f"{file[:-5]} was not deleted")
+                
+        for result in self._consulting_results.values():
             json_text = result.model_dump_json(indent=3)
             fname = result.short_name
-            path.joinpath(f'{fname}.json').write_text(json_text)
+            with path.open(f'{fname}.json', 'w') as f:
+                f.write(json_text)
+
+    def pull(self):
+        path = self.path
+        results = {}
+        for file in path.glob('*.json'):
+            f = path.open(file, 'r')
+            result = ConsultingResult.model_validate_json(f.read())
+            results[result.short_name] = result
+        self._consulting_results = results
+
+    def clone_to(self, repo: ConsultingResultRepo):
+        repo.clear()
+        self.pull()
+        for result in self.list():
+            repo.put(**result)
+        repo.push()
+        
