@@ -1,3 +1,4 @@
+_template: learning_resources.html
 title: Learning Resources
 our_materials:
     {% for our_material in data.teaching_materials.our_materials %}

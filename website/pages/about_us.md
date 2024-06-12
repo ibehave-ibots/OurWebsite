@@ -1,3 +1,4 @@
+_template: about_us.html
 title: About Us
 contact_name: {{ data.people.nick.name }}
 contact_email: {{ data.people.nick.email }}

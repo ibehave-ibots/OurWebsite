@@ -28,65 +28,41 @@ def run_render_pipeline():
     site_data = extract_global_data(base_path='./templates/site') # get data just used for the website, shouldn't be used in pages files
 
     ## Render Each Page to HTML and write to './output'
-    for page_path in Path('./pages').glob('*.md'):
+    for page_path in Path('./pages').glob('**/*.*'):
         
         
-        frontmatter_data = {'data': global_data}
-        page_data = render_frontmatter(renderer=renderer, page_path=page_path, **frontmatter_data)
-        content_html = render_content_to_html(renderer=renderer, page_path=page_path)
+        page_data = render_frontmatter(renderer=renderer, page_path=page_path, data=global_data)
+        content_html = render_content_to_html(renderer=renderer, page_path=page_path) if page_path.suffix == '.md' else ''
         
+        template_name = page_data['_template']
         page_html = renderer.render_named_template(
-            template_name=page_path.stem + '.html', 
-            data=global_data, 
-            page=page_data,
-            content=content_html,
-            site=site_data,
-        )     
-
-        save_path = Path('./output').joinpath(page_path.stem + '.html')
-        save_path.parent.mkdir(parents=True, exist_ok=True)
-        save_path.write_text(page_html)   
-        
-        
-    for group_index_path in Path('./pages').glob('*/index.md'):
-        frontmatter_data = {'data': global_data}
-        page_data = render_frontmatter(renderer=renderer, page_path=group_index_path, **frontmatter_data)
-        content_html = render_content_to_html(renderer=renderer, page_path=group_index_path)
-
-        page_html = renderer.render_named_template(
-            template_name=f"{group_index_path.parent.name}/index.html", 
+            template_name=template_name, 
             data=global_data, 
             page=page_data,
             content=content_html,
             site=site_data,
         )
 
-        rel_path = group_index_path.relative_to('./pages')
-        save_path = Path('./output').joinpath(rel_path.with_suffix('.html'))
+        save_path = Path('./output').joinpath(template_name)
         save_path.parent.mkdir(parents=True, exist_ok=True)
-        save_path.write_text(page_html)
+        save_path.write_text(page_html)   
 
-        for p in page_data['_pages']:
-            frontmatter_data = {'data': global_data}
-            page_data = render_frontmatter(
-                renderer=renderer, 
-                page_path=group_index_path.with_name('item.yaml'), 
-                data=global_data,
-                page=p,
-            )
-            page_data.update(p)
+        if '_generate' in page_data:
+            for page_type in page_data['_generate']:
+                for p_data in page_type['pages']:
+                    template_name = page_type['template']
+                    page_html = renderer.render_named_template(
+                        template_name=template_name, 
+                        data=global_data, 
+                        page=p_data,
+                        content=content_html,
+                        site=site_data,
+                    )
+                    
+                    save_path = Path('./output').joinpath(template_name).with_stem(p_data['id'])
+                    
+                    save_path.parent.mkdir(parents=True, exist_ok=True)
+                    save_path.write_text(page_html) 
+                    
 
-            page_html = renderer.render_named_template(
-                template_name=f"{group_index_path.parent.name}/item.html", 
-                data=global_data, 
-                page=page_data,
-                site=site_data,
-            )
-            rel_path = group_index_path.relative_to('./pages')
-            save_path = Path('./output').joinpath(group_index_path.parent.name).joinpath(f"{p['id']}.html")
-            save_path.parent.mkdir(parents=True, exist_ok=True)
-            save_path.write_text(page_html)
-
-            
-    
         

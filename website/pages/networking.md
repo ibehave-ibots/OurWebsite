@@ -1,4 +1,4 @@
-
+_template: networking.html
 title: Networking
 clubs:
   {% for club in data.networking_events.clubs %}

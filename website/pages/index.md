@@ -1,3 +1,4 @@
+_template: index.html
 title: Home
 milestones:
     {% for milestone in data.group.milestones %}

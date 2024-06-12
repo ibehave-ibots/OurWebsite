@@ -1,4 +1,4 @@
-
+_template: consulting.html
 title: iBOTS Technology Consulting
 statistics:
     title: Statistics
