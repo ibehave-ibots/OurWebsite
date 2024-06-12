@@ -9,7 +9,7 @@ from . import utils
 
 ## YAML Frontmatter ##
 
-def render_frontmatter(renderer: JinjaRenderer, page_path: Path, **render_data) -> dict:
+def render_yaml_frontmatter(renderer: JinjaRenderer, page_path: Path, **render_data) -> dict:
     templated_yaml = _read_frontmatter_text(path=page_path)
     if not templated_yaml:
         return {}

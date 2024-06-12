@@ -7,7 +7,7 @@ from .templates import JinjaRenderer
 from .data import extract_global_data
 from .utils import copydir
 from .filters import redirect_path, resize_image
-from .pages import render_content_to_html, render_frontmatter
+from .pages import render_content_to_html, render_yaml_frontmatter
 
 
 def run_render_pipeline():
@@ -31,7 +31,7 @@ def run_render_pipeline():
     for page_path in Path('./pages').glob('**/*.*'):
         
         
-        page_data = render_frontmatter(renderer=renderer, page_path=page_path, data=global_data)
+        page_data = render_yaml_frontmatter(renderer=renderer, page_path=page_path, data=global_data)
         content_html = render_content_to_html(renderer=renderer, page_path=page_path) if page_path.suffix == '.md' else ''
         
         template_name = page_data['_template']
