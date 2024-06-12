@@ -64,8 +64,35 @@ def test_find_single_nested_files(tmp_path):
 
 
 
-def test_doesnt_supported_multinested_files(tmp_path):
+def test_double_nested_file(tmp_path):
     fname = "animals/dogs/pug.yaml"
+    yaml = """
+    a: 3
+    b: 5
+    """
+    path = tmp_path.joinpath(fname)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(yaml)
+
+    fname = "animals/dogs/pom.yaml"
+    yaml = """
+    a: 13
+    b: 15
+    """
+    path = tmp_path.joinpath(fname)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(yaml)
+
+    data = extract_global_data(tmp_path)
+    assert data['animals']['dogs']['pug']['a'] == 3
+    assert data['animals']['dogs']['pug']['b'] == 5
+    assert data['animals']['dogs']['pom']['a'] == 13
+    assert data['animals']['dogs']['pom']['b'] == 15
+
+
+
+def test_doesnt_supported_triple_nested_files(tmp_path):
+    fname = "animals/dogs/breeds/pug.yaml"
     yaml = """
     a: 3
     b: 5
@@ -77,4 +104,3 @@ def test_doesnt_supported_multinested_files(tmp_path):
     with pytest.raises(NotImplementedError):
         extract_global_data(tmp_path)
         
-
