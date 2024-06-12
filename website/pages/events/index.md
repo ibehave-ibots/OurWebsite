@@ -3,39 +3,6 @@ _pages:
 {% for wshop_id, workshop in data.events.workshops.items() %}
   - id: {{ wshop_id }}
 {% endfor %}
-contact_email: {{ data.group.email }}
-mailing_list_link: {{ data.group.mailing_list_subscribe_url }}
-
-upcoming_workshops:
-{% for wshop_id, workshop in data.events.workshops.items() %}
-  {% if workshop.sessions[0].date >= today %}
-  - id: {{ wshop_id }}
-    title: {{ workshop.title }}
-    start_date: {{ workshop.sessions[0].date }}
-    instructor: {{ data.people[workshop.instructors[0].id].name }}
-    duration: {{ workshop.hours }}
-    registration_link: {{ workshop.registration_link }}
-    summary: {{ workshop.summary }}
-{% endif %}
-{% endfor %}
-
-past_workshops:
-{% for wshop_id, workshop in data.events.workshops.items() %}
-  {% if workshop.sessions[0].date < today %}
-  - id: {{ wshop_id }}
-    title: {{ workshop.title }}
-    start_date: {{ workshop.sessions[0].date }}
-    instructor: {{ data.people[workshop.instructors[0].id].name }}
-    duration: {{ workshop.hours }}
-    registration_link: {{ workshop.registration_link }}
-    summary: {{ workshop.summary }}
-{% endif %}
-{% endfor %}
-
-statistics:
-  - name: Number of Workshops
-    value: {{ data.events.workshops | length }}
-    units: workshops
 ---
 
 ## Description

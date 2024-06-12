@@ -88,7 +88,5 @@ def run_render_pipeline():
             save_path.write_text(page_html)
 
             
-            print(p)
-
     
         
