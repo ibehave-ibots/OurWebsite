@@ -32,15 +32,13 @@ jobs:
     - name: Install build dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install build
+        pip install build twine
     - name: Build package
       run: python -m build
-    - uses: actions/upload-artifact@v4
-      with:
-        # Name of the artifact to upload.
-        # Optional. Default is 'artifact'
-        name: results_repo.tar
-        path: consulting_analysis_results/dist/ibots_results_repo-*.tar.gz
-        if-no-files-found: error
+    - uses: Publish package to Test PyPI
+      env:
+        TWINE_USERNAME: ${{ secrets.TEST_PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.TEST_PYPI_PASSWORD }}
+      run: twine upload --repository-url https://test.pypi.org/legacy/ dist/*
     
       
