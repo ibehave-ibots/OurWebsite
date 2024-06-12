@@ -15,7 +15,7 @@ def find_pages(base_path: Path) -> Iterable[Path]:
 ## YAML Frontmatter ##
 
 def render_frontmatter(renderer: JinjaRenderer, page_path: Path, **render_data) -> dict:
-    templated_yaml = _read_frontmatter_text(md_path=page_path)
+    templated_yaml = _read_frontmatter_text(path=page_path)
     if not templated_yaml:
         return {}
     
@@ -24,8 +24,11 @@ def render_frontmatter(renderer: JinjaRenderer, page_path: Path, **render_data) 
     return page_data
 
 
-def _read_frontmatter_text(md_path: Path) -> str:
-    text = Path(md_path).read_text()
+def _read_frontmatter_text(path: Path) -> str:
+    text = Path(path).read_text()
+    if path.suffix in ['.yaml', '.yml']:
+        return text
+    
     *frontmatters, _ = text.split('---')
     frontmatter = frontmatters[0] if frontmatters else ''
     return frontmatter

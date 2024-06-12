@@ -1,10 +1,11 @@
+{% set event = data.events.workshops[page.id] %}
 {% extends "blocks/base.html" %}
 
 {% block title %} Workshop {{ page.title }} {% endblock %}
 
 {% block body %}
 <article>
-    <h1>{{ page.title }}</h1>
+    <h1>{{ event.title }}</h1>
 
     <section>
         {{ content | safe }}
@@ -13,14 +14,14 @@
     <section>
     <h1>Trainers</h1>
     <ul>
-    {% for instructor in page.instructors %}
+    {% for instructor in event.instructors %}
       {% if instructor.role == "instructor" %}
-        <li>{{ instructor.name }}: Instructor</li>
+        <li>{{ data.people[instructor.id].name }}: Instructor</li>
       {% endif %}
     {% endfor %}
-    {% for instructor in page.instructors %}
+    {% for instructor in event.instructors %}
       {% if instructor.role == "assistant" %}
-        <li>{{ instructor.name }}: Teaching </li>
+        <li>{{ data.people[instructor.id].name }}: Teaching </li>
       {% endif %}
     {% endfor %}
     </ul>
@@ -29,7 +30,7 @@
 
     <section>
         <h1>Prerequisites</h1>
-        <p>{{ page.prerequisites }}</p>
+        <p>{{ event.prerequisites }}</p>
     </section>
 
     <section>
@@ -37,11 +38,11 @@
 
         <dl>
             <dt>Format</dt>
-            <dd>{{ page.format }}</dd>
+            <dd>{{ event.format }}</dd>
             
             <dt>Duration</dt>
-            <dd>{{ page.hours }} hours</dd>
-            <dd>{{ page.sessions | length }} sessions</dd>
+            <dd>{{ event.hours }} hours</dd>
+            <dd>{{ event.sessions | length }} sessions</dd>
             
         </dl>
     </section>
@@ -49,7 +50,7 @@
     <section>
         <h1>Session Dates</h1>
         <ul>
-        {% for session in page.sessions %}
+        {% for session in event.sessions %}
             <li>
                 <dl>
                     <dt>Date</dt>
@@ -71,19 +72,19 @@
 
     <section>
         <h1>Course Preparation</h1>        
-        <p>{{ page.preparation_instructions }}</p>
+        <p>{{ event.preparation_instructions }}</p>
     </section>
     
-    {% if page.github_repo %}
+    {% if event.github_repo %}
     <section>
         <h1>Course Materials</h1>        
-        <p>Find course materials here: <a href="{{ page.github_repo }}">{{ page.title }}</a></p>
+        <p>Find course materials here: <a href="{{ event.github_repo }}">{{ event.title }}</a></p>
     </section>
     {% endif %}
 
     <section>
         <h1>Participation Certificates</h1>
-        <p>{{ page.certificate_criteria }}</p>
+        <p>{{ event.certificate_criteria }}</p>
     </section>
 </article>
 {% endblock %}

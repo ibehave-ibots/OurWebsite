@@ -8,7 +8,7 @@ sessions:
       end_time: 14:00
       location: online
 instructors:
-  - name: {{ data.people.nick.name }}
+  - id: nick
     role: instructor
 github_repo: |
     www.github.com 
@@ -22,6 +22,5 @@ preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
 certificate_criteria: | 
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
---- 
-
-(This isn't a real course... it's just a placeholder.)
+description: |
+    (This isn't a real course... it's just a placeholder.)

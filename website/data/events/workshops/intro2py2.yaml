@@ -24,13 +24,13 @@ sessions:
       end_time: 12h30
       location: online
 instructors:
-  - name: {{ data.people.sangeetha.name }}
+  - id: sangeetha
     role: instructor
-  - name: {{ data.people.ben_h.name }}
+  - id: ben_h
     role: assistant
-  - name: {{ data.people.mohammad.name }}
+  - id: mohammad
     role: assistant
-  - name: {{ data.people.nick.name }}
+  - id: nick
     role: assistant
 github_repo:  |
     https://github.com/ibehave-ibots/iBOTS-Tools/tree/main/workshops/intro-to-python-and-pandas2
@@ -44,8 +44,8 @@ preparation_instructions: |
     Software installation instructions will be sent before the start of the course.
 certificate_criteria: | 
     At the end of the course, participants who attend at least 80% of the course certificates of participation.
---- 
+description: | 
 
-In this hands-on workshop, we will explore the Python and Pandas data analysis ecosystem in depth, applying them to data analysis from the world of neuroscience! Morning collaboration sessions see participants working in small teams, collaborating to learn new skills and share their perspectives in a diverse environment.
+    In this hands-on workshop, we will explore the Python and Pandas data analysis ecosystem in depth, applying them to data analysis from the world of neuroscience! Morning collaboration sessions see participants working in small teams, collaborating to learn new skills and share their perspectives in a diverse environment.
 
-At the end of each session, interactive Jupyter notebooks that explore the tools introduced the day will be available for independent learning and review, with teachers available to answer questions. People of all skill levels, experiences, and backgrounds are welcome!
+    At the end of each session, interactive Jupyter notebooks that explore the tools introduced the day will be available for independent learning and review, with teachers available to answer questions. People of all skill levels, experiences, and backgrounds are welcome!

@@ -24,8 +24,8 @@
       {% for wshop in page.upcoming_workshops %}
       {{ course_card(
         title = wshop.title, 
-        registration_url = wshop.registration_link, 
-        instructor = wshop.instructor, 
+        registration_url = "/events/" + wshop.id + '.html', 
+        instructor = wshop.instructor,
         start_date = wshop.start_date, 
         duration = wshop.duration, 
         registration_open = True, 
@@ -41,7 +41,7 @@
       {% for wshop in page.past_workshops %}
       {{ course_card(
         title = wshop.title, 
-        registration_url = wshop.registration_link, 
+        registration_url = "/events/" + wshop.id + '.html', 
         instructor = wshop.instructor, 
         start_date = wshop.start_date, 
         duration = wshop.duration, 

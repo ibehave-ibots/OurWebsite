@@ -15,11 +15,11 @@ menu:
   - title: Workshops
     children:
       - title: Overview
-        url: /workshops
+        url: /events
       - title: Upcoming Workshops
-        url: /workshops#upcoming-workshops
+        url: /events#upcoming-workshops
       - title: Past Workshops
-        url: /workshops#past-workshops
+        url: /events#past-workshops
 
   - title: Learning Resources
     url: /learning_resources.html
@@ -28,8 +28,6 @@ menu:
     children:
       - title: Overview
         url: /networking.html
-      - title: Clubs
-        url: /networking.html#clubs
       - title: Conferences
         url: /networking.html#conferences
       - title: iBehave Seminars
