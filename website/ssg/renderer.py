@@ -1,15 +1,13 @@
 from __future__ import annotations
 
-from collections import defaultdict
 from datetime import date, datetime
 from pathlib import Path
 
-
 from .templates import JinjaRenderer
 from .data import extract_global_data
-from .utils import copydir, write_text
+from .utils import copydir
 from .filters import redirect_path, resize_image
-from .pages import find_pages, render_content_to_html, get_page_collection, render_frontmatter, update_pages_data
+from .pages import render_content_to_html, render_frontmatter
 
 
 def run_render_pipeline():
@@ -94,20 +92,3 @@ def run_render_pipeline():
 
     
         
-    
-
-
-
-
-
-def _get_template_name_and_output_path(collection_name: str | None, md_name: str) -> tuple[str, Path]:
-    match collection_name, md_name:
-        case None, '_index.md': 
-            return ("index.html", Path('index.html'))
-        case None, md:
-            return (Path(md).with_suffix('.html').name, Path(md).with_suffix('.html').name)
-        case coll, '_index.md': 
-            return (f"{coll}.html", Path(coll) / 'index.html')
-        case coll, md:
-            assert coll[-1] == 's', "collection names should end with an s, dumb rule I know but here we are."
-            return (f"{coll[:-1]}.html", Path(coll) / Path(md).with_suffix('.html').name)
