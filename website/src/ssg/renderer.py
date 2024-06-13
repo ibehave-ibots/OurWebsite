@@ -9,7 +9,7 @@ import yaml
 from .templates import JinjaRenderer
 from .data import extract_global_data
 from .utils import copydir, writefile
-from .filters import redirect_path, resize_image, flatten_nested_dict
+from .filters import redirect_path, resize_image, flatten_nested_dict, promote_key, items
 
 
 def run_render_pipeline():
@@ -19,6 +19,8 @@ def run_render_pipeline():
         filters={
             'resize': redirect_path('./_output')(resize_image), 
             'flatten_nested': flatten_nested_dict,
+            'promote_key': promote_key,
+            'items': items,
         },
         globals={
             'today': date.today(),

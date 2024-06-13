@@ -21,13 +21,13 @@
     
     <h1>Upcoming Events</h1>  
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-3 gx-md-4 mt-n2 mt-sm-0">
-      {% for event_type, event_id, event in data.events | flatten_nested %}
-        {% if event.sessions[0].date >= today %}
+      {% for (event_type, event_id), event in data.events | flatten_nested | promote_key('start_date', ['sessions', 0, 'date']) | items %}
+        {% if event.start_date >= today %}
           {{ course_card(
             title = event.title, 
             registration_url = "/events/" + event_type.replace('_', '-') + "/" + event_id + '.html', 
             instructor = data.people[event.instructors[0].id].name,
-            start_date = event.sessions[0].date, 
+            start_date = event.start_date, 
             duration = event.hours, 
             registration_open = True, 
             img_src="https://placehold.co/600x400") 
@@ -40,13 +40,13 @@
   <section id="past-events">
     <h1>Past Events</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-3 gx-md-4 mt-n2 mt-sm-0">
-      {% for event_type, event_id, event in data.events | flatten_nested %}
-        {% if event.sessions[0].date < today %}
+      {% for (event_type, event_id), event in data.events | flatten_nested | promote_key('start_date', ['sessions', 0, 'date']) | items %}
+        {% if event.start_date < today %}
           {{ course_card(
             title = event.title, 
             registration_url = "/events/" + event_id + '.html', 
             instructor = data.people[event.instructors[0].id].name,
-            start_date = event.sessions[0].date, 
+            start_date = event.start_date, 
             duration = event.hours, 
             registration_open = True, 
             img_src="https://placehold.co/600x400") 

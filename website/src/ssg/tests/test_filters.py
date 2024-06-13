@@ -35,11 +35,42 @@ def test_flatten_dict_works():
             10: 'Bye',
         }
     }
-    observed = filters.flatten_dict(data)
-    expected = [
-        ('a', 1, True),
-        ('a', 2, False),
-        ('b', 3, 'Hi'),
-        ('b', 10, 'Bye'),
+    observed = filters.flatten_nested_dict(data)
+    expected = {
+        ('a', 1): True,
+        ('a', 2): False,
+        ('b', 3): 'Hi',
+        ('b', 10): 'Bye',
+    }
+    assert observed == expected
+
+def test_items():
+    data = {'a': 1, 'b': 'hi'}
+    observed = filters.items(data)
+    expected = [('a', 1), ('b', 'hi')]
+    assert observed == expected
+
+def test_promote_key_list_of_dicts():
+    data = [
+        {'A': {'a': 1, 'b': [10, 20, 30]}},
+        {'A': {'a': 10, 'b': [100, 200, 300]}}
     ]
+    observed = filters.promote_key(data, key='newkey', attr_seq=['A', 'b', 1])
+    expected = [
+        {'A': {'a': 1, 'b': [10, 20, 30]}, 'newkey': 20},
+        {'A': {'a': 10, 'b': [100, 200, 300]}, 'newkey': 200},
+    ]
+    assert observed == expected
+
+
+def test_promote_key_dict_of_dicts():
+    data = {
+        'first': {'A': {'a': 1, 'b': [10, 20, 30]}},
+        'second': {'A': {'a': 10, 'b': [100, 200, 300]}}
+    }
+    observed = filters.promote_key(data, key='newkey', attr_seq=['A', 'b', 1])
+    expected = {
+        'first': {'A': {'a': 1, 'b': [10, 20, 30]}, 'newkey': 20},
+        'second': {'A': {'a': 10, 'b': [100, 200, 300]}, 'newkey': 200},
+    }
     assert observed == expected
