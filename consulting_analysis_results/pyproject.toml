@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ibots-results-repo"
-version = "0.0.4"
+version = "0.0.1"
 authors = [
   { name="Sangeetha Nandakumar", email="sangeethanandakumar0694@gmail.com" },
   { name="Nicholas A. Del Grosso", email="delgrosso.nick@gmail.com" }
@@ -14,7 +14,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 classifiers = []
 dependencies = [
-  "pydantic>=2.7", "fsspec>=2024.6"
+  "pydantic>=2.7", "fsspec"
 ]
 
 [project.optional-dependencies]
