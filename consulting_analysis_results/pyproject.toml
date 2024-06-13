@@ -14,7 +14,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 classifiers = []
 dependencies = [
-  "pydantic", "fsspec"
+  "pydantic>=2.7", "fsspec>=2024.6"
 ]
 
 [project.optional-dependencies]
