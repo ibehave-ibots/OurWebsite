@@ -11,11 +11,11 @@ from .pages import render_content_to_html, render_yaml_frontmatter
 
 
 def run_render_pipeline():
-    copydir(src="./static", target="./output/static")
+    copydir(src="./static", target="./_output/static")
     renderer = JinjaRenderer.from_path(
         templates_dir='./templates', 
         filters={
-            'resize': redirect_path('./output')(resize_image), 
+            'resize': redirect_path('./_output')(resize_image), 
         },
         globals={
             'today': date.today(),
@@ -43,7 +43,7 @@ def run_render_pipeline():
             site=site_data,
         )
 
-        save_path = Path('./output').joinpath(template_name)
+        save_path = Path('./_output').joinpath(template_name)
         save_path.parent.mkdir(parents=True, exist_ok=True)
         save_path.write_text(page_html)   
 
@@ -59,7 +59,7 @@ def run_render_pipeline():
                         site=site_data,
                     )
                     
-                    save_path = Path('./output').joinpath(template_name).with_stem(p_data['id'])
+                    save_path = Path('./_output').joinpath(template_name).with_stem(p_data['id'])
                     
                     save_path.parent.mkdir(parents=True, exist_ok=True)
                     save_path.write_text(page_html) 

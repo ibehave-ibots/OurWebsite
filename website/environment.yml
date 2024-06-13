@@ -10,10 +10,6 @@ dependencies:
       - markdown2
       - PyYAML
       - Pillow
-      - pytest
-      - webdav4
-      - fsspec
-      - python-docx
   
 
 
