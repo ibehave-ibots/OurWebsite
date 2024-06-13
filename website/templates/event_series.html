@@ -1,0 +1,8 @@
+{% set event = data.events.workshops[page.id] %}
+{% extends "blocks/base.html" %}
+
+{% block title %} Category {% endblock %}
+
+{% block body %}
+Series: {{ page.id }}
+{% endblock %}

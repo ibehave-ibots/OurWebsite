@@ -1,0 +1,6 @@
+- id: workshops
+  template: event_series.html
+  url: events/workshops/index.html
+- id: code explorers
+  template: event_series.html
+  url: events/code-explorers/index.html

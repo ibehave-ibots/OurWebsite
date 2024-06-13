@@ -1,4 +1,4 @@
-{% set event = data.events.workshops[page.id] %}
+{% set event = data.events[page.type][page.id] %}
 {% extends "blocks/base.html" %}
 
 {% block title %} Workshop {{ event.title }} {% endblock %}

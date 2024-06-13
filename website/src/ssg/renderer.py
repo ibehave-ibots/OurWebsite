@@ -42,8 +42,6 @@ def run_render_pipeline():
         for markdown_path in page_path.glob('*.md'):
             page_data[markdown_path.stem] = markdown2.Markdown().convert(markdown_path.read_text())
         
-
-
         render_data = page_data['_render']
         # support multiple pages rendered from the same file
         if isinstance(render_data, dict):

@@ -1,5 +1,8 @@
-{% for wshop_id, workshop in data.events.workshops.items() %}
+{% for event_type, series in data.events.items() %}
+{% for event_id, event in series.items() %}
   - template: event.html
-    id: {{ wshop_id }}
-    url: events/{{ wshop_id }}.html
+    id: {{ event_id }}
+    type: {{ event_type }}
+    url: events/{{ event_type | replace('_', '-') }}/{{ event_id }}.html
+{% endfor %}
 {% endfor %}
