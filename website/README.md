@@ -25,3 +25,18 @@ or
 python main.py --cmd serve 
 ```
 
+
+## For Developers
+
+## Install with all dev dependencies, in editable mode
+```
+pip install -e .[dev]
+```
+
+## Run tests
+
+```
+pytest
+```
+
+

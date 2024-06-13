@@ -19,3 +19,6 @@ authors = [
   {name = "Sangeetha Nandakumar", email = "sangeetha.nandakumar@gmail.com"},
 ]
 readme = "README.md"
+
+[project.optional-dependencies]
+dev = ["pytest"]
