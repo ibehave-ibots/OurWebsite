@@ -38,6 +38,12 @@ def copydir(src: Path, target: Path) -> None:
     
 
         
+def writefile(path: Path, text: str, basedir: Path = None) -> None:
+    """Writes to a file and creates its parents."""
+    path = Path(basedir).joinpath(path) if basedir else Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text)   
+
 
 def load_yaml(text: str):
     return yaml.load(text, Loader=yaml.Loader)    
