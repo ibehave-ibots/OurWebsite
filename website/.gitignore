@@ -5,3 +5,4 @@ __pycache__
 *.docx
 data_consulting_stats
 .env
+_output
