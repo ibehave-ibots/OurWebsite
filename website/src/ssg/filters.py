@@ -1,4 +1,5 @@
 from pathlib import Path, PurePosixPath
+from typing import Any
 
 from PIL import Image
 
@@ -39,3 +40,9 @@ def resize_image(fname: str, res: tuple[int, int]) -> str:
 
     
 
+def flatten_nested_dict[K1, K2](nested_dict: dict[K1, dict[K2, Any]]) -> list[tuple[K1, K2, Any]]:
+    out = []
+    for k1, d in nested_dict.items():
+        for k2, value in d.items():
+            out.append((k1, k2, value))
+    return out

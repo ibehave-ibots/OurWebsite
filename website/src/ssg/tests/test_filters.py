@@ -24,4 +24,22 @@ def test_path_prepend_decorator():
     assert output == 'cc/bb'
     
 
-
+def test_flatten_dict_works():
+    data = {
+        'a': {
+            1: True,
+            2: False
+        },
+        'b': {
+            3: 'Hi',
+            10: 'Bye',
+        }
+    }
+    observed = filters.flatten_dict(data)
+    expected = [
+        ('a', 1, True),
+        ('a', 2, False),
+        ('b', 3, 'Hi'),
+        ('b', 10, 'Bye'),
+    ]
+    assert observed == expected
