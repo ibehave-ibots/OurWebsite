@@ -1,20 +1,3 @@
-_template: learning_resources.html
-title: Learning Resources
-our_materials:
-    {% for our_material in data.teaching_materials.our_materials %}
-    - name: {{ our_material.name }}
-      filepath: {{ our_material.notebook_filepath }}
-      technologies:
-        {% for technology in our_material.technologies %}
-            - {{ technology }}
-        {% endfor %}
-    {% endfor %}
-external_resources:
-    {% for resource in data.teaching_materials.external_resources %}
-        - {{ resource }}
-    {% endfor %}
----
-
 ## Description
 
 Vivamus ut ornare quam. In ullamcorper vehicula erat. Mauris magna diam, tempus sit amet elit eu, placerat euismod arcu. Quisque laoreet neque lectus. Aenean dui orci, aliquam eget eros eget, malesuada tincidunt lorem. Etiam mollis erat diam, vitae imperdiet erat elementum sit amet. Cras ultrices luctus nisi quis finibus. Sed in vehicula sapien, eget consectetur libero. Proin vulputate nulla eget elit pulvinar, et rutrum massa rhoncus. Fusce dictum justo ac augue tempus, vitae mattis purus malesuada. Phasellus id elementum ex.

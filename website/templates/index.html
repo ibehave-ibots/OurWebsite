@@ -1,19 +1,19 @@
 {% extends "blocks/base.html" %}
 
-{% block title %} {{ page.title }} {% endblock %}
+{% block title %} {{ page.data.title }} {% endblock %}
 
 {% block body %}
 
 <article>
     
-    <h1> {{ page.title }} </h1>
+    <h1> {{ page.data.title }} </h1>
     <section>
     {{ content | safe }}
     </section>
     
     <h2> Our History </h2>
     <section>
-        {% for milestone in page.milestones %}
+        {% for milestone in page.data.milestones %}
         <h3> {{ milestone.name }} </h3>
         {{ milestone.date }}
         {{ milestone.summary }}
@@ -28,25 +28,25 @@
     <h2> Statistics </h2>
     <section>
         <h3>Consulting</h3>
-        <p>Number of consulting sessions: {{ page.consulting.n_sessions }}</p>
-        <p>Number of researchers: {{ page.consulting.n_clients }}</p>
-        <p>Number of labs: {{ page.consulting.n_labs }}</p>
-        <p>Total consulting time: {{ page.consulting.total_hours }} Hours</p>
+        <p>Number of consulting sessions: {{ page.data.consulting.n_sessions }}</p>
+        <p>Number of researchers: {{ page.data.consulting.n_clients }}</p>
+        <p>Number of labs: {{ page.data.consulting.n_labs }}</p>
+        <p>Total consulting time: {{ page.data.consulting.total_hours }} Hours</p>
         <p>Hear from the researchers...
             <ul>
-                {% for testimonial in page.consulting.testimonials %}
+                {% for testimonial in page.data.consulting.testimonials %}
                 <li>{{ testimonial }}</li>
                 {% endfor %}
             </ul>
         </p>
 
         <h3>Workshops</h3>
-        <p>Number of workshops: {{ page.workshop.n_workshops }}</p>
-        <p>Number of students: {{ page.workshop.n_students }}</p>
-        <p>Total teaching time: {{ page.workshop.total_hours }} Hours</p>
+        <p>Number of workshops: {{ page.data.workshop.n_workshops }}</p>
+        <p>Number of students: {{ page.data.workshop.n_students }}</p>
+        <p>Total teaching time: {{ page.data.workshop.total_hours }} Hours</p>
         <p>Hear from the students...
             <ul>
-                {% for testimonial in page.workshop.testimonials %}
+                {% for testimonial in page.data.workshop.testimonials %}
                 <li>{{ testimonial }}</li>
                 {% endfor %}
             </ul>

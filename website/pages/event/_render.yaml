@@ -1,0 +1,5 @@
+{% for wshop_id, workshop in data.events.workshops.items() %}
+  - template: event.html
+    id: {{ wshop_id }}
+    url: events/{{ wshop_id }}.html
+{% endfor %}

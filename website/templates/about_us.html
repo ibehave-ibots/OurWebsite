@@ -11,7 +11,7 @@
     
     <article>
 
-        <h1> {{ page.title }} </h1>
+        <h1> {{ page.data.title }} </h1>
         <section id="rse-description">
             {{ content | safe }}
         </section>
@@ -20,7 +20,7 @@
             <h3 class="h1 text-center pb-md-1 mb-1 mb-sm-3"> 
                 The iBOTS Team
             </h3>
-            {{ people_grid(people=page.people.current )}}
+            {{ people_grid(people=page.data.people.current )}}
         </section>
 
 
@@ -62,7 +62,7 @@
             </div>
         </section>
 
-        {% for section in page.sections %}  
+        {% for section in page.data.sections %}  
         <section>
             {{ service_description(
                 title=section.title,
@@ -80,12 +80,12 @@
             <h3 class="h1 text-center pb-md-1 mb-1 mb-sm-3"> 
                 Past Collaborators 
             </h3>
-            {{ people_grid(people=page.people.past + page.people.other )}}
+            {{ people_grid(people=page.data.people.past + page.data.people.other )}}
         </section>
         
         <section id="sponsors">
             <h1> Sponsors </h1>
-            {% for sponsor in page.sponsors %}
+            {% for sponsor in page.data.sponsors %}
             <h3>{{ sponsor.name }}</h3>
             <img src="{{ sponsor.logo }}" alt="{{ sponsor.logo }}">
             <p>{{ sponsor.description }}</p>

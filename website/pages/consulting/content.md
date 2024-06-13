@@ -1,29 +1,3 @@
-_template: consulting.html
-title: iBOTS Technology Consulting
-statistics:
-    title: Statistics
-    report:
-        labs_helped: {{ data.group.consulting_stats.which_labs_have_used_ibots }}
-        researchers_helped: {{ data.group.consulting_stats.num_of_clients }}
-        consulting_sessions: {{ data.group.consulting_stats.num_consulting_sessions }}
-        consulting_hours: {{ data.group.consulting_stats.total_hours_consulting }}
-session_booking:
-    title: Book a Session
-    description: |
-        Nullam interdum orci tellus, quis mollis leo pellentesque non. Aenean aliquam odio quis ipsum cursus blandit. Fusce ultrices eu dolor et vestibulum. Donec efficitur luctus justo. Quisque maximus sollicitudin tellus a maximus. Curabitur rhoncus augue est, eget congue augue placerat vitae. Nam laoreet dignissim ligula, ac dictum eros maximus at.
-    consultants:
-        - name:  Nicholas Del Grosso, Ph.D
-          booking_link: https://calendly.com/delgrosso-nick/short-chat
-        - name: Sangeetha Nandakumar, Ph.D
-          booking_link: https://calendly.com/sangeethank/short-chat
-testimonials:
-    title: Testimonials
-    testimonials: 
-        {% for testimonial in data.testimonials.consulting %}
-        - {{ testimonial }}
-        {% endfor %}
----
-
 # Description
 
 Nullam interdum orci tellus, quis mollis leo pellentesque non. Aenean aliquam odio quis ipsum cursus blandit. Fusce ultrices eu dolor et vestibulum. Donec efficitur luctus justo. Quisque maximus sollicitudin tellus a maximus. Curabitur rhoncus augue est, eget congue augue placerat vitae. Nam laoreet dignissim ligula, ac dictum eros maximus at.

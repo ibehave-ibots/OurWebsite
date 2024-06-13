@@ -1,14 +1,3 @@
-_template: events/index.html
-_generate:
-  - template: events/item.html
-    pages: 
-    {% for wshop_id, workshop in data.events.workshops.items() %}
-      - id: {{ wshop_id }}
-    {% endfor %}
-    
-title: Workshops
-
----
 
 ## Description
 

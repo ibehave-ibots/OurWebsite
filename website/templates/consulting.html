@@ -1,20 +1,20 @@
 {% extends "blocks/base.html" %}
 
-{% block title %} {{ page.title }} {% endblock %}
+{% block title %} {{ page.data.title }} {% endblock %}
 
 {% block body %}
 
 <article>
     
-    <h1> {{ page.title }} </h1>
+    <h1> {{ page.data.title }} </h1>
     <section id="description">
     {{ content | safe }}
     </section>
     
     <section>
-        <h1> {{ page.statistics.title }} </h1>
+        <h1> {{ page.data.statistics.title }} </h1>
         <dl>
-        {% for key, value in page.statistics.report.items() %}
+        {% for key, value in page.data.statistics.report.items() %}
         <dt>{{key}}</dt>
         <dd>{{ value }}</dd>
         </dl>
@@ -22,9 +22,9 @@
     </section>
     
     <section id="book-a-session">
-        <h1> {{ page.session_booking.title }} </h1>
-        <p> {{ page.session_booking.description }} </p>
-        {% for consultant in page.session_booking.consultants %}
+        <h1> {{ page.data.session_booking.title }} </h1>
+        <p> {{ page.data.session_booking.description }} </p>
+        {% for consultant in page.data.session_booking.consultants %}
         <article>
             <h1> {{ consultant.name }} </h1>
             <p> <a href="{{ consultant.booking_link }}">{{ consultant.booking_link }}</a> </p>
@@ -36,8 +36,8 @@
     </section>
 
     <section>
-        <h1>{{ page.testimonials.title }} </h1>
-        {% for testimonial in page.testimonials.testimonials %}
+        <h1>{{ page.data.testimonials.title }} </h1>
+        {% for testimonial in page.data.testimonials.testimonials %}
         <p>{{ testimonial }} </p>
         {% endfor %}
         

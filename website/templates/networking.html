@@ -4,14 +4,14 @@
 
 {% block body %}
 <article>
-    <h1> {{ page.title }} </h1>
+    <h1> {{ page.data.title }} </h1>
     <section>
         {{ content | safe }}
     </section>
 
     <section id="conferences">
         <h2>Conferences</h2>
-        {% for conference in page.conferences %}
+        {% for conference in page.data.conferences %}
             <h3> {{ conference.name }} </h3>
             <p> {{ conference.summary }} </p>
             <p>When: {{ conference.date }} </p>
@@ -29,7 +29,7 @@
 
     <section id="seminars">
         <h2>Seminars</h2>
-        {% for seminar in page.seminars %}
+        {% for seminar in page.data.seminars %}
             <h3> {{ seminar.name }} </h3>
             <p> {{ seminar.summary }} </p>
             <p>When: {{ seminar.date }} </p>
@@ -47,7 +47,7 @@
 
     <section id="partners">
         <h1> Partners </h1>
-        {% for partner in page.partners %}
+        {% for partner in page.data.partners %}
         <h3>{{ partner.name }}</h3>
         <p>{{ partner.description }}</p>
         <a href="{{ partner.website }}">{{ partner.website }}</a>

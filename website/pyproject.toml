@@ -21,4 +21,4 @@ authors = [
 readme = "README.md"
 
 [project.optional-dependencies]
-dev = ["pytest"]
+dev = ["pytest", "ipdb"]
