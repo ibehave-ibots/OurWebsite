@@ -35,9 +35,9 @@ def _load_frontmatter(text: str) -> Any:
 
 ## Markdown Content ##
 
-def render_content_to_html(renderer: JinjaRenderer, page_path: Path, **render_data) -> str:
+def parse_markdown_to_html(page_path: Path) -> str:
     page_md = _read_content_text(md_path=page_path)
-    content_html = _load_markdown(page_md)
+    content_html = markdown2.Markdown().convert(page_md)
     return content_html
 
 
@@ -48,7 +48,5 @@ def _read_content_text(md_path: Path) -> str:
     return content
 
 
-def _load_markdown(text: str):
-    return markdown2.Markdown().convert(text)
 
 

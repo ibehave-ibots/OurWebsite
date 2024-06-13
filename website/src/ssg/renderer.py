@@ -7,7 +7,7 @@ from .templates import JinjaRenderer
 from .data import extract_global_data
 from .utils import copydir, writefile
 from .filters import redirect_path, resize_image
-from .pages import render_content_to_html, parse_jinja_yaml_frontmatter
+from .pages import parse_markdown_to_html, parse_jinja_yaml_frontmatter
 
 
 def run_render_pipeline():
@@ -32,7 +32,7 @@ def run_render_pipeline():
         
         page_data = parse_jinja_yaml_frontmatter(renderer=renderer, page_path=page_path, data=global_data)
         if page_path.suffix == '.md':
-            page_data['content'] = render_content_to_html(renderer=renderer, page_path=page_path)
+            page_data['content'] = parse_markdown_to_html(page_path)
         
         template_name = page_data['_template']
         page_html = renderer.render_named_template(
