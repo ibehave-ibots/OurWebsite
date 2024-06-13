@@ -12,13 +12,13 @@ menu:
       - title: Book a Session
         url: /consulting.html#book-a-session
 
-  - title: Workshops
+  - title: Events
     children:
       - title: Overview
         url: /events
-      - title: Upcoming Workshops
+      - title: Upcoming Events
         url: /events#upcoming-workshops
-      - title: Past Workshops
+      - title: Past Events
         url: /events#past-workshops
 
   - title: Learning Resources

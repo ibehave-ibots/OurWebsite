@@ -1,7 +1,7 @@
 {% from 'macros/course_card.html' import course_card %}
 {% extends "blocks/base.html" %}
 
-{% block title %}  Workshops {% endblock %}
+{% block title %}  Events {% endblock %}
 
 {% block body %}
 
@@ -17,41 +17,45 @@
   </section>
   
   
-  <section id="upcoming-workshops">
+  <section id="upcoming-events">
     
-    <h1>Upcoming Workshops</h1>  
+    <h1>Upcoming Events</h1>  
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-3 gx-md-4 mt-n2 mt-sm-0">
-      {% for wshop_id, wshop in data.events.workshops.items() %}
-        {% if wshop.sessions[0].date >= today %}
-          {{ course_card(
-            title = wshop.title, 
-            registration_url = "/events/" + wshop_id + '.html', 
-            instructor = data.people[wshop.instructors[0].id].name,
-            start_date = wshop.sessions[0].date, 
-            duration = wshop.hours, 
-            registration_open = True, 
-            img_src="https://placehold.co/600x400") 
-          }}
-        {% endif %}
+      {% for event_type, series in data.events.items() %}
+        {% for event_id, event in series.items() %}
+          {% if event.sessions[0].date >= today %}
+            {{ course_card(
+              title = event.title, 
+              registration_url = "/events/" + event_id + '.html', 
+              instructor = data.people[event.instructors[0].id].name,
+              start_date = event.sessions[0].date, 
+              duration = event.hours, 
+              registration_open = True, 
+              img_src="https://placehold.co/600x400") 
+            }}
+          {% endif %}
+        {% endfor %}
       {% endfor %}
     </div>
   </section>
   
-  <section id="past-workshops">
-    <h1>Past Workshops</h1>
+  <section id="past-events">
+    <h1>Past Events</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-3 gx-md-4 mt-n2 mt-sm-0">
-      {% for wshop_id, wshop in data.events.workshops.items() %}
-        {% if wshop.sessions[0].date < today %}
-          {{ course_card(
-            title = wshop.title, 
-            registration_url = "/events/" + wshop_id + '.html', 
-            instructor = data.people[wshop.instructors[0].id].name,
-            start_date = wshop.sessions[0].date, 
-            duration = wshop.hours, 
-            registration_open = True, 
-            img_src="https://placehold.co/600x400") 
-          }}
-        {% endif %}
+      {% for event_type, series in data.events.items() %}
+        {% for event_id, event in series.items() %}
+          {% if event.sessions[0].date < today %}
+            {{ course_card(
+              title = event.title, 
+              registration_url = "/events/" + event_id + '.html', 
+              instructor = data.people[event.instructors[0].id].name,
+              start_date = event.sessions[0].date, 
+              duration = event.hours, 
+              registration_open = True, 
+              img_src="https://placehold.co/600x400") 
+            }}
+          {% endif %}
+        {% endfor %}
       {% endfor %}
     </div>
   </section>

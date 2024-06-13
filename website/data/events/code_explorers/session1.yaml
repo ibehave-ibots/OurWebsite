@@ -8,8 +8,8 @@ sessions:
     end_time: 13h30
     location: online
 instructors:
-  - name: Sangeetha Nandakumar
+  - id: sangeetha
     role: Organizer
-  - name: Anoushka Jain
+  - id: anoushka
     role: Organizer
 registration_link: codeexplorers.register.com
