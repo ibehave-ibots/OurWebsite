@@ -26,7 +26,7 @@
           {% if event.sessions[0].date >= today %}
             {{ course_card(
               title = event.title, 
-              registration_url = "/events/" + event_id + '.html', 
+              registration_url = "/events/" + event_type.replace('_', '-') + "/" + event_id + '.html', 
               instructor = data.people[event.instructors[0].id].name,
               start_date = event.sessions[0].date, 
               duration = event.hours, 
