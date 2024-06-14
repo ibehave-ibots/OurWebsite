@@ -1,4 +1,4 @@
-name: ibots-site
+name: consulting-analysis
 channels:
   - defaults
 dependencies: 
@@ -14,6 +14,7 @@ dependencies:
       - webdav4
       - fsspec
       - python-docx
+      - snakemake
 
 
 
