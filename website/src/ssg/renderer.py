@@ -35,6 +35,7 @@ def run_render_pipeline():
     site_data = extract_global_data(base_path='./templates/data') # get data just used for the website, shouldn't be used in pages files
 
     ## Render Each Page to HTML and write to './output'
+    urls_written = {}  # stores the url paths created, and by what page path
     for page_path in Path('./pages').glob('**/*'):
         if not page_path.is_dir():
             continue
@@ -60,7 +61,16 @@ def run_render_pipeline():
                 page=page_data | rdata,
                 site=site_data,
             )
-            writefile(path=rdata['url'], text=page_html, basedir='./_output')
+
+            # Check that we're not overwriting a url that was already made--it's confusing to debug.
+            url_to_write = rdata['url']
+            if url_to_write in urls_written:
+                raise FileExistsError(f"{str(page_path)} tried to overwrite {url_to_write}, already made by {str(urls_written[url_to_write])}")
+            else:
+                urls_written[url_to_write] = page_path
+            
+            # Write the html file
+            writefile(path=url_to_write, text=page_html, basedir='./_output')
 
 
         

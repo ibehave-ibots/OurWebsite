@@ -14,7 +14,7 @@ menu:
 
   - title: Events
     children:
-      - title: Overview
+      - title: All Events
         url: /events
       - title: Upcoming Events
         url: /events#upcoming-workshops

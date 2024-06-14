@@ -7,10 +7,6 @@
 
 <article>
   <h1>{{ page.data.title }} </h1>
-  <section>
-    <h1>Subscribe for Announcements</h1>
-    <p>To get announcements of upcoming workshops and be the first to register for them, please [Join Our Mailing List]({{ data.group.mailing_list_subscribe_url }}).  If you have any quesitons, please feel free to write to Nick at {{data.group.email}} </p>
-  </section>
   
   <section>
     {{ page.content | safe }}
@@ -36,7 +32,10 @@
             start_date = event.start_date, 
             duration = event.hours, 
             registration_open = True, 
-            img_src="https://placehold.co/600x400") 
+            img_src="https://placehold.co/600x400",
+            series_name = event_type.replace('_', ' ').title(),
+            series_url="/events/" + event_type.replace('_', '-') + "/index.html"
+            )
           }}
         {% endif %}
       {% endfor %}
@@ -60,8 +59,11 @@
             instructor = data.people[event.instructors[0].id].name,
             start_date = event.start_date, 
             duration = event.hours, 
-            registration_open = True, 
-            img_src="https://placehold.co/600x400") 
+            registration_open = False, 
+            img_src="https://placehold.co/600x400",
+            series_name = event_type.replace('_', ' ').title(),
+            series_url="/events/" + event_type + "/index.html"
+            ) 
           }}
         {% endif %}
       {% endfor %}

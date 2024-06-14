@@ -1,5 +1,5 @@
 
-{% macro course_card(title, registration_url, instructor, start_date, duration, registration_open = True, img_src="https://placehold.co/600x400") -%}
+{% macro course_card(title, registration_url, instructor, start_date, duration, registration_open = True, img_src="https://placehold.co/600x400", series_name="WSHOP", series_url="series.html") -%}
 <div class="col pb-1 pb-lg-3 mb-4">
     <article class="card h-100 border-0 shadow-sm">
         <div class="position-relative">
@@ -17,6 +17,9 @@
                     {{ title }}
                 </a>
             </h1>
+            <p class="fs-lg fw-semibold tet-primary mb-0">
+                Series: <a href="{{series_url}}">{{ series_name }}</a>
+            </p>
             <p class="fs-sm mb-2">
                 By {{ instructor }}
             </p>
