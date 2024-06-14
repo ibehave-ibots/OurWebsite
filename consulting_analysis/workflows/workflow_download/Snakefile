@@ -5,8 +5,8 @@ rule consolidate_reports:
         path="raw_data/"
     output:
         path="processed_data/consolidated_report.txt"
-    shell:
-        "python scripts/consolidate_reports.py {input.path} {output.path}"
+    run:
+        shell("python scripts/consolidate_reports.py {input.path} {output.path}")
 
 rule write_json:
     input:
