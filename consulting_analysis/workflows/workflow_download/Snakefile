@@ -5,15 +5,5 @@ rule consolidate_reports:
         directory="raw_data/"
     output: 
         file="processed_data/consolidated_report.txt"
-    run:
-        import os
-        import sys
-        sys.path.append(os.path.abspath(os.path.join('..', 'scripts')))
-        from pathlib import Path
-        from data_downloader import download_data
-        from data_processor import create_consolidated_report
-        download_data()
-        reports = [file for file in Path(input.directory).iterdir() if file.is_file()]
-        consolidated_report = create_consolidated_report(reports=reports)
-        with open(output.file, 'w', encoding='utf-8') as f:
-            f.write(consolidated_report)
+    shell:
+        "python workflows/workflow_download/consolidate_reports.py {input.directory} {output.file}"
