@@ -55,7 +55,7 @@ def test_promote_key_list_of_dicts():
         {'A': {'a': 1, 'b': [10, 20, 30]}},
         {'A': {'a': 10, 'b': [100, 200, 300]}}
     ]
-    observed = filters.promote_key(data, key='newkey', attr_seq=['A', 'b', 1])
+    observed = filters.promote_key(data, key='newkey', attrs=['A', 'b', 1])
     expected = [
         {'A': {'a': 1, 'b': [10, 20, 30]}, 'newkey': 20},
         {'A': {'a': 10, 'b': [100, 200, 300]}, 'newkey': 200},
@@ -68,9 +68,16 @@ def test_promote_key_dict_of_dicts():
         'first': {'A': {'a': 1, 'b': [10, 20, 30]}},
         'second': {'A': {'a': 10, 'b': [100, 200, 300]}}
     }
-    observed = filters.promote_key(data, key='newkey', attr_seq=['A', 'b', 1])
+    observed = filters.promote_key(data, key='newkey', attrs=['A', 'b', 1])
     expected = {
         'first': {'A': {'a': 1, 'b': [10, 20, 30]}, 'newkey': 20},
         'second': {'A': {'a': 10, 'b': [100, 200, 300]}, 'newkey': 200},
     }
+    assert observed == expected
+
+
+def test_multi_index():
+    data = {'a': {'b': [10, 20, 30]}}
+    observed = filters.multi_index(data, ['a', 'b', 1])
+    expected = 20
     assert observed == expected

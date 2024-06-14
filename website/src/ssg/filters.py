@@ -1,5 +1,5 @@
 from pathlib import Path, PurePosixPath
-from typing import Any, Iterable
+from typing import Any, Collection, Iterable
 
 from PIL import Image
 
@@ -73,3 +73,17 @@ def promote_key[T: list[dict] | dict[str, dict]](data: T, key: str, attrs: list[
 
 def items[K, V](data: dict[K, V]) -> list[tuple[K, V]]:
     return list(data.items())
+
+
+def multi_index(data: Collection, indices: list[int | str]) -> Any:
+    """Given a sequence of indices, returns the value from nested index from data."""
+    get_code = ''.join([f"['{ind}']" if isinstance(ind, str) else f"[{ind}]" for ind in indices])
+    value = eval("data" + get_code)
+    return value
+
+
+def sort_by[T: Iterable](data: T, attrs: list[int | str]) -> T:
+    
+
+    data_sorted = type(data)()
+    sorted()
