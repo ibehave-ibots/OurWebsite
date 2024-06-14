@@ -16,10 +16,10 @@ menu:
     children:
       - title: All Events
         url: /events
-      - title: Upcoming Events
-        url: /events#upcoming-workshops
-      - title: Past Events
-        url: /events#past-workshops
+      - title: Workshops
+        url: /events/workshops
+      - title: Code Explorers Club
+        url: /events/code-explorers
 
   - title: Learning Resources
     url: /learning_resources.html

@@ -32,7 +32,12 @@ def run_render_pipeline():
 
     ## Get Data from './data'
     global_data = extract_global_data(base_path='./data')
-    site_data = extract_global_data(base_path='./templates/data') # get data just used for the website, shouldn't be used in pages files
+
+    ## Render Jinja and load yaml files from './templates/data'
+    site_data = {}
+    for yaml_path in Path('./templates/data').glob('*.yaml'):
+        yaml_text = renderer.render_in_place(template_text=yaml_path.read_text(), data=global_data)
+        site_data[yaml_path.stem] = yaml.load(yaml_text, Loader=yaml.Loader)
 
     ## Render Each Page to HTML and write to './output'
     urls_written = {}  # stores the url paths created, and by what page path
