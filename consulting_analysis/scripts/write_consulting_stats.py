@@ -14,14 +14,43 @@ def main(input_path):
     repo_local = ConsultingResultRepo.connect(fs_local)
 
     n_short = consolidated_report.lower().count('type: short')
+    n_hands_on = consolidated_report.lower().count('type: hands')
+    n_sess = consolidated_report.lower().count('type: short') + consolidated_report.lower().count('type: hands')
+    tot_hrs = consolidated_report.lower().count('type: short')*0.45 + consolidated_report.lower().count('type: hands')*2.5
+
 
     repo_local.put(
-        short_name='n_sess',
+        short_name='n_short',
         name='Total number of sessions',
         value=n_short,
         units='Session',
         display_units='Session'
     )
+
+    repo_local.put(
+        short_name='n_sess',
+        name='Total number of sessions',
+        value=n_sess,
+        units='Session',
+        display_units='Session'
+    )
+
+    repo_local.put(
+        short_name='tot_hrs',
+        name='Total hours of sessions',
+        value=tot_hrs,
+        units='Hour',
+        display_units='Hrs'
+    )
+
+    repo_local.put(
+        short_name='n_hands',
+        name='Total number of hands-on',
+        value=n_hands_on,
+        units='Hour',
+        display_units='Hrs'
+    )
+
 
     repo_local.push()
     
