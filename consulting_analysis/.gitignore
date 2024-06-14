@@ -5,4 +5,5 @@ __pycache__
 *.docx
 data_consulting_stats
 processed_data
+analysis_data
 .snakemake
