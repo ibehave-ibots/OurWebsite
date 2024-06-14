@@ -6,4 +6,4 @@ rule consolidate_reports:
     output: 
         file="processed_data/consolidated_report.txt"
     shell:
-        "python workflows/workflow_download/consolidate_reports.py {input.directory} {output.file}"
+        "python scripts/consolidate_reports.py {input.directory} {output.file}"
