@@ -81,3 +81,32 @@ def test_multi_index():
     observed = filters.multi_index(data, ['a', 'b', 1])
     expected = 20
     assert observed == expected
+
+
+def test_sort_by():
+    data = [
+        (12, {'a': [4, {'A': 200, 'B': 200}]}),
+        (65, {'a': [4, {'A': 50, 'B': 200}]}),
+        (25, {'a': [4, {'A': 100, 'B': 200}]}),
+    ]
+
+    # A should be ascending
+    observed = filters.sort_by(data, [1, 'a', 1, 'A'])
+    expected = [
+        (65, {'a': [4, {'A': 50, 'B': 200}]}),
+        (25, {'a': [4, {'A': 100, 'B': 200}]}),
+        (12, {'a': [4, {'A': 200, 'B': 200}]}),
+    ]
+    assert observed == expected
+
+    # When reversed, A should be descending
+    # A should be ascending
+    observed = filters.sort_by(data, [1, 'a', 1, 'A'], reverse=True)
+    expected = [
+        (12, {'a': [4, {'A': 200, 'B': 200}]}),
+        (25, {'a': [4, {'A': 100, 'B': 200}]}),
+        (65, {'a': [4, {'A': 50, 'B': 200}]}),
+    ]
+    assert observed == expected
+    
+

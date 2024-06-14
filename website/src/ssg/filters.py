@@ -82,8 +82,5 @@ def multi_index(data: Collection, indices: list[int | str]) -> Any:
     return value
 
 
-def sort_by[T: Iterable](data: T, attrs: list[int | str]) -> T:
-    
-
-    data_sorted = type(data)()
-    sorted()
+def sort_by[T](data: Iterable[T], indices: list[int | str], reverse: bool = False) -> list[T]:
+    return type(data)(sorted(data, key=lambda d: multi_index(d, indices), reverse=reverse))

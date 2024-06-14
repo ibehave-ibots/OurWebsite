@@ -21,7 +21,13 @@
     
     <h1>Upcoming Events</h1>  
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-3 gx-md-4 mt-n2 mt-sm-0">
-      {% for (event_type, event_id), event in data.events | flatten_nested | promote_key('start_date', ['sessions', 0, 'date']) | items %}
+      {% for (event_type, event_id), event in 
+        data.events 
+        | flatten_nested 
+        | promote_key('start_date', ['sessions', 0, 'date']) 
+        | items
+        | sort_by([1, 'start_date'])
+      %}
         {% if event.start_date >= today %}
           {{ course_card(
             title = event.title, 
@@ -40,7 +46,13 @@
   <section id="past-events">
     <h1>Past Events</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-3 gx-md-4 mt-n2 mt-sm-0">
-      {% for (event_type, event_id), event in data.events | flatten_nested | promote_key('start_date', ['sessions', 0, 'date']) | items %}
+      {% for (event_type, event_id), event in 
+        data.events 
+        | flatten_nested 
+        | promote_key('start_date', ['sessions', 0, 'date']) 
+        | items 
+        | sort_by([1, 'start_date'], reverse=True)
+      %}
         {% if event.start_date < today %}
           {{ course_card(
             title = event.title, 
