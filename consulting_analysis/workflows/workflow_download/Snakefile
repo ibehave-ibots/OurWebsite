@@ -5,38 +5,15 @@ rule consolidate_reports:
         path="raw_data/"
     output:
         path="processed_data/consolidated_report.txt"
-    shell:
-        "python scripts/consolidate_reports.py {input.path} {output.path}"
+    run:
+        shell("python scripts/consolidate_reports.py {input.path} {output.path}")
 
 rule write_json:
     input:
         path="processed_data/consolidated_report.txt"
     output:
-        path=directory("analysis_data/")
+        path=directory("analysis_data")
     run:
-        from results_repo import ConsultingResultRepo
-        from fsspec.implementations.local import LocalFileSystem
-        import os
-        from pathlib import Path
-        
-        os.environ['DB_WRITEMODE'] = '1'
-        
-        with open(input.path, 'r', encoding='utf-8') as f:
-            consolidated_report = f.read().replace('\n', '')
-        
-        Path(output.path).mkdir(parents=True, exist_ok=True)
-        
-        os.chdir(output.path)
-        fs_local = LocalFileSystem()
-        repo_local = ConsultingResultRepo.connect(fs_local)
-        
-        n_short = consolidated_report.lower().count('type: short')
-        
-        repo_local.put(
-            short_name='n_sess',
-            name='Total number of sessions',
-            value=n_short,
-            units='Session',
-            display_units='Session'
-        )
-        repo_local.push()
+        shell("mkdir {output.path}")
+        shell("python scripts/write_consulting_stats.py {input.path}")
+        shell("mv *.json {output.path}")
