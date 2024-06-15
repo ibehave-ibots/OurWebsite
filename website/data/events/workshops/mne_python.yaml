@@ -1,7 +1,7 @@
 title: Intro to (M)EEG Analysis with MNE-Python
 summary: |
     Would you like to learn more about (M)EEG analysis and programming in Python? By the course's end, you’ll have an understanding of how to install and setup a Python environment with MNE and be able use it to analyze your (M)EEG data.
-duration: 15
+hours: 15
 sessions:
     - date: 2024-02-07
       start_time: 14h00
@@ -28,7 +28,7 @@ registration_link: |
     https://us02web.zoom.us/meeting/register/tZ0uf-utqj0vGdI5V0ouc_qthEQJyvejqqRU
 format: Online, Hands-On Course
 class_size: 25
-perequisites: |
+prerequisites: |
     People of all skill levels, experiences, and backgrounds are welcome!
 preparation_instructions: |
     Software installation instructions will be sent before the start of the course.

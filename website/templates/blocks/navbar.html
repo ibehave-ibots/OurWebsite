@@ -17,7 +17,7 @@
           <ul class="navbar-nav">
               
               {% for header in site.navbar.menu %}
-                  {% if not header.children %}
+                  {% if 'children' not in header or not header.children %}
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ header.url }}">{{ header.title }}</a>
                     </li>

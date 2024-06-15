@@ -2,7 +2,7 @@
     title="What is an RSE?",
     img="https://placehold.co/600x600",
     paragraphs=["aadf akdfjakfl jalfkjafa", "dfjkajfldfjlkajfla  lkf dalkfjalkfdjalf"],
-    features=[{'title': 'title', 'sentence': 'sentence', 'icon.svg': 'icon.svg'}],
+    features=[{'title': 'title', 'sentence': 'sentence', 'icon': 'icon.svg'}],
     reverse_layout=False
     ) %}
     
@@ -68,10 +68,10 @@
                     <div class="row row-cols-1 row-cols-sm-2 g-0">
                         {% for feature in features %}
                         <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
-                            <img src="{{ feature[2] }}" width="48" alt="Icon">
+                            <img src="{{ feature.icon }}" width="48" alt="Icon">
                             <div class="ps-2 ms-1">
-                                <h3 class="h6 mb-0">{{ feature[0] }}</h3>
-                                <p class="fs-xs mb-0"> {{ feature[1] }} </p>
+                                <h3 class="h6 mb-0">{{ feature.title }}</h3>
+                                <p class="fs-xs mb-0"> {{ feature.sentence }} </p>
                             </div>
                         </div>
                         {% endfor %}

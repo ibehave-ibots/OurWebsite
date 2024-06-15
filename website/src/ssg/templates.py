@@ -14,6 +14,7 @@ class JinjaRenderer(NamedTuple):
         env = jinja2.Environment(
             loader=jinja2.FileSystemLoader(templates_dir),
             autoescape=jinja2.select_autoescape(),
+            undefined=jinja2.StrictUndefined,
         )
         env.filters.update(filters)
         env.globals.update(globals)

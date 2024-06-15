@@ -27,7 +27,7 @@ def run_render_pipeline():
         globals={
             'today': date.today(),
             'now': datetime.now(),
-        }
+        },
     )
 
     ## Get Data from './data'
