@@ -14,6 +14,7 @@ from . import filters
 
 def run_render_pipeline():
     copydir(src="./static", target="./_output/static")
+    copydir(src="./themes/Silicon/assets", target="./_output/assets")
     renderer = JinjaRenderer.from_path(
         templates_dir='./templates', 
         filters={

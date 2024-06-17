@@ -1,3 +1,25 @@
 # Add patterns of files dvc should ignore, which could improve
 # the performance. Learn more at
 # https://dvc.org/doc/user-guide/dvcignore
+.DS_Store
+*/.DS_Store
+.DS_Store?
+Thumbs.db
+node_modules/
+/node_modules
+/bower_components
+bower_components/
+.vscode
+*.sublime*
+/.idea
+.sass-cache
+.bowerrc
+.grunt
+.sass-lint.yml
+*.zip
+*.cfg
+*.jar
+*.log
+*.app
+*.exe
+*.war
