@@ -12,7 +12,8 @@ dependencies = [
   "markdown2",
   "PyYAML",
   "Pillow",
-  "dvc"
+  "dvc",
+  "dvc_webdav>=3.0"
 ]
 requires-python = ">= 3.12"
 authors = [

@@ -1,4 +1,7 @@
 [core]
     remote = dev
 ['remote "dev"']
-    url = webdavs://uni-bonn.sciebo.de/public.php/wRsGAHvi6Ab0mUp
+    url = webdavs://uni-bonn.sciebo.de/public.php/webdav
+    user = wRsGAHvi6Ab0mUp
+    password = ''
+
