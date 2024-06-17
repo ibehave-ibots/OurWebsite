@@ -7,3 +7,4 @@ data_consulting_stats
 .env
 _output
 *.egg-info
+*.bak
