@@ -1,0 +1,4 @@
+[core]
+    remote = dev
+['remote "dev"']
+    url = webdavs://uni-bonn.sciebo.de/public.php/wRsGAHvi6Ab0mUp
