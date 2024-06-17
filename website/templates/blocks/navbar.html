@@ -6,9 +6,14 @@
       <img src="/static/images/ibots.png" width="47" alt="Silicon">
       iBOTS
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse1" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse1" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="form-check form-switch mode-switch order-lg-2 ms-4 ms-lg-auto me-lg-4" data-bs-toggle="mode">
+      <input type="checkbox" class="form-check-input" id="theme-mode">
+      <label class="form-check-label d-none d-sm-block d-lg-none d-xl-block" for="theme-mode">Light</label>
+      <label class="form-check-label d-none d-sm-block d-lg-none d-xl-block" for="theme-mode">Dark</label>
+    </div>
     <nav id="navbarCollapse1" class="collapse navbar-collapse">
       <hr class="d-lg-none mt-3 mb-2">
       <ul class="navbar-nav me-auto">
@@ -31,50 +36,11 @@
           </li> 
         {% endif %}
         {% endfor %}       
-        <!-- <li class="nav-item">
-          <a href="#" class="nav-link active">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Dropdown</a>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="#" class="dropdown-item">Action link</a>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action link</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li><a class="dropdown-item" href="#">Yet another link</a></li>
-              </ul>
-            </li>
-            <li><a class="dropdown-item" href="#"> Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li> -->
-
-
 
       </ul>
-      <div class="d-none d-lg-flex order-lg-3">
-        <a href="{{ data.group.mailing_list_subscribe_url }}" class="d-flex align-items-center text-decoration-none ms-4">
-          <i class="bx bx-chat fs-2 text-primary"></i>
-          <div class="fs-sm ps-2">
-            <h6 class="fs-sm mb-0">Mailing List</h6>
-            <span class="text-nav">listen.uni-bonn.de</span>
-          </div>
-        </a>
-      </div>
-      <!-- <a href="#" class="btn btn-primary btn-sm fs-sm rounded my-3 my-lg-0">
-        {{ site.navbar.call_to_action.title }} 
-      </a> -->
+      <a href="{{ site.navbar.call_to_action.url }}" class="btn btn-primary btn-sm fs-sm rounded my-3 my-lg-0">
+        {{ site.navbar.call_to_action.title }}
+      </a>
     </nav>
   </div>
 </header>

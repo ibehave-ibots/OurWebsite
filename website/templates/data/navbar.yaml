@@ -1,6 +1,6 @@
 call_to_action:
-  title: Join Our Mailing List!
-  url: https://listen.uni-bonn.de/wws/subscribe/ibehave.ibots-news
+  title: Subscribe
+  url: {{ data.group.mailing_list_subscribe_url }}
 menu:
 
   - title: Consulting
