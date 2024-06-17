@@ -1,15 +1,15 @@
 from results_repo import ConsultingResultRepo
 from fsspec.implementations.local import LocalFileSystem
-from utils.consulting_utils import count_types_of_sessions
+from utils.consulting_utils import count_types_of_sessions, count_num_unique_scholars
 import os
 import sys
 from pathlib import Path
 
-def main(input_path):
+def main(consolidated_report_path):
     os.environ['DB_WRITEMODE'] = '1'
 
-    with open(input_path, 'r', encoding='utf-8') as f:
-        consolidated_report = f.read().replace('\n', '')
+    with open(consolidated_report_path, 'r', encoding='utf-8') as f:
+        consolidated_report = f.read()#.replace('\n', ' ')
 
     fs_local = LocalFileSystem()
     repo_local = ConsultingResultRepo.connect(fs_local)
@@ -20,6 +20,7 @@ def main(input_path):
     hands_on_hrs = n_hands_on * 2.5
     n_sess = n_short + n_hands_on
     tot_hrs = short_hrs + hands_on_hrs
+    n_unique_scholars = count_num_unique_scholars(consolidated_report)
 
     repo_local.put(
         short_name='n_sess',
@@ -44,6 +45,15 @@ def main(input_path):
         units='Session',
         display_units='Session'
     )
+
+    repo_local.put(
+        short_name='n_unique_scholars',
+        name='Number of different scholars',
+        value=n_unique_scholars,
+        units='Researcher',
+        display_units='Researcher'
+    )
+
     repo_local.push()
    
 
