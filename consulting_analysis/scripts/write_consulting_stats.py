@@ -13,15 +13,17 @@ def main(input_path):
     fs_local = LocalFileSystem()
     repo_local = ConsultingResultRepo.connect(fs_local)
 
-    n_short = consolidated_report.lower().count('type: short')
-    n_hands_on = consolidated_report.lower().count('type: hands')
-    n_sess = consolidated_report.lower().count('type: short') + consolidated_report.lower().count('type: hands')
-    tot_hrs = consolidated_report.lower().count('type: short')*0.45 + consolidated_report.lower().count('type: hands')*2.5
+    n_short = count_types_of_sessions(consolidated_report, type='short')
+    short_hrs = n_short * 0.45
+    n_hands_on = count_types_of_sessions(consolidated_report, type='hands')
+    hands_on_hrs = n_hands_on * 2.5
+    n_sess = n_short + n_hands_on
+    tot_hrs = short_hrs + hands_on_hrs
 
 
     repo_local.put(
         short_name='n_short',
-        name='Total number of sessions',
+        name='Total number of short chats',
         value=n_short,
         units='Session',
         display_units='Session'
@@ -45,14 +47,17 @@ def main(input_path):
 
     repo_local.put(
         short_name='n_hands',
-        name='Total number of hands-on',
+        name='Total number of hands-on sesions',
         value=n_hands_on,
-        units='Hour',
-        display_units='Hrs'
+        units='Session',
+        display_units='Session'
     )
 
 
     repo_local.push()
+
+def count_types_of_sessions(consolidated_report, type='short'):
+    return consolidated_report.lower().count(f'type: {type}')
     
 
 if __name__ == "__main__":
