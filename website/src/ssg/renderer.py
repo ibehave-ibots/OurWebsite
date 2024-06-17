@@ -8,11 +8,12 @@ import yaml
 
 from .templates import JinjaRenderer
 from .data import extract_global_data
-from .utils import copydir, writefile
+from .utils import copydir, writefile, rmdir
 from . import filters
 
 
 def run_render_pipeline():
+    rmdir("./_output/static")
     copydir(src="./static", target="./_output/static")
     copydir(src="./themes/Silicon/assets", target="./_output/assets")
     renderer = JinjaRenderer.from_path(
@@ -55,12 +56,15 @@ def run_render_pipeline():
             page_data[markdown_path.stem] = markdown2.Markdown().convert(markdown_path.read_text())
         
         render_data = page_data['_render']
+
         # support multiple pages rendered from the same file
         if isinstance(render_data, dict):
             render_data = [render_data]  
         assert isinstance(render_data, list)
 
         for rdata in render_data:
+            assert rdata['url'].startswith('/'), f"Page URLS must be absolute.  Try {'/' + rdata['url']}"
+
             page_html = renderer.render_named_template(
                 template_name=rdata['template'], 
                 data=global_data, 

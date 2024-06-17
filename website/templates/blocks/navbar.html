@@ -1,48 +1,71 @@
 
- 
-<nav class="bg-body-tertiary shadow-sm navbar fixed-top navbar-expand-lg">
-    <div class="container-fluid">
-
-        <!-- Logo -->
-        <a class="navbar-brand" href="/index.html"><img src="/static/images/ibots.png" alt="iBOTS Logo" width="50px"></a>
-
-      <!-- Show/Hide Button ?? Is there a way to get this into the SASS file? -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<header class="navbar navbar-expand-lg bg-light shadow-sm">
+  <div class="container">
+    <a href="/index.html" class="navbar-brand">
       
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <img src="/static/images/ibots.png" width="47" alt="Silicon">
+      iBOTS
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse1" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <nav id="navbarCollapse1" class="collapse navbar-collapse">
+      <hr class="d-lg-none mt-3 mb-2">
+      <ul class="navbar-nav me-auto">
+       
+        {% for header in site.navbar.menu %}
+        {% if 'children' not in header or not header.children %}
+          <li class="nav-item ">
+              <a class="nav-link {% if page.url == header.url %}active{% endif %}" aria-current="page" href="{{ header.url }}">{{ header.title }}</a>
+          </li>
+        {% else %}
+          <li class="nav-item dropdown">  
+              <a class="nav-link dropdown-toggle" href="#" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ header.title }}
+              </a>  
+              <ul class="dropdown-menu">
+                  {% for item in header.children %}
+                  <li><a class="dropdown-item" href="{{ item.url }}">{{ item.title }}</a></li>
+                  {% endfor %}
+              </ul>
+          </li> 
+        {% endif %}
+        {% endfor %}       
+        <!-- <li class="nav-item">
+          <a href="#" class="nav-link active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Dropdown</a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" class="dropdown-item">Action link</a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action link</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="#">Yet another link</a></li>
+              </ul>
+            </li>
+            <li><a class="dropdown-item" href="#"> Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li> -->
 
-          <!-- Menu Items -->
-          <ul class="navbar-nav">
-              
-              {% for header in site.navbar.menu %}
-                  {% if 'children' not in header or not header.children %}
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ header.url }}">{{ header.title }}</a>
-                    </li>
-                  {% else %}
-                    <li class="nav-item dropdown">  
-                        <a class="nav-link dropdown-toggle" href="#" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ header.title }}
-                        </a>  
-                        <ul class="dropdown-menu">
-                            {% for item in header.children %}
-                            <li><a class="dropdown-item" href="{{ item.url }}">{{ item.title }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </li> 
-                  {% endif %}
-              {% endfor %}        
 
-        <!-- Call to Action -->
-        <a class="btn btn-primary btn-sm rounded d-none d-lg-inline-flex" href="{{ site.navbar.call_to_action.url }}" target="_blank" rel="noopener">
-            {{ site.navbar.call_to_action.title }} 
-        </a>
-      </div>
-    </div>
-</nav>
 
-<!-- Padding for fixed navbar -->
-<div style="padding-top: 85px;"></div>
-
+      </ul>
+      <a href="#" class="btn btn-primary btn-sm fs-sm rounded my-3 my-lg-0">
+        {{ site.navbar.call_to_action.title }} 
+      </a>
+    </nav>
+  </div>
+</header>

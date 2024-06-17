@@ -33,7 +33,6 @@ def rmdir(start_directory: Path):
 def copydir(src: Path, target: Path) -> None:
     src = Path(src)
     target = Path(target)
-    rmdir(target)
     shutil.copytree(src, target, dirs_exist_ok=True)
     
 
