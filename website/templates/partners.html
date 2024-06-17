@@ -1,0 +1,20 @@
+{% extends "blocks/base.html" %}
+
+{% block title %} Partners {% endblock %}
+
+{% block body %}
+<article>
+    <h1> Partners </h1>
+    {% for partner in page.data.partners %}
+    <article>
+        <h3>{{ partner.name }}</h3>
+        <p>{{ partner.description }}</p>
+        <a href="{{ partner.website }}">{{ partner.website }}</a>
+        <p>{{ partner.email }}</p>
+    </article>
+    {% endfor %}
+    
+</article>
+
+
+{% endblock %}

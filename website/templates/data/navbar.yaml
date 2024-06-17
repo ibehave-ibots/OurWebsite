@@ -22,16 +22,8 @@ menu:
   - title: Learning Resources
     url: /learning_resources.html
 
-  - title: Networking  
-    children:
-      - title: Overview
-        url: /networking.html
-      - title: Conferences
-        url: /networking.html#conferences
-      - title: iBehave Seminars
-        url: /networking.html#seminars
-      - title: Support Groups
-        url: /networking.html#partners
+  - title: Partners  
+    url: /our-partners.html
 
   - title: About Us
     url: /about_us.html
