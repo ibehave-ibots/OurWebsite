@@ -5,10 +5,10 @@ import os
 import sys
 from pathlib import Path
 
-def main(input_path):
+def main(consolidated_report_path):
     os.environ['DB_WRITEMODE'] = '1'
 
-    with open(input_path, 'r', encoding='utf-8') as f:
+    with open(consolidated_report_path, 'r', encoding='utf-8') as f:
         consolidated_report = f.read().replace('\n', '')
 
     fs_local = LocalFileSystem()
