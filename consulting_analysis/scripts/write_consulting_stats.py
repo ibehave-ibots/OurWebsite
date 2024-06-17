@@ -1,5 +1,6 @@
 from results_repo import ConsultingResultRepo
 from fsspec.implementations.local import LocalFileSystem
+from utils.consulting_utils import count_types_of_sessions
 import os
 import sys
 from pathlib import Path
@@ -19,15 +20,6 @@ def main(input_path):
     hands_on_hrs = n_hands_on * 2.5
     n_sess = n_short + n_hands_on
     tot_hrs = short_hrs + hands_on_hrs
-
-
-    repo_local.put(
-        short_name='n_short',
-        name='Total number of short chats',
-        value=n_short,
-        units='Session',
-        display_units='Session'
-    )
 
     repo_local.put(
         short_name='n_sess',
@@ -52,13 +44,8 @@ def main(input_path):
         units='Session',
         display_units='Session'
     )
-
-
     repo_local.push()
-
-def count_types_of_sessions(consolidated_report, type='short'):
-    return consolidated_report.lower().count(f'type: {type}')
-    
+   
 
 if __name__ == "__main__":
     input_path = sys.argv[1]
