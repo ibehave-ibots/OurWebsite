@@ -9,7 +9,7 @@ def main(consolidated_report_path):
     os.environ['DB_WRITEMODE'] = '1'
 
     with open(consolidated_report_path, 'r', encoding='utf-8') as f:
-        consolidated_report = f.read()#.replace('\n', ' ')
+        consolidated_report = f.read()
 
     fs_local = LocalFileSystem()
     repo_local = ConsultingResultRepo.connect(fs_local)
