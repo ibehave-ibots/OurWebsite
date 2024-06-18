@@ -1,50 +1,32 @@
+{% from 'macros/consulting_card.html' import consulting_card %}
+
+
 {% extends "blocks/base.html" %}
 
 {% block title %} {{ page.data.title }} {% endblock %}
 
 {% block body %}
 
-<article>
-    
-    <h1> {{ page.data.title }} </h1>
-    <section id="description">
-    {{ page.content | safe }}
-    </section>
-    
-    <section>
-        <h1> {{ page.data.statistics.title }} </h1>
-        <dl>
-        {% for key, value in page.data.statistics.report.items() %}
-        <dt>{{key}}</dt>
-        <dd>{{ value }}</dd>
-        </dl>
-        {% endfor %}
-    </section>
-    
-    <section id="book-a-session">
-        <h1> {{ page.data.session_booking.title }} </h1>
-        <p> {{ page.data.session_booking.description }} </p>
-        {% for consultant in page.data.session_booking.consultants %}
-        <article>
-            <h1> {{ consultant.name }} </h1>
-            <p> <a href="{{ consultant.booking_link }}">{{ consultant.booking_link }}</a> </p>
+<h1> {{ page.data.title }} </h1>
 
-        </article>
-        
-        {% endfor %}
-        
-    </section>
+<section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
+  {{ page.content | safe }}
+</section>
 
-    <section>
-        <h1>{{ page.data.testimonials.title }} </h1>
-        {% for testimonial in page.data.testimonials.testimonials %}
-        <p>{{ testimonial }} </p>
-        {% endfor %}
-        
-    </section>
-
-</article>
-
-
-        
+<section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
+  {% for topic in page.data.topics %}
+  {{ consulting_card(
+    title=topic.title,
+    summary=topic.summary,
+    image=topic.image,
+    date_added=topic.date_added,
+    categories=topic.categories,
+    consultants=topic.consultants
+  ) 
+  }}
+  {% endfor %}
+</section>
 {% endblock %}
+
+
+

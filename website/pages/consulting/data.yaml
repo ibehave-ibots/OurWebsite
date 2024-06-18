@@ -21,3 +21,31 @@ testimonials:
         {% for testimonial in data.testimonials.consulting %}
         - {{ testimonial }}
         {% endfor %}
+topics:
+    - title: Writing a Library in Python
+      summary: adfklj adlfkj aldkfj alkfjalkf alkfj alkfja dslkfdaslkfjdalk falkfjlak fasdlkfj alkjdfalksffsd lkdflkjalksdf jldak fasdjlfa
+      image: assets/img/blog/01.jpg
+      date_added: 2024-03-05
+      categories:
+        - Research Software Engineering
+      consultants:
+        {% for pid in ["nick", "sangeetha"] %}
+            {% set person = data.people[pid] %}
+            - id: {{ pid }}
+              nickname: {{ person.nickname }}
+              booking_url: {{ person.booking_url }}
+              photo: {{ person.photo }}
+        {% endfor %}
+    - title: Writing a Library in Matlab
+      summary: adfklj adlfkj aldkfj alkfjalkf alkfj alkfja dslkfdaslkfjdalk falkfjlak fasdlkfj alkjdfalksffsd lkdflkjalksdf jldak fasdjlfa
+      image: assets/img/blog/02.jpg
+      date_added: 2024-03-05
+      categories:
+        - Research Software Engineering
+      consultants:
+        {% for pid in ["sangeetha"] %}
+            {% set person = data.people[pid] %}
+            - id: {{ pid }}
+              booking_url: {{ person.booking_url }}
+              photo: {{ person.photo }}
+        {% endfor %}
