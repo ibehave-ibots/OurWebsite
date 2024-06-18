@@ -21,3 +21,6 @@ def count_num_unique_scholars(consolidated_report):
                 scholar_names.append(next_element)
     df = pd.DataFrame({'scholars': scholar_names})
     return len(df.scholars.unique())
+
+def count_num_occurrances_of_word(consolidated_report, word='python'):
+    return consolidated_report.lower().count(word)

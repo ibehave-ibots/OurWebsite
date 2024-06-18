@@ -1,6 +1,6 @@
 from results_repo import ConsultingResultRepo
 from fsspec.implementations.local import LocalFileSystem
-from utils.consulting_utils import count_types_of_sessions, count_num_unique_scholars, count_num_consultants
+from utils.consulting_utils import count_types_of_sessions, count_num_unique_scholars, count_num_consultants, count_num_occurrances_of_word
 import os
 import sys
 from pathlib import Path
@@ -8,6 +8,7 @@ from pathlib import Path
 
 def process_consolidated_report(consolidated_report):
     n_consultants = count_num_consultants()
+
     n_short = count_types_of_sessions(consolidated_report, type='short')
     num_short_per_consultant = n_short / n_consultants
     short_hrs = n_short * 0.45
@@ -21,6 +22,9 @@ def process_consolidated_report(consolidated_report):
     n_sess = n_short + n_hands_on
     tot_hrs = short_hrs + hands_on_hrs
     n_unique_scholars = count_num_unique_scholars(consolidated_report)
+
+    n_python = count_num_occurrances_of_word(consolidated_report, word='python')
+    n_matlab = count_num_occurrances_of_word(consolidated_report, word='matlab')
     
     return {
         'n_sess': ('Total number of sessions', n_sess, 'Session', 'Session'),
@@ -34,7 +38,9 @@ def process_consolidated_report(consolidated_report):
         'num_short_per_consultant': ('Average short chats per consultant', num_short_per_consultant, 'Session', 'Session'),
         'hrs_short_per_consultant': ('Average time in short chats per consultant', hrs_short_per_consultant, 'Hour', 'Hrs'),
         'num_hands_per_consultant': ('Average hands-on per consultant', num_hands_per_consultant, 'Session', 'Session'),
-        'hrs_hands_per_consultant': ('Average time in hands-on per consultant', hrs_hands_per_consultant, 'Hour', 'Hrs')
+        'hrs_hands_per_consultant': ('Average time in hands-on per consultant', hrs_hands_per_consultant, 'Hour', 'Hrs'),
+        'n_python': ('Number of Python mentions', n_python, 'Occurance', 'Occurance'),
+        'n_matlab': ('Number of Matlab mentions', n_matlab, 'Occurance', 'Occurance'),
     }
 
 def main(consolidated_report_path):
