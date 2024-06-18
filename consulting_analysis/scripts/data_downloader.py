@@ -1,3 +1,4 @@
+from pathlib import Path
 from dotenv import load_dotenv
 import os
 from webdav4.fsspec import WebdavFileSystem
@@ -11,3 +12,5 @@ def download_data():
     fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(SANGEE_REPORT_USR, SANGEE_REPORT_PWD))
     fs.download("/", "raw_data", recursive=True)
 
+def get_reports(input_dir):
+    return [file for file in Path(input_dir).iterdir() if file.is_file()]
