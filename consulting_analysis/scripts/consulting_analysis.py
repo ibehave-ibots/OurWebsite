@@ -25,7 +25,6 @@ def process_consolidated_report(consolidated_report):
 
     n_python = count_num_occurrances_of_word(consolidated_report, word='python')
     n_matlab = count_num_occurrances_of_word(consolidated_report, word='matlab')
-    n_r = count_num_occurrances_of_word(consolidated_report, word='r')
     
     return {
         'n_sess': ('Total number of sessions', n_sess, 'Session', 'Session'),
@@ -42,7 +41,6 @@ def process_consolidated_report(consolidated_report):
         'hrs_hands_per_consultant': ('Average time in hands-on per consultant', hrs_hands_per_consultant, 'Hour', 'Hrs'),
         'n_python': ('Number of Python mentions', n_python, 'Occurance', 'Occurance'),
         'n_matlab': ('Number of Matlab mentions', n_matlab, 'Occurance', 'Occurance'),
-        'n_r': ('Number of R mentions', n_r, 'Occurance', 'Occurance'),
     }
 
 def main(consolidated_report_path):
