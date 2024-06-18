@@ -12,10 +12,16 @@ from .utils import copydir, writefile, rmdir
 from . import filters
 
 
-def run_render_pipeline():
+def copy_static():
     rmdir("./_output/static")
     copydir(src="./static", target="./_output/static")
     copydir(src="./themes/Silicon/assets", target="./_output/assets")
+
+
+def run_render_pipeline():
+    if not Path('./_output').exists():
+        copy_static()
+
     renderer = JinjaRenderer.from_path(
         templates_dir='./templates', 
         filters={
