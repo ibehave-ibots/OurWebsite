@@ -130,11 +130,20 @@
 </head>
 
 <body>
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+
+
     <header>
         {% include "blocks/navbar.html" %}
     </header>
 
-    <main class="container">
+    <main class="container page-wrapper">
         {% block body %}
         {% endblock %}
     </main>
