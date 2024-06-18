@@ -8,6 +8,7 @@ from pathlib import Path
 
 def process_consolidated_report(consolidated_report):
     n_consultants = count_num_consultants()
+
     n_short = count_types_of_sessions(consolidated_report, type='short')
     num_short_per_consultant = n_short / n_consultants
     short_hrs = n_short * 0.45

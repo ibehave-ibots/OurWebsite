@@ -15,5 +15,5 @@ rule write_json:
         path=directory("analysis_data")
     run:
         shell("mkdir {output.path}")
-        shell("python scripts/write_consulting_stats.py {input.path}")
+        shell("python scripts/consulting_analysis.py {input.path}")
         shell("mv *.json {output.path}")

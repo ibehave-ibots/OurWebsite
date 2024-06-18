@@ -6,11 +6,8 @@ from data_processor import create_consolidated_report
 
 def main(input_dir, output_file):
     download_data()
-
     reports = get_reports(input_dir)
-
     consolidated_report = create_consolidated_report(reports=reports)
-
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(consolidated_report)
 
