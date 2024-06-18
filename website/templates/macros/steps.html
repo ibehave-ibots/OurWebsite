@@ -1,0 +1,19 @@
+
+{% macro steps(steps) %}
+<!-- Horizontal steps -->
+<!-- Convert steps to horizontal layout on certain breakpoint by adding steps-horizontal-sm, steps-horizontal-md, steps-horizontal-lg, steps-horizontal-xl, steps-horizontal-xxl -->
+<div class="steps steps-horizontal-md">
+  {% for step in steps %}
+  <div class="step">
+    <div class="step-number">
+      <div class="step-number-inner">{{ loop.index }} </div>
+    </div>
+    <div class="step-body">
+      <h5 class="mb-2">{{ step.title }}</h5>
+      <p class="fs-sm mb-0">{{ step.summary }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endmacro %}

@@ -1,5 +1,5 @@
 {% from 'macros/consulting_card.html' import consulting_card %}
-
+{% from 'macros/steps.html' import steps %}
 
 {% extends "blocks/base.html" %}
 
@@ -9,11 +9,20 @@
 
 <h1> {{ page.data.title }} </h1>
 
+
+
 <section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
   {{ page.content | safe }}
 </section>
 
+
 <section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
+  <h3>Let's Work on it Together!</h3>
+  {{ steps(steps=page.data.steps) }}
+</section>
+
+<section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
+  <h3>What Have We Helped With In the Past?</h3>
   {% for topic in page.data.topics %}
   {{ consulting_card(
     title=topic.title,
@@ -22,7 +31,7 @@
     date_added=topic.date_added,
     categories=topic.categories,
     consultants=topic.consultants
-  ) 
+    ) 
   }}
   {% endfor %}
 </section>
