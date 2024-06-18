@@ -1,11 +1,13 @@
 from results_repo import ConsultingResultRepo
 from fsspec.implementations.local import LocalFileSystem
-from utils.consulting_utils import count_types_of_sessions, count_num_unique_scholars
+from utils.consulting_utils import count_types_of_sessions, count_num_unique_scholars, count_num_consultants
 import os
 import sys
 from pathlib import Path
 
+
 def process_consolidated_report(consolidated_report):
+    n_consultants = count_num_consultants()
     n_short = count_types_of_sessions(consolidated_report, type='short')
     short_hrs = n_short * 0.45
     n_hands_on = count_types_of_sessions(consolidated_report, type='hands')
@@ -18,7 +20,8 @@ def process_consolidated_report(consolidated_report):
         'n_sess': ('Total number of sessions', n_sess, 'Session', 'Session'),
         'tot_hrs': ('Total hours of sessions', tot_hrs, 'Hour', 'Hrs'),
         'n_hands': ('Total number of hands-on sessions', n_hands_on, 'Session', 'Session'),
-        'n_unique_scholars': ('Number of different scholars', n_unique_scholars, 'Researcher', 'Session')
+        'n_unique_scholars': ('Number of different scholars', n_unique_scholars, 'Researcher', 'Session'),
+        'n_consultants': ('Number of consultants', n_consultants, 'Consultant', 'Consultant') 
     }
 
 def main(consolidated_report_path):

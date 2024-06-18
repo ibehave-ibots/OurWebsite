@@ -1,6 +1,12 @@
 
 import pandas as pd
 
+from data_downloader import connect_to_sciebo
+
+def count_num_consultants():
+    fs = connect_to_sciebo()
+    return len(fs.ls('/'))
+
 def count_types_of_sessions(consolidated_report, type='short'):
     return consolidated_report.lower().count(f'type: {type}')
  
