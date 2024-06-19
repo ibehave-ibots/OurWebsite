@@ -9,7 +9,7 @@ from .renderer import run_render_pipeline
 
 def build_server() -> Server:
 
-    patch_livereload_to_fix_bug_around_wsgi_support()
+    
 
     # os.chdir('./_output')
     STATIC_FOLDER = './_output'
@@ -34,7 +34,7 @@ def build_server() -> Server:
 
 
     
-
+    patch_livereload_to_fix_bug_around_wsgi_support()
     server = Server(app=app.wsgi_app)
     server.watch("templates/**/*", func=run_render_pipeline)
     server.watch("static/**/*", func=run_render_pipeline)
