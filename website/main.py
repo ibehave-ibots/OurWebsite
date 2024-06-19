@@ -15,8 +15,6 @@ import subprocess
 from ssg.server import build_server
 from ssg.renderer import run_render_pipeline
 
-breakpoint()
-
 parser = ArgumentParser()
 
 parser.add_argument('--cmd', choices=['serve', 'render', 'pull-data'], default='serve')
