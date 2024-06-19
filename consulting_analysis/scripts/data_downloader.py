@@ -17,5 +17,11 @@ def connect_to_sciebo():
     fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(SANGEE_REPORT_USR, SANGEE_REPORT_PWD))
     return fs
 
+def connect_to_sciebo_results():
+    load_dotenv()
+    SANGEE_RESULTS_USR = os.getenv('USR')
+    fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(SANGEE_RESULTS_USR, ''))
+    return fs
+
 def get_reports(input_dir):
     return [file for file in Path(input_dir).iterdir() if file.is_file()]

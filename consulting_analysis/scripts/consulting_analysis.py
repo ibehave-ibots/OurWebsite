@@ -1,6 +1,7 @@
 from results_repo import ConsultingResultRepo
 from fsspec.implementations.local import LocalFileSystem
 from utils.consulting_utils import count_types_of_sessions, count_num_unique_scholars, count_num_consultants, count_num_occurrances_of_word
+from data_downloader import connect_to_sciebo_results
 import os
 import sys
 from pathlib import Path
@@ -50,7 +51,9 @@ def main(consolidated_report_path):
         consolidated_report = f.read()
 
     fs_local = LocalFileSystem()
+    fs_remote = connect_to_sciebo_results()
     repo_local = ConsultingResultRepo.connect(fs_local)
+    repo_remote = ConsultingResultRepo.connect(fs_remote)
 
     results = process_consolidated_report(consolidated_report)
 
@@ -64,6 +67,7 @@ def main(consolidated_report_path):
         )    
 
     repo_local.push()
+    repo_local.clone_to(repo_remote)
    
 
 if __name__ == "__main__":
