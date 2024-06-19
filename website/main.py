@@ -1,9 +1,21 @@
+import os
+
+
+# Use ipdb as the default debugger, if possible.
+try:
+    import ipdb
+    os.environ['PYTHONBREAKPOINT'] = 'ipdb.set_trace'
+except ImportError:
+    pass
+
+
 from argparse import ArgumentParser
 import subprocess
 
 from ssg.server import build_server
 from ssg.renderer import run_render_pipeline
 
+breakpoint()
 
 parser = ArgumentParser()
 

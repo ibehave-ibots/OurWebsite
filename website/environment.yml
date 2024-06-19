@@ -1,16 +1,10 @@
+# Use this to set up a virtual environment with all dependencies, except for the python dependencies.
 name: ibots-site
 channels:
   - defaults
 dependencies: 
   - python=3.12
-  - pip
   - nodejs
-  - pip:
-      - livereload
-      - jinja2
-      - markdown2
-      - PyYAML
-      - Pillow
   
 
 

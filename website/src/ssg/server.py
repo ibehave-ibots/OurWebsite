@@ -5,6 +5,7 @@ from .renderer import run_render_pipeline
 
 def build_server() -> Server:
     server = Server()
+    breakpoint()
     server.watch("templates/**/*", func=run_render_pipeline)
     server.watch("static/**/*", func=run_render_pipeline)
     server.watch("pages/**/*", func=run_render_pipeline)
