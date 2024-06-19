@@ -1,0 +1,5 @@
+outs:
+- md5: 9e52c97cdac0090cbcf6c0ade6cd39ab
+  size: 2945
+  hash: md5
+  path: calcium_imaging.yaml

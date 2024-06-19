@@ -1,0 +1,5 @@
+outs:
+- md5: fa574814deb504fe9fb1a20cf65bf27e
+  size: 730
+  hash: md5
+  path: group.yaml

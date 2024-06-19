@@ -1,0 +1,5 @@
+outs:
+- md5: 5a60bc225f52a2f5cd0e065ff3aa6342
+  size: 4242
+  hash: md5
+  path: partners.yaml

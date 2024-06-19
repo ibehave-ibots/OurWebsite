@@ -1,0 +1,5 @@
+outs:
+- md5: 3430360fb0210989779aa8ae02c33fcc
+  size: 1033
+  hash: md5
+  path: session1.yaml

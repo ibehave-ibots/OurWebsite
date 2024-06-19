@@ -1,0 +1,5 @@
+outs:
+- md5: ac676c816d4858345ec8316de42f18f0
+  size: 33
+  hash: md5
+  path: ben2.yaml

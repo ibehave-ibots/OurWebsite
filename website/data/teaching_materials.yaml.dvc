@@ -1,0 +1,5 @@
+outs:
+- md5: f19d7b92d8079be2e58ee5ee58882c51
+  size: 392
+  hash: md5
+  path: teaching_materials.yaml

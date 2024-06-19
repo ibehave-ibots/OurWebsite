@@ -1,0 +1,5 @@
+outs:
+- md5: 0cc24eb5c3bc90632d91dc0b56dfbf42
+  size: 2430
+  hash: md5
+  path: data_management.yaml

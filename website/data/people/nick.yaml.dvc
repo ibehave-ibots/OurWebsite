@@ -1,0 +1,5 @@
+outs:
+- md5: 24ccbaeb79e18e7ec1ade036fcd21f19
+  size: 396
+  hash: md5
+  path: nick.yaml

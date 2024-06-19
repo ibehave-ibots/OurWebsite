@@ -1,0 +1,5 @@
+outs:
+- md5: fad3154f1f2e322a67252b55cbe659d6
+  size: 2735
+  hash: md5
+  path: arduino.yaml
