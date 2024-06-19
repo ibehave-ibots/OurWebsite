@@ -6,5 +6,7 @@ partners:
       website: {{ partner.url }}
       email: {{ partner.email }}
       description: {{ partner.description }}
-      institute: {{partner.institute}}
+      institute: 
+        name: {{partner.institute.name }}
+        url: {{ partner.institute.url }}
     {% endfor %}
