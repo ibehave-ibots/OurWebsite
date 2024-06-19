@@ -8,3 +8,4 @@ data_consulting_stats
 _output
 *.egg-info
 *.bak
+/data

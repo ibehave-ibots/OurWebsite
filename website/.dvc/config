@@ -1,7 +1,7 @@
 [core]
     remote = dev
+    autostage = true
 ['remote "dev"']
     url = webdavs://uni-bonn.sciebo.de/public.php/webdav
     user = wRsGAHvi6Ab0mUp
-    password = ''
-
+    password = ""
