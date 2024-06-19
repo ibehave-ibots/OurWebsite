@@ -9,18 +9,14 @@ from .renderer import run_render_pipeline
 
 def build_server() -> Server:
 
-    
-
     # os.chdir('./_output')
     STATIC_FOLDER = './_output'
     app = Flask(__name__, root_path='.')
 
-    @app.route('/')
-    def homepage():
-        return send_from_directory(STATIC_FOLDER, 'index.html')
 
+    @app.route('/')
     @app.route('/<path:path>')
-    def catch_all(path):
+    def catch_all(path='/'):
        
         if path.endswith('/'):
             return redirect('index.html')  # appends 'index.html' to the path for directory-style requests (e.g. 'events/' -> 'events/index.html')
