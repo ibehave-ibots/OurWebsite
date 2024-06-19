@@ -1,6 +1,8 @@
 call_to_action:
   title: Subscribe
   url: {{ data.group.mailing_list_subscribe_url }}
+name: iBOTS Code
+logo: "/static/images/ibots.png"
 menu:
 
   - title: Consulting
