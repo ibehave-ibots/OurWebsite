@@ -12,8 +12,9 @@ def patch_livereload_to_fix_bug_around_wsgi_support():
 
     @wrapt.patch_function_wrapper('livereload.server', 'LiveScriptContainer.__init__')
     def patched_init(wrapped, instance, args, kwargs):
-        """LiveScriptContainer should also call the __init__() from its superclass."""
-        # Call the superclass __init__ first
+        """
+        LiveScriptContainer should also call the __init__() from its superclass.
+        """
         wsgi_app = args[0] if args else kwargs['wsgi_app']
         WSGIContainer.__init__(instance, wsgi_application=wsgi_app)
         return wrapped(*args, **kwargs)
