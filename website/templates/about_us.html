@@ -43,7 +43,7 @@
                     </h2>
                     <ul class="list-unstyled pb-2 pb-lg-0 mb-4 mb-lg-5">
                             <i class="bx bx-map text-primary fs-xl me-2" style="margin-top: .125rem;"></i>
-                            <p>Uniklinikum Bonn, Venusberg Campus</p>
+                            <p>Universitätsklinikum Bonn, Venusberg Campus</p>
                             <p>Sigmund-Freud-Strasse 25G</p>
                             <p>53127 Bonn</p>
                     </ul>
@@ -83,16 +83,6 @@
             {{ people_grid(people=page.data.people.past + page.data.people.other )}}
         </section>
         
-        <section id="sponsors">
-            <h1> Sponsors </h1>
-            {% for sponsor in page.data.sponsors %}
-            <h3>{{ sponsor.name }}</h3>
-            <img src="{{ sponsor.logo }}" alt="{{ sponsor.logo }}">
-            <p>{{ sponsor.description }}</p>
-            <a href="{{ sponsor.website }}">{{ sponsor.website }}</a>
-            <p>{{ sponsor.email }}</p>
-            {% endfor %}        
-        </section>
     </article>
     
 </main>
