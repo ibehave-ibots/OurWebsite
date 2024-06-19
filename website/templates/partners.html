@@ -1,3 +1,6 @@
+{% from 'macros/partner_card.html' import partner_card %}
+
+
 {% extends "blocks/base.html" %}
 
 {% block title %} Partners {% endblock %}
@@ -7,10 +10,17 @@
     <h1> Partners </h1>
     {% for partner in page.data.partners %}
     <article>
-        <h3>{{ partner.name }}</h3>
-        <p>{{ partner.description }}</p>
-        <a href="{{ partner.website }}">{{ partner.website }}</a>
-        <p>{{ partner.email }}</p>
+        {{ partner_card(
+            title=partner.name, 
+            summary=partner.description, 
+            image='assets/img/blog/0' + str(loop.index) + '.jpg', 
+            date_added='232', 
+            categories=[],
+            institute=partner.institute,
+            website=partner.website,
+            email=partner.email
+            )
+        }}
     </article>
     {% endfor %}
     
