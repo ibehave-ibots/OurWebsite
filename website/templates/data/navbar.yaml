@@ -15,11 +15,11 @@ menu:
   - title: Events
     children:
       - title: All Events
-        url: /events
+        url: /events/index.html
       - title: Workshops
-        url: /events/workshops
+        url: /events/workshops/index.html
       - title: Code Explorers Club
-        url: /events/code-explorers
+        url: /events/code-explorers/index.html
 
   - title: Learning Resources
     url: /learning_resources.html
