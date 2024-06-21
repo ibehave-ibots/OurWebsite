@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 import os
 from fsspec.implementations.local import LocalFileSystem
 from webdav4.fsspec import WebdavFileSystem
-import fsspec
 
 
 class DataDownloadStrategy(ABC):
