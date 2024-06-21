@@ -1,7 +1,5 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from docx import Document
-from dataclasses import dataclass
 from dotenv import load_dotenv
 import os
 from fsspec.implementations.local import LocalFileSystem
