@@ -62,18 +62,6 @@
             </div>
         </section>
 
-        {% for section in page.data.sections %}  
-        <section>
-            {{ service_description(
-                title=section.title,
-                img=section.image,
-                paragraphs=section.paragraphs,
-                features=section.features,
-                reverse_layout=loop.index % 2
-            ) }}
-        </section> 
-        {% endfor %}
-        
 
         
         <section class="container mb-5 py-lg-3 py-xl-4 py-xxl-5">

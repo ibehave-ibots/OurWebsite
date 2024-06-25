@@ -1,0 +1,33 @@
+{% from "macros/people.html" import people_grid %}
+{% from "macros/services.html" import service_description %}
+
+<main>
+    
+    {% extends "blocks/base.html" %}
+    
+    {% block title %} About Us {% endblock %}
+    
+    {% block body %}
+    
+    <article>
+
+        <h1> {{ page.data.title }} </h1>        
+
+        {% for section in page.data.sections %}  
+        <section>
+            {{ service_description(
+                title=section.title,
+                img=section.image,
+                paragraphs=section.paragraphs,
+                features=section.features,
+                reverse_layout=loop.index % 2
+            ) }}
+        </section> 
+        {% endfor %}
+        
+
+    </article>
+    
+</main>
+
+{% endblock %}

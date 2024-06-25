@@ -21,11 +21,14 @@ menu:
       - title: Code Explorers Club
         url: /events/code-explorers/index.html
 
-  - title: Learning Resources
+  - title: Learning
     url: /learning_resources.html
 
   - title: Partners  
     url: /our-partners.html
 
-  - title: About Us
-    url: /about_us.html
+  - title: About
+    url: /about.html
+
+  - title: Contact Us
+    url: /contacts.html
