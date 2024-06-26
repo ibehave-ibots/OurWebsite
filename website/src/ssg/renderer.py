@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import date, datetime
-from pathlib import Path
+from pathlib import Path, PosixPath, PurePosixPath
 
 import markdown2
 import yaml
@@ -23,7 +23,7 @@ def run_render_pipeline():
         copy_static()
 
     renderer = JinjaRenderer.from_path(
-        templates_dir='./templates', 
+        templates_dir='./pages', 
         filters={
             'resize': filters.redirect_path('./_output')(filters.resize_image), 
             'flatten_nested': filters.flatten_nested_dict,
@@ -44,13 +44,13 @@ def run_render_pipeline():
 
     ## Render Jinja and load yaml files from './templates/data'
     site_data = {}
-    for yaml_path in Path('./templates/data').glob('*.yaml'):
+    for yaml_path in Path('./pages/_data').glob('*.yaml'):
         yaml_text = renderer.render_in_place(template_text=yaml_path.read_text(), data=global_data)
         site_data[yaml_path.stem] = yaml.load(yaml_text, Loader=yaml.Loader)
 
     ## Render Each Page to HTML and write to './output'
     urls_written = {}  # stores the url paths created, and by what page path
-    for page_path in Path('./pages').glob('**/*'):
+    for page_path in Path('./pages').glob('[!_]*'):
         if not page_path.is_dir():
             continue
         
@@ -72,9 +72,9 @@ def run_render_pipeline():
         for rdata in render_data:
             assert rdata['url'].startswith('/'), f"Page URLS must be absolute.  Try {'/' + rdata['url']}"
 
-            renderer.vars['TEMPLATE_DIR'] = str(Path(rdata['template']).parent)
+            renderer.vars['TEMPLATE_DIR'] = str(PurePosixPath(page_path.relative_to(Path('./pages'))))
             page_html = renderer.render_named_template(
-                template_name=rdata['template'], 
+                template_name=f"{page_path.name}/{rdata['template']}", 
                 data=global_data, 
                 page=page_data | rdata,
                 site=site_data,
