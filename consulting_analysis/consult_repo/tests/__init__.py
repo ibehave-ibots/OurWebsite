@@ -1,1 +1,2 @@
 from src.download import ScieboDataDownload
+from src.process import WordDocumentProcessor
