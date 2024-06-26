@@ -1,62 +1,519 @@
+{% from "macros/hero.html" import hero %}
+{% from "macros/about_section.html" import about_section %}
+{% from "macros/icon_squares.html" import icon_squares %}
+
 {% extends "blocks/base.html" %}
 
-{% block title %} {{ page.data.title }} {% endblock %}
+
 
 {% block body %}
 
-<article>
+
+
+<!-- Hero + animations -->
+{{ hero() }}
+
+
+<!-- About -->
+{{ about_section() }}
+
+
+
+<!-- Solutions -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  <h2 class="h1 mb-lg-5 mb-4 pb-lg-0 pb-md-2 text-center">Custom Software Solutions</h2>
+  {{ icon_squares() }}  
+</section>
+
+
+<!-- Industries (Slider) -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  <div class="row gy-md-5 gy-4 mb-xl-3">
+    <div class="col-xl-4 col-lg-5 d-flex flex-column order-2 order-lg-1">
+      <h2 class="h1 mb-4 pb-3 pt-2 d-none d-lg-block">Industries We Serve</h2>
+      
+      <!-- Swiper slider -->
+      <div class="swiper mx-0" data-swiper-options='{
+        "spaceBetween": 24,
+        "loop": true,
+        "tabs": true,
+        "autoHeight": true,
+        "navigation": {
+          "prevEl": "#prev-industry",
+          "nextEl": "#next-industry"
+        }
+      }'>
+      <div class="swiper-wrapper text-lg-start text-center">
+        
+        <!-- Swiper item -->
+        <div class="swiper-slide" data-swiper-tab="#industry-1">
+          <h3 class="h5 mb-lg-4 mb-3">Finance and insurance</h3>
+          <p>Risus massa fames metus lectus diam maecenas dui. Nibh morbi id purus eget tellus diam, integer blandit. Ac condimentum a nisl sagittis, interdum. Et viverra maecenas quis cras sed gravida volutpat, cursus enim. </p>
+        </div>
+        
+        <!-- Swiper item -->
+        <div class="swiper-slide" data-swiper-tab="#industry-2">
+          <h3 class="h5 mb-lg-4 mb-3">Startup and technology</h3>
+          <p>Interdum amet lobortis viverra et sapien aliquam nunc amet. Bibendum eu pellentesque sit risus leo commodo. Nibh dictum tellus lectus in risus eget cursus vitae nisi lacinia aliquam utuismod cras pellentesque.</p>
+        </div>
+        
+        <!-- Swiper item -->
+        <div class="swiper-slide" data-swiper-tab="#industry-3">
+          <h3 class="h5 mb-lg-4 mb-3">E-commerce</h3>
+          <p>Egestas nunc eleifend lacinia suspendisse bibendum ultrices risus. Facilisis neque eleifend diam orci id. Iaculis dignissim sed malesuada porttitor ac iaculis nullam donec sed volutpat quis vulputate sollicitudin tincidunt.</p>
+        </div>
+      </div>
+    </div>
     
-    <h1> {{ page.data.title }} </h1>
-    <section>
-    {{ page.content | safe }}
-    </section>
+    <!-- Swiper controls (Prev / next buttons) -->
+    <div class="d-flex justify-content-center justify-content-lg-start mt-2 mt-lg-auto">
+      <button type="button" id="prev-industry" class="btn btn-prev btn-icon btn-sm me-2" aria-label="Previous">
+        <i class="bx bx-chevron-left"></i>
+      </button>
+      <button type="button" id="next-industry" class="btn btn-next btn-icon btn-sm ms-2" aria-label="Next">
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+  <div class="col-lg-7 offset-xl-1 order-1 order-lg-2">
     
-    <h2> Our History </h2>
-    <section>
-        {% for milestone in page.data.milestones %}
-        <h3> {{ milestone.name }} </h3>
-        {{ milestone.date }}
-        {{ milestone.summary }}
-        {% endfor %}
-    </section>
-
-    <h2> Events Calendar </h2>
-    <section>
-        Our calendar goes here!
-    </section>
-
-    <h2> Statistics </h2>
-    <section>
-        <h3>Consulting</h3>
-        <p>Number of consulting sessions: {{ page.data.consulting.n_sessions }}</p>
-        <p>Number of researchers: {{ page.data.consulting.n_clients }}</p>
-        <p>Number of labs: {{ page.data.consulting.n_labs }}</p>
-        <p>Total consulting time: {{ page.data.consulting.total_hours }} Hours</p>
-        <p>Hear from the researchers...
-            <ul>
-                {% for testimonial in page.data.consulting.testimonials %}
-                <li>{{ testimonial }}</li>
-                {% endfor %}
-            </ul>
-        </p>
-
-        <h3>Workshops</h3>
-        <p>Number of workshops: {{ page.data.workshop.n_workshops }}</p>
-        <p>Number of students: {{ page.data.workshop.n_students }}</p>
-        <p>Total teaching time: {{ page.data.workshop.total_hours }} Hours</p>
-        <p>Hear from the students...
-            <ul>
-                {% for testimonial in page.data.workshop.testimonials %}
-                <li>{{ testimonial }}</li>
-                {% endfor %}
-            </ul>
-        </p>
-
-    </section>
+    <!-- Swiper tabs (Industry images) -->
+    <div class="swiper-tabs">
+      
+      <!-- Industry 1 -->
+      <div id="industry-1" class="swiper-tab active">
+        <img src="assets/img/landing/software-agency-3/industries/01.jpg" class="rounded-3" alt="Image">
+      </div>
+      
+      <!-- Industry 2 -->
+      <div id="industry-2" class="swiper-tab">
+        <img src="assets/img/landing/software-agency-3/industries/02.jpg" class="rounded-3" alt="Image">
+      </div>
+      
+      <!-- Industry 3 -->
+      <div id="industry-3" class="swiper-tab">
+        <img src="assets/img/landing/software-agency-3/industries/03.jpg" class="rounded-3" alt="Image">
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 
 
-</article>
+<!-- Technologies -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  
+  <!-- Swiper slider -->
+  <div class="swiper mb-xl-3 text-center" data-swiper-options='{
+    "spaceBetween": 24,
+    "autoplay": true,
+    "breakpoints": {
+      "0": {
+        "slidesPerView": 2
+      },
+      "500": {
+        "slidesPerView": 3
+      },
+      "768": {
+        "slidesPerView": 4
+      },
+      "1200": {
+        "slidesPerView": 6
+      }
+    },
+    "pagination": {
+      "el": ".swiper-pagination",
+      "clickable": true
+    }
+  }'>
+  <div class="swiper-wrapper">
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mb-3">
+        <img src="assets/img/landing/software-agency-3/technologies/js-light.svg" alt="Logo" class="d-dark-mode-none d-inline-block">
+        <img src="assets/img/landing/software-agency-3/technologies/js-dark.svg" alt="Logo" class="d-dark-mode-inline-block d-none">
+      </div>
+      <span class="text-body">Javascript</span>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mb-3">
+        <img src="assets/img/landing/software-agency-3/technologies/node-light.svg" alt="Logo" class="d-dark-mode-none d-inline-block">
+        <img src="assets/img/landing/software-agency-3/technologies/node-dark.svg" alt="Logo" class="d-dark-mode-inline-block d-none">
+      </div>
+      <span class="text-body">Node.JS</span>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mb-3">
+        <img src="assets/img/landing/software-agency-3/technologies/react-light.svg" alt="Logo" class="d-dark-mode-none d-inline-block">
+        <img src="assets/img/landing/software-agency-3/technologies/react-dark.svg" alt="Logo" class="d-dark-mode-inline-block d-none">
+      </div>
+      <span class="text-body">React</span>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mb-3">
+        <img src="assets/img/landing/software-agency-3/technologies/php-light.svg" alt="Logo" class="d-dark-mode-none d-inline-block">
+        <img src="assets/img/landing/software-agency-3/technologies/php-dark.svg" alt="Logo" class="d-dark-mode-inline-block d-none">
+      </div>
+      <span class="text-body">PHP</span>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mb-3">
+        <img src="assets/img/landing/software-agency-3/technologies/angular-light.svg" alt="Logo" class="d-dark-mode-none d-inline-block">
+        <img src="assets/img/landing/software-agency-3/technologies/angular-dark.svg" alt="Logo" class="d-dark-mode-inline-block d-none">
+      </div>
+      <span class="text-body">Angular</span>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mb-3">
+        <img src="assets/img/landing/software-agency-3/technologies/python-light.svg" alt="Logo" class="d-dark-mode-none d-inline-block">
+        <img src="assets/img/landing/software-agency-3/technologies/python-dark.svg" alt="Logo" class="d-dark-mode-inline-block d-none">
+      </div>
+      <span class="text-body">Python</span>
+    </div>
+  </div>
+  
+  <!-- Swiper pagination -->
+  <div class="swiper-pagination position-static mt-4 pt-lg-3 pt-2"></div>
+</div>
+</section>
 
 
+<!-- Projects -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  <h2 class="h1 mb-lg-5 mb-4 pb-lg-0 pb-md-2 text-center">Explore Our Featured Projects</h2>
+  
+  <!-- Project item -->
+  <div class="row gy-4 mb-4 pb-md-3 pb-2">
+    <div class="col-md-6 rellax" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="md">
+      <div class="bg-secondary rounded-3">
+        <img src="assets/img/landing/software-agency-3/projects/01.png" alt="Project image">
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 offset-lg-1 d-flex rellax" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+      <div class="align-self-center ps-lg-0 ps-md-4">
+        <h4 class="mb-lg-4 mb-3 fs-base fw-normal text-body">Mobile App</h4>
+        <h3 class="h2 mb-lg-4 mb-3">Task management app</h3>
+        <p class="mb-lg-4 mb-3">Odio mus adipiscing nunc sed viverra massa aliquam sit vestibulum maecenas arcu adipiscing tincidunt at velit pharetra varius sit.</p>
+        <ul class="mb-lg-4 mb-3 fs-sm text-muted list-inline" style="max-width: 19.125rem;">
+          <li class="list-inline-item me-1">
+            Product Strategy
+            <span class="ms-1">/</span>
+          </li>
+          <li class="list-inline-item me-1">
+            Front end Development
+            <span class="ms-1">/</span>
+          </li>
+          <li class="list-inline-item me-1">
+            Systems Design
+            <span class="ms-1">/</span>
+          </li>
+          <li class="list-inline-item me-1">
+            Web Development
+          </li>
+        </ul>
+        <a href="#" class="btn btn-lg btn-outline-primary">Read More</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Project item -->
+  <div class="row gy-4 mb-4 pb-md-3 pb-2">
+    <div class="col-md-6 rellax" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="md">
+      <div class="bg-secondary rounded-3">
+        <img src="assets/img/landing/software-agency-3/projects/02.png" alt="Project image">
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 offset-lg-1 d-flex rellax" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+      <div class="align-self-center ps-lg-0 ps-md-4">
+        <h4 class="mb-lg-4 mb-3 fs-base fw-normal text-body">Landing Page</h4>
+        <h3 class="h2 mb-lg-4 mb-3">Landing page for electric scooters</h3>
+        <p class="mb-lg-4 mb-3">Vitae non luctus rhoncus ipsum feugiat luctus ornare. Pretium nulla sed quis duis tristique orci. Odio in pellentesque urna sit facilisi convallis vel tempus.</p>
+        <ul class="mb-lg-4 mb-3 fs-sm text-muted list-inline" style="max-width: 19.125rem;">
+          <li class="list-inline-item me-1">
+            Product Strategy
+            <span class="ms-1">/</span>
+          </li>
+          <li class="list-inline-item me-1">
+            Front end Development
+            <span class="ms-1">/</span>
+          </li>
+          <li class="list-inline-item me-1">
+            Systems Design
+            <span class="ms-1">/</span>
+          </li>
+          <li class="list-inline-item me-1">
+            Web Development
+          </li>
+        </ul>
+        <a href="#" class="btn btn-lg btn-outline-primary">Read More</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Project item -->
+  <div class="row gy-4 mb-xl-3">
+    <div class="col-md-6 rellax" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="md">
+      <div class="bg-secondary rounded-3">
+        <img src="assets/img/landing/software-agency-3/projects/03.png" alt="Project image">
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 offset-lg-1 d-flex rellax" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+      <div class="align-self-center ps-lg-0 ps-md-4">
+        <h4 class="mb-lg-4 mb-3 fs-base fw-normal text-body">Web App</h4>
+        <h3 class="h2 mb-lg-4 mb-3">Crypto market dashboard</h3>
+        <p class="mb-lg-4 mb-3">Donec donec ultricies feugiat imperdiet enim cras eget enim elementum eget ultrices praesent pretium morbi.</p>
+        <ul class="mb-lg-4 mb-3 fs-sm text-muted list-inline" style="max-width: 19.125rem;">
+          <li class="list-inline-item me-1">
+            Front end Development
+            <span class="ms-1">/</span>
+          </li>
+          <li class="list-inline-item me-1">
+            Systems Design
+            <span class="ms-1">/</span>
+          </li>
+          <li class="list-inline-item me-1">
+            Web Development
+          </li>
+        </ul>
+        <a href="#" class="btn btn-lg btn-outline-primary">Read More</a>
+      </div>
+    </div>
+  </div>
+</section>
 
+
+<!-- Benefits -->
+<section class="container mb-lg-5 mb-4 pb-3">
+  <h2 class="h1 mb-lg-5 mb-4 pb-lg-0 pb-md-2 text-center">Our benefits</h2>
+  
+  <!-- Swiper slider -->
+  <div class="swiper mb-xl-3 text-sm-start text-center" data-swiper-options='{
+    "spaceBetween": 24,
+    "autoplay": true,
+    "breakpoints": {
+      "0": {
+        "slidesPerView": 1
+      },
+      "500": {
+        "slidesPerView": 2
+      },
+      "768": {
+        "slidesPerView": 3
+      },
+      "1200": {
+        "slidesPerView": 4
+      }
+    },
+    "pagination": {
+      "el": ".swiper-pagination",
+      "clickable": true
+    }
+  }'>
+  <div class="swiper-wrapper">
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mx-sm-0 mx-auto" style="max-width: 19.125rem;">
+        <h4 class="h5 mb-3">Prototype in 24 hrs</h4>
+        <p class="mb-0">Commodo senectus massa est urna mi. Mattis dis arcu aenean libero viverra gravida id. Imperdiet elit integer elit.</p>
+      </div>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mx-sm-0 mx-auto" style="max-width: 19.125rem;">
+        <h4 class="h5 mb-3">MVP within two weeks</h4>
+        <p class="mb-0">Purus netus eget facilisis morbi pellentesque. Fermentum mi sit a mi ebentot pellentesque.</p>
+      </div>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mx-sm-0 mx-auto" style="max-width: 19.125rem;">
+        <h4 class="h5 mb-3">Kickstart development</h4>
+        <p class="mb-0">Purus netus eget facilisis morbi pellentesque. Fermentum mi sit a mi ebentot pellentesque.</p>
+      </div>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mx-sm-0 mx-auto" style="max-width: 19.125rem;">
+        <h4 class="h5 mb-3">24/7 Tech support</h4>
+        <p class="mb-0">Commodo senectus massa est urna mi. Mattis dis arcu aenean libero viverra gravida id. Imperdiet elit integer elit.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Swiper pagination -->
+  <div class="swiper-pagination position-static mt-4 pt-lg-3 pt-2"></div>
+</div>
+</section>
+
+
+<!-- Brands (carousel on screens < 1100px) -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  <div class="swiper mx-n2" data-swiper-options='{
+    "spaceBetween": 8,
+    "pagination": {
+      "el": ".swiper-pagination",
+      "clickable": true
+    },
+    "breakpoints": {
+      "0": {
+        "slidesPerView": 2
+      },
+      "768": {
+        "slidesPerView": 3
+      },
+      "1200": {
+        "slidesPerView": 4
+      }
+    }
+  }'>
+  <div class="swiper-wrapper">
+    
+    <!-- Item -->
+    <div class="swiper-slide py-3">
+      <a href="#" class="card card-body card-hover px-2 mx-2">
+        <img src="assets/img/brands/01.svg" class="d-block mx-auto my-2" width="154" alt="Brand">
+      </a>
+    </div>
+    
+    <!-- Item -->
+    <div class="swiper-slide py-3">
+      <a href="#" class="card card-body card-hover px-2 mx-2">
+        <img src="assets/img/brands/02.svg" class="d-block mx-auto my-2" width="154" alt="Brand">
+      </a>
+    </div>
+    
+    <!-- Item -->
+    <div class="swiper-slide py-3">
+      <a href="#" class="card card-body card-hover px-2 mx-2">
+        <img src="assets/img/brands/03.svg" class="d-block mx-auto my-2" width="154" alt="Brand">
+      </a>
+    </div>
+    
+    <!-- Item -->
+    <div class="swiper-slide py-3">
+      <a href="#" class="card card-body card-hover px-2 mx-2">
+        <img src="assets/img/brands/04.svg" class="d-block mx-auto my-2" width="154" alt="Brand">
+      </a>
+    </div>
+  </div>
+  
+  <!-- Pagination (bullets) -->
+  <div class="swiper-pagination position-relative pt-2 mt-4"></div>
+</div>
+</section>
+
+
+<!-- Blog -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  
+  <!-- Swiper slider -->
+  <div class="swiper mb-xl-3 text-sm-start text-center" data-swiper-options='{
+    "spaceBetween": 24,
+    "autoplay": true,
+    "breakpoints": {
+      "0": {
+        "slidesPerView": 1
+      },
+      "500": {
+        "slidesPerView": 2
+      },
+      "768": {
+        "slidesPerView": 3
+      }
+    },
+    "pagination": {
+      "el": ".swiper-pagination",
+      "clickable": true
+    }
+  }'>
+  <div class="swiper-wrapper">
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide h-auto">
+      <article class="card h-100 border-0 bg-transparent">
+        <div class="position-relative">
+          <a href="#" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
+          <img src="assets/img/blog/05.jpg" class="rounded-3" alt="Image">
+        </div>
+        <div class="card-body pb-0 px-0">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">Business</a>
+            <span class="fs-sm text-muted">12 hours ago</span>
+          </div>
+          <h3 class="h5 mb-0 fw-semibold">
+            <a href="#">How to check the website before releasing?</a>
+          </h3>
+        </div>
+      </article>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide h-auto">
+      <article class="card h-100 border-0 bg-transparent">
+        <div class="position-relative">
+          <a href="#" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
+          <img src="assets/img/blog/07.jpg" class="rounded-3" alt="Image">
+        </div>
+        <div class="card-body pb-0 px-0">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">Digital</a>
+            <span class="fs-sm text-muted">11 hours ago</span>
+          </div>
+          <h3 class="h5 mb-0 fw-semibold">
+            <a href="#">Inclusive Marketing: Why and How Does it Work?</a>
+          </h3>
+        </div>
+      </article>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide h-auto">
+      <article class="card h-100 border-0 bg-transparent">
+        <div class="position-relative">
+          <a href="#" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
+          <img src="assets/img/blog/08.jpg" class="rounded-3" alt="Image">
+        </div>
+        <div class="card-body pb-0 px-0">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">Development</a>
+            <span class="fs-sm text-muted">10 hours ago</span>
+          </div>
+          <h3 class="h5 mb-0 fw-semibold">
+            <a href="#">Your Guide to Optimising A JavaScript-enabled Website</a>
+          </h3>
+        </div>
+      </article>
+    </div>
+  </div>
+  
+  <!-- Swiper pagination -->
+  <div class="swiper-pagination position-static mt-4 pt-lg-3 pt-2"></div>
+</div>
+</section>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="assets/vendor/rellax/rellax.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<!-- Main Theme Script -->
+<script src="assets/js/theme.min.js"></script>
 {% endblock %}

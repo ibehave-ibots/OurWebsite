@@ -1,0 +1,53 @@
+
+{% macro icon_squares() %}
+
+<!-- Swiper slider -->
+<div class="swiper mb-xl-3" data-swiper-options='{
+    "spaceBetween": 24,
+    "breakpoints": {
+        "0": {
+            "slidesPerView": 1
+        },
+        "500": {
+            "slidesPerView": 2
+        },
+        "768": {
+            "slidesPerView": 3
+        },
+        "1200": {
+            "slidesPerView": 4
+        }
+    },
+    "pagination": {
+        "el": ".swiper-pagination",
+        "clickable": true
+    }
+}'>
+<div class="swiper-wrapper">
+    
+    <!-- Swiper item -->
+    {% for i in range(7) %}
+    <div class="swiper-slide h-auto">
+        {{ card() }}
+    </div>
+    {% endfor %}
+    
+</div>
+
+<!-- Swiper pagination -->
+<div class="swiper-pagination position-static mt-4 pt-lg-3 pt-2"></div>
+</div>
+
+{% endmacro %}
+
+
+
+{% macro card() %}
+<div class="card h-100">
+    <div class="card-body my-md-5 my-4 py-xl-2 py-md-0 py-sm-2 text-center">
+        <img src="assets/img/landing/software-agency-3/icons/03.svg" alt="Icon" class="d-block mb-3 mx-auto">
+        <h3 class="h5 mb-3">Support &amp; Maintenance</h3>
+        <p class="mb-0">Turpis ultrices lacinia ut placerat dignissim morbi. Amet lectus sed tortor in elit adipiscing magnis.</p>
+    </div>
+</div>
+{% endmacro %}

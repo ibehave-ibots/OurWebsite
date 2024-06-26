@@ -1,0 +1,59 @@
+
+{% macro hero() %}
+<section class="position-relative d-flex align-items-center min-vh-100 py-5 bg-dark overflow-hidden">
+    <span class="position-absolute top-0 start-0 d-dark-mode-block d-none w-100 h-100 bg-secondary opacity-75"></span>
+    <div class="container position-relative mt-5 mb-lg-5 mb-md-4 mb-3 pt-3 pb-xl-3" data-bs-theme="dark">
+      <div class="row gy-5">
+        <div class="col-xl-5 col-lg-6">
+          <div class="position-relative zindex-5 text-lg-start text-center">
+            <h1 class="display-2 mb-4 pb-lg-3 pb-md-2">Top <span class="text-primary">software</span> engineering company</h1>
+            <p class="mb-4 pb-lg-3 pb-md-2">
+              <span class="me-2 text-light">We are the Top Rated agency on</span>
+              <img src="assets/img/landing/software-agency-3/clutch-rating.png" width="193" alt="Clutch rating" class="mt-n1">
+            </p>
+            <a href="#" class="btn btn-lg btn-primary">Start your project</a>
+          </div>
+        </div>
+        <div class="col-lg-6 offset-xl-1">
+          <div class="position-relative ms-xl-0 ms-lg-4">
+            <div class="position-absolute top-50 start-50 translate-middle ratio ratio-1x1" style="width: 125%; max-width: 49.75rem;">
+              <div class="p-md-0 p-5">
+                <img src="assets/img/landing/software-agency-3/hero-bg.png" alt="Shape" class="hero-animation-spin p-md-0 p-5">
+              </div>
+            </div>
+            <div class="position-relative row row-cols-sm-2 row-cols-1 gx-xl-4 gx-lg-3 gx-md-4 gx-3">
+              <div class="col">
+                <div class="d-sm-grid d-flex gap-xl-4 gap-lg-3 gap-md-4 gap-sm-3 gap-2">
+                  <div class="d-flex align-items-center justify-content-center bg-secondary rounded-3" style="min-height: 176px; backdrop-filter: blur(6px);">
+                    <div class="p-xl-4 p-sm-3 p-2 fs-xl fw-semibold text-center">
+                      <span class="hero-animation-fade text-white">I need AI engineers</span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-center bg-secondary rounded-3" style="min-height: 176px; backdrop-filter: blur(6px);">
+                    <div class="p-xl-4 p-sm-3 p-2 fs-xl fw-semibold text-center">
+                      <span class="hero-animation-fade hero-animation-delay-2 text-white">We are looking for Shopify Experts</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col mt-sm-5 mt-2 pt-sm-5">
+                <div class="d-sm-grid d-flex gap-xl-4 gap-lg-3 gap-md-4 gap-sm-3 gap-2">
+                  <div class="d-flex align-items-center justify-content-center bg-secondary rounded-3" style="min-height: 176px; backdrop-filter: blur(6px);">
+                    <div class="p-xl-4 p-sm-3 p-2 fs-xl fw-semibold text-center">
+                      <span class="hero-animation-fade hero-animation-delay-1 text-white">I need MVP for startup</span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-center bg-secondary rounded-3" style="min-height: 176px; backdrop-filter: blur(6px);">
+                    <div class="p-xl-4 p-sm-3 p-2 fs-xl fw-semibold text-center">
+                      <span class="hero-animation-fade hero-animation-delay-3 text-white">I need web development</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endmacro %}
