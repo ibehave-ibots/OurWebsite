@@ -72,6 +72,7 @@ def run_render_pipeline():
         for rdata in render_data:
             assert rdata['url'].startswith('/'), f"Page URLS must be absolute.  Try {'/' + rdata['url']}"
 
+            renderer.vars['TEMPLATE_DIR'] = str(Path(rdata['template']).parent)
             page_html = renderer.render_named_template(
                 template_name=rdata['template'], 
                 data=global_data, 

@@ -1,2 +1,2 @@
-template: contacts.html
+template: contacts/contacts.html
 url: /contacts.html

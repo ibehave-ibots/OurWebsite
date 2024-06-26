@@ -1,2 +1,2 @@
-template: events.html
+template: events/events.html
 url: /events/index.html

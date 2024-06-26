@@ -22,6 +22,10 @@ class JinjaRenderer(NamedTuple):
         env.lstrip_blocks = True
         return JinjaRenderer(env=env)
 
+    @property
+    def vars(self) -> dict[str, Any]:
+        return self.env.globals
+
     def render_in_place(self, template_text: str, **data) -> str:
         rendered = self.env.from_string(template_text).render(**data)
         return rendered

@@ -1,2 +1,2 @@
-template: event_series.html
+template: event_series/event_series.html
 url: /events/conferences/index.html
