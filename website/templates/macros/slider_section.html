@@ -1,0 +1,71 @@
+{% macro slider_section() %}
+<div class="row gy-md-5 gy-4 mb-xl-3">
+    <div class="col-xl-4 col-lg-5 d-flex flex-column order-2 order-lg-1">
+      <h2 class="h1 mb-4 pb-3 pt-2 d-none d-lg-block">Industries We Serve</h2>
+      
+      <!-- Swiper slider -->
+      <div class="swiper mx-0" data-swiper-options='{
+        "spaceBetween": 24,
+        "loop": true,
+        "tabs": true,
+        "autoHeight": true,
+        "navigation": {
+          "prevEl": "#prev-industry",
+          "nextEl": "#next-industry"
+        }
+      }'>
+      <div class="swiper-wrapper text-lg-start text-center">
+        
+        <!-- Swiper item -->
+        <div class="swiper-slide" data-swiper-tab="#industry-1">
+          <h3 class="h5 mb-lg-4 mb-3">Finance and insurance</h3>
+          <p>Risus massa fames metus lectus diam maecenas dui. Nibh morbi id purus eget tellus diam, integer blandit. Ac condimentum a nisl sagittis, interdum. Et viverra maecenas quis cras sed gravida volutpat, cursus enim. </p>
+        </div>
+        
+        <!-- Swiper item -->
+        <div class="swiper-slide" data-swiper-tab="#industry-2">
+          <h3 class="h5 mb-lg-4 mb-3">Startup and technology</h3>
+          <p>Interdum amet lobortis viverra et sapien aliquam nunc amet. Bibendum eu pellentesque sit risus leo commodo. Nibh dictum tellus lectus in risus eget cursus vitae nisi lacinia aliquam utuismod cras pellentesque.</p>
+        </div>
+        
+        <!-- Swiper item -->
+        <div class="swiper-slide" data-swiper-tab="#industry-3">
+          <h3 class="h5 mb-lg-4 mb-3">E-commerce</h3>
+          <p>Egestas nunc eleifend lacinia suspendisse bibendum ultrices risus. Facilisis neque eleifend diam orci id. Iaculis dignissim sed malesuada porttitor ac iaculis nullam donec sed volutpat quis vulputate sollicitudin tincidunt.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Swiper controls (Prev / next buttons) -->
+    <div class="d-flex justify-content-center justify-content-lg-start mt-2 mt-lg-auto">
+      <button type="button" id="prev-industry" class="btn btn-prev btn-icon btn-sm me-2" aria-label="Previous">
+        <i class="bx bx-chevron-left"></i>
+      </button>
+      <button type="button" id="next-industry" class="btn btn-next btn-icon btn-sm ms-2" aria-label="Next">
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+  <div class="col-lg-7 offset-xl-1 order-1 order-lg-2">
+    
+    <!-- Swiper tabs (Industry images) -->
+    <div class="swiper-tabs">
+      
+      <!-- Industry 1 -->
+      <div id="industry-1" class="swiper-tab active">
+        <img src="assets/img/landing/software-agency-3/industries/01.jpg" class="rounded-3" alt="Image">
+      </div>
+      
+      <!-- Industry 2 -->
+      <div id="industry-2" class="swiper-tab">
+        <img src="assets/img/landing/software-agency-3/industries/02.jpg" class="rounded-3" alt="Image">
+      </div>
+      
+      <!-- Industry 3 -->
+      <div id="industry-3" class="swiper-tab">
+        <img src="assets/img/landing/software-agency-3/industries/03.jpg" class="rounded-3" alt="Image">
+      </div>
+    </div>
+  </div>
+
+{% endmacro %}
