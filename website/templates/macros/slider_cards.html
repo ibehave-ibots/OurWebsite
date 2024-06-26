@@ -1,0 +1,64 @@
+{% macro slider_cards() %}
+ <!-- Swiper slider -->
+ <div class="swiper mb-xl-3 text-sm-start text-center" data-swiper-options='{
+    "spaceBetween": 24,
+    "autoplay": true,
+    "breakpoints": {
+      "0": {
+        "slidesPerView": 1
+      },
+      "500": {
+        "slidesPerView": 2
+      },
+      "768": {
+        "slidesPerView": 3
+      },
+      "1200": {
+        "slidesPerView": 4
+      }
+    },
+    "pagination": {
+      "el": ".swiper-pagination",
+      "clickable": true
+    }
+  }'>
+  <div class="swiper-wrapper">
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mx-sm-0 mx-auto" style="max-width: 19.125rem;">
+        <h4 class="h5 mb-3">Prototype in 24 hrs</h4>
+        <p class="mb-0">Commodo senectus massa est urna mi. Mattis dis arcu aenean libero viverra gravida id. Imperdiet elit integer elit.</p>
+      </div>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mx-sm-0 mx-auto" style="max-width: 19.125rem;">
+        <h4 class="h5 mb-3">MVP within two weeks</h4>
+        <p class="mb-0">Purus netus eget facilisis morbi pellentesque. Fermentum mi sit a mi ebentot pellentesque.</p>
+      </div>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mx-sm-0 mx-auto" style="max-width: 19.125rem;">
+        <h4 class="h5 mb-3">Kickstart development</h4>
+        <p class="mb-0">Purus netus eget facilisis morbi pellentesque. Fermentum mi sit a mi ebentot pellentesque.</p>
+      </div>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide">
+      <div class="mx-sm-0 mx-auto" style="max-width: 19.125rem;">
+        <h4 class="h5 mb-3">24/7 Tech support</h4>
+        <p class="mb-0">Commodo senectus massa est urna mi. Mattis dis arcu aenean libero viverra gravida id. Imperdiet elit integer elit.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Swiper pagination -->
+  <div class="swiper-pagination position-static mt-4 pt-lg-3 pt-2"></div>
+
+  
+{% endmacro %}
