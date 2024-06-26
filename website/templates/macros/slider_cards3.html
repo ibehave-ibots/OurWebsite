@@ -1,0 +1,106 @@
+{% macro slider_cards3() %}
+
+  <!-- Swiper slider -->
+  <div class="swiper mb-xl-3 text-sm-start text-center" data-swiper-options='{
+    "spaceBetween": 24,
+    "autoplay": true,
+    "breakpoints": {
+      "0": {
+        "slidesPerView": 1
+      },
+      "500": {
+        "slidesPerView": 2
+      },
+      "768": {
+        "slidesPerView": 3
+      }
+    },
+    "pagination": {
+      "el": ".swiper-pagination",
+      "clickable": true
+    }
+  }'>
+  <div class="swiper-wrapper">
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide h-auto">
+      <article class="card h-100 border-0 bg-transparent">
+        <div class="position-relative">
+          <a href="#" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
+          <img src="assets/img/blog/05.jpg" class="rounded-3" alt="Image">
+        </div>
+        <div class="card-body pb-0 px-0">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">Business</a>
+            <span class="fs-sm text-muted">12 hours ago</span>
+          </div>
+          <h3 class="h5 mb-0 fw-semibold">
+            <a href="#">How to check the website before releasing?</a>
+          </h3>
+        </div>
+      </article>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide h-auto">
+      <article class="card h-100 border-0 bg-transparent">
+        <div class="position-relative">
+          <a href="#" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
+          <img src="assets/img/blog/07.jpg" class="rounded-3" alt="Image">
+        </div>
+        <div class="card-body pb-0 px-0">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">Digital</a>
+            <span class="fs-sm text-muted">11 hours ago</span>
+          </div>
+          <h3 class="h5 mb-0 fw-semibold">
+            <a href="#">Inclusive Marketing: Why and How Does it Work?</a>
+          </h3>
+        </div>
+      </article>
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide h-auto">
+      <article class="card h-100 border-0 bg-transparent">
+        <div class="position-relative">
+          <a href="#" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
+          <img src="assets/img/blog/08.jpg" class="rounded-3" alt="Image">
+        </div>
+        <div class="card-body pb-0 px-0">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">Development</a>
+            <span class="fs-sm text-muted">10 hours ago</span>
+          </div>
+          <h3 class="h5 mb-0 fw-semibold">
+            <a href="#">Your Guide to Optimising A JavaScript-enabled Website</a>
+          </h3>
+        </div>
+      </article>
+      
+    </div>
+    
+    <!-- Swiper item -->
+    <div class="swiper-slide h-auto">
+      <article class="card h-100 border-0 bg-transparent">
+        <div class="position-relative">
+          <a href="#" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
+          <img src="assets/img/blog/08.jpg" class="rounded-3" alt="Image">
+        </div>
+        <div class="card-body pb-0 px-0">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">Development</a>
+            <span class="fs-sm text-muted">10 hours ago</span>
+          </div>
+          <h3 class="h5 mb-0 fw-semibold">
+            <a href="#">Your Guide to Optimising A JavaScript-enabled Website</a>
+          </h3>
+        </div>
+      </article>
+      
+    </div>
+    
+    <!-- Swiper pagination -->
+    <div class="swiper-pagination position-static mt-4 pt-lg-3 pt-2"></div>
+  
+{% endmacro %}

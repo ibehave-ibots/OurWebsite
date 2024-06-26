@@ -6,6 +6,7 @@
 {% from "macros/project_sections.html" import project_sections %}
 {% from "macros/slider_cards.html" import slider_cards %}
 {% from "macros/slider_cards2.html" import slider_cards2 %}
+{% from "macros/slider_cards3.html" import slider_cards3 %}
 
 {% extends "blocks/base.html" %}
 
@@ -33,21 +34,21 @@
 
 <!-- Industries (Slider) -->
 <section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
-{{ slider_section() }}
+  {{ slider_section() }}
 </section>
 
 
 <!-- Technologies -->
 <section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
-{{ slider_icons() }}
- 
+  {{ slider_icons() }}
+  
 </section>
 
 
 <!-- Projects -->
 <section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
   <h2 class="h1 mb-lg-5 mb-4 pb-lg-0 pb-md-2 text-center">Explore Our Featured Projects</h2>
- {{ project_sections() }}
+  {{ project_sections() }}
 </section>
 
 
@@ -55,102 +56,19 @@
 <section class="container mb-lg-5 mb-4 pb-3">
   <h2 class="h1 mb-lg-5 mb-4 pb-lg-0 pb-md-2 text-center">Our benefits</h2>
   {{ slider_cards() }}
- 
+  
 </section>
 
 
 <!-- Brands (carousel on screens < 1100px) -->
 <section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
- {{ slider_cards2() }}  
+  {{ slider_cards2() }}  
 </section>
 
 
 <!-- Blog -->
 <section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
-  
-  <!-- Swiper slider -->
-  <div class="swiper mb-xl-3 text-sm-start text-center" data-swiper-options='{
-    "spaceBetween": 24,
-    "autoplay": true,
-    "breakpoints": {
-      "0": {
-        "slidesPerView": 1
-      },
-      "500": {
-        "slidesPerView": 2
-      },
-      "768": {
-        "slidesPerView": 3
-      }
-    },
-    "pagination": {
-      "el": ".swiper-pagination",
-      "clickable": true
-    }
-  }'>
-  <div class="swiper-wrapper">
-    
-    <!-- Swiper item -->
-    <div class="swiper-slide h-auto">
-      <article class="card h-100 border-0 bg-transparent">
-        <div class="position-relative">
-          <a href="#" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
-          <img src="assets/img/blog/05.jpg" class="rounded-3" alt="Image">
-        </div>
-        <div class="card-body pb-0 px-0">
-          <div class="d-flex align-items-center justify-content-between mb-3">
-            <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">Business</a>
-            <span class="fs-sm text-muted">12 hours ago</span>
-          </div>
-          <h3 class="h5 mb-0 fw-semibold">
-            <a href="#">How to check the website before releasing?</a>
-          </h3>
-        </div>
-      </article>
-    </div>
-    
-    <!-- Swiper item -->
-    <div class="swiper-slide h-auto">
-      <article class="card h-100 border-0 bg-transparent">
-        <div class="position-relative">
-          <a href="#" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
-          <img src="assets/img/blog/07.jpg" class="rounded-3" alt="Image">
-        </div>
-        <div class="card-body pb-0 px-0">
-          <div class="d-flex align-items-center justify-content-between mb-3">
-            <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">Digital</a>
-            <span class="fs-sm text-muted">11 hours ago</span>
-          </div>
-          <h3 class="h5 mb-0 fw-semibold">
-            <a href="#">Inclusive Marketing: Why and How Does it Work?</a>
-          </h3>
-        </div>
-      </article>
-    </div>
-    
-    <!-- Swiper item -->
-    <div class="swiper-slide h-auto">
-      <article class="card h-100 border-0 bg-transparent">
-        <div class="position-relative">
-          <a href="#" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
-          <img src="assets/img/blog/08.jpg" class="rounded-3" alt="Image">
-        </div>
-        <div class="card-body pb-0 px-0">
-          <div class="d-flex align-items-center justify-content-between mb-3">
-            <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">Development</a>
-            <span class="fs-sm text-muted">10 hours ago</span>
-          </div>
-          <h3 class="h5 mb-0 fw-semibold">
-            <a href="#">Your Guide to Optimising A JavaScript-enabled Website</a>
-          </h3>
-        </div>
-      </article>
-    </div>
-  </div>
-  
-  <!-- Swiper pagination -->
-  <div class="swiper-pagination position-static mt-4 pt-lg-3 pt-2"></div>
-</div>
+  {{ slider_cards3() }}
 </section>
 
 
