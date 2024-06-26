@@ -5,6 +5,7 @@
 {% from "macros/slider_icons.html" import slider_icons %}
 {% from "macros/project_sections.html" import project_sections %}
 {% from "macros/slider_cards.html" import slider_cards %}
+{% from "macros/slider_cards2.html" import slider_cards2 %}
 
 {% extends "blocks/base.html" %}
 
@@ -60,58 +61,7 @@
 
 <!-- Brands (carousel on screens < 1100px) -->
 <section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
-  <div class="swiper mx-n2" data-swiper-options='{
-    "spaceBetween": 8,
-    "pagination": {
-      "el": ".swiper-pagination",
-      "clickable": true
-    },
-    "breakpoints": {
-      "0": {
-        "slidesPerView": 2
-      },
-      "768": {
-        "slidesPerView": 3
-      },
-      "1200": {
-        "slidesPerView": 4
-      }
-    }
-  }'>
-  <div class="swiper-wrapper">
-    
-    <!-- Item -->
-    <div class="swiper-slide py-3">
-      <a href="#" class="card card-body card-hover px-2 mx-2">
-        <img src="assets/img/brands/01.svg" class="d-block mx-auto my-2" width="154" alt="Brand">
-      </a>
-    </div>
-    
-    <!-- Item -->
-    <div class="swiper-slide py-3">
-      <a href="#" class="card card-body card-hover px-2 mx-2">
-        <img src="assets/img/brands/02.svg" class="d-block mx-auto my-2" width="154" alt="Brand">
-      </a>
-    </div>
-    
-    <!-- Item -->
-    <div class="swiper-slide py-3">
-      <a href="#" class="card card-body card-hover px-2 mx-2">
-        <img src="assets/img/brands/03.svg" class="d-block mx-auto my-2" width="154" alt="Brand">
-      </a>
-    </div>
-    
-    <!-- Item -->
-    <div class="swiper-slide py-3">
-      <a href="#" class="card card-body card-hover px-2 mx-2">
-        <img src="assets/img/brands/04.svg" class="d-block mx-auto my-2" width="154" alt="Brand">
-      </a>
-    </div>
-  </div>
-  
-  <!-- Pagination (bullets) -->
-  <div class="swiper-pagination position-relative pt-2 mt-4"></div>
-</div>
+ {{ slider_cards2() }}  
 </section>
 
 
