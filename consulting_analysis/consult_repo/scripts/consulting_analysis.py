@@ -1,6 +1,7 @@
 from fsspec.implementations.local import LocalFileSystem
 from src import ScieboDataDownload  
 from src import WordDocumentProcessor
+from src import count_types_of_sessions
 
 def main():
     fs_raw = LocalFileSystem()
@@ -12,6 +13,9 @@ def main():
     word_doc = WordDocumentProcessor()
     reports = fs_raw.ls('raw/', detail=False)
     processed_text = word_doc.process(reports)
+
+    n_short = count_types_of_sessions(processed_text, type='short')
+
     
 
 if __name__ == "__main__":
