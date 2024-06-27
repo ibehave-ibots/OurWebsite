@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from webdav4.fsspec import WebdavFileSystem
 import os
 
-class DataDownloadStrategy(ABC):
+class DataDownload(ABC):
     @abstractmethod
     def download_raw_reports(self, destination: str) -> None:
         pass
@@ -13,7 +13,7 @@ class DataDownloadStrategy(ABC):
     def download_results(self, destination: str) -> None:
         pass
 
-class ScieboDataDownload(DataDownloadStrategy):
+class ScieboDataDownload(DataDownload):
     def download_raw_reports(self, destination: str):
         load_dotenv()
         SANGEE_REPORT_USR = os.getenv('SANGEE_REPORT_USR')

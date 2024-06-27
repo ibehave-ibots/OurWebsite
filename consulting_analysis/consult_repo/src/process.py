@@ -3,12 +3,12 @@ from abc import ABC, abstractmethod
 from docx import Document
 
 
-class DataProcessStrategy(ABC):
+class DataProcess(ABC):
     @abstractmethod
     def process(self, reports: list) -> None:
         pass
 
-class WordDocumentProcessor(DataProcessStrategy):
+class WordDocumentProcessor(DataProcess):
 
     def process(self, reports) -> str:
         session_reports = []
