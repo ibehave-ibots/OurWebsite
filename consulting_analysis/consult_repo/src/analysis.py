@@ -40,3 +40,11 @@ def count_num_unique_scholars(report: str) -> AnalysisResult:
     )
 
 
+def count_num_occurrances_of_word(report, word='python') -> AnalysisResult:
+    return AnalysisResult(
+        short_name=f"n_{word}",
+        name=f"Number of {word} mentions",
+        value=report.lower().count(word),
+        units='Occurrance',
+        display_units='Occurrance'
+    )
