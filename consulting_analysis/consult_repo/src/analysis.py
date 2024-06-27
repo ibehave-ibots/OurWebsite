@@ -13,8 +13,8 @@ class AnalysisResult:
 def count_types_of_sessions(report: str, type: str = 'short') -> AnalysisResult:
     counts = report.lower().count(f'type: {type}')
     return AnalysisResult(
-        short_name='n_short',
-        name='Total number of short chats',
+        short_name=f'n_{type}',
+        name=f'Total number of {type} chats',
         value=counts,
         units='Session',
         display_units='Session'
