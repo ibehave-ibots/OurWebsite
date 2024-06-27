@@ -15,6 +15,9 @@ def main():
     processed_text = word_doc.process(reports)
 
     n_short = count_types_of_sessions(processed_text, type='short')
+    n_hands = count_types_of_sessions(processed_text, type='hands-on')
+    print(n_short)
+    print(n_hands)
 
     
 
