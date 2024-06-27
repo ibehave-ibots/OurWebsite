@@ -1,13 +1,5 @@
 from fsspec.implementations.local import LocalFileSystem
-import pytest
-from src import ScieboDataDownload
-
-@pytest.fixture
-def download_raw(tmp_path):
-    sciebo_download = ScieboDataDownload()
-    destination = tmp_path / "raw_data"
-    destination.mkdir(parents=True, exist_ok=True)
-    return destination    
+from src import ScieboDataDownload  
 
 def test_download_raw_reports(download_raw):
     sciebo_download = ScieboDataDownload()
