@@ -1,7 +1,7 @@
 from fsspec.implementations.local import LocalFileSystem
 from src import ScieboDataDownload  
 from src import WordDocumentProcessor
-from src import count_types_of_sessions
+from src import count_types_of_sessions, count_num_unique_scholars
 
 def main():
     fs_raw = LocalFileSystem()
@@ -16,8 +16,10 @@ def main():
 
     n_short = count_types_of_sessions(processed_text, type='short')
     n_hands = count_types_of_sessions(processed_text, type='hands-on')
-    print(n_short)
-    print(n_hands)
+
+    n_unique_scholars = count_num_unique_scholars(processed_text)
+    print(n_unique_scholars)
+
 
     
 
