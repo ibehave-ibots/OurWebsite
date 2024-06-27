@@ -20,7 +20,9 @@ def main():
     n_unique_scholars = count_num_unique_scholars(processed_text)
 
     n_python = count_num_occurrances_of_word(processed_text, word='python')
-    print(n_python)
+    n_matlab = count_num_occurrances_of_word(processed_text, word='matlab')
+
+    print(n_matlab)
 
 
     
