@@ -1,4 +1,13 @@
+from dataclasses import dataclass
 from docx import Document
+
+@dataclass
+class ReportData:
+    type: str
+    scholar: str
+    date: str
+    topic: str
+    content: str
 
 def extract_report_data(file_path):
     document = Document(file_path)
@@ -11,11 +20,30 @@ def extract_report_data(file_path):
     }
 
     current_section = None
+    reports = []
 
     for para in document.paragraphs:
         text = para.text.strip()
         
         if text.startswith('Type:'):
+            if current_section == 'content':  
+                reports.append(
+                    ReportData(
+                        type=report_data['type'],
+                        scholar=report_data['scholar'],
+                        date=report_data['date'],
+                        topic=report_data['topic'],
+                        content=report_data['content']
+                    )
+                )
+
+                report_data = {
+                    'type': '',
+                    'scholar': '',
+                    'date': '',
+                    'topic': '',
+                    'content': ''
+                }
             report_data['type'] = text.replace('Type:', '').strip()
             current_section = 'type'
         elif text.startswith('Scholar:'):
@@ -33,8 +61,18 @@ def extract_report_data(file_path):
         elif current_section == 'content':
             report_data['content'] += '\n' + text
 
-    return report_data
+    if report_data['type']:
+        reports.append(
+            ReportData(
+                type=report_data['type'],
+                scholar=report_data['scholar'],
+                date=report_data['date'],
+                topic=report_data['topic'],
+                content=report_data['content']
+            )
+        )
+
+    return reports
 
 file_path = 'consulting_session_template.docx'
-report_data = extract_report_data(file_path)
-print(report_data['content'])
+reports = extract_report_data(file_path)
