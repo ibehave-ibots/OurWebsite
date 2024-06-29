@@ -1,13 +1,9 @@
-import os
-from pathlib import Path
+
+from flask import Flask, redirect, send_from_directory
 from livereload import Server
-from flask import Flask, abort, redirect, send_from_directory, make_response
-from werkzeug.utils import send_file
-from wsgiref.types import WSGIEnvironment
 
-from .vendor_patches import patch_livereload_to_fix_bug_around_wsgi_support
 from .renderer import run_render_pipeline
-
+from .vendor_patches import patch_livereload_to_fix_bug_around_wsgi_support
 
 
 def build_server() -> Server:
