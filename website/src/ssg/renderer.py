@@ -14,13 +14,15 @@ from . import filters
 
 def copy_static():
     rmdir("./_output/static")
-    copydir(src="./static", target="./_output/static")
     copydir(src="./themes/Silicon/assets", target="./_output/assets")
+    
 
 
 def run_render_pipeline():
     if not Path('./_output').exists():
         copy_static()
+    copydir(src="./pages/_static", target="./_output/static")
+        
 
     renderer = JinjaRenderer.from_path(
         templates_dir='./pages', 
