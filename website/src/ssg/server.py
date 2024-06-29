@@ -12,10 +12,7 @@ from .renderer import run_render_pipeline
 
 def build_server() -> Server:
 
-    # os.chdir('./_output')
-    # STATIC_FOLDER = '_output'
     app = Flask(__name__, root_path='.', static_folder='.')
-
 
     @app.route('/')
     @app.route('/<path:path>')
@@ -23,11 +20,11 @@ def build_server() -> Server:
         if path.endswith('/'):
             return redirect('index.html')  # appends 'index.html' to the path for directory-style requests (e.g. 'events/' -> 'events/index.html')
         
-        return send_from_directory('./_output', path=path)
+        return send_from_directory('_output', path=path)
 
     @app.errorhandler(404)
     def page_not_found(e):
-        return send_from_directory('./_output', '404.html'), 404
+        return send_from_directory('_output', '404.html'), 404
     
 
     patch_livereload_to_fix_bug_around_wsgi_support()
