@@ -1,5 +1,7 @@
 from pathlib import Path, PurePosixPath
 from typing import Any, Collection, Iterable
+import urllib.request
+
 
 from PIL import Image
 
@@ -47,6 +49,18 @@ def flatten_nested_dict[K1, K2](nested_dict: dict[K1, dict[K2, Any]]) -> dict[tu
             out[k1, k2] = value
     return out
 
+
+def download(url, target):
+    # Extract the filename from the URL
+    filename = url.split("/")[-1].split('?')[0]
+    # Create the full path
+    save_path = Path(target) / filename
+    
+    # Download the file from the URL
+    urllib.request.urlretrieve(url, save_path)
+    
+    return str(save_path)
+    
 
 def promote_key[T: list[dict] | dict[str, dict]](data: T, key: str, attrs: list[int | str]) -> T:
     if isinstance(data, list):

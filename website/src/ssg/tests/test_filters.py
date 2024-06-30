@@ -110,3 +110,11 @@ def test_sort_by():
     assert observed == expected
     
 
+def test_download_filter(tmp_path):
+    url = "https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg"
+    fold = str(tmp_path)
+    path = filters.download(url, target=fold)
+    assert isinstance(path, str)
+    assert Path(path).exists()
+    assert Path(path).name == 'domestic-dog_thumb_square.jpg'
+    

@@ -33,6 +33,7 @@ def run_render_pipeline():
             'items': filters.items,
             'index': filters.multi_index,
             'sort_by': filters.sort_by,
+            'download': filters.download,
         },
         globals={
             'today': date.today(),
