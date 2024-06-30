@@ -41,6 +41,7 @@ def run_render_pipeline():
             'str': str,
         },
     )
+    
 
     ## Get Data from './data'
     global_data = extract_global_data(base_path='./data')
@@ -76,6 +77,8 @@ def run_render_pipeline():
             assert rdata['url'].startswith('/'), f"Page URLS must be absolute.  Try {'/' + rdata['url']}"
 
             renderer.vars['TEMPLATE_DIR'] = str(PurePosixPath(page_path.relative_to(Path('./pages'))))
+            renderer.vars['PAGE_PATH'] = str(PurePosixPath(page_path))
+            
             page_html = renderer.render_named_template(
                 template_name=f"{page_path.name}/{rdata['template']}", 
                 data=global_data, 

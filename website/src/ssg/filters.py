@@ -54,7 +54,8 @@ def download(url, target):
     # Extract the filename from the URL
     filename = url.split("/")[-1].split('?')[0]
     # Create the full path
-    save_path = Path(target) / filename
+    save_path = PurePosixPath(target) / filename
+    Path(save_path).parent.mkdir(parents=True, exist_ok=True)
     
     # Download the file from the URL
     urllib.request.urlretrieve(url, save_path)
