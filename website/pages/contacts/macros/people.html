@@ -1,7 +1,11 @@
 
 {% macro person_card(name, position, email, booking_url) %}
 <div class="card card-body card-hover bg-light border-0 text-center">
-    <img src="https://placehold.co/200x200" class="d-block rounded-circle mx-auto mb-3" width="162" alt="{{ name }}">
+    <img 
+        src="https://placehold.co/200x200" 
+        class="d-block rounded-circle mx-auto mb-3" 
+        width="162" 
+        alt="{{ name }}">
     <h5 class="fw-medium fs-lg mb-1"> {{ name }}</h5>
     <p class="fs-sm mb-3"> {{ position }} </p>
     <div class="d-flex justify-content-center">
