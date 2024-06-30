@@ -1,11 +1,13 @@
 
 {% macro person_card(name, position, email, booking_url) %}
 <div class="card card-body card-hover bg-light border-0 text-center">
-    <img 
-        src="https://placehold.co/200x200" 
-        class="d-block rounded-circle mx-auto mb-3" 
-        width="162" 
-        alt="{{ name }}">
+    <picture>
+        <source srcset="https://placehold.co/200x200" media="(max-width: 576px)">
+        <source srcset="https://placehold.co/400x400" media="(max-width: 768px)">
+        <source srcset="https://placehold.co/600x600" media="(max-width: 992px)">
+        <source srcset="https://placehold.co/800x800" media="(max-width: 1200px)">
+        <img src="https://placehold.co/800x800" class="d-block rounded-circle mx-auto mb-3" width="162" alt="{{ name }}">
+    </picture>
     <h5 class="fw-medium fs-lg mb-1"> {{ name }}</h5>
     <p class="fs-sm mb-3"> {{ position }} </p>
     <div class="d-flex justify-content-center">
@@ -20,8 +22,6 @@
         </a>
     </div>
 </div>
-
-
 {% endmacro %}
 
 {% macro people_grid(people) %}
