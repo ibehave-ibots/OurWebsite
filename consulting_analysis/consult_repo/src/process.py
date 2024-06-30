@@ -1,14 +1,15 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from docx import Document
 
 
-class DataProcessStrategy(ABC):
+class DataProcess(ABC):
     @abstractmethod
-    def process(self, reports: list) -> None:
+    def process(self, reports: list) -> str:
         pass
 
-class WordDocumentProcessor(DataProcessStrategy):
+class WordDocumentProcessor(DataProcess):
 
     def process(self, reports) -> str:
         session_reports = []
@@ -46,3 +47,4 @@ class WordDocumentProcessor(DataProcessStrategy):
                 pages.append(current_text.strip())
 
         return pages
+
