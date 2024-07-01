@@ -105,3 +105,12 @@ def copy_to(src: str, target: str) -> str:
     shutil.copy2(src, target)
     new_path = Path(target) / Path(src).name
     return str(PurePosixPath(new_path))
+
+
+def prepend(path: str, base: str) -> str:
+    if PurePosixPath(path).is_absolute() or Path(path).is_absolute():  # here we also use linux-style filenames in a windows environment.
+        raise ValueError(f"absolute path {path} cannot be prepended.")
+    
+    new_path = PurePosixPath(base).joinpath(path)
+    return str(new_path)
+    

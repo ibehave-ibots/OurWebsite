@@ -10,6 +10,7 @@ people:
         - name: {{ person.name }}
           email: {{ person.email }}
           booking_url: {{ person.booking_url }}
+          image: {{ person.image }}
         {% endif %}
         {% endfor %}
     past:

@@ -26,7 +26,7 @@
                         {{ person_card(
                             name=person.name, 
                             position="Research Software Consultant", 
-                            image='data/images/ibots.png' | copy_to('static'),
+                            image=person.image | prepend('data') | copy_to('static'),
                             email=person.email, 
                             booking_url=person.booking_url,
                             )

@@ -1,4 +1,6 @@
 from pathlib import Path
+
+import pytest
 from ssg import filters
 
 
@@ -128,3 +130,10 @@ def test_download_filter_creates_folder(tmp_path):
     assert Path(path).exists()
     assert Path(path).name == 'domestic-dog_thumb_square.jpg'
 
+
+def test_prepend():
+    assert filters.prepend('a/b', 'z') == 'z/a/b'
+
+def test_prepend_does_not_work_on_absolute_paths():
+    with pytest.raises(ValueError):
+        filters.prepend('/a/b', 'z')
