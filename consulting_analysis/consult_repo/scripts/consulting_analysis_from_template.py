@@ -1,7 +1,6 @@
 import os
 from fsspec.implementations.local import LocalFileSystem
-from src import ScieboDataDownload  
-from src import TemplateDocumentProcessor
+from src import ScieboDataDownload, TemplateDocumentProcessor  
 
 def main():
     os.environ['DB_WRITEMODE'] = '1'
@@ -22,6 +21,12 @@ def main():
     time_short_hrs = sum(consultant.time_short_hrs for consultant in consultants)
     time_hands_on_hrs = sum(consultant.time_hands_on_hrs for consultant in consultants)
     time_all_hrs = sum(consultant.time_all_hrs for consultant in consultants)
+    content = " ".join(consultant.consolidated_content for consultant in consultants)
+    
+    num_python = content.lower().count('python')
+    num_matlab = content.lower().count('matlab')
+
+
 
 if __name__ == "__main__":
     main()

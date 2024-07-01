@@ -48,8 +48,8 @@ class Consultant:
     def time_all_hrs(self) -> float:
         return self.time_short_hrs + self.time_hands_on_hrs
  
-
-    def _get_combined_content(self) -> str:
+    @property
+    def consolidated_content(self) -> str:
         return " ".join(report.content for report in self.reports)
 
 
