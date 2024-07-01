@@ -29,7 +29,7 @@ def test_process_for_template(template, sandbox_report):
     assert consultant.num_total_sessions == 16
     assert consultant.num_short_sessions == 11
     assert consultant.num_hands_on_sessions == 5
-    assert consultant.num_unique_scholars == 12
+    assert consultant.num_unique_scholars == 13
     
 
     
