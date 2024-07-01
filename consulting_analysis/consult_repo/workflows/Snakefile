@@ -1,7 +1,12 @@
 workdir: '../'
 
+rule all:
+    input:
+        "raw/",
+        "analysis_complete"
+
 rule download_from_sciebo:
-    output: 'raw/'
+    output: directory('raw/')
     run:
         import sys
         import os
@@ -10,11 +15,124 @@ rule download_from_sciebo:
 
         from src import ScieboDataDownload
 
-
-        os.environ['DB_WRITEMODE'] = '1'
         fs_raw = LocalFileSystem()
 
-        if not fs_raw.exists('{output}', detail=False):
+        if not fs_raw.exists(output, detail=False):
             sciebo_download = ScieboDataDownload()
-            sciebo_download.download_raw_reports(destination='raw/')
+            sciebo_download.download_raw_reports(destination=str(output))
+
+
+rule analysis:
+    input: 
+        'raw/'
+    output:
+        'analysis_complete'
+    run:
+        import sys
+        import os
+        sys.path.append(os.path.abspath('../consult_repo'))
+        from src import ScieboDataUpload, TemplateDocumentProcessor 
+        from results_repo import ConsultingResultRepo
+        from fsspec.implementations.local import LocalFileSystem
+
+        timestamp_file = input[0]+'/.snakemake_timestamp'
+
+        os.environ['DB_WRITEMODE'] = '1'
+        if os.path.exists(timestamp_file):
+            os.remove(timestamp_file)            
+
+        fs_raw = LocalFileSystem()
+
+        template_doc = TemplateDocumentProcessor()
+        reports = fs_raw.ls(input[0], detail=False)
+        extracted_consultants = template_doc.process(reports_path=reports)
+        consultants = extracted_consultants[1:]
+        total_sessions = sum(consultant.num_total_sessions for consultant in consultants)
+        num_short_sessions = sum(consultant.num_short_sessions for consultant in consultants)
+        num_hands_on_sessions = sum(consultant.num_hands_on_sessions for consultant in consultants)
+        num_unique_scholars = sum(consultant.num_unique_scholars for consultant in consultants)
+        time_short_hrs = sum(consultant.time_short_hrs for consultant in consultants)
+        time_hands_on_hrs = sum(consultant.time_hands_on_hrs for consultant in consultants)
+        time_all_hrs = sum(consultant.time_all_hrs for consultant in consultants)
+        content = " ".join(consultant.consolidated_content for consultant in consultants)
         
+        num_python = content.lower().count('python')
+        num_matlab = content.lower().count('matlab')
+
+        sciebo_upload = ScieboDataUpload()
+        fs_remote = sciebo_upload.connect()
+        repo_remote = ConsultingResultRepo.connect(fs_remote)
+
+        repo_remote.put(
+            short_name='n_sess',
+            name='Total number of sessions',
+            value=total_sessions,
+            units="Session",
+            display_units='Session'
+        )
+
+        repo_remote.put(
+            short_name='time_sess_hrs',
+            name='Total time for all sessions',
+            value=time_all_hrs,
+            units="Hour",
+            display_units='Hrs'
+        )
+
+        repo_remote.put(
+            short_name='n_short',
+            name='Total number of short chats',
+            value=num_short_sessions,
+            units="Session",
+            display_units='Session'
+        )
+
+        repo_remote.put(
+            short_name='time_short_hrs',
+            name='Total time for short chats',
+            value=time_short_hrs,
+            units="Hour",
+            display_units='Hrs'
+        )
+
+        repo_remote.put(
+            short_name='n_hands',
+            name='Total number of hands-on chats',
+            value=num_hands_on_sessions,
+            units="Session",
+            display_units='Session'
+        )
+
+        repo_remote.put(
+            short_name='time_hands_on_hrs',
+            name='Total time for hands-on sessions',
+            value=time_hands_on_hrs,
+            units="Hour",
+            display_units='Hrs'
+        )    
+
+        repo_remote.put(
+            short_name='n_scholars',
+            name='Total number of unique scholars',
+            value=num_unique_scholars,
+            units="Researcher",
+            display_units='Session'
+        )
+
+        repo_remote.put(
+            short_name='n_python',
+            name='Total number of Python occurrances in content',
+            value=num_python,
+            units="Occurrance",
+            display_units='Occurrance'
+        )
+
+        repo_remote.put(
+            short_name='n_matlab',
+            name='Total number of Matlab occurrances in content',
+            value=num_matlab,
+            units="Occurrance",
+            display_units='Occurrance'
+        )
+
+        repo_remote.push()        
