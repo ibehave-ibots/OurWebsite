@@ -12,9 +12,12 @@ def extract_global_data(base_path: Path) -> dict[str, Any]:
             if item.is_dir():
                 collections[item.stem] = extract_recursive(item)
             else:
-                if item.suffix == '.yaml':
+                if '.yaml' in item.name:
                     data = load_yaml(item.read_text())
-                    collections[item.stem] = data
+                    if item.name == '.yaml':
+                        collections.update(data)  # Merge directly if filanme only '.yaml'
+                    else:
+                        collections[item.stem] = data
                 else:
                     collections[item.stem] = str(PurePosixPath(item.relative_to(base_path)))
         return collections

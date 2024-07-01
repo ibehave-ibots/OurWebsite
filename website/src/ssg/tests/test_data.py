@@ -121,3 +121,18 @@ def test_gets_path_of_image_files_with_relative_paths(tmp_path):
     os.chdir(tmp_path)
     data = extract_global_data(tmp_path)
     assert data['animals']['dog']['dog'] == 'animals/dog/dog.jpg'
+
+
+def test_no_subkey_is_added_if_fielname_is_only_yaml_extension(tmp_path):
+    fname = "animals/dogs/.yaml"
+    yaml = """
+    a: 3
+    b: 5
+    """
+    path = tmp_path.joinpath(fname)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(yaml)
+
+    data = extract_global_data(tmp_path)
+    assert '.yaml' not in data['animals']['dogs']
+    assert data['animals']['dogs']['a'] == 3
