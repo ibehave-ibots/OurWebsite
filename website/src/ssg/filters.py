@@ -1,9 +1,10 @@
 import shutil
 import urllib.request
 from pathlib import Path, PurePosixPath
-from typing import Any, Collection, Iterable
+from typing import Any, Collection, Iterable, Literal
 
 from PIL import Image
+import validators
 
 
 def redirect_path(prepend_path, arg_idx=0):
@@ -51,16 +52,6 @@ def flatten_nested_dict[K1, K2](nested_dict: dict[K1, dict[K2, Any]]) -> dict[tu
     return out
 
 
-def download(url, folder: str, fname: str = None):
-    
-    save_path = Path(folder)
-    save_path /= fname if fname is not None else Path(url).name
-    if not save_path.exists():
-        save_path.parent.mkdir(parents=True, exist_ok=True)
-        urllib.request.urlretrieve(url, save_path ,)
-    
-    return str(PurePosixPath(save_path))
-    
 
 def promote_key[T: list[dict] | dict[str, dict]](data: T, key: str, attrs: list[int | str]) -> T:
     if isinstance(data, list):
@@ -100,11 +91,6 @@ def sort_by[T](data: Iterable[T], indices: list[int | str], reverse: bool = Fals
     return type(data)(sorted(data, key=lambda d: multi_index(d, indices), reverse=reverse))
 
 
-def copy_to(src: str, target: str) -> str:
-    Path(target).mkdir(parents=True, exist_ok=True)
-    shutil.copy2(src, target)
-    new_path = Path(target) / Path(src).name
-    return str(PurePosixPath(new_path))
 
 
 def prepend(path: str, base: str) -> str:
@@ -114,3 +100,34 @@ def prepend(path: str, base: str) -> str:
     new_path = PurePosixPath(base).joinpath(path)
     return str(new_path)
     
+
+
+
+def download(src, folder: str, fname: str = None):
+    
+    save_path = Path(folder)
+    save_path /= fname if fname is not None else Path(src).name
+    if not save_path.exists():
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        urllib.request.urlretrieve(src, save_path ,)
+    
+    return str(PurePosixPath(save_path))
+    
+
+def copy_to(src: str, folder: str, fname: str = None) -> str:
+    save_path = Path(folder)
+    save_path /= fname if fname is not None else Path(src).name
+    if not save_path.exists():
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, folder)
+    
+    return str(PurePosixPath(save_path))
+
+
+
+def transfer_file(src: str, folder: str, fname: str = None, download_fun=download, copy_fun=copy_to):
+    if validators.url(src):
+        return download_fun(src=src, folder=folder, fname=fname)
+    else:
+        return copy_fun(src=src, folder=folder, fname=fname)
+

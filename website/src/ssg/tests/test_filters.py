@@ -1,4 +1,5 @@
 from pathlib import Path
+from unittest.mock import Mock
 
 import pytest
 from ssg import filters
@@ -137,3 +138,19 @@ def test_prepend():
 def test_prepend_does_not_work_on_absolute_paths():
     with pytest.raises(ValueError):
         filters.prepend('/a/b', 'z')
+
+
+def test_transfer_file_downloads_urls():
+    downloader = Mock()
+    copier = Mock()
+    filters.transfer_file('https://www.gooogle.com', folder='', download_fun=downloader, copy_fun=copier)
+    downloader.assert_called_once()
+    copier.assert_not_called()
+
+
+def test_transfer_file_downloads_urls():
+    downloader = Mock()
+    copier = Mock()
+    filters.transfer_file('data/file.json', folder='', download_fun=downloader, copy_fun=copier)
+    downloader.assert_not_called()
+    copier.assert_called_once()

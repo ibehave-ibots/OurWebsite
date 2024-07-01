@@ -36,6 +36,7 @@ def run_render_pipeline():
             'download': filters.redirect_path('./_output', arg_idx=1)(filters.download),  
             'copy_to': filters.redirect_path('./_output', arg_idx=1)(filters.copy_to),
             'prepend': filters.prepend,
+            'getfile': filters.transfer_file,
         },
         globals={
             'today': date.today(),
