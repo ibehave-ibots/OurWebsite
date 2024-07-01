@@ -34,7 +34,7 @@ sections:
           icon: icon.svg
 
     - title: What Do We Do?
-      image: https://placehold.co/600x600
+      image: service_distribution.png
       paragraphs: 
         - Morbi id mattis orci. Maecenas elit sapien, viverra in urna eu, ornare finibus eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non tristique lacus, nec dapibus dui.
         - Sed volutpat tempor nunc, et ullamcorper arcu ullamcorper in. Nulla facilisis in sapien ut porttitor. Mauris commodo sollicitudin nibh a cursus. Proin porttitor dictum libero vel rhoncus. Vestibulum enim enim, iaculis in massa eu, vulputate laoreet nulla.
