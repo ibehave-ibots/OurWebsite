@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from docx import Document
 
-
 @dataclass
 class ReportData:
     type: str
@@ -15,6 +14,27 @@ class ReportData:
 class Consultant:
     name: str
     reports: list[ReportData]
+
+    @property
+    def num_total_sessions(self) -> int:
+        return len(self.reports)
+
+    @property    
+    def num_short_sessions(self) -> int:
+        return sum(1 for report in self.reports if report.type == 'short')
+
+    @property    
+    def num_hands_on_sessions(self) -> int:
+        return sum(1 for report in self.reports if report.type == 'hands')
+    
+    @property
+    def num_unique_scholars(self) -> int:
+        scholars = {report.scholar for report in self.reports}
+        return len(scholars)
+    
+    def _get_combined_content(self) -> str:
+        return " ".join(report.content for report in self.reports)
+
 
 @dataclass
 class TemplateDocumentProcessor:
