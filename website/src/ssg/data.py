@@ -6,6 +6,7 @@ from .utils import load_yaml
 
 def extract_global_data(base_path: Path) -> dict[str, Any]:
     def extract_recursive(path: Path) -> Any:
+        path = Path(path)
         collections = {}
         for item in path.iterdir():
             if item.is_dir():
