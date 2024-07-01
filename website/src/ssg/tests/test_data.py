@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from ssg.data import extract_global_data
 import pytest
 
@@ -136,3 +137,24 @@ def test_no_subkey_is_added_if_fielname_is_only_yaml_extension(tmp_path):
     data = extract_global_data(tmp_path)
     assert '.yaml' not in data['animals']['dogs']
     assert data['animals']['dogs']['a'] == 3
+
+
+def test_only_yaml_extension_can_provide_default_values_for_images(tmp_path):
+    fname = "dogs/.yaml"
+    yaml = """
+    image: 'https://www.default.com/image.png'
+    pic: 'https://www.default.com/image.png'
+    b: 5
+    """
+    path = tmp_path.joinpath(fname)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(yaml)
+
+    fname = "dogs/image.png"
+    tmp_path.joinpath(fname).touch()
+
+
+    data = extract_global_data(tmp_path)
+    assert data['dogs']['b'] == 5
+    assert data['dogs']['pic'] == 'https://www.default.com/image.png'
+    assert data['dogs']['image'] == 'dogs/image.png'
