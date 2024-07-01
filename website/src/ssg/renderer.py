@@ -34,7 +34,7 @@ def run_render_pipeline():
             'index': filters.multi_index,
             'sort_by': filters.sort_by,
             'download': filters.redirect_path('./_output', arg_idx=1)(filters.download),  
-            'rel_to': filters.relative_to,
+            'copy_to': filters.redirect_path('./_output', arg_idx=1)(filters.copy_to)
         },
         globals={
             'today': date.today(),

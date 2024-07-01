@@ -1,3 +1,4 @@
+import shutil
 import urllib.request
 from io import BytesIO
 from pathlib import Path, PurePosixPath
@@ -33,9 +34,6 @@ def redirect_path(prepend_path, arg_idx=0):
         return wrapper
     return decorator
 
-
-def relative_to(path: str, base: str) -> str:
-    return '/' + str(PurePosixPath(Path(path).relative_to(Path(base))))
 
 def resize_image(fname: str, width: int, height: int) -> str:
     path = Path(fname)
@@ -105,3 +103,7 @@ def sort_by[T](data: Iterable[T], indices: list[int | str], reverse: bool = Fals
     return type(data)(sorted(data, key=lambda d: multi_index(d, indices), reverse=reverse))
 
 
+def copy_to(src: str, target: str) -> str:
+    Path(target).mkdir(parents=True, exist_ok=True)
+    shutil.copy2(src, target)
+    return target
