@@ -106,4 +106,5 @@ def sort_by[T](data: Iterable[T], indices: list[int | str], reverse: bool = Fals
 def copy_to(src: str, target: str) -> str:
     Path(target).mkdir(parents=True, exist_ok=True)
     shutil.copy2(src, target)
-    return target
+    new_path = Path(target) / Path(src).name
+    return str(PurePosixPath(new_path))
