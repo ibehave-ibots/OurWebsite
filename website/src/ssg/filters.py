@@ -37,15 +37,13 @@ def redirect_path(prepend_path, arg_idx=0):
 def relative_to(path: str, base: str) -> str:
     return '/' + str(PurePosixPath(Path(path).relative_to(Path(base))))
 
-def resize_image(fname: str, res: tuple[int, int]) -> str:
+def resize_image(fname: str, width: int, height: int) -> str:
     path = Path(fname)
     with Image.open(path) as img:
-        img2 = img.resize(res)
+        img2 = img.resize((width, height))
 
-
-    path2 = path.with_stem(path.stem + f"_{res[0]}x{res[1]}")
+    path2 = path.with_stem(path.stem + f"_{width}x{height}")
     img2.save(path2)
-
     return str(PurePosixPath(path2))
 
     
