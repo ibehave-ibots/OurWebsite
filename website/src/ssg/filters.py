@@ -1,9 +1,11 @@
+import urllib.request
+from io import BytesIO
 from pathlib import Path, PurePosixPath
 from typing import Any, Collection, Iterable
-import urllib.request
 
-
+import requests
 from PIL import Image
+from PIL.Image import Image as ImageType
 
 
 def redirect_path(prepend_path):
@@ -59,9 +61,32 @@ def download(url, target):
     
     # Download the file from the URL
     urllib.request.urlretrieve(url, save_path)
-    
+
     return str(save_path)
     
+
+def download_image(url) -> Image:
+    response = requests.get(url)
+    img = Image.open(BytesIO(response.content))
+    return img
+
+
+def save_image(im: ImageType, path: str, basedir: str = None) -> str:
+    path2 = Path(path)
+    if basedir is None:
+        im.save(path2)
+    if basedir is not None:
+        if str(path2.resolve()) == str(path2):
+            raise ValueError(f"Only relative paths supported with basedir. Got {str(path2)}")
+        path3 = Path(basedir) / path2
+        path3.parent.mkdir(parents=True, exist_ok=True)
+        im.save(path3)
+
+    return path
+    
+        
+    
+
 
 def promote_key[T: list[dict] | dict[str, dict]](data: T, key: str, attrs: list[int | str]) -> T:
     if isinstance(data, list):
@@ -99,3 +124,5 @@ def multi_index(data: Collection, indices: list[int | str]) -> Any:
 
 def sort_by[T](data: Iterable[T], indices: list[int | str], reverse: bool = False) -> list[T]:
     return type(data)(sorted(data, key=lambda d: multi_index(d, indices), reverse=reverse))
+
+

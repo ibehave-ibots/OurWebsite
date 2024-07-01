@@ -78,6 +78,7 @@ def run_render_pipeline():
 
             renderer.vars['TEMPLATE_DIR'] = str(PurePosixPath(page_path.relative_to(Path('./pages'))))
             renderer.vars['PAGE_PATH'] = str(PurePosixPath(page_path))
+            renderer.vars['OUTPUT_PATH'] = str(PurePosixPath('./_output'))
             
             page_html = renderer.render_named_template(
                 template_name=f"{page_path.name}/{rdata['template']}", 

@@ -1,6 +1,7 @@
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from ssg import filters
-
+from PIL.Image import Image as ImageType
+from PIL import Image
 
 def test_path_prepend_decorator():
     
@@ -127,3 +128,36 @@ def test_download_filter_creates_folder(tmp_path):
     assert isinstance(path, str)
     assert Path(path).exists()
     assert Path(path).name == 'domestic-dog_thumb_square.jpg'
+
+
+
+def test_imdownload2():
+    url = "https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg"
+    im = filters.download_image(url)
+    assert isinstance(im, ImageType)
+
+
+def test_save_image(tmp_path):
+    img = Image.new('RGB', [500,500], (255, 128, 128))
+    path = tmp_path / 'im.jpg'
+    assert not path.exists()
+    path2 = filters.save_image(img, str(PurePosixPath(path)))
+    path2 = Path(path2)
+    assert path.exists()
+    assert path2.exists()
+    assert path == path2
+    img2 = Image.open(path2)
+    assert img2.size == (500, 500)
+    
+
+def test_save_image_with_basedir(tmp_path):
+    img = Image.new('RGB', [500,500], (255, 128, 128))
+    basedir = tmp_path
+    path = 'static/im2.jpg'
+    assert not (basedir / path).exists()
+    path_out = filters.save_image(img, path=path, basedir=str(tmp_path))
+    assert (basedir / path).exists()
+    
+    img2 = Image.open(basedir / path)
+    assert img2.size == (500, 500)
+    assert path_out == path
