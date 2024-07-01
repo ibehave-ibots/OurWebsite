@@ -5,35 +5,17 @@ from .utils import load_yaml
 
 
 def extract_global_data(base_path: Path) -> dict[str, Any]:
-    base_path = Path(base_path)
-    collections = {}
-    for path in base_path.glob('*.*'):
-        if path.suffix == '.yaml':
-            data = load_yaml(path.read_text())
-            collections[path.stem] = data
-        else:
-            collections[path.stem] = str(PurePosixPath(path.relative_to(path.parent)))
-    for path in base_path.glob('*/*.*'):
-        if not path.parent.stem in collections:
-            collections[path.parent.stem] = {}
-        if path.suffix == '.yaml':
-            data = load_yaml(path.read_text())
-            collections[path.parent.stem][path.stem] = data
-        else:
-            collections[path.parent.stem][path.stem] = str(PurePosixPath(path.relative_to(path.parent.parent)))
-    for path in base_path.glob('*/*/*.*'):
-        if not path.parent.parent.stem in collections:
-            collections[path.parent.parent.stem] = {}
-        if not path.parent.stem in collections[path.parent.parent.stem]:
-            collections[path.parent.parent.stem][path.parent.stem] = {}
-        if path.suffix == '.yaml':
-            data = load_yaml(path.read_text())
-            collections[path.parent.parent.stem][path.parent.stem][path.stem] = data
-        else:
-            collections[path.parent.parent.stem][path.parent.stem][path.stem] = str(PurePosixPath(path.relative_to(path.parent.parent.parent)))
-    for path in base_path.glob('*/*/*'):
-        if path.is_dir():
-            raise NotImplementedError("only single- and double-nested collections are currently supported, sorry.")
-    return collections
+    def extract_recursive(path: Path) -> Any:
+        collections = {}
+        for item in path.iterdir():
+            if item.is_dir():
+                collections[item.stem] = extract_recursive(item)
+            else:
+                if item.suffix == '.yaml':
+                    data = load_yaml(item.read_text())
+                    collections[item.stem] = data
+                else:
+                    collections[item.stem] = str(PurePosixPath(item.relative_to(base_path)))
+        return collections
 
-
+    return extract_recursive(base_path)

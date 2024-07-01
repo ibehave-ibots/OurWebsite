@@ -92,21 +92,6 @@ def test_double_nested_file(tmp_path):
 
 
 
-def test_doesnt_supported_triple_nested_files(tmp_path):
-    fname = "animals/dogs/breeds/pug.yaml"
-    yaml = """
-    a: 3
-    b: 5
-    """
-    path = tmp_path.joinpath(fname)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(yaml)
-
-    with pytest.raises(NotImplementedError):
-        extract_global_data(tmp_path)
-        
-
-
 def test_gets_path_of_image_files(tmp_path):
     
     # create a folder with an image in it.
