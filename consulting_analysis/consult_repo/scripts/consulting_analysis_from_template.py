@@ -23,11 +23,5 @@ def main():
     time_hands_on_hrs = sum(consultant.time_hands_on_hrs for consultant in consultants)
     time_all_hrs = sum(consultant.time_all_hrs for consultant in consultants)
 
-    print(num_short_sessions, num_hands_on_sessions)
-    print(time_short_hrs, time_hands_on_hrs)
-    print(time_all_hrs)
-
-
-
 if __name__ == "__main__":
     main()
