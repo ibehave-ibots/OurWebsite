@@ -1,5 +1,3 @@
 from .download import ScieboDataDownload
 from .upload import ScieboDataUpload
-from .process import WordDocumentProcessor
-from .process_template import TemplateDocumentProcessor
-from .analysis import count_types_of_sessions, count_num_unique_scholars, count_num_occurrances_of_word
+from .process import TemplateDocumentProcessor
