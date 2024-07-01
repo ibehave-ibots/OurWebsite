@@ -2,8 +2,9 @@ from typing import Any, Dict
 from pathlib import Path, PurePosixPath
 from .utils import load_yaml
 
+def extract_global_data(base_path: Path | str) -> Dict[str, Any]:
+    base_path = Path(base_path)
 
-def extract_global_data(base_path: Path) -> Dict[str, Any]:
     return _extract_recursive(base_path, base_path)
 
 
@@ -19,6 +20,7 @@ def _process_file(item: Path, base_path: Path, collections: Dict[str, Any]) -> N
 
 
 def _extract_recursive(path: Path, base_path: Path) -> Dict[str, Any]:
+    
     collections = {}
     for item in path.iterdir():
         if item.is_dir():
