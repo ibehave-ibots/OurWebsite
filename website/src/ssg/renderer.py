@@ -27,13 +27,14 @@ def run_render_pipeline():
     renderer = JinjaRenderer.from_path(
         templates_dir='./pages', 
         filters={
-            'resize': filters.redirect_path('./_output')(filters.resize_image), 
+            'resize': filters.resize_image, 
             'flatten_nested': filters.flatten_nested_dict,
             'promote_key': filters.promote_key,
             'items': filters.items,
             'index': filters.multi_index,
             'sort_by': filters.sort_by,
-            'download': filters.download,
+            'download': filters.download,  
+            'rel_to': filters.relative_to,
         },
         globals={
             'today': date.today(),

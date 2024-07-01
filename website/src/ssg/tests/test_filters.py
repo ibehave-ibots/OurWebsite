@@ -114,7 +114,7 @@ def test_sort_by():
 def test_download_filter(tmp_path):
     url = "https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg"
     fold = str(tmp_path)
-    path = filters.download(url, target=fold)
+    path = filters.download(url, folder=fold)
     assert isinstance(path, str)
     assert Path(path).exists()
     assert Path(path).name == 'domestic-dog_thumb_square.jpg'
@@ -124,7 +124,7 @@ def test_download_filter_creates_folder(tmp_path):
     url = "https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg"
     fold = str(tmp_path / 'images')
     assert not Path(fold).exists()
-    path = filters.download(url, target=fold)
+    path = filters.download(url, folder=fold)
     assert isinstance(path, str)
     assert Path(path).exists()
     assert Path(path).name == 'domestic-dog_thumb_square.jpg'
@@ -149,15 +149,3 @@ def test_save_image(tmp_path):
     img2 = Image.open(path2)
     assert img2.size == (500, 500)
     
-
-def test_save_image_with_basedir(tmp_path):
-    img = Image.new('RGB', [500,500], (255, 128, 128))
-    basedir = tmp_path
-    path = 'static/im2.jpg'
-    assert not (basedir / path).exists()
-    path_out = filters.save_image(img, path=path, basedir=str(tmp_path))
-    assert (basedir / path).exists()
-    
-    img2 = Image.open(basedir / path)
-    assert img2.size == (500, 500)
-    assert path_out == path

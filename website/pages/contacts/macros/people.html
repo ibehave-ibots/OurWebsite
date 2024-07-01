@@ -2,11 +2,24 @@
 {% macro person_card(name, position, email, booking_url) %}
 <div class="card card-body card-hover bg-light border-0 text-center">
     <picture>
-        <source srcset="{{ 'https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg' | download('/static')}}" media="(max-width: 576px)">
-        <source srcset="https://placehold.co/400x400" media="(max-width: 768px)">
-        <source srcset="https://placehold.co/600x600" media="(max-width: 992px)">
-        <source srcset="https://placehold.co/800x800" media="(max-width: 1200px)">
-        <img src="https://placehold.co/800x800" class="d-block rounded-circle mx-auto mb-3" width="162" alt="{{ name }}">
+        <source 
+            srcset="{{ 'https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg' | download('_output/static/') | resize((10, 10))  | rel_to('_output') }}" 
+            media="(max-width: 576px)">
+        <source 
+            srcset="{{ 'https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg' | download('_output/static/') | resize((30, 30))  | rel_to('_output') }}" 
+            media="(max-width: 768px)">
+        <source 
+        srcset="{{ 'https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg' | download('_output/static/') | resize((100, 100))  | rel_to('_output') }}" 
+            media="(max-width: 992px)">
+        <source 
+        srcset="{{ 'https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg' | download('_output/static/') | resize((200, 200))  | rel_to('_output') }}" 
+            media="(max-width: 1200px)">
+        <img 
+            src="{{ 'https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg' | download('_output/static/') | rel_to('_output') }}" 
+            class="d-block rounded-circle mx-auto mb-3" 
+            width="162" 
+            alt="{{ name }}"
+        >
     </picture>
     <h5 class="fw-medium fs-lg mb-1"> {{ name }}</h5>
     <p class="fs-sm mb-3"> {{ position }} </p>

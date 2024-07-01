@@ -30,6 +30,8 @@ def redirect_path(prepend_path):
     return decorator
 
 
+def relative_to(path: str, base: str) -> str:
+    return '/' + str(PurePosixPath(Path(path).relative_to(Path(base))))
 
 def resize_image(fname: str, res: tuple[int, int]) -> str:
     path = Path(fname)
@@ -52,17 +54,15 @@ def flatten_nested_dict[K1, K2](nested_dict: dict[K1, dict[K2, Any]]) -> dict[tu
     return out
 
 
-def download(url, target):
-    # Extract the filename from the URL
-    filename = url.split("/")[-1].split('?')[0]
-    # Create the full path
-    save_path = PurePosixPath(target) / filename
-    Path(save_path).parent.mkdir(parents=True, exist_ok=True)
+def download(url, folder: str, fname: str = None):
     
-    # Download the file from the URL
-    urllib.request.urlretrieve(url, save_path)
-
-    return str(save_path)
+    save_path = Path(folder)
+    save_path /= fname if fname is not None else Path(url).name
+    if not save_path.exists():
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        urllib.request.urlretrieve(url, save_path ,)
+    
+    return str(PurePosixPath(save_path))
     
 
 def download_image(url) -> Image:
@@ -71,22 +71,12 @@ def download_image(url) -> Image:
     return img
 
 
-def save_image(im: ImageType, path: str, basedir: str = None) -> str:
+def save_image(im: ImageType, path: str) -> str:
     path2 = Path(path)
-    if basedir is None:
-        im.save(path2)
-    if basedir is not None:
-        if str(path2.resolve()) == str(path2):
-            raise ValueError(f"Only relative paths supported with basedir. Got {str(path2)}")
-        path3 = Path(basedir) / path2
-        path3.parent.mkdir(parents=True, exist_ok=True)
-        im.save(path3)
-
+    path2.parent.mkdir(parents=True, exist_ok=True)
+    im.save(path2)
     return path
     
-        
-    
-
 
 def promote_key[T: list[dict] | dict[str, dict]](data: T, key: str, attrs: list[int | str]) -> T:
     if isinstance(data, list):
