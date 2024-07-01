@@ -5,25 +5,30 @@ booking_link: {{ data.people.nick.booking_url }}
 mailing_list_link: {{ data.group.mailing_list_subscribe_url }}
 people:
     current:
-        {% for person in data.people.values() %}
+        {% for id, person in data.people.items() %}
         {% if person.role == "current" %}
-        - name: {{ person.name }}
+        - id: {{ id }}
+          name: {{ person.name }}
           email: {{ person.email }}
           booking_url: {{ person.booking_url }}
           image: {{ person.image }}
         {% endif %}
         {% endfor %}
     past:
-        {% for person in data.people.values() %}
+        {% for id, person in data.people.items() %}
         {% if person.role == "past" %}
-        - name: {{ person.name }}
+        - id: {{ id }}
+          name: {{ person.name }}
           email: {{ person.email }}
+          image: {{ person.image }}
         {% endif %}
         {% endfor %}
     other:
-        {% for person in data.people.values() %}
+        {% for id, person in data.people.items() %}
         {% if person.role not in ["past", "current"] %}
-        - name: {{ person.name }}
+        - id: {{ id }}
+          name: {{ person.name }}
           email: {{ person.email }}
+          image: {{ person.image }}
         {% endif %}
         {% endfor %}
