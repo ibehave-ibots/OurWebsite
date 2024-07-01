@@ -47,5 +47,6 @@ def extract_report_data(file_path):
 
     return reports
 
-file_path = 'consulting_session_template.docx'
+file_path = 'Sangee_template.docx'
 reports = extract_report_data(file_path)
+print(reports[1].content)
