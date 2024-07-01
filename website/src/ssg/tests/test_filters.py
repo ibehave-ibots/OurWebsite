@@ -14,14 +14,14 @@ def test_path_prepend_decorator():
     
     A.path = None
     new_fun = filters.redirect_path('output')(fun)
-    output = new_fun(Path('aa/bb'))
-    assert A.path == Path('output/aa/bb')
+    output = new_fun('aa/bb')
+    assert A.path == 'output/aa/bb'
     assert output == 'aa/bb'
 
     A.path = None
     new_fun = filters.redirect_path('ddd')(fun)
-    output = new_fun(Path('cc/bb'))
-    assert A.path == Path('ddd/cc/bb')
+    output = new_fun('cc/bb')
+    assert A.path == 'ddd/cc/bb'
     assert output == 'cc/bb'
     
 
