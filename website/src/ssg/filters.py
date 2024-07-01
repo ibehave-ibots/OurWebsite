@@ -1,12 +1,9 @@
 import shutil
 import urllib.request
-from io import BytesIO
 from pathlib import Path, PurePosixPath
 from typing import Any, Collection, Iterable
 
-import requests
 from PIL import Image
-from PIL.Image import Image as ImageType
 
 
 def redirect_path(prepend_path, arg_idx=0):

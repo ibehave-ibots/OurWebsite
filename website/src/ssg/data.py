@@ -1,6 +1,5 @@
 from typing import Any, Dict
 from pathlib import Path, PurePosixPath
-from collections import defaultdict
 from .utils import load_yaml
 
 

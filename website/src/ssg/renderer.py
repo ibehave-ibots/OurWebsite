@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import date, datetime
-from pathlib import Path, PosixPath, PurePosixPath
+from pathlib import Path, PurePosixPath
 
 import markdown2
 import yaml

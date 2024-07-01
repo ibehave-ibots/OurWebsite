@@ -1,7 +1,6 @@
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 from ssg import filters
-from PIL.Image import Image as ImageType
-from PIL import Image
+
 
 def test_path_prepend_decorator():
     

@@ -1,7 +1,6 @@
 import os
-from pathlib import Path
 from ssg.data import extract_global_data
-import pytest
+
 
 def test_find_single_file(tmp_path):
     fname = "dogs.yaml"
