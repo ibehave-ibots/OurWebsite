@@ -91,3 +91,4 @@ class TemplateDocumentProcessor:
 
     def _reset_report_data(self):
         return {'type': '', 'scholar': '', 'date': '', 'topic': '', 'content': ''}
+
