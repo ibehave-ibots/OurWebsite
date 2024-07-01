@@ -16,6 +16,10 @@ class Consultant:
     reports: list[ReportData]
 
     @property
+    def scholars(self) -> list[str]:
+        return {report.scholar for report in self.reports}
+
+    @property
     def num_total_sessions(self) -> int:
         return len(self.reports)
 
