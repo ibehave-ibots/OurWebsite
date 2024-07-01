@@ -8,20 +8,24 @@ from PIL import Image
 from PIL.Image import Image as ImageType
 
 
-def redirect_path(prepend_path):
+def redirect_path(prepend_path, arg_idx=0):
     """
     Decorator that redirects the path onto the first argument of the function for internel use, but keeps
     the output path the same. 
     """
     def decorator(fun):
-        def wrapper(path, *args, **kwargs):
+        def wrapper(*args, **kwargs):
+            path = args[arg_idx]
             if str(path).startswith('/'):
                 was_root = True
                 path = path[1:]
             else:
                 was_root = False
-            new_path = Path(prepend_path).joinpath(path)
-            output_path = fun(new_path, *args, **kwargs)
+            new_path = str(PurePosixPath(prepend_path).joinpath(path))
+            new_args = list(args)
+            new_args[arg_idx] = new_path
+            new_args = tuple(new_args)
+            output_path = fun(*new_args, **kwargs)
             new_path = str(PurePosixPath(Path(output_path).relative_to(prepend_path)))
             if was_root:
                 new_path = '/' + new_path
@@ -42,7 +46,7 @@ def resize_image(fname: str, res: tuple[int, int]) -> str:
     path2 = path.with_stem(path.stem + f"_{res[0]}x{res[1]}")
     img2.save(path2)
 
-    return str(path2)
+    return str(PurePosixPath(path2))
 
     
 
