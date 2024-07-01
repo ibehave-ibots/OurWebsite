@@ -129,23 +129,3 @@ def test_download_filter_creates_folder(tmp_path):
     assert Path(path).exists()
     assert Path(path).name == 'domestic-dog_thumb_square.jpg'
 
-
-
-def test_imdownload2():
-    url = "https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg"
-    im = filters.download_image(url)
-    assert isinstance(im, ImageType)
-
-
-def test_save_image(tmp_path):
-    img = Image.new('RGB', [500,500], (255, 128, 128))
-    path = tmp_path / 'im.jpg'
-    assert not path.exists()
-    path2 = filters.save_image(img, str(PurePosixPath(path)))
-    path2 = Path(path2)
-    assert path.exists()
-    assert path2.exists()
-    assert path == path2
-    img2 = Image.open(path2)
-    assert img2.size == (500, 500)
-    

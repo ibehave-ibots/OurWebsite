@@ -69,19 +69,6 @@ def download(url, folder: str, fname: str = None):
     return str(PurePosixPath(save_path))
     
 
-def download_image(url) -> Image:
-    response = requests.get(url)
-    img = Image.open(BytesIO(response.content))
-    return img
-
-
-def save_image(im: ImageType, path: str) -> str:
-    path2 = Path(path)
-    path2.parent.mkdir(parents=True, exist_ok=True)
-    im.save(path2)
-    return path
-    
-
 def promote_key[T: list[dict] | dict[str, dict]](data: T, key: str, attrs: list[int | str]) -> T:
     if isinstance(data, list):
         new_data = []
