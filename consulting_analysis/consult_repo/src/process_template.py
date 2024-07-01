@@ -11,11 +11,9 @@ class ReportData:
 
 @dataclass
 class TemplateDocumentProcessor:
-    reports_path: list
-
-    def process(self) -> list[ReportData]:
+    def process(self, reports_path: list) -> list[ReportData]:
         consolidated_reports = []
-        for report_path in self.reports_path:
+        for report_path in reports_path:
             consolidated_reports.append(self._extract_report_data(report_path))
         return consolidated_reports
 
@@ -51,8 +49,8 @@ class TemplateDocumentProcessor:
 
         return reports
 
-    def _clean_text(text, prefix):
+    def _clean_text(self, text, prefix):
         return text.replace(prefix, '').strip()
 
-    def _reset_report_data():
+    def _reset_report_data(self):
         return {'type': '', 'scholar': '', 'date': '', 'topic': '', 'content': ''}
