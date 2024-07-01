@@ -1,6 +1,8 @@
 import os
 from fsspec.implementations.local import LocalFileSystem
-from src import ScieboDataDownload, TemplateDocumentProcessor  
+from src import ScieboDataDownload, ScieboDataUpload, TemplateDocumentProcessor 
+from results_repo import ConsultingResultRepo
+
 
 def main():
     os.environ['DB_WRITEMODE'] = '1'
@@ -26,7 +28,83 @@ def main():
     num_python = content.lower().count('python')
     num_matlab = content.lower().count('matlab')
 
+    sciebo_upload = ScieboDataUpload()
+    fs_remote = sciebo_upload.connect()
+    repo_remote = ConsultingResultRepo.connect(fs_remote)
 
+    repo_remote.put(
+        short_name='n_sess',
+        name='Total number of sessions',
+        value=total_sessions,
+        units="Session",
+        display_units='Session'
+    )
+
+    repo_remote.put(
+        short_name='time_sess_hrs',
+        name='Total time for all sessions',
+        value=time_all_hrs,
+        units="Hour",
+        display_units='Hrs'
+    )
+
+    repo_remote.put(
+        short_name='n_short',
+        name='Total number of short chats',
+        value=num_short_sessions,
+        units="Session",
+        display_units='Session'
+    )
+
+    repo_remote.put(
+        short_name='time_short_hrs',
+        name='Total time for short chats',
+        value=time_short_hrs,
+        units="Hour",
+        display_units='Hrs'
+    )
+
+    repo_remote.put(
+        short_name='n_hands',
+        name='Total number of hands-on chats',
+        value=num_hands_on_sessions,
+        units="Session",
+        display_units='Session'
+    )
+
+    repo_remote.put(
+        short_name='time_hands_on_hrs',
+        name='Total time for hands-on sessions',
+        value=time_hands_on_hrs,
+        units="Hour",
+        display_units='Hrs'
+    )    
+
+    repo_remote.put(
+        short_name='n_scholars',
+        name='Total number of unique scholars',
+        value=num_unique_scholars,
+        units="Researcher",
+        display_units='Session'
+    )
+
+    repo_remote.put(
+        short_name='n_python',
+        name='Total number of Python occurrances in content',
+        value=num_python,
+        units="Occurrance",
+        display_units='Occurrance'
+    )
+
+    repo_remote.put(
+        short_name='n_matlab',
+        name='Total number of Matlab occurrances in content',
+        value=num_matlab,
+        units="Occurrance",
+        display_units='Occurrance'
+    )
+
+    repo_remote.push()
 
 if __name__ == "__main__":
     main()
