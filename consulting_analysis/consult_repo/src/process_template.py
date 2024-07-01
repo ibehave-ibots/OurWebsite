@@ -1,5 +1,7 @@
 from dataclasses import dataclass
+from pathlib import Path
 from docx import Document
+
 
 @dataclass
 class ReportData:
@@ -10,12 +12,23 @@ class ReportData:
     content: str
 
 @dataclass
+class Consultant:
+    name: str
+    reports: list[ReportData]
+
+@dataclass
 class TemplateDocumentProcessor:
     def process(self, reports_path: list) -> list[ReportData]:
-        consolidated_reports = []
+        consultants = []
+        
         for report_path in reports_path:
-            consolidated_reports.append(self._extract_report_data(report_path))
-        return consolidated_reports
+            consultants.append(
+                Consultant(
+                    name = Path(report_path[1]).stem,
+                    reports = self._extract_report_data(report_path)
+                )                
+            )
+        return consultants
 
     def _extract_report_data(self, report_path):
         document = Document(report_path)
