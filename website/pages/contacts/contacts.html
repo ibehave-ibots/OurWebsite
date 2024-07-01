@@ -1,4 +1,4 @@
-{% from TEMPLATE_DIR + "/macros/people.html" import people_grid %}
+{% from TEMPLATE_DIR + "/macros/person_card.html" import person_card %}
 
 <main>
     
@@ -19,7 +19,22 @@
             <h3 class="h1 text-center pb-md-1 mb-1 mb-sm-3"> 
                 The {{ site.navbar.name }} Team
             </h3>
-            {{ people_grid(people=page.data.people.current )}}
+            <div class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 pb-lg-2 pb-xl-3">
+                {% for person in (page.data.people.current)  %}
+                <div class="col">
+                    <div class="position-relative">
+                        {{ person_card(
+                            name=person.name, 
+                            position="Research Software Consultant", 
+                            image='https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg',
+                            email=person.email, 
+                            booking_url=person.booking_url,
+                            )
+                        }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </section>
 
 
@@ -67,7 +82,22 @@
             <h3 class="h1 text-center pb-md-1 mb-1 mb-sm-3"> 
                 Past Collaborators 
             </h3>
-            {{ people_grid(people=page.data.people.past + page.data.people.other )}}
+            <div class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 pb-lg-2 pb-xl-3">
+                {% for person in (page.data.people.past + page.data.people.other)  %}
+                <div class="col">
+                    <div class="position-relative">
+                        {{ person_card(
+                            name=person.name, 
+                            position="Research Software Consultant", 
+                            image='https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg',
+                            email=person.email, 
+                            booking_url=person.booking_url,
+                            )
+                        }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </section>
         
     </article>
