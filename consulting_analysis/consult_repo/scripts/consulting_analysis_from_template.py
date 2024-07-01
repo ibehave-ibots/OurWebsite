@@ -15,6 +15,5 @@ def main():
     reports = fs_raw.ls('raw/', detail=False)
     extracted_consultants = template_doc.process(reports_path=reports)
 
-
 if __name__ == "__main__":
     main()

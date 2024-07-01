@@ -24,7 +24,7 @@ class TemplateDocumentProcessor:
         for report_path in reports_path:
             consultants.append(
                 Consultant(
-                    name = Path(report_path[1]).stem,
+                    name = Path(report_path).stem,
                     reports = self._extract_report_data(report_path)
                 )                
             )
