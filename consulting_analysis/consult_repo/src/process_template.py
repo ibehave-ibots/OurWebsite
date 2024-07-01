@@ -36,6 +36,19 @@ class Consultant:
         scholars = {report.scholar for report in self.reports}
         return len(scholars)
     
+    @property
+    def time_short_minute(self) -> float:
+        return sum(1 for report in self.reports if report.type == 'short')*45.0
+
+    @property
+    def time_hands_on_minute(self) -> float:
+        return sum(1 for report in self.reports if report.type == 'hands')*150.0
+    
+    @property
+    def time_all_minute(self) -> float:
+        return self.time_short_minute + self.time_hands_on_minute
+ 
+
     def _get_combined_content(self) -> str:
         return " ".join(report.content for report in self.reports)
 

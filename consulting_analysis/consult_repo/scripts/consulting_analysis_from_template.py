@@ -14,6 +14,13 @@ def main():
     template_doc = TemplateDocumentProcessor()
     reports = fs_raw.ls('raw/', detail=False)
     extracted_consultants = template_doc.process(reports_path=reports)
+    consultants = extracted_consultants[1:]
+    total_sessions = sum(consultant.num_total_sessions for consultant in consultants)
+    num_short_sessions = sum(consultant.num_short_sessions for consultant in consultants)
+    num_hands_on_sessions = sum(consultant.num_hands_on_sessions for consultant in consultants)
+    num_unique_scholars = sum(consultant.num_unique_scholars for consultant in consultants)
+
+
 
 if __name__ == "__main__":
     main()
