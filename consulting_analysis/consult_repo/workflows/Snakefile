@@ -3,7 +3,7 @@ workdir: '../'
 rule all:
     input:
         "raw/",
-        "analysis_complete"
+        "analysis.log"
 
 rule download_from_sciebo:
     output: directory('raw/')
@@ -26,7 +26,8 @@ rule analysis:
     input: 
         'raw/'
     output:
-        'analysis_complete'
+        'analysis.log'
+
     run:
         import sys
         import os
