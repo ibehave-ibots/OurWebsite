@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
 from docx import Document
@@ -53,8 +54,13 @@ class Consultant:
         return " ".join(report.content for report in self.reports)
 
 
+class DocumentProcessor(ABC):
+    @abstractmethod
+    def process(self, reports_path: list) -> list[ReportData]:
+        ...
+
 @dataclass
-class TemplateDocumentProcessor:
+class TemplateDocumentProcessor(DocumentProcessor):
     def process(self, reports_path: list) -> list[ReportData]:
         consultants = []
         
