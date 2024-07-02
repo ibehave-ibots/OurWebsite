@@ -22,7 +22,7 @@ rule download_from_sciebo:
             sciebo_download.download_raw_reports(destination=str(output))
 
 
-rule analysis:
+rule analysis_and_upload_to_sciebo:
     input: 
         'raw/'
     output:
@@ -137,3 +137,15 @@ rule analysis:
         )
 
         repo_remote.push()        
+
+        with open(output[0], 'w') as f:
+            f.write("Analysis completed successfully.\n")
+            f.write(f"Total sessions: {total_sessions}\n")
+            f.write(f"Total short sessions: {num_short_sessions}\n")
+            f.write(f"Total hands-on sessions: {num_hands_on_sessions}\n")
+            f.write(f"Total unique scholars: {num_unique_scholars}\n")
+            f.write(f"Total time for short sessions (hrs): {time_short_hrs}\n")
+            f.write(f"Total time for hands-on sessions (hrs): {time_hands_on_hrs}\n")
+            f.write(f"Total time for all sessions (hrs): {time_all_hrs}\n")
+            f.write(f"Python occurrences: {num_python}\n")
+            f.write(f"Matlab occurrences: {num_matlab}\n")        
