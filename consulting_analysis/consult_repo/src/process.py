@@ -52,6 +52,10 @@ class Consultant:
     @property
     def consolidated_content(self) -> str:
         return " ".join(report.content for report in self.reports)
+    
+    @property
+    def consolidated_topic(self) -> str:
+        return " ".join(report.topic for report in self.reports)
 
 
 class DocumentProcessor(ABC):
