@@ -1,3 +1,17 @@
+### Constructing your consulting report
+
+1. Each session is in a different page (use page breaks).
+2. Has the following key words:
+    Type: [short, hands]
+    Date: str
+    Scholar: str
+    Topic: str 
+    Content: str
+3. (Recommended) Copy and paste the topic created with calendly event.
+4. (Recommended) You can make content as descriptive as you like. 
+
+
+
 ### Workflows
 
 #### Download raw reports
