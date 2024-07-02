@@ -36,4 +36,4 @@ rule delete_timestamp:
             os.remove(timestamp_file)  
 
         with open(output[0], 'w') as f:
-            f.write(f"Data downloaded on: {datetime.now}")                    
+            f.write(f"Data downloaded on: {datetime.now()}")                    

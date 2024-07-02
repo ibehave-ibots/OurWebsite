@@ -35,6 +35,7 @@ rule analysis_and_upload_to_sciebo:
         from src import ScieboDataUpload, TemplateDocumentProcessor 
         from results_repo import ConsultingResultRepo
         from fsspec.implementations.local import LocalFileSystem
+        from datetime import datetime
 
 
         os.environ['DB_WRITEMODE'] = '1'
@@ -141,7 +142,7 @@ rule analysis_and_upload_to_sciebo:
         repo_remote.push()        
 
         with open(output[0], 'w') as f:
-            f.write("Analysis completed successfully.\n")
+            f.write(f"Analysis completed successfully on {datetime.now()}.\n")
             f.write(f"Total sessions: {total_sessions}\n")
             f.write(f"Total short sessions: {num_short_sessions}\n")
             f.write(f"Total hands-on sessions: {num_hands_on_sessions}\n")
