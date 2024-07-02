@@ -1,4 +1,4 @@
-workdir: '../'
+workdir: '../..'
 
 rule all:
     input:
@@ -36,9 +36,11 @@ rule analysis_and_upload_to_sciebo:
         from results_repo import ConsultingResultRepo
         from fsspec.implementations.local import LocalFileSystem
 
-        timestamp_file = input[0]+'/.snakemake_timestamp'
 
         os.environ['DB_WRITEMODE'] = '1'
+
+        timestamp_file = input[0]+'/.snakemake_timestamp'
+
         if os.path.exists(timestamp_file):
             os.remove(timestamp_file)            
 
