@@ -1,5 +1,5 @@
 from src.external import load_report_credentials, load_result_credentials
-from src.app import DataDownload
+from src import DataDownload
 from webdav4.fsspec import WebdavFileSystem
 
 
