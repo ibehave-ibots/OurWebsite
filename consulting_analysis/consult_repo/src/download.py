@@ -16,13 +16,14 @@ class DataDownload(ABC):
 class ScieboDataDownload(DataDownload):
     def download_raw_reports(self, destination: str):
         load_dotenv()
-        SANGEE_REPORT_USR = os.getenv('SANGEE_REPORT_USR')
-        SANGEE_REPORT_PWD = os.getenv('SANGEE_REPORT_PWD')
-        fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(SANGEE_REPORT_USR, SANGEE_REPORT_PWD))
+        DOWNLOAD_USR = os.getenv('DOWNLOAD_USR')
+        DOWNLOAD_PWD = os.getenv('DOWNLOAD_PWD')
+        fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(DOWNLOAD_USR, DOWNLOAD_PWD))
         fs.download("/", destination, recursive=True)
 
     def download_results(self, destination: str):
         load_dotenv()
-        SANGEE_RESULTS_USR = os.getenv('USR')
-        fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(SANGEE_RESULTS_USR, ''))
+        UPLOAD_USR = os.getenv('UPLOAD_USR')
+        UPLOAD_PWD = os.getenv('UPLOAD_PWD')
+        fs = WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(UPLOAD_USR, UPLOAD_PWD))
         fs.download("/", destination, recursive=True)
