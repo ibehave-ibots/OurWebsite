@@ -32,7 +32,7 @@ rule analysis_and_upload_to_sciebo:
         import sys
         import os
         sys.path.append(os.path.abspath('../consult_repo'))
-        from src import ScieboDataUpload, TemplateDocumentProcessor 
+        from src import ScieboResultsUpload, TemplateDocumentProcessor 
         from results_repo import ConsultingResultRepo
         from fsspec.implementations.local import LocalFileSystem
         from datetime import datetime
@@ -67,7 +67,7 @@ rule analysis_and_upload_to_sciebo:
         num_python = content.lower().count('python')
         num_matlab = content.lower().count('matlab')
 
-        sciebo_upload = ScieboDataUpload()
+        sciebo_upload = ScieboResultsUpload()
         fs_remote = sciebo_upload.connect()
         repo_remote = ConsultingResultRepo.connect(fs_remote)
 

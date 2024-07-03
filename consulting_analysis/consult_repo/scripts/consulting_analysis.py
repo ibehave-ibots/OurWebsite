@@ -1,6 +1,6 @@
 import os
 from fsspec.implementations.local import LocalFileSystem
-from src import ScieboDataDownload, ScieboDataUpload, TemplateDocumentProcessor 
+from src import ScieboDataDownload, ScieboResultsUpload, TemplateDocumentProcessor 
 from results_repo import ConsultingResultRepo
 
 
@@ -28,7 +28,7 @@ def main():
     num_python = content.lower().count('python')
     num_matlab = content.lower().count('matlab')
 
-    sciebo_upload = ScieboDataUpload()
+    sciebo_upload = ScieboResultsUpload()
     fs_remote = sciebo_upload.connect()
     repo_remote = ConsultingResultRepo.connect(fs_remote)
 
