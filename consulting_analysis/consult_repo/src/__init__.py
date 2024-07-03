@@ -1,3 +1,3 @@
-from .download import ScieboDataDownload
-from .upload import ScieboDataUpload
-from .process import TemplateDocumentProcessor
+from .app import ScieboDataDownload
+from .app import ScieboDataUpload
+from .app import TemplateDocumentProcessor

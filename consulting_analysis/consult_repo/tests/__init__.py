@@ -1,2 +1,2 @@
-from src.download import ScieboDataDownload
-from src.process import TemplateDocumentProcessor
+from src import ScieboDataDownload
+from src import TemplateDocumentProcessor
