@@ -1,4 +1,4 @@
-from .scieboexternal import load_report_credentials, load_result_credentials
+from src.external import load_report_credentials, load_result_credentials
 from src.app import DataDownload
 from webdav4.fsspec import WebdavFileSystem
 
