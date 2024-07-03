@@ -1,2 +1,3 @@
 from .downloadrepo_sciebo import ScieboDataDownload
 from .uploadrepo_sciebo import ScieboDataUpload
+from .processrepo_template import TemplateDocumentProcessor

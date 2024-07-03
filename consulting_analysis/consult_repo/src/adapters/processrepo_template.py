@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 from docx import Document
-from .process import DocumentProcessor, ReportData, Consultant
+from src import DocumentProcessor, ReportData, Consultant
 
 @dataclass
 class TemplateDocumentProcessor(DocumentProcessor):
