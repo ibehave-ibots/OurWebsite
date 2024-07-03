@@ -7,7 +7,7 @@ import os
 
 class DataDownload(ABC):
     @abstractmethod
-    def download_raw_reports(self, destination: str) -> None:
+    def download_reports(self, destination: str) -> None:
         pass
 
     @abstractmethod
@@ -15,7 +15,7 @@ class DataDownload(ABC):
         pass
 
 class ScieboDataDownload(DataDownload):
-    def download_raw_reports(self, destination: str):
+    def download_reports(self, destination: str):
         fs = self._get_file_system('report')
         fs.download("/", destination, recursive=True)
 
@@ -25,10 +25,10 @@ class ScieboDataDownload(DataDownload):
 
     def _get_file_system(self, type: Union['report': str, 'result': str]) -> WebdavFileSystem:
         load_dotenv()
-        REPORT_USR = os.getenv('REPORT_USR')
-        REPORT_PWD = os.getenv('REPORT_PWD')
-        RESULT_USR = os.getenv('REPORT_USR')
-        RESULT_PWD = os.getenv('REPORT_PWD')
+        REPORT_USR = os.getenv('REPORT_USR') or ''
+        REPORT_PWD = os.getenv('REPORT_PWD') or ''
+        RESULT_USR = os.getenv('RESULT_USR') or ''
+        RESULT_PWD = os.getenv('RESULT_PWD') or ''
         if type == 'report':
             return WebdavFileSystem("https://uni-bonn.sciebo.de/public.php/webdav", auth=(REPORT_USR, REPORT_PWD))
         if type == 'result':

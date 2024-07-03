@@ -20,7 +20,7 @@ rule download_from_sciebo:
 
         if not fs_raw.exists(output, detail=False):
             sciebo_download = ScieboDataDownload()
-            sciebo_download.download_raw_reports(destination=str(output))
+            sciebo_download.download_reports(destination=str(output))
 
 rule delete_timestamp:
     input: 

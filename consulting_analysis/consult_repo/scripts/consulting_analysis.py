@@ -10,7 +10,7 @@ def main():
 
     if not fs_raw.exists('raw/', detail=False):
         sciebo_download = ScieboDataDownload()
-        sciebo_download.download_raw_reports(destination='raw/')
+        sciebo_download.download_reports(destination='raw/')
 
     template_doc = TemplateDocumentProcessor()
     reports = fs_raw.ls('raw/', detail=False)
