@@ -6,12 +6,12 @@ import os
 
 
 
-class RemoteDataUpload(ABC):
+class DataUpload(ABC):
     @abstractmethod
     def connect(self) -> WebdavFileSystem:
         ...
 
-class ScieboDataUpload(RemoteDataUpload):
+class ScieboDataUpload(DataUpload):
     def connect(self) -> WebdavFileSystem:
         load_dotenv()
         RESULT_USR = os.getenv('RESULT_USR') or '' 
