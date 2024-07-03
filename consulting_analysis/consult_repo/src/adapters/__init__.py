@@ -1,1 +1,2 @@
 from .downloadrepo_sciebo import ScieboDataDownload
+from .uploadrepo_sciebo import ScieboDataUpload

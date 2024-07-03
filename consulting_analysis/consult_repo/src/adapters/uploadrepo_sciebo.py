@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from .upload import DataUpload
+from src import DataUpload
 from webdav4.fsspec import WebdavFileSystem
 import os
 
