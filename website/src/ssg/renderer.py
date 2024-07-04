@@ -36,11 +36,9 @@ def run_render_pipeline():
             'promote_key': filters.promote_key,
             'items': filters.items,
             'index': filters.multi_index,
-            'sort_by': filters.sort_by,
-            'download': filters.redirect_path('./_output', arg_idx=1)(filters.download),  
+            'sort_by': filters.sort_by,  
             'copy_to': filters.redirect_path('./_output', arg_idx=1)(filters.copy_to),
             'prepend': filters.prepend,
-            'getfile': filters.transfer_file,
         },
         globals={
             'today': date.today(),

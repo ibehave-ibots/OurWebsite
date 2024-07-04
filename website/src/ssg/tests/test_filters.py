@@ -1,6 +1,3 @@
-from pathlib import Path
-from unittest.mock import Mock
-
 import pytest
 from ssg import filters
 
@@ -113,24 +110,6 @@ def test_sort_by():
     assert observed == expected
     
 
-def test_download_filter(tmp_path):
-    url = "https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg"
-    fold = str(tmp_path)
-    path = filters.download(url, folder=fold)
-    assert isinstance(path, str)
-    assert Path(path).exists()
-    assert Path(path).name == 'domestic-dog_thumb_square.jpg'
-    
-
-def test_download_filter_creates_folder(tmp_path):
-    url = "https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg"
-    fold = str(tmp_path / 'images')
-    assert not Path(fold).exists()
-    path = filters.download(url, folder=fold)
-    assert isinstance(path, str)
-    assert Path(path).exists()
-    assert Path(path).name == 'domestic-dog_thumb_square.jpg'
-
 
 def test_prepend():
     assert filters.prepend('a/b', 'z') == 'z/a/b'
@@ -138,19 +117,3 @@ def test_prepend():
 def test_prepend_does_not_work_on_absolute_paths():
     with pytest.raises(ValueError):
         filters.prepend('/a/b', 'z')
-
-
-def test_transfer_file_downloads_urls():
-    downloader = Mock()
-    copier = Mock()
-    filters.transfer_file('https://www.gooogle.com', folder='', download_fun=downloader, copy_fun=copier)
-    downloader.assert_called_once()
-    copier.assert_not_called()
-
-
-def test_transfer_file_downloads_urls():
-    downloader = Mock()
-    copier = Mock()
-    filters.transfer_file('data/file.json', folder='', download_fun=downloader, copy_fun=copier)
-    downloader.assert_not_called()
-    copier.assert_called_once()
