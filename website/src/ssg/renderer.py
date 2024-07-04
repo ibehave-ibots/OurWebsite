@@ -60,9 +60,10 @@ def run_render_pipeline():
     urls_written = {}  # stores the url paths created, and by what page path
     for renderfile_path in Path('./pages').glob('[!_]*/_render.yaml'):
         
+        renderer.vars['TEMPLATE_DIR'] = str(PurePosixPath(renderfile_path.parent.relative_to(Path('./pages'))))   # used for finding jinja macros and blocks that are relative to the page template
+        
         render_data = yaml.load(renderer.render_in_place(template_text=renderfile_path.read_text(), data=global_data), yaml.Loader)
         page_path = renderfile_path.parent
-
 
         page_data = {}
         for key, fname in render_data.get('data', {}).items():
@@ -91,12 +92,9 @@ def run_render_pipeline():
 
 
         for page in render_data.get('pages', []):
+            url = page['url']
+            assert url.startswith('/'), f"Page URLS must be absolute paths.  Try {'/' + url}"
 
-            assert page['url'].startswith('/'), f"Page URLS must be absolute paths.  Try {'/' + page['url']}"
-
-            # used for finding macros that are relative to the page template
-            renderer.vars['TEMPLATE_DIR'] = str(PurePosixPath(renderfile_path.parent.relative_to(Path('./pages'))))
-            
             page_html = renderer.render_named_template(
                 template_path=page_path.joinpath(render_data['template']), 
                 data=global_data, 
@@ -105,14 +103,12 @@ def run_render_pipeline():
             )
 
             # Check that we're not overwriting a url that was already made--it's confusing to debug.
-            url_to_write = page['url']
-            if url_to_write in urls_written:
-                raise FileExistsError(f"{str(renderfile_path)} tried to overwrite {url_to_write}, already made by {str(urls_written[url_to_write])}")
-            else:
-                urls_written[url_to_write] = renderfile_path
+            if url in urls_written:
+                raise FileExistsError(f"{str(renderfile_path)} tried to overwrite {url}, already made by {str(urls_written[url])}")
             
             # Write the html file
-            writefile(path=url_to_write, text=page_html, basedir='./_output')
+            writefile(path=url, text=page_html, basedir='./_output')
+            urls_written[url] = renderfile_path
 
 
         
