@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import date, datetime
 from pathlib import Path, PurePosixPath
+import shutil
 
 import markdown2
 import yaml
@@ -75,6 +76,19 @@ def run_render_pipeline():
             else:
                 raise NotImplementedError(f"{path.suffix} extension not yet supported.  Try '.yaml' or '.md' .")
             
+        for src, target in render_data.get('files', {}).items():
+            src: str
+            target: str
+            src_path = page_path.joinpath(src)
+            if not src_path.exists():
+                raise FileNotFoundError(f"Could not find file {src_path}.")
+            if target.startswith('/'):
+                target = target[1:]
+            target_path = Path('./_output') / Path(target)
+            print(f'Copying File: {src_path} -> {target_path}')
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src=src_path, dst=target_path)
+
 
         for page in render_data.get('pages', []):
 
