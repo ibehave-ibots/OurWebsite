@@ -1,5 +1,4 @@
 from pathlib import Path
-import shutil
 from warnings import warn
 
 import yaml
@@ -27,16 +26,9 @@ def rmdir(start_directory: Path):
         except PermissionError:
             warn(f"permission denied for {str(path)}. Continuing anyway...")
 
-        
-
-
-def copydir(src: Path, target: Path) -> None:
-    src = Path(src)
-    target = Path(target)
-    shutil.copytree(src, target, dirs_exist_ok=True)
     
     
-
+    
 def load_yaml(text: str):
     return yaml.load(text, Loader=yaml.Loader)    
 
