@@ -9,14 +9,14 @@ import yaml
 
 from .templates import JinjaRenderer
 from .data import extract_global_data
-from .utils import copydir, writefile, rmdir
 from . import filters
 
 
 def copy_static():
-    rmdir("./_output/static")
+    if Path("./_output/static").exists():
+        shutil.rmtree("./_output/static")
     print("Copying: themes/Silicon/assets ->  _output/assets ")
-    copydir(src="./themes/Silicon/assets", target="./_output/assets")
+    shutil.copytree("./themes/Silicon/assets", "./_output/assets", dirs_exist_ok=True)
     
 
 
@@ -25,7 +25,7 @@ def run_render_pipeline():
         copy_static()
     
     print("Copying: pages/_static ->  _output/static ")
-    copydir(src="./pages/_static", target="./_output/static")
+    shutil.copytree("./pages/_static", "./_output/static", dirs_exist_ok=True)
         
 
     renderer = JinjaRenderer.from_path(
