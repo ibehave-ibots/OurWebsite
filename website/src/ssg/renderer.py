@@ -15,6 +15,7 @@ from . import filters
 
 def copy_static():
     rmdir("./_output/static")
+    print("Copying: themes/Silicon/assets ->  _output/assets ")
     copydir(src="./themes/Silicon/assets", target="./_output/assets")
     
 
@@ -22,6 +23,8 @@ def copy_static():
 def run_render_pipeline():
     if not Path('./_output').exists():
         copy_static()
+    
+    print("Copying: pages/_static ->  _output/static ")
     copydir(src="./pages/_static", target="./_output/static")
         
 
@@ -57,7 +60,6 @@ def run_render_pipeline():
         site_data[path.stem] = yaml.load(yaml_text, Loader=yaml.Loader)
 
     ## Render Each Page to HTML and write to './output'
-    urls_written = {}  # stores the url paths created, and by what page path
     for renderfile_path in Path('./pages').glob('[!_]*/_render.yaml'):
         
         renderer.vars['TEMPLATE_DIR'] = str(PurePosixPath(renderfile_path.parent.relative_to(Path('./pages'))))   # used for finding jinja macros and blocks that are relative to the page template
@@ -91,8 +93,9 @@ def run_render_pipeline():
             shutil.copy2(src=src_path, dst=target_path)
 
 
+        paths_written = []
         for page in render_data.get('pages', []):
-            url = page['url']
+            url: str = page['url']
             assert url.startswith('/'), f"Page URLS must be absolute paths.  Try {'/' + url}"
 
             page_html = renderer.render_named_template(
@@ -102,13 +105,15 @@ def run_render_pipeline():
                 site=site_data,
             )
 
-            # Check that we're not overwriting a url that was already made--it's confusing to debug.
-            if url in urls_written:
-                raise FileExistsError(f"{str(renderfile_path)} tried to overwrite {url}, already made by {str(urls_written[url])}")
-            
             # Write the html file
-            writefile(path=url, text=page_html, basedir='./_output')
-            urls_written[url] = renderfile_path
+            url = url[1:] if url.startswith('/') else url
+            url_path = Path('./_output').joinpath(url)
+            if url_path in paths_written:
+                raise FileExistsError()
+            url_path.parent.mkdir(parents=True, exist_ok=True)
+            print(f"Writing: {url_path}")
+            url_path.write_text(page_html)
+            paths_written.append(url_path)
 
 
         
