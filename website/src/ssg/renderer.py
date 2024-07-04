@@ -9,7 +9,7 @@ import yaml
 
 from .templates import JinjaRenderer
 from .data import extract_global_data
-from .utils import copydir, writefile, rmdir
+from .utils import copydir, rmdir
 from . import filters
 
 
