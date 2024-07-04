@@ -1,9 +1,8 @@
 import os
 from fsspec.implementations.local import LocalFileSystem
-from src import ScieboDataDownload  
-from src import WordDocumentProcessor
-from src import count_types_of_sessions, count_num_unique_scholars, count_num_occurrances_of_word
+from src import ScieboDataDownload, ScieboResultsUpload, TemplateDocumentProcessor 
 from results_repo import ConsultingResultRepo
+
 
 def main():
     os.environ['DB_WRITEMODE'] = '1'
@@ -11,41 +10,101 @@ def main():
 
     if not fs_raw.exists('raw/', detail=False):
         sciebo_download = ScieboDataDownload()
-        sciebo_download.download_raw_reports(destination='raw/')
+        sciebo_download.download_reports(destination='raw/')
 
-    word_doc = WordDocumentProcessor()
+    template_doc = TemplateDocumentProcessor()
     reports = fs_raw.ls('raw/', detail=False)
-    processed_text = word_doc.process(reports)
+    extracted_consultants = template_doc.process(reports_path=reports)
+    consultants = extracted_consultants[1:]
+    total_sessions = sum(consultant.num_total_sessions for consultant in consultants)
+    num_short_sessions = sum(consultant.num_short_sessions for consultant in consultants)
+    num_hands_on_sessions = sum(consultant.num_hands_on_sessions for consultant in consultants)
+    num_unique_scholars = sum(consultant.num_unique_scholars for consultant in consultants)
+    time_short_hrs = sum(consultant.time_short_hrs for consultant in consultants)
+    time_hands_on_hrs = sum(consultant.time_hands_on_hrs for consultant in consultants)
+    time_all_hrs = sum(consultant.time_all_hrs for consultant in consultants)
+    content = " ".join(consultant.consolidated_content for consultant in consultants)
+    
+    num_python = content.lower().count('python')
+    num_matlab = content.lower().count('matlab')
 
-    n_short = count_types_of_sessions(processed_text, type='short')
-    n_hands = count_types_of_sessions(processed_text, type='hands-on')
+    sciebo_upload = ScieboResultsUpload()
+    fs_remote = sciebo_upload.connect()
+    repo_remote = ConsultingResultRepo.connect(fs_remote)
 
-    n_unique_scholars = count_num_unique_scholars(processed_text)
+    repo_remote.put(
+        short_name='n_sess',
+        name='Total number of sessions',
+        value=total_sessions,
+        units="Session",
+        display_units='Session'
+    )
 
-    n_python = count_num_occurrances_of_word(processed_text, word='python')
-    n_matlab = count_num_occurrances_of_word(processed_text, word='matlab')
+    repo_remote.put(
+        short_name='time_sess_hrs',
+        name='Total time for all sessions',
+        value=time_all_hrs,
+        units="Hour",
+        display_units='Hrs'
+    )
 
-    consulting_results = [
-        n_short,
-        n_hands,
-        n_unique_scholars,
-        n_python,
-        n_matlab
-    ]
+    repo_remote.put(
+        short_name='n_short',
+        name='Total number of short chats',
+        value=num_short_sessions,
+        units="Session",
+        display_units='Session'
+    )
 
-    fs_local = LocalFileSystem()
-    repo_local = ConsultingResultRepo.connect(fs_local)
-    for consulting_result in consulting_results:
-        repo_local.put(
-            short_name=consulting_result.short_name,
-            name=consulting_result.name,
-            value=consulting_result.value,
-            units=consulting_result.units,
-            display_units=consulting_result.display_units
-        )
+    repo_remote.put(
+        short_name='time_short_hrs',
+        name='Total time for short chats',
+        value=time_short_hrs,
+        units="Hour",
+        display_units='Hrs'
+    )
 
-    repo_local.push()
+    repo_remote.put(
+        short_name='n_hands',
+        name='Total number of hands-on chats',
+        value=num_hands_on_sessions,
+        units="Session",
+        display_units='Session'
+    )
 
+    repo_remote.put(
+        short_name='time_hands_on_hrs',
+        name='Total time for hands-on sessions',
+        value=time_hands_on_hrs,
+        units="Hour",
+        display_units='Hrs'
+    )    
+
+    repo_remote.put(
+        short_name='n_scholars',
+        name='Total number of unique scholars',
+        value=num_unique_scholars,
+        units="Researcher",
+        display_units='Session'
+    )
+
+    repo_remote.put(
+        short_name='n_python',
+        name='Total number of Python occurrances in content',
+        value=num_python,
+        units="Occurrance",
+        display_units='Occurrance'
+    )
+
+    repo_remote.put(
+        short_name='n_matlab',
+        name='Total number of Matlab occurrances in content',
+        value=num_matlab,
+        units="Occurrance",
+        display_units='Occurrance'
+    )
+
+    repo_remote.push()
 
 if __name__ == "__main__":
     main()
