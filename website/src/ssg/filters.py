@@ -20,7 +20,14 @@ def redirect_path(prepend_path, arg_idx=0):
                 path = path[1:]
             else:
                 was_root = False
-            new_path = str(PurePosixPath(prepend_path).joinpath(path))
+            if 'http' in str(path):
+                base_url = path[path.index('//') + 2:]
+                new_path = str(PurePosixPath(prepend_path) / 'downloads' / base_url)
+                Path(new_path).parent.mkdir(exist_ok=True, parents=True)
+                print(f"Downloading File: {path} -> {new_path}")
+                urllib.request.urlretrieve(path, new_path)
+            else:
+                new_path = str(PurePosixPath(prepend_path).joinpath(path))
             new_args = list(args)
             new_args[arg_idx] = new_path
             new_args = tuple(new_args)

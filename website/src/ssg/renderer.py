@@ -96,8 +96,6 @@ def run_render_pipeline():
 
             # used for finding macros that are relative to the page template
             renderer.vars['TEMPLATE_DIR'] = str(PurePosixPath(renderfile_path.parent.relative_to(Path('./pages'))))
-            # renderer.vars['PAGE_PATH'] = str(PurePosixPath(renderfile_path.parent))
-            # renderer.vars['OUTPUT_PATH'] = str(PurePosixPath('./_output'))
             
             page_html = renderer.render_named_template(
                 template_path=page_path.joinpath(render_data['template']), 
