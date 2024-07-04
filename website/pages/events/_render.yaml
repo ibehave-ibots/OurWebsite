@@ -1,2 +1,6 @@
 template: events.html
-url: /events/index.html
+pages:
+  - url: /events/index.html
+data:
+  data: data.yaml
+  content: content.md

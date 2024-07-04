@@ -1,2 +1,3 @@
 template: privacy_policy.html
-url: /privacy-policy.html
+pages:
+  - url: /privacy-policy.html

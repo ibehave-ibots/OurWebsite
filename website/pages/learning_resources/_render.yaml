@@ -1,2 +1,6 @@
 template: learning_resources.html
-url: /learning_resources.html
+pages:
+  - url: /learning_resources.html
+data:
+  content: content.md
+  data: data.yaml

@@ -1,2 +1,6 @@
 template: event_series.html
-url: /events/optogenetics-seminars/index.html
+pages:
+  - url: /events/optogenetics-seminars/index.html
+data:
+  content: content.md
+  data: data.yaml

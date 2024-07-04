@@ -51,51 +51,53 @@ def run_render_pipeline():
 
     ## Render Jinja and load yaml files from './templates/data'
     site_data = {}
-    for yaml_path in Path('./pages/_data').glob('*.yaml'):
-        yaml_text = renderer.render_in_place(template_text=yaml_path.read_text(), data=global_data)
-        site_data[yaml_path.stem] = yaml.load(yaml_text, Loader=yaml.Loader)
+    for path in Path('./pages/_data').glob('*.yaml'):
+        yaml_text = renderer.render_in_place(template_text=path.read_text(), data=global_data)
+        site_data[path.stem] = yaml.load(yaml_text, Loader=yaml.Loader)
 
     ## Render Each Page to HTML and write to './output'
     urls_written = {}  # stores the url paths created, and by what page path
-    for page_path in Path('./pages').glob('[!_]*'):
-        if not page_path.is_dir():
-            continue
+    for renderfile_path in Path('./pages').glob('[!_]*/_render.yaml'):
         
+        render_data = yaml.load(renderer.render_in_place(template_text=renderfile_path.read_text(), data=global_data), yaml.Loader)
+        page_path = renderfile_path.parent
+
+
         page_data = {}
-        for yaml_path in page_path.glob('*.yaml'):
-            yaml_text = renderer.render_in_place(template_text=yaml_path.read_text(), data=global_data)
-            page_data[yaml_path.stem] = yaml.load(yaml_text, Loader=yaml.Loader)
+        for key, fname in render_data.get('data', {}).items():
+            path = page_path.joinpath(fname)
+            if not path.exists():
+                raise FileNotFoundError(path)
+            if Path(fname).suffix == '.yaml':
+                page_data[key] = yaml.load(renderer.render_in_place(template_text=path.read_text(), data=global_data), yaml.Loader)
+            elif Path(fname).suffix == '.md':
+                page_data[key] = markdown2.Markdown().convert(path.read_text())
+            else:
+                raise NotImplementedError(f"{path.suffix} extension not yet supported.  Try '.yaml' or '.md' .")
+            
 
-        for markdown_path in page_path.glob('*.md'):
-            page_data[markdown_path.stem] = markdown2.Markdown().convert(markdown_path.read_text())
-        
-        render_data = page_data['_render']
+        for page in render_data.get('pages', []):
 
-        # support multiple pages rendered from the same file
-        if isinstance(render_data, dict):
-            render_data = [render_data]  
-        assert isinstance(render_data, list)
+            assert page['url'].startswith('/'), f"Page URLS must be absolute paths.  Try {'/' + page['url']}"
 
-        for rdata in render_data:
-            assert rdata['url'].startswith('/'), f"Page URLS must be absolute.  Try {'/' + rdata['url']}"
-
-            renderer.vars['TEMPLATE_DIR'] = str(PurePosixPath(page_path.relative_to(Path('./pages'))))
-            renderer.vars['PAGE_PATH'] = str(PurePosixPath(page_path))
-            renderer.vars['OUTPUT_PATH'] = str(PurePosixPath('./_output'))
+            # used for finding macros that are relative to the page template
+            renderer.vars['TEMPLATE_DIR'] = str(PurePosixPath(renderfile_path.parent.relative_to(Path('./pages'))))
+            # renderer.vars['PAGE_PATH'] = str(PurePosixPath(renderfile_path.parent))
+            # renderer.vars['OUTPUT_PATH'] = str(PurePosixPath('./_output'))
             
             page_html = renderer.render_named_template(
-                template_name=f"{page_path.name}/{rdata['template']}", 
+                template_path=page_path.joinpath(render_data['template']), 
                 data=global_data, 
-                page=page_data | rdata,
+                page=page_data | page,
                 site=site_data,
             )
 
             # Check that we're not overwriting a url that was already made--it's confusing to debug.
-            url_to_write = rdata['url']
+            url_to_write = page['url']
             if url_to_write in urls_written:
-                raise FileExistsError(f"{str(page_path)} tried to overwrite {url_to_write}, already made by {str(urls_written[url_to_write])}")
+                raise FileExistsError(f"{str(renderfile_path)} tried to overwrite {url_to_write}, already made by {str(urls_written[url_to_write])}")
             else:
-                urls_written[url_to_write] = page_path
+                urls_written[url_to_write] = renderfile_path
             
             # Write the html file
             writefile(path=url_to_write, text=page_html, basedir='./_output')

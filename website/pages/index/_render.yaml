@@ -1,2 +1,6 @@
 template: index.html
-url: /index.html
+pages:
+  - url: /index.html
+data:
+  content: content.md
+  data: data.yaml

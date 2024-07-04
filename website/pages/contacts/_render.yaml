@@ -1,2 +1,6 @@
 template: contacts.html
-url: /contacts.html
+pages: 
+  - url: /contacts.html
+data:
+  data: data.yaml
+  content: content.md

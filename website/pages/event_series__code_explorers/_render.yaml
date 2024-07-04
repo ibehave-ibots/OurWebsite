@@ -1,2 +1,6 @@
 template: event_series.html
-url: /events/code-explorers/index.html
+pages: 
+  - url: /events/code-explorers/index.html
+data:
+  content: content.md
+  data: data.yaml

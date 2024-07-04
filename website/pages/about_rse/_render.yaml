@@ -1,2 +1,5 @@
 template: about_rse.html
-url: /about.html
+pages:
+  - url: /about.html
+data:
+  data: data.yaml

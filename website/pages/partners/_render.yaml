@@ -1,2 +1,5 @@
 template: partners.html
-url: /our-partners.html
+pages:
+  - url: /our-partners.html
+data:
+  data: data.yaml

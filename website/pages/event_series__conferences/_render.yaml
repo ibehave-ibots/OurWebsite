@@ -1,2 +1,6 @@
 template: event_series.html
-url: /events/conferences/index.html
+pages:
+  - url: /events/conferences/index.html
+data:
+  content: content.md
+  data: data.yaml
