@@ -1,9 +1,6 @@
 from pathlib import Path
 from warnings import warn
 
-import yaml
-
-
 def rmdir(start_directory: Path):
     """Recursively and permanently removes the specified directory, all of its
     subdirectories, and every file contained in any of those folders."""
@@ -27,9 +24,3 @@ def rmdir(start_directory: Path):
             warn(f"permission denied for {str(path)}. Continuing anyway...")
 
     
-    
-    
-def load_yaml(text: str):
-    return yaml.load(text, Loader=yaml.Loader)    
-
-
