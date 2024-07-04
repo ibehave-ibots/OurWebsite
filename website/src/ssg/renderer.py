@@ -9,12 +9,12 @@ import yaml
 
 from .templates import JinjaRenderer
 from .data import extract_global_data
-from .utils import rmdir
 from . import filters
 
 
 def copy_static():
-    rmdir("./_output/static")
+    if Path("./_output/static").exists():
+        shutil.rmtree("./_output/static")
     print("Copying: themes/Silicon/assets ->  _output/assets ")
     shutil.copytree("./themes/Silicon/assets", "./_output/assets", dirs_exist_ok=True)
     
