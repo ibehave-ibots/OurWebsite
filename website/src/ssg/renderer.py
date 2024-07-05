@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import date, datetime
 from pathlib import Path, PurePosixPath
 import shutil
+from typing import Any
 
 import markdown2
 import yaml
@@ -64,18 +65,6 @@ def run_render_pipeline():
         
         render_data = yaml.load(renderer.render_in_place(template_text=renderfile_path.read_text(), data=global_data), yaml.Loader)
         page_path = renderfile_path.parent
-
-        page_data = {}
-        for key, fname in render_data.get('data', {}).items():
-            path = page_path.joinpath(fname)
-            if not path.exists():
-                raise FileNotFoundError(path)
-            if Path(fname).suffix == '.yaml':
-                page_data[key] = yaml.load(renderer.render_in_place(template_text=path.read_text(), data=global_data), yaml.Loader)
-            elif Path(fname).suffix == '.md':
-                page_data[key] = markdown2.Markdown().convert(path.read_text())
-            else:
-                raise NotImplementedError(f"{path.suffix} extension not yet supported.  Try '.yaml' or '.md' .")
             
         for src, target in render_data.get('files', {}).items():
             src: str
@@ -96,6 +85,13 @@ def run_render_pipeline():
             url: str = page['url']
             assert url.startswith('/'), f"Page URLS must be absolute paths.  Try {'/' + url}"
 
+            data_fnames: dict[str, str] = render_data.get('data', {})
+            if data_fnames:
+                data_dir = page_path.joinpath(page['folder']) if 'folder' in page else page_path
+                page_data = _read_page_data(data_dir=data_dir, data_fnames=data_fnames, renderer=renderer, **global_data)
+            else:
+                page_data = {}
+
             page_html = renderer.render_named_template(
                 template_path=page_path.joinpath(render_data['template']), 
                 data=global_data, 
@@ -112,6 +108,21 @@ def run_render_pipeline():
             print(f"Writing: {url_path}")
             url_path.write_text(page_html)
             paths_written.append(url_path)
+
+
+def _read_page_data(data_dir, data_fnames: dict[str, str], renderer, **render_data) -> dict[str, Any]:
+    page_data: dict[str, Any] = {}
+    for key, fname in data_fnames.items():
+        path = data_dir.joinpath(fname)
+        if not path.exists():
+            raise FileNotFoundError(path)
+        if Path(fname).suffix == '.yaml':
+            page_data[key] = yaml.load(renderer.render_in_place(template_text=path.read_text(), data=render_data), yaml.Loader)
+        elif Path(fname).suffix == '.md':
+            page_data[key] = markdown2.Markdown().convert(path.read_text())
+        else:
+            raise NotImplementedError(f"{path.suffix} extension not yet supported.  Try '.yaml' or '.md' .")
+    return page_data
 
 
         
