@@ -24,6 +24,7 @@ def main():
 
     with open('consulting_statistics.yaml', 'w') as f:
         yaml.dump(consulting_stats, f)
+        
 if __name__ == '__main__':
     main()
 
