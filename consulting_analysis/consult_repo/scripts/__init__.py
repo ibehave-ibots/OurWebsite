@@ -1,2 +1,2 @@
 from src import ScieboDataDownload
-from src import WordDocumentProcessor
+from src import TemplateDocumentProcessor

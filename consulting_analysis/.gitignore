@@ -7,3 +7,4 @@ data_consulting_stats
 processed_data
 analysis_data
 .snakemake
+*.yaml
