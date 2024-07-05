@@ -4,7 +4,7 @@ from src import ScieboDataDownload, ScieboResultsUpload, TemplateDocumentProcess
 from results_repo import ConsultingResultRepo
 
 
-def main():
+def write_yaml():
     os.environ['DB_WRITEMODE'] = '1'
     fs_raw = LocalFileSystem()
 
@@ -107,6 +107,3 @@ def main():
     )
 
     repo_remote.push()
-
-if __name__ == "__main__":
-    main()
