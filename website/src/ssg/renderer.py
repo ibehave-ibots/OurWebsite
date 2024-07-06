@@ -8,9 +8,8 @@ from typing import Any
 import markdown2
 import yaml
 
-from .templates import JinjaRenderer
+from .templates.jinja_renderer import JinjaRenderer
 from .data import extract_global_data
-from . import filters
 
 
 def copy_static():
@@ -28,27 +27,8 @@ def run_render_pipeline():
     print("Copying: pages/_static ->  _output/static ")
     shutil.copytree("./pages/_static", "./_output/static", dirs_exist_ok=True)
         
-
-    renderer = JinjaRenderer.from_path(
-        templates_dir='./pages', 
-        filters={
-            'resize': filters.redirect_path('./_output')(filters.resize_image), 
-            'flatten_nested': filters.flatten_nested_dict,
-            'promote_key': filters.promote_key,
-            'items': filters.items,
-            'index': filters.multi_index,
-            'sort_by': filters.sort_by,  
-            'copy_to': filters.redirect_path('./_output', arg_idx=1)(filters.copy_to),
-            'prepend': filters.prepend,
-        },
-        globals={
-            'today': date.today(),
-            'now': datetime.now(),
-            'str': str,
-        },
-    )
+    renderer = JinjaRenderer.from_path(templates_dir='./pages')
     
-
     ## Get Data from './data'
     global_data = extract_global_data(base_path='./data')
 
