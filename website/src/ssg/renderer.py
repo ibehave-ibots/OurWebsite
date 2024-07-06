@@ -9,7 +9,7 @@ import markdown2
 import yaml
 
 from .templates.jinja_renderer import JinjaRenderer
-from .data import extract_global_data
+from .data_directory import extract_global_data
 
 
 def copy_static():

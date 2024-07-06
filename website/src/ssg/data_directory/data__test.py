@@ -1,5 +1,5 @@
 import os
-from ssg.data import extract_global_data
+from .data import extract_global_data
 
 
 def test_find_single_file(tmp_path):

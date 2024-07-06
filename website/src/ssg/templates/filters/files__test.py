@@ -1,5 +1,5 @@
 import pytest
-from ssg.filters import files
+from . import files
 
 
 def test_path_prepend_decorator():
