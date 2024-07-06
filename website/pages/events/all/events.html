@@ -1,4 +1,4 @@
-{% from TEMPLATE_DIR + '/_macros/course_card.html' import course_card %}
+{% from TEMPLATE_DIR + '/macros/course_card.html' import course_card %}
 {% extends "_blocks/base.html" %}
 
 {% block title %}  Events {% endblock %}
@@ -24,7 +24,7 @@
         | items
         | sort_by([1, 'start_date'])
       %}
-        {% if event.start_date >= today and ('all' in page.data.event_types or event_type in page.data.event_types) %}
+        {% if event.start_date >= today  and 'all' in page.data.event_types or event_type in page.data.event_types %}
           {{ course_card(
             title = event.title, 
             registration_url = "/events/" + event_type.replace('_', '-') + "/" + event_id + '.html', 
@@ -52,7 +52,7 @@
         | items 
         | sort_by([1, 'start_date'], reverse=True)
       %}
-        {% if event.start_date < today and ('all' in page.data.event_types or event_type in page.data.event_types) %}
+        {% if event.start_date < today %}
           {{ course_card(
             title = event.title, 
             registration_url = "/events/" + event_type.replace('_', '-') + "/" + event_id + '.html', 
@@ -71,6 +71,14 @@
   </section>
   
   
+  <section>
+    <h1>Statistics</h1>
+    <ul>
+      {% for stat in page.data.statistics %}
+      <li><strong>{{ stat.name }}:</strong> {{ stat.value }} {{ stat.unit }} </li>
+      {% endfor %}
+    </ul>
+  </section>
   
 </article>
 {% endblock %}

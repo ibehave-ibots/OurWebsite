@@ -1,6 +1,15 @@
 template: events.html
-pages:
+pages: 
   - url: /events/index.html
+    folder: all
+  - url: /events/code-explorers/index.html
+    folder: code_explorers
+  - url: /events/workshops/index.html
+    folder: workshops
+  - url: /events/optogenetics-seminars/index.html
+    folder: opto_seminars
+  - url: /events/conferences/index.html
+    folder: conferences
 data:
-  data: data.yaml
   content: content.md
+  data: data.yaml

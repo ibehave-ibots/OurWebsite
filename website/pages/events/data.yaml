@@ -1,5 +1,0 @@
-title: Events
-statistics:
-  - name: Total Events
-    value: {{ data.events | flatten_nested | length }}
-    unit: Events
