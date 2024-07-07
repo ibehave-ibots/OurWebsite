@@ -45,19 +45,7 @@ def run_render_pipeline():
         render_data = yaml.load(renderer.render_in_place(template_text=renderfile_path.read_text(), data=global_data), yaml.Loader)
         page_path = renderfile_path.parent
             
-        for src, target in render_data.get('files', {}).items():
-            src: str
-            target: str
-            src_path = page_path.joinpath(src)
-            if not src_path.exists():
-                raise FileNotFoundError(f"Could not find file {src_path}.")
-            if target.startswith('/'):
-                target = target[1:]
-            target_path = Path('./_output') / Path(target)
-            print(f'Copying File: {src_path} -> {target_path}')
-            target_path.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(src=src_path, dst=target_path)
-
+        _copy_files(file_destinations=render_data.get('files', {}), basedir=page_path)
 
         paths_written = []
         for page in render_data.get('pages', []):
@@ -65,16 +53,15 @@ def run_render_pipeline():
             assert url.startswith('/'), f"Page URLS must be absolute paths.  Try {'/' + url}"
 
             data_fnames: dict[str, str] = render_data.get('data', {})
+            page_data = page
             if data_fnames:
                 data_dir = page_path.joinpath(page['folder']) if 'folder' in page else page_path
-                page_data = _read_page_data(data_dir=data_dir, data_fnames=data_fnames, renderer=renderer, **global_data)
-            else:
-                page_data = {}
+                page_data |= _read_page_data(data_dir=data_dir, data_fnames=data_fnames, renderer=renderer, **global_data)
 
             page_html = renderer.render_named_template(
                 template_path=page_path.joinpath(render_data['template']), 
                 data=global_data, 
-                page=page_data | page,
+                page=page_data,
                 site=site_data,
             )
 
@@ -87,6 +74,20 @@ def run_render_pipeline():
             print(f"Writing: {url_path}")
             url_path.write_text(page_html)
             paths_written.append(url_path)
+
+
+def _copy_files(file_destinations: dict[str, str], basedir: Path) -> None:
+    basedir = Path(basedir)
+    for src, target in file_destinations.items():
+        src_path = basedir.joinpath(src)
+        if not src_path.exists():
+            raise FileNotFoundError(f"Could not find file {src_path}.")
+        if target.startswith('/'):
+            target = target[1:]
+        target_path = Path('./_output') / Path(target)
+        print(f'Copying File: {src_path} -> {target_path}')
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src=src_path, dst=target_path)
 
 
 def _read_page_data(data_dir, data_fnames: dict[str, str], renderer, **render_data) -> dict[str, Any]:
