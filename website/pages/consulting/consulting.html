@@ -23,15 +23,15 @@
   {{ steps(steps=[
     {'title': 'Meet Us Tomorrow', 
     'summary': "Book a short chat online, tell us what's on your mind, and crate a custom learning plan together with your iBOTS consultant."
-    },
-    {'title': 'Work With Us On A Sandbox Project', 
-    'summary': "Work together with your consultant to going through a custom tutorial relevant to your needs.  Between meetings, your iBOTS consultant will do further research, make templates and reference materials, and learn together with you."
-    },
-    {'title': 'Apply Your New Skills to Your Project', 
-    'summary': """Together with your consultant, apply the technology directly on your machine, with your data, for your project.  Don't get stuck--as technical problems arise, you'll have someone there to help you keep things moving!"""
-    },
-    ]) 
-  }}
+  },
+  {'title': 'Work With Us On A Sandbox Project', 
+  'summary': "Work together with your consultant to going through a custom tutorial relevant to your needs.  Between meetings, your iBOTS consultant will do further research, make templates and reference materials, and learn together with you."
+},
+{'title': 'Apply Your New Skills to Your Project', 
+'summary': """Together with your consultant, apply the technology directly on your machine, with your data, for your project.  Don't get stuck--as technical problems arise, you'll have someone there to help you keep things moving!"""
+},
+]) 
+}}
 </section>
 
 
@@ -71,55 +71,29 @@
 
 </section>
 
-<section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
+<section class="container pb-2 pb-md-4 pb-lg-5 mb-3">
   <h3>What Have We Helped With In the Past?</h3>
-  {% for id, topic in data.skills.items() %}
-  <div id="{{id}}">
-    <article class="card border-0 shadow-sm overflow-hidden mb-4">
-      <div class="row g-0">
-        <div class="col-sm-4 position-relative bg-position-center bg-repeat-0 bg-size-cover" style="background-image: url(assets/img/blog/01.jpg); min-height: 15rem;">
-          <a class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
-        </div>
-        <div class="col-sm-8">
-          <div class="card-body">
-            <h3 class="h4">
-              {{ topic.name }}
-            </h3>
-            <p>{{ topic.short_description }}</p>
-            <hr class="my-4">
-            
-            <div class="d-flex align-items-center justify-content-left">
-              {% for id, consultant in data.people.items() %}
-              {% if 'consulting' in consultant and id in consultant.consulting.skills %}
-              <a href="#{{id}}" class="d-flex align-items-center fw-bold text-dark text-decoration-none me-1">
-                <img src="{{ consultant.image | prepend('data') | copy_to('/static') }}" class="rounded-circle me-3" width="48" alt="Avatar">
-              </a>
-              {% endif %}
-              {% endfor %}
-              
-              <div class="flex-grow-1"></div>
-              
-              <div class="d-flex align-items-center text-muted">
-                <div class="d-flex align-items-center me-3">
-                  <i class="bx bx-like fs-lg me-1"></i>
-                  <span class="fs-sm">8</span>
-                </div>
-                <div class="d-flex align-items-center me-3">
-                  <i class="bx bx-comment fs-lg me-1"></i>
-                  <span class="fs-sm">7</span>
-                </div>
-                <div class="d-flex align-items-center">
-                  <i class="bx bx-share-alt fs-lg me-1"></i>
-                  <span class="fs-sm">4</span>
-                </div>
-              </div>
+  <div class="row row-cols-1 row-cols-md-2">
+    {% for id, topic in data.skills.items() %}
+    <div id="{{id}}">
+      <div class="col py-4 my-2 my-sm-3">
+        <a href="" class="card card-hover h-100 border-0 shadow-sm text-decoration-none pt-5 px-sm-3 px-md-0 px-lg-3 pb-sm-3 pb-md-0 pb-lg-3 me-xl-2">
+          <div class="card-body pt-3">
+            <div class="d-inline-block bg-primary shadow-primary rounded-3 position-absolute top-0 translate-middle-y p-3">
+              <img src="assets/img/services/icons/cms.svg" class="d-block m-1" width="40" alt="Icon">
             </div>
+            <h2 class="h4 d-inline-flex align-items-center">
+              {{ topic.name }}
+              <i class="bx bx-right-arrow-circle text-primary fs-3 ms-2"></i>
+            </h2>
+            <p class="fs-sm text-body mb-0"> {{ topic.short_description }} </p>
           </div>
-        </div>
+        </a>
       </div>
-    </article>
+    </div>
   </div>
   {% endfor %}
+</div>
 </section>
 
 
