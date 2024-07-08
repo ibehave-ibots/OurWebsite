@@ -14,7 +14,7 @@
       <p class="fs-sm mb-2">{{ background }}</p>
         {% for specialty in specialties %}
         {% set spec = sitedata.skills[specialty] %}
-            <a>{{spec.name}}</a>, 
+            <a href="#{{specialty}}">{{spec.name}}</a>, 
         {% endfor %}
         </p>
       <div class="d-flex">

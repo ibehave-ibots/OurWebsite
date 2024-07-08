@@ -42,7 +42,7 @@
   <div class="row row-cols-2">
     {% for id, person in data.people.items()  %}
       {% if 'consulting' in person %}
-      <div class="col">
+      <div id="{{id}}" class="col">
         {{ consultant_card(
           sitedata=data,
           name=person.name,
@@ -65,6 +65,7 @@
 <section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
   <h3>What Have We Helped With In the Past?</h3>
   {% for id, topic in data.skills.items() %}
+  <div id="{{id}}">
     {{ consulting_card(
       sitedata=data,
       skill_id=id,
@@ -72,6 +73,7 @@
       summary=topic.short_description
       ) 
     }}
+  </div>
   {% endfor %}
 </section>
 

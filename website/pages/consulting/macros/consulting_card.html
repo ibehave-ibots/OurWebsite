@@ -4,22 +4,16 @@
     title="Title", 
     summary="Summary", 
     image="assets/img/blog/01.jpg", 
-    categories=[], 
     consultants=[]
 ) %}
 
 <article class="card border-0 shadow-sm overflow-hidden mb-4">
     <div class="row g-0">
         <div class="col-sm-4 position-relative bg-position-center bg-repeat-0 bg-size-cover" style="background-image: url({{image}}); min-height: 15rem;">
-            <a href="blog-single.html" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
+            <a class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
         </div>
         <div class="col-sm-8">
             <div class="card-body">
-                <div class="d-flex align-items-center mb-3">
-                    {% for category in categories %}
-                    <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">{{ category }}</a>
-                    {% endfor %}
-                </div>
                 <h3 class="h4">
                     {{ title }}
                     <!-- <a href="blog-single.html">{{ title }}</a> -->
@@ -28,9 +22,9 @@
                 <hr class="my-4">
                 
                 <div class="d-flex align-items-center justify-content-left">
-                    {% for consultant in sitedata.people.values() %}
+                    {% for id, consultant in sitedata.people.items() %}
                         {% if 'consulting' in consultant and skill_id in consultant.consulting.skills %}
-                            <a href="{{ consultant.consulting.booking_url }}" class="d-flex align-items-center fw-bold text-dark text-decoration-none me-1">
+                            <a href="#{{id}}" class="d-flex align-items-center fw-bold text-dark text-decoration-none me-1">
                                 <img src="{{ consultant.image | prepend('data') | copy_to('/static') }}" class="rounded-circle me-3" width="48" alt="Avatar">
                             </a>
                         {% endif %}
