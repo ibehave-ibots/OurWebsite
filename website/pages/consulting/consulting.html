@@ -10,13 +10,29 @@
 
 
 <section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
-  {{ page.content | safe }}
+  <h3>Technology Consulting for the <a href="https://ibehave.nrw">iBehave Neuroscience Network</a></h3>
+  <p>
+    dd interdum orci tellus, quis mollis leo pellentesque non. 
+    Aenean aliquam odio quis ipsum cursus blandit. Fusce ultrices eu dolor et vestibulum. 
+    Donec efficitur luctus justo. Quisque maximus sollicitudin tellus a maximus. Curabitur rhoncus augue est, eget congue augue placerat vitae. Nam laoreet dignissim ligula, ac dictum eros maximus at.
+  </p>
 </section>
 
 
 <section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
   <h3>Let's Work on it Together!</h3>
-  {{ steps(steps=page.data.steps) }}
+  {{ steps(steps=[
+    {'title': 'Meet Us Tomorrow', 
+     'summary': "Book a short chat online, tell us what's on your mind, and crate a custom learning plan together with your iBOTS consultant."
+    },
+    {'title': 'Work With Us On A Sandbox Project', 
+     'summary': "Work together with your consultant to going through a custom tutorial relevant to your needs.  Between meetings, your iBOTS consultant will do further research, make templates and reference materials, and learn together with you."
+    },
+    {'title': 'Apply Your New Skills to Your Project', 
+     'summary': """Together with your consultant, apply the technology directly on your machine, with your data, for your project.  Don't get stuck--as technical problems arise, you'll have someone there to help you keep things moving!"""
+    },
+    ]) 
+  }}
 </section>
 
 <section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">

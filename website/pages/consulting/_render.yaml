@@ -3,4 +3,3 @@ pages:
   - url: /consulting.html
 data:
   data: data.yaml
-  content: content.md
