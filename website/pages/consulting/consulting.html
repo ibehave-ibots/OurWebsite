@@ -1,6 +1,4 @@
-{% from TEMPLATE_DIR + '/macros/consulting_card.html' import consulting_card %}
 {% from TEMPLATE_DIR + '/macros/steps.html' import steps %}
-{% from TEMPLATE_DIR + '/macros/consultant_card.html' import consultant_card %}
 
 {% extends "_blocks/base.html" %}
 
@@ -24,13 +22,13 @@
   <h3>Let's Work on it Together!</h3>
   {{ steps(steps=[
     {'title': 'Meet Us Tomorrow', 
-     'summary': "Book a short chat online, tell us what's on your mind, and crate a custom learning plan together with your iBOTS consultant."
+    'summary': "Book a short chat online, tell us what's on your mind, and crate a custom learning plan together with your iBOTS consultant."
     },
     {'title': 'Work With Us On A Sandbox Project', 
-     'summary': "Work together with your consultant to going through a custom tutorial relevant to your needs.  Between meetings, your iBOTS consultant will do further research, make templates and reference materials, and learn together with you."
+    'summary': "Work together with your consultant to going through a custom tutorial relevant to your needs.  Between meetings, your iBOTS consultant will do further research, make templates and reference materials, and learn together with you."
     },
     {'title': 'Apply Your New Skills to Your Project', 
-     'summary': """Together with your consultant, apply the technology directly on your machine, with your data, for your project.  Don't get stuck--as technical problems arise, you'll have someone there to help you keep things moving!"""
+    'summary': """Together with your consultant, apply the technology directly on your machine, with your data, for your project.  Don't get stuck--as technical problems arise, you'll have someone there to help you keep things moving!"""
     },
     ]) 
   }}
@@ -41,38 +39,85 @@
   <h3> Book a Session! </h3>
   <div class="row row-cols-2">
     {% for id, person in data.people.items()  %}
-      {% if 'consulting' in person %}
-      <div id="{{id}}" class="col">
-        {{ consultant_card(
-          sitedata=data,
-          name=person.name,
-          image=person.image | prepend('data') | copy_to('static/people/' + id),
-          background=person.field_of_study,
-          languages=person.consulting.languages,
-          specialties=person.consulting.skills
-        ) 
-        }}
+    {% if 'consulting' in person %}
+    <div id="{{id}}" class="col">
+      <div class="card card-body d-flex flex-row align-items-center card-hover bg-light border-0">
+        <img src="{{ person.image | prepend('data') | copy_to('static/people/' + id) }}" class="d-block rounded-circle" width="162" alt="Darrell Steward">
+        <div class="ps-4">
+          <h5 class="fw-medium fs-lg mb-0">{{ person.name }}</h5>
+          <p class="fs-sm mb-2">{{ person.field_of_study }}</p>
+          {% for specialty in person.consulting.skills %}
+          {% set spec = data.skills[specialty] %}
+          <a href="#{{specialty}}">{{spec.name}}</a>, 
+          {% endfor %}
+        </p>
+        <div class="d-flex">
+          {% for language in person.consulting.languages %}
+          {% set lang = data.technologies[language] %}
+          <a href="{{lang.homepage}}" class="btn btn-icon btn-outline-secondary btn-sm me-2" aria-label="{{language}}">
+            <i class="{{lang.icon}}"></i>
+          </a>
+          {% endfor %}
+        </div>
       </div>
-      {% endif %}
-    {% endfor %}
-
     </div>
-
   </div>
+  {% endif %}
+  {% endfor %}
   
+</div>
+
+</div>
+
 </section>
 
 <section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
   <h3>What Have We Helped With In the Past?</h3>
   {% for id, topic in data.skills.items() %}
   <div id="{{id}}">
-    {{ consulting_card(
-      sitedata=data,
-      skill_id=id,
-      title=topic.name,
-      summary=topic.short_description
-      ) 
-    }}
+    <article class="card border-0 shadow-sm overflow-hidden mb-4">
+      <div class="row g-0">
+        <div class="col-sm-4 position-relative bg-position-center bg-repeat-0 bg-size-cover" style="background-image: url(assets/img/blog/01.jpg); min-height: 15rem;">
+          <a class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
+        </div>
+        <div class="col-sm-8">
+          <div class="card-body">
+            <h3 class="h4">
+              {{ topic.name }}
+            </h3>
+            <p>{{ topic.short_description }}</p>
+            <hr class="my-4">
+            
+            <div class="d-flex align-items-center justify-content-left">
+              {% for id, consultant in data.people.items() %}
+              {% if 'consulting' in consultant and id in consultant.consulting.skills %}
+              <a href="#{{id}}" class="d-flex align-items-center fw-bold text-dark text-decoration-none me-1">
+                <img src="{{ consultant.image | prepend('data') | copy_to('/static') }}" class="rounded-circle me-3" width="48" alt="Avatar">
+              </a>
+              {% endif %}
+              {% endfor %}
+              
+              <div class="flex-grow-1"></div>
+              
+              <div class="d-flex align-items-center text-muted">
+                <div class="d-flex align-items-center me-3">
+                  <i class="bx bx-like fs-lg me-1"></i>
+                  <span class="fs-sm">8</span>
+                </div>
+                <div class="d-flex align-items-center me-3">
+                  <i class="bx bx-comment fs-lg me-1"></i>
+                  <span class="fs-sm">7</span>
+                </div>
+                <div class="d-flex align-items-center">
+                  <i class="bx bx-share-alt fs-lg me-1"></i>
+                  <span class="fs-sm">4</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
   </div>
   {% endfor %}
 </section>
