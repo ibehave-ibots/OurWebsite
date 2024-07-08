@@ -1,0 +1,3 @@
+static:
+  themes/Silicon/assets: _output/assets
+  pages/_static: _output/static

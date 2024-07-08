@@ -11,20 +11,10 @@ from .templates.jinja_renderer import JinjaRenderer
 from .data_directory import extract_global_data
 
 
-def copy_static():
-    if Path("./_output/static").exists():
-        shutil.rmtree("./_output/static")
-    print("Copying: themes/Silicon/assets ->  _output/assets ")
-    shutil.copytree("./themes/Silicon/assets", "./_output/assets", dirs_exist_ok=True)
+def copy_static(src, target):
+    shutil.copytree(src, target, dirs_exist_ok=True)
     
-
-
 def run_render_pipeline():
-    if not Path('./_output').exists():
-        copy_static()
-    
-    print("Copying: pages/_static ->  _output/static ")
-    shutil.copytree("./pages/_static", "./_output/static", dirs_exist_ok=True)
         
     renderer = JinjaRenderer.from_path(templates_dir='./pages')
     
