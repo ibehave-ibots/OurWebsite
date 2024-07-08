@@ -77,8 +77,9 @@
     {% for id, topic in data.skills.items() %}
     <div id="{{id}}">
       <div class="col py-4 my-2 my-sm-3">
-        <a href="" class="card card-hover h-100 border-0 shadow-sm text-decoration-none pt-5 px-sm-3 px-md-0 px-lg-3 pb-sm-3 pb-md-0 pb-lg-3 me-xl-2">
+        <a href="" class="card card-hover h-100 border-0 shadow-sm text-decoration-none pt-5 px-sm-3 px-md-0 px-lg-3 pb-sm-3 pb-md-0 pb-lg-3 me-xl-2 position-relative">
           <div class="card-body pt-3">
+            
             <div class="d-inline-block bg-primary shadow-primary rounded-3 position-absolute top-0 translate-middle-y p-3">
               <img src="assets/img/services/icons/cms.svg" class="d-block m-1" width="40" alt="Icon">
             </div>
@@ -88,12 +89,21 @@
             </h2>
             <p class="fs-sm text-body mb-0"> {{ topic.short_description }} </p>
           </div>
+          
+          <!-- Thumbnails container -->
+          <div class="position-absolute top-0 end-0 translate-middle-x mt-2 me-2 d-flex">
+            {% for person_id, consultant in data.people.items() %}
+            {% if 'consulting' in consultant and id in consultant.consulting.skills %}
+              <img src="{{ consultant.image | prepend('data') | copy_to('/static') }}" class="rounded-circle border border-white" width="40" height="40" alt="Person 1">             
+            {% endif %}
+            {% endfor %}
+            
+          </div>
         </a>
       </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
 </section>
 
 
