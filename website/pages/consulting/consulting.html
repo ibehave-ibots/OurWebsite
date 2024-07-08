@@ -36,13 +36,39 @@
   }}
 </section>
 
+
+<section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
+  <h3> Book a Session! </h3>
+  <div class="row row-cols-2">
+    {% for id, person in data.people.items()  %}
+      {% if 'consulting' in person %}
+      <div class="col">
+        {{ consultant_card(
+          sitedata=data,
+          name=person.name,
+          image=person.image | prepend('data') | copy_to('static/people/' + id),
+          background=person.field_of_study,
+          languages=person.consulting.languages,
+          specialties=person.consulting.skills
+        ) 
+        }}
+      </div>
+      {% endif %}
+    {% endfor %}
+
+    </div>
+
+  </div>
+  
+</section>
+
 <section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
   <h3>What Have We Helped With In the Past?</h3>
   {% for topic in page.data.topics %}
   {{ consulting_card(
     title=topic.title,
     summary=topic.summary,
-    image=topic.image,
+    image=topic.image ,
     date_added=topic.date_added,
     categories=topic.categories,
     consultants=topic.consultants
@@ -54,36 +80,6 @@
 
 
 
-<section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
-  <h3> Book a Session! </h3>
-  <div class="row row-cols-2">
-    <div class="col">
-      {{ consultant_card(
-        sitedata=data,
-        name="Nick Del Grosso",
-        languages=["python"]
-      ) 
-      }}
-    </div>
-    <div class="col">
-      {{ consultant_card(
-        sitedata=data,
-        name="Nick Del Grosso",
-        languages=["r", "matlab"]
-      ) 
-      }}
-    </div>
-    <div class="col">
-      {{ consultant_card(
-        sitedata=data,
-        name="Nick Del Grosso"
-      ) 
-      }}
-    </div>
-
-  </div>
-  
-</section>
 
 
 {% endblock %}

@@ -1,18 +1,20 @@
 {% macro consultant_card(
     sitedata,
     name="Jane Doe", 
+    image="assets/img/team/10.jpg",
     background="Systems Neuroscience",
     specialties=["Publishing", "Testing"], 
     languages=["python", "r", "matlab"]
 ) 
 %}
 <div class="card card-body d-flex flex-row align-items-center card-hover bg-light border-0">
-    <img src="assets/img/team/10.jpg" class="d-block rounded-circle" width="162" alt="Darrell Steward">
+    <img src="{{ image }}" class="d-block rounded-circle" width="162" alt="Darrell Steward">
     <div class="ps-4">
       <h5 class="fw-medium fs-lg mb-0">{{ name }}</h5>
       <p class="fs-sm mb-2">{{ background }}</p>
         {% for specialty in specialties %}
-            <a>{{specialty}}</a>, 
+        {% set spec = sitedata.skills[specialty] %}
+            <a>{{spec.name}}</a>, 
         {% endfor %}
         </p>
       <div class="d-flex">
