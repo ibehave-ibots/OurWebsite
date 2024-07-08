@@ -64,16 +64,14 @@
 
 <section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
   <h3>What Have We Helped With In the Past?</h3>
-  {% for topic in page.data.topics %}
-  {{ consulting_card(
-    title=topic.title,
-    summary=topic.summary,
-    image=topic.image ,
-    date_added=topic.date_added,
-    categories=topic.categories,
-    consultants=topic.consultants
-    ) 
-  }}
+  {% for id, topic in data.skills.items() %}
+    {{ consulting_card(
+      sitedata=data,
+      skill_id=id,
+      title=topic.name,
+      summary=topic.short_description
+      ) 
+    }}
   {% endfor %}
 </section>
 

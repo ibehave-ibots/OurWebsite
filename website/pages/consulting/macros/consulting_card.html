@@ -1,12 +1,17 @@
-{% macro consulting_card(title, summary, image, date_added, categories=[], consultants=[]) %}
+{% macro consulting_card(
+    sitedata,
+    skill_id="skill",
+    title="Title", 
+    summary="Summary", 
+    image="assets/img/blog/01.jpg", 
+    categories=[], 
+    consultants=[]
+) %}
 
 <article class="card border-0 shadow-sm overflow-hidden mb-4">
     <div class="row g-0">
         <div class="col-sm-4 position-relative bg-position-center bg-repeat-0 bg-size-cover" style="background-image: url({{image}}); min-height: 15rem;">
             <a href="blog-single.html" class="position-absolute top-0 start-0 w-100 h-100" aria-label="Read more"></a>
-            <a href="#" class="btn btn-icon btn-light bg-white border-white btn-sm rounded-circle position-absolute top-0 end-0 zindex-5 me-3 mt-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Read later" aria-label="Read later">
-                <i class="bx bx-bookmark"></i>
-            </a>
         </div>
         <div class="col-sm-8">
             <div class="card-body">
@@ -14,7 +19,6 @@
                     {% for category in categories %}
                     <a href="#" class="badge fs-sm text-nav bg-secondary text-decoration-none">{{ category }}</a>
                     {% endfor %}
-                    <span class="fs-sm text-muted border-start ps-3 ms-3">Added: {{ date_added }} </span>
                 </div>
                 <h3 class="h4">
                     {{ title }}
@@ -24,10 +28,12 @@
                 <hr class="my-4">
                 
                 <div class="d-flex align-items-center justify-content-left">
-                    {% for consultant in consultants %}
-                    <a href="{{ consultant.booking_url }}" class="d-flex align-items-center fw-bold text-dark text-decoration-none me-1">
-                        <img src="{{ consultant.photo }}" class="rounded-circle me-3" width="48" alt="Avatar">
-                    </a>
+                    {% for consultant in sitedata.people.values() %}
+                        {% if 'consulting' in consultant and skill_id in consultant.consulting.skills %}
+                            <a href="{{ consultant.consulting.booking_url }}" class="d-flex align-items-center fw-bold text-dark text-decoration-none me-1">
+                                <img src="{{ consultant.image | prepend('data') | copy_to('/static') }}" class="rounded-circle me-3" width="48" alt="Avatar">
+                            </a>
+                        {% endif %}
                     {% endfor %}
                     
                     <div class="flex-grow-1"></div>
