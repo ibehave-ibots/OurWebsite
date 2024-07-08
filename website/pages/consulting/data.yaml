@@ -1,11 +1,4 @@
 title: iBOTS Technology Consulting
-statistics:
-    title: Statistics
-    report:
-        labs_helped: {{ data.group.consulting_stats.which_labs_have_used_ibots }}
-        researchers_helped: {{ data.group.consulting_stats.num_of_clients }}
-        consulting_sessions: {{ data.group.consulting_stats.num_consulting_sessions }}
-        consulting_hours: {{ data.group.consulting_stats.total_hours_consulting }}
 session_booking:
     title: Book a Session
     description: |
@@ -15,12 +8,6 @@ session_booking:
           booking_link: https://calendly.com/delgrosso-nick/short-chat
         - name: Sangeetha Nandakumar, Ph.D
           booking_link: https://calendly.com/sangeethank/short-chat
-testimonials:
-    title: Testimonials
-    testimonials: 
-        {% for testimonial in data.testimonials.consulting %}
-        - {{ testimonial }}
-        {% endfor %}
 topics:
     - title: Writing a Library in Python
       summary: adfklj adlfkj aldkfj alkfjalkf alkfj alkfja dslkfdaslkfjdalk falkfjlak fasdlkfj alkjdfalksffsd lkdflkjalksdf jldak fasdjlfa

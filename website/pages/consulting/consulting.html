@@ -1,5 +1,6 @@
 {% from TEMPLATE_DIR + '/macros/consulting_card.html' import consulting_card %}
 {% from TEMPLATE_DIR + '/macros/steps.html' import steps %}
+{% from TEMPLATE_DIR + '/macros/consultant_card.html' import consultant_card %}
 
 {% extends "_blocks/base.html" %}
 
@@ -12,7 +13,7 @@
 <section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
   <h3>Technology Consulting for the <a href="https://ibehave.nrw">iBehave Neuroscience Network</a></h3>
   <p>
-    dd interdum orci tellus, quis mollis leo pellentesque non. 
+    ee interdum orci tellus, quis mollis leo pellentesque non. 
     Aenean aliquam odio quis ipsum cursus blandit. Fusce ultrices eu dolor et vestibulum. 
     Donec efficitur luctus justo. Quisque maximus sollicitudin tellus a maximus. Curabitur rhoncus augue est, eget congue augue placerat vitae. Nam laoreet dignissim ligula, ac dictum eros maximus at.
   </p>
@@ -49,7 +50,40 @@
   }}
   {% endfor %}
 </section>
+
+
+
+
+<section class="container mt-4 mb-lg-5 pt-lg-2 pb-5">
+  <h3> Book a Session! </h3>
+  <div class="row row-cols-2">
+    <div class="col">
+      {{ consultant_card(
+        sitedata=data,
+        name="Nick Del Grosso",
+        languages=["python"]
+      ) 
+      }}
+    </div>
+    <div class="col">
+      {{ consultant_card(
+        sitedata=data,
+        name="Nick Del Grosso",
+        languages=["r", "matlab"]
+      ) 
+      }}
+    </div>
+    <div class="col">
+      {{ consultant_card(
+        sitedata=data,
+        name="Nick Del Grosso"
+      ) 
+      }}
+    </div>
+
+  </div>
+  
+</section>
+
+
 {% endblock %}
-
-
-

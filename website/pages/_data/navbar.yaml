@@ -6,11 +6,7 @@ logo: "/static/images/ibots.png"
 menu:
 
   - title: Consulting
-    children:
-      - title: Description
-        url: /consulting.html
-      - title: Book a Session
-        url: /consulting.html#book-a-session
+    url: /consulting.html
 
   - title: Events
     children:
