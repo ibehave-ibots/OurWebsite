@@ -11,7 +11,7 @@ import aioshutil
 from aiopath import AsyncPath
 
 from .templates.jinja_renderer import JinjaRenderer
-from .data_directory import extract_global_data
+from .data_directory import extract_global_data, text_to_data
 
 
 @dataclass
@@ -124,20 +124,6 @@ def copy_static_files(config: Config, skip_if_exists: bool = False) -> Iterator[
 
 
 ####### UTILS #####################
-
-def text_to_data(text, format: Literal['md', 'yaml']) -> Any:
-    loaders = {
-        'md': lambda text: markdown2.Markdown().convert(text),
-        'yaml': lambda text: yaml.load(text, yaml.Loader),
-    }
-    try:
-        loader = loaders[format]
-    except KeyError:
-        raise NotImplementedError(f"{format} files not yet supported. Supported formats: {list(loaders.keys())}")
-    
-    data = loader(text)
-    return data
-    
 
 
 async def write_textfile(path, text) -> None:
