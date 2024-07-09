@@ -78,7 +78,25 @@ async def run_render_pipeline(config: Config):
     
     for renderfile_path in config.pages_dir.glob('[!_]*/_render.yaml'):
         big_r = await TemplateRendering.from_file(renderfile_path, renderer, data=global_data)
-        await copyfiles(file_destinations=big_r.static_files_map, basedir=renderfile_path.parent)
+
+        ### Copying page files
+        tasks = []
+
+        for src, target in big_r.static_files_map.items():
+            src_path = renderfile_path.parent.joinpath(src)
+            
+            if target.startswith('/'):
+                target = target[1:]
+            target_path = Path('./_output') / Path(target)
+            print(f'Copying File: {src_path} -> {target_path}')
+            # Add the file copy task with mkdir dependency to the tasks list
+            tasks.append(copy(src_path, target_path))
+
+        # Wait for all tasks to complete
+        await asyncio.gather(*tasks)
+
+        ####
+
         for page_render_data in big_r.page_instructions:
             page_data = {}
             for name, rel_path in page_render_data.page_data_files.items():
@@ -137,23 +155,6 @@ async def read_yaml(path: Path, renderer: JinjaRenderer = None,  **render_data):
     data = text_to_data(text_to_load, format='yaml')
     return data
 
-
-async def copyfiles(file_destinations: dict[str, str], basedir: Path) -> None:
-    basedir = Path(basedir)
-    tasks = []
-
-    for src, target in file_destinations.items():
-        src_path = basedir.joinpath(src)
-        
-        if target.startswith('/'):
-            target = target[1:]
-        target_path = Path('./_output') / Path(target)
-        print(f'Copying File: {src_path} -> {target_path}')
-        # Add the file copy task with mkdir dependency to the tasks list
-        tasks.append(copy(src_path, target_path))
-
-    # Wait for all tasks to complete
-    await asyncio.gather(*tasks)
 
 
 async def copy(src: Path, target: Path) -> None:
