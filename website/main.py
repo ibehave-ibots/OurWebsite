@@ -10,8 +10,9 @@ except ImportError:
 
 
 import asyncio
+from ssg.config import Config
 from ssg.server import build_server
-from ssg.renderer import run_render_pipeline, Config, copy_static_files
+from ssg.renderer import run_render_pipeline, copy_static_files
 
 
 

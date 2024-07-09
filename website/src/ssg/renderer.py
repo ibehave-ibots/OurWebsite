@@ -8,30 +8,9 @@ from typing import Any, Coroutine, Iterator
 import aioshutil
 from aiopath import AsyncPath
 
-from .templates.jinja_renderer import JinjaRenderer
+from .config import Config
 from .data_directory import extract_global_data, text_to_data
-
-
-@dataclass
-class Config:
-    static_path_map: dict[Path, Path]
-    pages_dir: Path = Path('./pages')
-    global_data_dir: Path = Path('./data')
-    site_data_dir: Path = Path('./site')
-    output_dir: Path = Path('./_output')
-
-    @classmethod
-    def from_path(cls, path: Path) -> Config:
-        assert Path(path).suffix == '.yaml'
-        text = Path(path).read_text()
-        data = text_to_data(text, format='yaml')
-        return Config(
-            static_path_map={Path(src): Path(target) for src, target in data.get('static', {}).items()},
-            pages_dir=Path(data['pages_dir']),
-            global_data_dir=Path(data['global_data_dir']),
-            site_data_dir=Path(data['site_data_dir']),
-            output_dir=Path(data['output_dir']),
-        )
+from .templates.jinja_renderer import JinjaRenderer
 
 
 @dataclass
@@ -77,8 +56,8 @@ async def run_render_pipeline(config: Config):
     for renderfile_path in config.pages_dir.glob('[!_]*/_render.yaml'):
         big_r = await TemplateRendering.from_file(renderfile_path, renderer, data=global_data)
 
-        for static_dir in renderfile_path.parent.glob('_static'):
-            await copy(static_dir, config.output_dir.joinpath('static'))
+        for static_dir in renderfile_path.parent.glob(config.page_static_dirname):
+            await copy(static_dir, config.output_static_dir)
 
         for page_render_data in big_r.page_instructions:
             page_data = {}
