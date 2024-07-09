@@ -55,20 +55,32 @@ class RenderInstructions:
                 data=page.get('data', {})
             )
             
+@dataclass            
+class TemplateRendering:
+    base_path: Path
+    static_files_map: dict[Path, Path]
+    page_instructions: list[RenderInstructions]
+
+    @classmethod
+    async def from_file(cls, renderfile_path: Path, renderer: JinjaRenderer, **render_data) -> TemplateRendering:
+        render_data = await read_yaml(renderfile_path, renderer=renderer, **render_data)
+        return TemplateRendering(
+            base_path=renderfile_path.parent,
+            static_files_map=render_data.get('files', {}),
+            page_instructions=list(RenderInstructions.from_renderdata(render_data)),
+        )
 
 
 async def run_render_pipeline(config: Config):
     global_data = extract_global_data(base_path=config.global_data_dir)
     renderer = JinjaRenderer.from_path(templates_dir=config.pages_dir)
-    site_data = {path.stem: await read_yaml(path, renderer, data=global_data) for path in config.site_data_dir.glob('*.yaml')}
+    site_data = await read_and_render_dir(base_dir=config.site_data_dir, renderer=renderer, data=global_data)
 
     
     for renderfile_path in config.pages_dir.glob('[!_]*/_render.yaml'):
-        render_data = await read_yaml(renderfile_path, renderer=renderer, data=global_data)
-        
-        await copyfiles(file_destinations=render_data.get('files', {}), basedir=renderfile_path.parent)
-        for page_render_data in RenderInstructions.from_renderdata(render_data=render_data):
-
+        big_r = await TemplateRendering.from_file(renderfile_path, renderer, data=global_data)
+        await copyfiles(file_destinations=big_r.static_files_map, basedir=renderfile_path.parent)
+        for page_render_data in big_r.page_instructions:
             page_data = {}
             for name, rel_path in page_render_data.page_data_files.items():
                 data_path = renderfile_path.parent.joinpath(rel_path)
@@ -86,6 +98,14 @@ async def run_render_pipeline(config: Config):
 
             url_path = Path('./_output').joinpath(page_render_data.url.lstrip('/'))
             await write_textfile(path=url_path, text=page_html)
+
+
+async def read_and_render_dir(base_dir: Path, renderer: JinjaRenderer, **render_data):
+    data = {}
+    async for path in AsyncPath(base_dir).glob('*.yaml'):
+        data[path.stem] = await read_yaml(path, renderer, **render_data)
+    return data
+
 
 
 async def read_and_render_page_data(path, renderer: JinjaRenderer, **render_data):
