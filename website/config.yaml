@@ -1,6 +1,6 @@
 static:
   themes/Silicon/assets: _output/assets
-  pages/_static: _output/static
+  site/_static: _output/static
 pages_dir: pages
 global_data_dir: data
 site_data_dir: site
