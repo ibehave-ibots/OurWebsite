@@ -143,19 +143,14 @@ def text_to_data(text, format: Literal['md', 'yaml']) -> Any:
 async def write_textfile(path, text) -> None:
     apath = AsyncPath(path)
     await apath.parent.mkdir(parents=True, exist_ok=True)
-    print(f"Writing: {path}")
     await apath.write_text(text)
 
 
 async def read_yaml(path: Path, renderer: JinjaRenderer = None,  **render_data):
     text = await AsyncPath(path).read_text()
-    if renderer is not None:
-        text_to_load = renderer.render_in_place(template_text=text, **render_data)
-    else:
-        text_to_load = text
+    text_to_load = renderer.render_in_place(template_text=text, **render_data) if renderer is not None else text
     data = yaml.load(text_to_load, yaml.Loader)
     return data
-
 
 
 async def copyfiles(file_destinations: dict[str, str], basedir: Path) -> None:
