@@ -3,5 +3,3 @@ pages:
   - url: /about.html
 data:
   data: data.yaml
-files:
-  service_distribution.png: /static/service_distribution.png

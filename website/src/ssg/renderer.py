@@ -57,7 +57,6 @@ class RenderInstructions:
 @dataclass            
 class TemplateRendering:
     base_path: Path
-    static_files_map: dict[Path, Path]
     page_instructions: list[RenderInstructions]
 
     @classmethod
@@ -65,7 +64,6 @@ class TemplateRendering:
         render_data = await read_yaml(renderfile_path, renderer=renderer, **render_data)
         return TemplateRendering(
             base_path=renderfile_path.parent,
-            static_files_map=render_data.get('files', {}),
             page_instructions=list(RenderInstructions.from_renderdata(render_data)),
         )
 
@@ -79,23 +77,8 @@ async def run_render_pipeline(config: Config):
     for renderfile_path in config.pages_dir.glob('[!_]*/_render.yaml'):
         big_r = await TemplateRendering.from_file(renderfile_path, renderer, data=global_data)
 
-        ### Copying page files
-        tasks = []
-
-        for src, target in big_r.static_files_map.items():
-            src_path = renderfile_path.parent.joinpath(src)
-            
-            if target.startswith('/'):
-                target = target[1:]
-            target_path = Path('./_output') / Path(target)
-            print(f'Copying File: {src_path} -> {target_path}')
-            # Add the file copy task with mkdir dependency to the tasks list
-            tasks.append(copy(src_path, target_path))
-
-        # Wait for all tasks to complete
-        await asyncio.gather(*tasks)
-
-        ####
+        for static_dir in renderfile_path.parent.glob('_static'):
+            await copy(static_dir, config.output_dir.joinpath('static'))
 
         for page_render_data in big_r.page_instructions:
             page_data = {}
