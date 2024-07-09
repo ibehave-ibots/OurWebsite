@@ -70,13 +70,11 @@ async def run_render_pipeline(config: Config):
         for page_render_data in RenderInstructions.from_renderdata(render_data=render_data):
 
             page_data = {}
-            for name, path in page_render_data.page_data_files.items():
-                text = await AsyncPath(renderfile_path).parent.joinpath(path).read_text()
-                rendered_text = renderer.render_in_place(text, data=global_data)
-                data = text_to_data(rendered_text, format=path.suffix.lstrip('.'))
+            for name, rel_path in page_render_data.page_data_files.items():
+                data_path = renderfile_path.parent.joinpath(rel_path)
+                data = await read_and_render_page_data(data_path, renderer, data=global_data)
                 page_data[name] = data
 
-            
             page_html = renderer.render_named_template(
                 template_path=renderfile_path.parent.joinpath(page_render_data.template),
                 **dict(
@@ -88,6 +86,13 @@ async def run_render_pipeline(config: Config):
 
             url_path = Path('./_output').joinpath(page_render_data.url.lstrip('/'))
             await write_textfile(path=url_path, text=page_html)
+
+
+async def read_and_render_page_data(path, renderer: JinjaRenderer, **render_data):
+    text = await AsyncPath(path).read_text()
+    rendered_text = renderer.render_in_place(text, **render_data)
+    data = text_to_data(rendered_text, format=path.suffix.lstrip('.'))
+    return data
             
 
 
