@@ -1,12 +1,10 @@
 from __future__ import annotations
 
 import asyncio
-from dataclasses import dataclass, field
-from pathlib import Path, PurePosixPath
-from typing import Any, Coroutine, Generator, Iterator, Literal
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Coroutine, Iterator
 
-import markdown2
-import yaml
 import aioshutil
 from aiopath import AsyncPath
 
@@ -25,7 +23,8 @@ class Config:
     @classmethod
     def from_path(cls, path: Path) -> Config:
         assert Path(path).suffix == '.yaml'
-        data = yaml.load(Path(path).read_text(), Loader=yaml.Loader)
+        text = Path(path).read_text()
+        data = text_to_data(text, format='yaml')
         return Config(
             static_path_map={Path(src): Path(target) for src, target in data.get('static', {}).items()},
             pages_dir=Path(data['pages_dir']),
@@ -135,7 +134,7 @@ async def write_textfile(path, text) -> None:
 async def read_yaml(path: Path, renderer: JinjaRenderer = None,  **render_data):
     text = await AsyncPath(path).read_text()
     text_to_load = renderer.render_in_place(template_text=text, **render_data) if renderer is not None else text
-    data = yaml.load(text_to_load, yaml.Loader)
+    data = text_to_data(text_to_load, format='yaml')
     return data
 
 
