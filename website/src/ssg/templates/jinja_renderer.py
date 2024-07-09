@@ -58,7 +58,9 @@ class JinjaRenderer(NamedTuple):
     
     def render_named_template(self, template_path: Path, **data) -> str:
         template_name = str(PurePosixPath(template_path.relative_to(self.templates_dir)))
-        rendered = self.env.get_template(template_name).render(**data)
+        TEMPLATE_DIR = template_path.parent.relative_to(self.templates_dir)
+        render_data = data | {'TEMPLATE_DIR': str(PurePosixPath(TEMPLATE_DIR))}
+        rendered = self.env.get_template(template_name).render(**render_data)
         return rendered
 
 

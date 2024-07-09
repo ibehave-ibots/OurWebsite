@@ -1,112 +1,164 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-import functools
+import asyncio
+from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
-import shutil
-from typing import Any
+from typing import Any, Coroutine, Generator, Iterator, Literal
 
 import markdown2
 import yaml
+import aioshutil
+from aiopath import AsyncPath
 
 from .templates.jinja_renderer import JinjaRenderer
 from .data_directory import extract_global_data
 
-class Pipeline:
-    renderer = JinjaRenderer.from_path(templates_dir='./pages')
 
-    def __init__(self):
-        ...
+@dataclass
+class Config:
+    static_path_map: dict[Path, Path]
+    pages_dir: Path = Path('./pages')
+    global_data_dir: Path = Path('./data')
+    site_data_dir: Path = Path('./site')
+    output_dir: Path = Path('./_output')
 
-    def get_global_data(self):
-        return extract_global_data(base_path='./data')
-    
-    def render_site_data(self):
-        site_data = {}
-        global_data = self.get_global_data()
-        for path in Path('./pages/_data').glob('*.yaml'):
-            yaml_text = self.renderer.render_in_place(template_text=path.read_text(), data=global_data)
-            site_data[path.stem] = yaml.load(yaml_text, Loader=yaml.Loader)
-        return site_data
-
-    def render_all_pages(self):
-        for renderfile_path in Path('./pages').glob('[!_]*/_render.yaml'):
-            self.render_page_subdir(renderfile_path)
-
-    def render_page_subdir(self, renderfile_path):
-        self.renderer.vars['TEMPLATE_DIR'] = str(PurePosixPath(renderfile_path.parent.relative_to(Path('./pages'))))   # used for finding jinja macros and blocks that are relative to the page template
-            
-        global_data = self.get_global_data()
-        render_data = yaml.load(self.renderer.render_in_place(template_text=renderfile_path.read_text(), data=global_data), yaml.Loader)
-        page_path = renderfile_path.parent
-                
-        _copy_files(file_destinations=render_data.get('files', {}), basedir=page_path)
-
-        for page in render_data.get('pages', []):
-            self.render_page(global_data, render_data, page_path, page)
-
-    def render_page(self, global_data, render_data, page_path, page):
-        url: str = page['url']
-        assert url.startswith('/'), f"Page URLS must be absolute paths.  Try {'/' + url}"
-
-        data_fnames: dict[str, str] = render_data.get('data', {})
-        page_data = page
-        if data_fnames:
-            data_dir = page_path.joinpath(page['folder']) if 'folder' in page else page_path
-            page_data |= _read_page_data(data_dir=data_dir, data_fnames=data_fnames, renderer=self.renderer, **global_data)
-
-        site_data = self.render_site_data()
-        page_html = self.renderer.render_named_template(
-            template_path=page_path.joinpath(render_data['template']), 
-            data=global_data, 
-            page=page_data,
-            site=site_data,
+    @classmethod
+    def from_path(cls, path: Path) -> Config:
+        assert Path(path).suffix == '.yaml'
+        data = yaml.load(Path(path).read_text(), Loader=yaml.Loader)
+        return Config(
+            static_path_map={Path(src): Path(target) for src, target in data.get('static', {}).items()},
+            pages_dir=Path(data['pages_dir']),
+            global_data_dir=Path(data['global_data_dir']),
+            site_data_dir=Path(data['site_data_dir']),
+            output_dir=Path(data['output_dir']),
         )
 
-                # Write the html file
-        url = url[1:] if url.startswith('/') else url
-        url_path = Path('./_output').joinpath(url)
-        url_path.parent.mkdir(parents=True, exist_ok=True)
-        print(f"Writing: {url_path}")
-        url_path.write_text(page_html)
 
-
-def copy_static(src, target):
-    shutil.copytree(src, target, dirs_exist_ok=True)
+@dataclass
+class RenderInstructions:
+    template: Path
+    page_data_files: dict[str, Path]
+    url: str
+    data: dict[str, Any]
     
-def run_render_pipeline():
-    pipeline = Pipeline()
-    pipeline.render_all_pages()
+    @classmethod
+    def from_renderdata(cls, render_data) -> Iterator[RenderInstructions]:
+        data_filenames = render_data.get('data', {})
+        for page in render_data.get('pages', []):
+            folder = page.get('folder', '')
+            data_paths = {name: Path(folder).joinpath(fname) for name, fname in data_filenames.items()}
+            yield RenderInstructions(
+                template=render_data['template'],
+                page_data_files=data_paths,
+                url=page['url'],
+                data=page.get('data', {})
+            )
+            
 
 
+async def run_render_pipeline(config: Config):
+    global_data = extract_global_data(base_path=config.global_data_dir)
+    renderer = JinjaRenderer.from_path(templates_dir=config.pages_dir)
+    site_data = {path.stem: await read_yaml(path, renderer, data=global_data) for path in config.site_data_dir.glob('*.yaml')}
 
-def _copy_files(file_destinations: dict[str, str], basedir: Path) -> None:
+    
+    for renderfile_path in config.pages_dir.glob('[!_]*/_render.yaml'):
+        render_data = await read_yaml(renderfile_path, renderer=renderer, data=global_data)
+        
+        await copyfiles(file_destinations=render_data.get('files', {}), basedir=renderfile_path.parent)
+        for page_render_data in RenderInstructions.from_renderdata(render_data=render_data):
+
+            page_data = {}
+            for name, path in page_render_data.page_data_files.items():
+                text = await AsyncPath(renderfile_path).parent.joinpath(path).read_text()
+                rendered_text = renderer.render_in_place(text, data=global_data)
+                data = text_to_data(rendered_text, format=path.suffix.lstrip('.'))
+                page_data[name] = data
+
+            
+            page_html = renderer.render_named_template(
+                template_path=renderfile_path.parent.joinpath(page_render_data.template),
+                **dict(
+                    data=global_data,
+                    site=site_data,
+                    page=page_data | page_render_data.data | {'url': page_render_data.url}
+                )
+            )
+
+            url_path = Path('./_output').joinpath(page_render_data.url.lstrip('/'))
+            await write_textfile(path=url_path, text=page_html)
+            
+
+
+def copy_static_files(config: Config, skip_if_exists: bool = False) -> Iterator[Coroutine]:
+    for src, target in config.static_path_map.items():
+        if skip_if_exists and target.exists():
+            continue
+        yield copytree(src, target)
+
+
+####### UTILS #####################
+
+def text_to_data(text, format: Literal['md', 'yaml']) -> Any:
+    loaders = {
+        'md': lambda text: markdown2.Markdown().convert(text),
+        'yaml': lambda text: yaml.load(text, yaml.Loader),
+    }
+    try:
+        loader = loaders[format]
+    except KeyError:
+        raise NotImplementedError(f"{format} files not yet supported. Supported formats: {list(loaders.keys())}")
+    
+    data = loader(text)
+    return data
+    
+
+
+async def write_textfile(path, text) -> None:
+    apath = AsyncPath(path)
+    await apath.parent.mkdir(parents=True, exist_ok=True)
+    print(f"Writing: {path}")
+    await apath.write_text(text)
+
+
+async def read_yaml(path: Path, renderer: JinjaRenderer = None,  **render_data):
+    text = await AsyncPath(path).read_text()
+    if renderer is not None:
+        text_to_load = renderer.render_in_place(template_text=text, **render_data)
+    else:
+        text_to_load = text
+    data = yaml.load(text_to_load, yaml.Loader)
+    return data
+
+
+async def copyfile(src_path: Path, target_path: Path):
+    src_path = AsyncPath(src_path)
+    if not await src_path.exists():
+            raise FileNotFoundError(f"Could not find file {src_path}.")
+    await AsyncPath(target_path).parent.mkdir(parents=True, exist_ok=True)
+    await aioshutil.copy2(src=src_path, dst=target_path)
+
+
+async def copyfiles(file_destinations: dict[str, str], basedir: Path) -> None:
     basedir = Path(basedir)
+    tasks = []
+
     for src, target in file_destinations.items():
         src_path = basedir.joinpath(src)
-        if not src_path.exists():
-            raise FileNotFoundError(f"Could not find file {src_path}.")
+        
         if target.startswith('/'):
             target = target[1:]
         target_path = Path('./_output') / Path(target)
         print(f'Copying File: {src_path} -> {target_path}')
-        target_path.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(src=src_path, dst=target_path)
+        # Add the file copy task with mkdir dependency to the tasks list
+        tasks.append(copyfile(src_path, target_path))
+
+    # Wait for all tasks to complete
+    await asyncio.gather(*tasks)
 
 
-def _read_page_data(data_dir, data_fnames: dict[str, str], renderer, **render_data) -> dict[str, Any]:
-    page_data: dict[str, Any] = {}
-    for key, fname in data_fnames.items():
-        path = data_dir.joinpath(fname)
-        if not path.exists():
-            raise FileNotFoundError(path)
-        if Path(fname).suffix == '.yaml':
-            page_data[key] = yaml.load(renderer.render_in_place(template_text=path.read_text(), data=render_data), yaml.Loader)
-        elif Path(fname).suffix == '.md':
-            page_data[key] = markdown2.Markdown().convert(path.read_text())
-        else:
-            raise NotImplementedError(f"{path.suffix} extension not yet supported.  Try '.yaml' or '.md' .")
-    return page_data
-
-
+async def copytree(src, target) -> None:
+        await aioshutil.copytree(src, target, dirs_exist_ok=True)
+        print(f"Copied {src}")
         

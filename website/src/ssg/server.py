@@ -1,10 +1,7 @@
 
-from pathlib import Path, PurePosixPath
 from flask import Flask, redirect, send_from_directory
 from livereload import Server
-import yaml
 
-from .renderer import run_render_pipeline, copy_static
 from .vendor_patches import patch_livereload_to_fix_bug_around_wsgi_support
 
 
@@ -27,15 +24,4 @@ def build_server() -> Server:
 
     patch_livereload_to_fix_bug_around_wsgi_support()
     server = Server(app=app.wsgi_app)
-
-    config = yaml.load(Path('config.yaml').read_text(), yaml.Loader)
-    for src, target in config.get('static', {}).items():
-        fun = lambda: copy_static(src, target)
-        print(src)
-        fun()
-        server.watch(str(PurePosixPath(src).joinpath('**/*')), func=fun)
-    
-    run_render_pipeline()
-    server.watch("pages/**/*", func=run_render_pipeline)
-    server.watch("data/**/*", func=run_render_pipeline)
-    server.serve()
+    return server
