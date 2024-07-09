@@ -120,7 +120,7 @@ def copy_static_files(config: Config, skip_if_exists: bool = False) -> Iterator[
     for src, target in config.static_path_map.items():
         if skip_if_exists and target.exists():
             continue
-        yield copytree(src, target)
+        yield copy(src, target)
 
 
 ####### UTILS #####################
@@ -157,13 +157,6 @@ async def read_yaml(path: Path, renderer: JinjaRenderer = None,  **render_data):
     return data
 
 
-async def copyfile(src_path: Path, target_path: Path):
-    src_path = AsyncPath(src_path)
-    if not await src_path.exists():
-            raise FileNotFoundError(f"Could not find file {src_path}.")
-    await AsyncPath(target_path).parent.mkdir(parents=True, exist_ok=True)
-    await aioshutil.copy2(src=src_path, dst=target_path)
-
 
 async def copyfiles(file_destinations: dict[str, str], basedir: Path) -> None:
     basedir = Path(basedir)
@@ -177,13 +170,20 @@ async def copyfiles(file_destinations: dict[str, str], basedir: Path) -> None:
         target_path = Path('./_output') / Path(target)
         print(f'Copying File: {src_path} -> {target_path}')
         # Add the file copy task with mkdir dependency to the tasks list
-        tasks.append(copyfile(src_path, target_path))
+        tasks.append(copy(src_path, target_path))
 
     # Wait for all tasks to complete
     await asyncio.gather(*tasks)
 
 
-async def copytree(src, target) -> None:
+async def copy(src: Path, target: Path) -> None:
+    print(f"Copying: {src}")
+    if Path(src).is_dir():
         await aioshutil.copytree(src, target, dirs_exist_ok=True)
-        print(f"Copied {src}")
+        return
+    
+    await AsyncPath(target).parent.mkdir(parents=True, exist_ok=True)
+    await aioshutil.copy2(src=src, dst=target)
+
+
         
