@@ -7,7 +7,7 @@ from pathlib import Path, PurePosixPath
 from aiopath import AsyncPath
 import jinja2
 
-from .utils import copy
+from .utils import copy, write_textfile
 from .data_directory import extract_global_data, text_to_data
 from .templates.jinja_renderer import build_jinja_environment
 
@@ -35,7 +35,7 @@ async def run_render_pipeline():
 
         subpages_data = defaultdict(dict)
         async for subpage_path in page_path.parent.glob('[!_]*/[!_]*.md'):
-            subpage_data = await read_and_render_page_data(subpage_path, data=global_data, site=site_data)
+            subpage_data = await read_and_render_page_data('./pages', subpage_path, data=global_data, site=site_data)
             subpages_data[subpage_data['type']][subpage_data['id']] = subpage_data
         subpages_data = dict(subpages_data)
         
@@ -43,7 +43,7 @@ async def run_render_pipeline():
         # Render HTML Template
         env = build_jinja_environment(['./site/templates', page_path.parent])
         template = env.get_template('template.html')
-        page_data = await read_and_render_page_data(page_path, data=global_data, site=site_data)
+        page_data = await read_and_render_page_data('./pages', page_path, data=global_data, site=site_data)
         page_html = await template.render_async(
             data=global_data, 
             site=site_data, 
@@ -56,21 +56,15 @@ async def run_render_pipeline():
 
 
 
-def build_page_metadata(page_path):
-    url_path = page_path.relative_to('./pages').with_suffix('.html')
+def url_from_path(basedir, page_path):
+    url_path = page_path.relative_to(basedir).with_suffix('.html')
     if url_path.name == 'index.html':
         url_path = url_path.parent.with_suffix('.html')
-            
-    extra_page_metadata = {
-            'url': str(PurePosixPath(url_path)),
-            'id': url_path.stem,
-            'type': url_path.parent.name,
-        }
-    
-    return extra_page_metadata
+    url = str(PurePosixPath(url_path))
+    return url
 
 
-async def read_and_render_page_data(page_path, **render_data):
+async def read_and_render_page_data(basedir, page_path, **render_data):
     page_text = (await page_path.read_text()).strip()
     env = build_jinja_environment()
     if page_text.startswith('---'):
@@ -84,7 +78,9 @@ async def read_and_render_page_data(page_path, **render_data):
 
     md_html = text_to_data(md_text, 'md')                
     page_data = {'data': yaml_data, 'content': md_html}
-    page_data |= build_page_metadata(page_path)
+    page_data['url'] = url_from_path(basedir, page_path)
+    page_data['id'] = page_path.stem
+    page_data['type'] = page_path.parent.name
     return page_data
 
 
@@ -102,14 +98,6 @@ async def read_and_render_yaml_dir(base_dir: str | Path, env: jinja2.Environment
             
 
 
-
-####### UTILS #####################
-
-
-async def write_textfile(path, text) -> None:
-    apath = AsyncPath(path)
-    await apath.parent.mkdir(parents=True, exist_ok=True)
-    await apath.write_text(text)
 
 
 

@@ -19,3 +19,9 @@ async def copy(src: Path, target: Path, skip_if_exists: bool = True) -> None:
 
     await AsyncPath(target).parent.mkdir(parents=True, exist_ok=True)
     await aioshutil.copy2(src=src, dst=target)
+
+
+async def write_textfile(path, text) -> None:
+    apath = AsyncPath(path)
+    await apath.parent.mkdir(parents=True, exist_ok=True)
+    await apath.write_text(text)
