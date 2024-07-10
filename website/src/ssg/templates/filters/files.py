@@ -65,7 +65,3 @@ def copy_to(src: str, folder: str, fname: str = None) -> str:
 
     return str(PurePosixPath(save_path))
 
-
-
-def build_asset_pipeline()
-def assetize(src: str) -> str:
