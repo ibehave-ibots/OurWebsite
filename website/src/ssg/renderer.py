@@ -56,10 +56,10 @@ async def run_render_pipeline():
 
 
 
-def url_from_path(basedir, page_path):
+def url_from_path(basedir, page_path: Path):
     url_path = page_path.relative_to(basedir).with_suffix('.html')
-    if url_path.name == 'index.html':
-        url_path = url_path.parent.with_suffix('.html')
+    if Path(page_path).with_suffix('').is_dir():
+        url_path = url_path.with_suffix('').joinpath('index.html')
     url = str(PurePosixPath(url_path))
     return url
 
