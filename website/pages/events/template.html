@@ -1,4 +1,4 @@
-{% from "macros/course_card.html" import course_card %}
+{% from "_macros/course_card.html" import course_card %}
 {% extends "base.html" %}
 
 {% block title %}  Events {% endblock %}
@@ -27,14 +27,14 @@
         {% if event.start_date >= today and ('all' in page.data.event_types or event_type in page.data.event_types) %}
           {{ course_card(
             title = event.title, 
-            registration_url = "/events/" + event_type.replace('_', '-') + "/" + event_id + '.html', 
+            registration_url = "/events/" + event_type + "/" + event_id + '.html', 
             instructor = data.people[event.instructors[0].id].name,
             start_date = event.start_date, 
             duration = event.hours, 
             registration_open = True, 
             img_src="https://placehold.co/600x400",
             series_name = event_type.replace('_', ' ').title(),
-            series_url="/events/" + event_type.replace('_', '-') + "/index.html"
+            series_url="/events/" + event_type + "/index.html"
             )
           }}
         {% endif %}
@@ -55,7 +55,7 @@
         {% if event.start_date < today and ('all' in page.data.event_types or event_type in page.data.event_types) %}
           {{ course_card(
             title = event.title, 
-            registration_url = "/events/" + event_type.replace('_', '-') + "/" + event_id + '.html', 
+            registration_url = "/events/" + event_type + "/" + event_id + '.html', 
             instructor = data.people[event.instructors[0].id].name,
             start_date = event.start_date, 
             duration = event.hours, 

@@ -1,0 +1,17 @@
+title: Optogenetics
+hours: 1
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in dolor commodo, eleifend orci quis, gravida nisi. Aenean erat dolor, finibus non augue a, maximus posuere urna. Cras augue eros, finibus et tempus eget, faucibus ut lorem. Nullam molestie risus in sapien venenatis, non tincidunt neque malesuada. In ex metus, maximus ut orci ac, lobortis tincidunt nibh. Maecenas quis urna egestas eros vehicula maximus. Morbi ullamcorper massa ut enim scelerisque blandit. Nunc libero ligula, porttitor a ultrices et, imperdiet a diam. Vivamus varius semper placerat. Sed sagittis id augue sed rhoncus.
+prerequisites: Anyone who wants to learn coding.
+sessions:
+  - date: 2024-08-28
+    start_time: 09h30
+    end_time: 13h30
+    location: DZNE
+instructors:
+  - id: sangeetha
+    role: Organizer
+registration_link: codeexplorers.register.com
+format: online
+preparation_instructions: ''
+github_repo: ''
+certificate_criteria: ''

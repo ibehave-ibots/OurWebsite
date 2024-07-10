@@ -28,7 +28,7 @@ async def run_render_pipeline():
     site_data = await read_and_render_yaml_dir(base_dir='./site/data', env=env, data=global_data)
     
     # Walk through each 'pages' directory and render the pages found inside
-    async for page_path in AsyncPath('./pages').glob('[!_]*/[!_]*.md'):
+    async for page_path in AsyncPath('./pages').glob('[!_]*/**/[!_]*.md'):
         page_text = (await page_path.read_text()).strip()
 
         print(f'Rendering: {page_path}')
@@ -54,11 +54,15 @@ async def run_render_pipeline():
         if url_path.name == 'index.html':
             url_path = url_path.parent.with_suffix('.html')
             
+        extra_page_metadata = {
+            'url': str(PurePosixPath(url_path)),
+            'id': url_path.stem,
+            'type': url_path.parent.name,
+        }            
         page_html = await template.render_async(
             data=global_data, 
             site=site_data, 
-            page=page_data,
-            url=str(PurePosixPath(url_path))
+            page=page_data | extra_page_metadata,
         )
 
         output_path = Path('./_output').joinpath(url_path)

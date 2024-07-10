@@ -1,0 +1,17 @@
+title: Bonn Brain Conference 2024
+hours: 1
+summary: BonnBrain³ stands at the forefront of cutting-edge scientific inquiry, uniting experts from diverse fields in a premier international conference focused on unraveling the complexities of states, behavior, neural circuits, and codes. This interdisciplinary scientific gathering prioritizes the presentation of groundbreaking and unpublished research, fostering insightful discussions after each talk and nurturing informal interactions among scientists at all career stages.
+prerequisites: Anyone who wants to learn coding.
+sessions:
+  - date: 2024-07-23
+    start_time: 09h30
+    end_time: 15h30
+    location: Uni Bonn
+instructors:
+  - id: sangeetha
+    role: Organizer
+registration_link: https://bonnbrain.de/
+format: conference
+preparation_instructions: ''
+github_repo: ''
+certificate_criteria: ''
