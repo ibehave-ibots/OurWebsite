@@ -1,6 +1,0 @@
-template: contacts.html
-pages: 
-  - url: /contacts.html
-data:
-  data: data.yaml
-  content: content.md

@@ -1,0 +1,33 @@
+{% from TEMPLATE_DIR + '/macros/partner_card.html' import partner_card %}
+
+
+{% extends "base.html" %}
+
+{% block title %} Partners {% endblock %}
+
+{% block body %}
+<article>
+    <h1> Partners </h1>
+    <div class="row">
+        {% for partner in page.data.partners %}
+        <div class="col-12 col-md-6 col-lg-4 d-flex">
+            <article>
+                {{ partner_card(
+                    title=partner.name, 
+                    summary=partner.description, 
+                    image='assets/img/blog/0' + str(loop.index) + '.jpg', 
+                    date_added='232', 
+                    categories=[],
+                    institute=partner.institute,
+                    website=partner.website,
+                    email=partner.email
+                    )
+                }}
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+</article>
+
+
+{% endblock %}

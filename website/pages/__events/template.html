@@ -1,0 +1,76 @@
+{% from TEMPLATE_DIR + '/_macros/course_card.html' import course_card %}
+{% extends "base.html" %}
+
+{% block title %}  Events {% endblock %}
+
+{% block body %}
+
+<article>
+  <h1>{{ page.data.title }} </h1>
+  
+  <section>
+    {{ page.content | safe }}
+  </section>
+  
+  
+  <section id="upcoming-events">
+    
+    <h1>Upcoming Events</h1>  
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-3 gx-md-4 mt-n2 mt-sm-0">
+      {% for (event_type, event_id), event in 
+        data.events 
+        | flatten_nested 
+        | promote_key('start_date', ['sessions', 0, 'date']) 
+        | items
+        | sort_by([1, 'start_date'])
+      %}
+        {% if event.start_date >= today and ('all' in page.data.event_types or event_type in page.data.event_types) %}
+          {{ course_card(
+            title = event.title, 
+            registration_url = "/events/" + event_type.replace('_', '-') + "/" + event_id + '.html', 
+            instructor = data.people[event.instructors[0].id].name,
+            start_date = event.start_date, 
+            duration = event.hours, 
+            registration_open = True, 
+            img_src="https://placehold.co/600x400",
+            series_name = event_type.replace('_', ' ').title(),
+            series_url="/events/" + event_type.replace('_', '-') + "/index.html"
+            )
+          }}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  
+  <section id="past-events">
+    <h1>Past Events</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-3 gx-md-4 mt-n2 mt-sm-0">
+      {% for (event_type, event_id), event in 
+        data.events 
+        | flatten_nested 
+        | promote_key('start_date', ['sessions', 0, 'date']) 
+        | items 
+        | sort_by([1, 'start_date'], reverse=True)
+      %}
+        {% if event.start_date < today and ('all' in page.data.event_types or event_type in page.data.event_types) %}
+          {{ course_card(
+            title = event.title, 
+            registration_url = "/events/" + event_type.replace('_', '-') + "/" + event_id + '.html', 
+            instructor = data.people[event.instructors[0].id].name,
+            start_date = event.start_date, 
+            duration = event.hours, 
+            registration_open = False, 
+            img_src="https://placehold.co/600x400",
+            series_name = event_type.replace('_', ' ').title(),
+            series_url="/events/" + event_type + "/index.html"
+            ) 
+          }}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  
+  
+  
+</article>
+{% endblock %}

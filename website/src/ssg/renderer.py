@@ -10,46 +10,14 @@ from aiopath import AsyncPath
 
 from .config import Config
 from .data_directory import extract_global_data, text_to_data
-from .templates.jinja_renderer import JinjaRenderer
+from .templates.jinja_renderer import build_jinja_environment
 
 
-@dataclass
-class RenderInstructions:
-    template: Path
-    page_data_files: dict[str, Path]
-    url: str
-    data: dict[str, Any]
-    
-    @classmethod
-    def from_renderdata(cls, render_data) -> Iterator[RenderInstructions]:
-        data_filenames = render_data.get('data', {})
-        for page in render_data.get('pages', []):
-            folder = page.get('folder', '')
-            data_paths = {name: Path(folder).joinpath(fname) for name, fname in data_filenames.items()}
-            yield RenderInstructions(
-                template=render_data['template'],
-                page_data_files=data_paths,
-                url=page['url'],
-                data=page.get('data', {})
-            )
-            
-@dataclass            
-class TemplateRendering:
-    base_path: Path
-    page_instructions: list[RenderInstructions]
-
-    @classmethod
-    async def from_file(cls, renderfile_path: Path, renderer: JinjaRenderer, **render_data) -> TemplateRendering:
-        render_data = await read_yaml(renderfile_path, renderer=renderer, **render_data)
-        return TemplateRendering(
-            base_path=renderfile_path.parent,
-            page_instructions=list(RenderInstructions.from_renderdata(render_data)),
-        )
 
 
 async def run_render_pipeline(config: Config):
     global_data = extract_global_data(base_path=config.global_data_dir)
-    renderer = JinjaRenderer.from_path(templates_dir=config.pages_dir)
+    renderer = JinjaRenderer.from_path(templates_dir=['site/templates'])
     site_data = await read_and_render_dir(base_dir=config.site_data_dir, renderer=renderer, data=global_data)
 
     

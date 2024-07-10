@@ -1,5 +1,0 @@
-template: about_rse.html
-pages:
-  - url: /about.html
-data:
-  data: data.yaml

@@ -1,0 +1,84 @@
+{% from TEMPLATE_DIR + "/macros/hero.html" import hero %}
+{% from TEMPLATE_DIR + "/macros/about_section.html" import about_section %}
+{% from TEMPLATE_DIR + "/macros/icon_squares.html" import icon_squares %}
+{% from TEMPLATE_DIR + "/macros/project_sections.html" import project_sections %}
+{% from TEMPLATE_DIR + "/macros/slider_cards.html" import slider_cards %}
+{% from TEMPLATE_DIR + "/macros/slider_cards2.html" import slider_cards2 %}
+{% from TEMPLATE_DIR + "/macros/slider_cards3.html" import slider_cards3 %}
+{% from TEMPLATE_DIR + "/macros/slider_icons.html" import slider_icons %}
+{% from TEMPLATE_DIR + "/macros/slider_section.html" import slider_section %}
+
+{% extends "base.html" %}
+
+
+
+{% block body %}
+
+
+
+<!-- Hero + animations -->
+{{ hero() }}
+
+
+<!-- About -->
+{{ about_section() }}
+
+
+
+<!-- Solutions -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  <h2 class="h1 mb-lg-5 mb-4 pb-lg-0 pb-md-2 text-center">Custom Software Solutions</h2>
+  {{ icon_squares() }}  
+</section>
+
+
+<!-- Industries (Slider) -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  {{ slider_section() }}
+</section>
+
+
+<!-- Technologies -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  {{ slider_icons() }}
+  
+</section>
+
+
+<!-- Projects -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  <h2 class="h1 mb-lg-5 mb-4 pb-lg-0 pb-md-2 text-center">Explore Our Featured Projects</h2>
+  {{ project_sections() }}
+</section>
+
+
+<!-- Benefits -->
+<section class="container mb-lg-5 mb-4 pb-3">
+  <h2 class="h1 mb-lg-5 mb-4 pb-lg-0 pb-md-2 text-center">Our benefits</h2>
+  {{ slider_cards() }}
+  
+</section>
+
+
+<!-- Brands (carousel on screens < 1100px) -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  {{ slider_cards2() }}  
+</section>
+
+
+<!-- Blog -->
+<section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+  {{ slider_cards3() }}
+</section>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="assets/vendor/rellax/rellax.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<!-- Main Theme Script -->
+<script src="assets/js/theme.min.js"></script>
+{% endblock %}
