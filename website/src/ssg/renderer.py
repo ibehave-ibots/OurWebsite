@@ -34,6 +34,7 @@ async def run_render_pipeline():
         page_text = (await page_path.read_text()).strip()
 
         print(f'Rendering: {page_path}')
+        env = build_jinja_environment()
         if page_text.startswith('---'):
             _, templated_yaml_text, md_text = page_text.split('---')
             template = env.from_string(templated_yaml_text)

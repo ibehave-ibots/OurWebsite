@@ -1,3 +1,9 @@
+---
+title: Events
+event_types:
+  - all
+
+---
 
 ## Subscribe for Announcements
 
