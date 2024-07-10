@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import asyncio
 from dataclasses import dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Coroutine, Iterator
 
 import aioshutil
@@ -18,21 +18,36 @@ async def run_render_pipeline():
     
     # Copy Static Files
     await asyncio.gather(
-        copy('site/static', '_output/static'),
-        copy('theme/assets', '_output/assets'),
+        copy('./site/static', './_output/static'),
+        copy('./theme/assets', './_output/assets'),
     )
 
     # Read Shared Data (no templating allowed)
-    global_data = extract_global_data(base_path='data')
+    global_data = extract_global_data(base_path='./data')
     
     # Read site-wide data
     env = build_jinja_environment()
-    site_data = await read_and_render_yaml_dir(base_dir='site/data', env=env, data=global_data)
-    breakpoint()
+    site_data = await read_and_render_yaml_dir(base_dir='./site/data', env=env, data=global_data)
     
-    
+    # Walk through each 'pages' directory and render the pages found inside
+    async for page_dir in AsyncPath('./pages').glob('[!_]*'):
+        print(page_dir)
+
+        env = build_jinja_environment(['./site/templates', page_dir])
+        template = env.get_template('template.html')
+        url_path = page_dir.relative_to('./pages').with_suffix('.html')
+        page_html = await template.render_async(
+            data=global_data, 
+            site=site_data, 
+            url=str(PurePosixPath(url_path))
+        )
+
+        output_path = Path('./_output').joinpath(url_path)
+        await write_textfile(path=output_path, text=page_html)
+
+
+
     # for renderfile_path in config.pages_dir.glob('[!_]*/_render.yaml'):
-    #     big_r = await TemplateRendering.from_file(renderfile_path, renderer, data=global_data)
 
     #     for static_dir in renderfile_path.parent.glob(config.page_static_dirname):
     #         await copy(static_dir, config.output_static_dir)
@@ -53,7 +68,6 @@ async def run_render_pipeline():
     #             )
     #         )
 
-    #         url_path = Path('./_output').joinpath(page_render_data.url.lstrip('/'))
     #         await write_textfile(path=url_path, text=page_html)
 
 
@@ -90,10 +104,14 @@ async def write_textfile(path, text) -> None:
 
 
 async def copy(src: Path, target: Path, skip_if_exists: bool = True) -> None:
-    print(f"Copying: {src}")
+    
     if skip_if_exists and Path(target).exists():
+        print(f'Skipping Copying: {src}')
         return
+    
+    print(f"Copying: {src}")
     if Path(src).is_dir():
+
         await aioshutil.copytree(src, target, dirs_exist_ok=True)
         return
     

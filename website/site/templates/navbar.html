@@ -21,7 +21,7 @@
         {% for header in site.navbar.menu %}
         {% if 'children' not in header or not header.children %}
           <li class="nav-item ">
-              <a class="nav-link {% if page.url == header.url %}active{% endif %}" aria-current="page" href="{{ header.url }}">{{ header.title }}</a>
+              <a class="nav-link {% if url == header.url %}active{% endif %}" aria-current="page" href="{{ header.url }}">{{ header.title }}</a>
           </li>
         {% else %}
           <li class="nav-item dropdown">  
