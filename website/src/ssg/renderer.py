@@ -66,7 +66,7 @@ async def run_render_pipeline(config: Config):
                 data = await read_and_render_page_data(data_path, renderer, data=global_data)
                 page_data[name] = data
 
-            page_html = renderer.render_named_template(
+            page_html = await renderer.render_named_template(
                 template_path=renderfile_path.parent.joinpath(page_render_data.template),
                 **dict(
                     data=global_data,
@@ -89,7 +89,7 @@ async def read_and_render_dir(base_dir: Path, renderer: JinjaRenderer, **render_
 
 async def read_and_render_page_data(path, renderer: JinjaRenderer, **render_data):
     text = await AsyncPath(path).read_text()
-    rendered_text = renderer.render_in_place(text, **render_data)
+    rendered_text = await renderer.render_in_place(text, **render_data)
     data = text_to_data(rendered_text, format=path.suffix.lstrip('.'))
     return data
             
@@ -113,7 +113,7 @@ async def write_textfile(path, text) -> None:
 
 async def read_yaml(path: Path, renderer: JinjaRenderer = None,  **render_data):
     text = await AsyncPath(path).read_text()
-    text_to_load = renderer.render_in_place(template_text=text, **render_data) if renderer is not None else text
+    text_to_load = await renderer.render_in_place(template_text=text, **render_data) if renderer is not None else text
     data = text_to_data(text_to_load, format='yaml')
     return data
 

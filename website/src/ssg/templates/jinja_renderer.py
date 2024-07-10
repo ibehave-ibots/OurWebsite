@@ -19,6 +19,7 @@ class JinjaRenderer(NamedTuple):
             loader=jinja2.FileSystemLoader(templates_dir),
             autoescape=jinja2.select_autoescape(),
             undefined=jinja2.StrictUndefined,
+            enable_async=True,
         )
         env.trim_blocks = True
         env.lstrip_blocks = True
@@ -52,15 +53,16 @@ class JinjaRenderer(NamedTuple):
     def vars(self) -> dict[str, Any]:
         return self.env.globals
 
-    def render_in_place(self, template_text: str, **data) -> str:
-        rendered = self.env.from_string(template_text).render(**data)
+    async def render_in_place(self, template_text: str, **data) -> str:
+        rendered = await self.env.from_string(template_text).render_async(**data)
         return rendered
     
-    def render_named_template(self, template_path: Path, **data) -> str:
+    async def render_named_template(self, template_path: Path, **data) -> str:
         template_name = str(PurePosixPath(template_path.relative_to(self.templates_dir)))
         TEMPLATE_DIR = template_path.parent.relative_to(self.templates_dir)
         render_data = data | {'TEMPLATE_DIR': str(PurePosixPath(TEMPLATE_DIR))}
-        rendered = self.env.get_template(template_name).render(**render_data)
+        template = self.env.get_template(template_name)
+        rendered = await template.render_async(**render_data)
         return rendered
 
 
