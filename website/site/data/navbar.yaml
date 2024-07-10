@@ -6,25 +6,25 @@ logo: "/static/images/ibots.png"
 menu:
 
   - title: Consulting
-    url: /consulting.html
+    url: /consulting/index.html
 
   - title: Events
     children:
       - title: All Events
-        url: /events.html
+        url: /events/index.html
       - title: Workshops
-        url: /events/workshops.html
+        url: /events/workshops/index.html
       - title: Code Explorers Club
-        url: /events/code_explorers.html
+        url: /events/code_explorers/index.html
 
   - title: Learning
-    url: /learning_resources.html
+    url: /learning_resources/index.html
 
   - title: Partners  
-    url: /partners.html
+    url: /partners/index.html
 
   - title: About
-    url: /about.html
+    url: /about/index.html
 
   - title: Contact Us
-    url: /contacts.html
+    url: /contacts/index.html

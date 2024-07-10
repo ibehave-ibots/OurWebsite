@@ -29,7 +29,9 @@ async def run_render_pipeline():
     site_data = await read_and_render_yaml_dir(base_dir='./site/data', env=env, data=global_data)
     
     # Walk through each 'pages' directory and render the pages found inside
-    async for page_path in AsyncPath('./pages').glob('[!_]*/**/[!_]*.md'):
+    async for page_path in AsyncPath('./pages').glob('**/[!_]*.md'):
+        if page_path.parent.name.startswith('_'):
+            continue
 
         print(f'Rendering: {page_path}')
 
