@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+from collections import defaultdict
 from pathlib import Path, PurePosixPath
 
 from aiopath import AsyncPath
@@ -29,44 +30,62 @@ async def run_render_pipeline():
     
     # Walk through each 'pages' directory and render the pages found inside
     async for page_path in AsyncPath('./pages').glob('[!_]*/**/[!_]*.md'):
-        page_text = (await page_path.read_text()).strip()
 
         print(f'Rendering: {page_path}')
-        env = build_jinja_environment()
-        if page_text.startswith('---'):
-            _, templated_yaml_text, md_text = page_text.split('---')
-            template = env.from_string(templated_yaml_text)
-            yaml_text = await template.render_async( data=global_data, site=site_data)
-            yaml_data = text_to_data(yaml_text, format='yaml')
-        else:
-            yaml_data = {}
-            md_text = page_text
 
-        md_html = text_to_data(md_text, 'md')                
-        page_data = {'data': yaml_data, 'content': md_html}
-
-
+        subpages_data = defaultdict(dict)
+        async for subpage_path in page_path.parent.glob('[!_]*/[!_]*.md'):
+            subpage_data = await read_and_render_page_data(subpage_path, data=global_data, site=site_data)
+            subpages_data[subpage_data['type']][subpage_data['id']] = subpage_data
+        subpages_data = dict(subpages_data)
+        
 
         # Render HTML Template
         env = build_jinja_environment(['./site/templates', page_path.parent])
         template = env.get_template('template.html')
-        url_path = page_path.relative_to('./pages').with_suffix('.html')
-        if url_path.name == 'index.html':
-            url_path = url_path.parent.with_suffix('.html')
-            
-        extra_page_metadata = {
-            'url': str(PurePosixPath(url_path)),
-            'id': url_path.stem,
-            'type': url_path.parent.name,
-        }            
+        page_data = await read_and_render_page_data(page_path, data=global_data, site=site_data)
         page_html = await template.render_async(
             data=global_data, 
             site=site_data, 
-            page=page_data | extra_page_metadata,
+            page=page_data,
+            subpages=subpages_data,
         )
 
-        output_path = Path('./_output').joinpath(url_path)
+        output_path = Path('./_output').joinpath(page_data['url'])
         await write_textfile(path=output_path, text=page_html)
+
+
+
+def build_page_metadata(page_path):
+    url_path = page_path.relative_to('./pages').with_suffix('.html')
+    if url_path.name == 'index.html':
+        url_path = url_path.parent.with_suffix('.html')
+            
+    extra_page_metadata = {
+            'url': str(PurePosixPath(url_path)),
+            'id': url_path.stem,
+            'type': url_path.parent.name,
+        }
+    
+    return extra_page_metadata
+
+
+async def read_and_render_page_data(page_path, **render_data):
+    page_text = (await page_path.read_text()).strip()
+    env = build_jinja_environment()
+    if page_text.startswith('---'):
+        _, templated_yaml_text, md_text = page_text.split('---')
+        template = env.from_string(templated_yaml_text)
+        yaml_text = await template.render_async(**render_data)
+        yaml_data = text_to_data(yaml_text, format='yaml')
+    else:
+        yaml_data = {}
+        md_text = page_text
+
+    md_html = text_to_data(md_text, 'md')                
+    page_data = {'data': yaml_data, 'content': md_html}
+    page_data |= build_page_metadata(page_path)
+    return page_data
 
 
 
@@ -104,12 +123,6 @@ async def read_and_render_yaml_dir(base_dir: str | Path, env: jinja2.Environment
     return data
 
 
-
-async def read_and_render_page_data(path, renderer: JinjaRenderer, **render_data):
-    text = await AsyncPath(path).read_text()
-    rendered_text = await renderer.render_in_place(text, **render_data)
-    data = text_to_data(rendered_text, format=path.suffix.lstrip('.'))
-    return data
             
 
 
