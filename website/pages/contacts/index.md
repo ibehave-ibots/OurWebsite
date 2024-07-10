@@ -1,3 +1,4 @@
+---
 title: About Us
 contact_name: {{ data.people.nick.name }}
 contact_email: {{ data.people.nick.email }}
@@ -32,3 +33,5 @@ people:
           image: {{ person.image }}
         {% endif %}
         {% endfor %}
+
+---
