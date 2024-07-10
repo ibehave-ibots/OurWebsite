@@ -7,9 +7,9 @@ import jinja2
 from . import filters as f
 
 
-def build_jinja_environment(paths: list[Path|str]) -> jinja2.Environment:
+def build_jinja_environment(search_path: str | list[Path|str] | None = None) -> jinja2.Environment:
     env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(paths),
+            loader=jinja2.FileSystemLoader(search_path) if search_path is not None else None,
             autoescape=jinja2.select_autoescape(),
             undefined=jinja2.StrictUndefined,
             enable_async=True,

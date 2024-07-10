@@ -10,25 +10,30 @@ except ImportError:
 
 
 import asyncio
-from ssg.config import Config
 from ssg.server import build_server
-from ssg.renderer import run_render_pipeline, copy_static_files
+from ssg.renderer import run_render_pipeline
 
 
 
-async def build_output(config: Config):
-    tasks = []
-    tasks += list(copy_static_files(config=config, skip_if_exists=True))
-    tasks += [run_render_pipeline(config=config)]
-    await asyncio.gather(*tasks)
+async def build_output():
+    await run_render_pipeline()
 
-config = Config.from_path('config.yaml')
-asyncio.run(build_output(config=config))
+asyncio.run(build_output())
+# async def build_output(config: Config):
+#     tasks = []
+#     tasks += list(copy_static_files(config=config, skip_if_exists=True))
+#     tasks += [run_render_pipeline(config=config)]
+#     await asyncio.gather(*tasks)
 
-server = build_server()
-server.watch('pages/**/*', lambda: asyncio.ensure_future(build_output(config)), delay=3)
-server.watch('data/**/*', lambda: asyncio.ensure_future(build_output(config)), delay=3, )
-server.serve()
+# config = Config.from_path('config.yaml')
+# asyncio.run(build_output(config=config))
+
+
+
+# server = build_server()
+# server.watch('pages/**/*', lambda: asyncio.ensure_future(build_output(config)), delay=3)
+# server.watch('data/**/*', lambda: asyncio.ensure_future(build_output(config)), delay=3, )
+# server.serve()
 
 # asyncio.run(build_server())
 
