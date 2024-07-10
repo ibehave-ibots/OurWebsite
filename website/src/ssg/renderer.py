@@ -77,7 +77,8 @@ async def read_and_render_page_data(basedir, page_path, **render_data):
         md_text = page_text
 
     md_html = text_to_data(md_text, 'md')                
-    page_data = {'data': yaml_data, 'content': md_html}
+    page_data = yaml_data
+    page_data['content'] = md_html
     page_data['url'] = url_from_path(basedir, page_path)
     page_data['id'] = page_path.stem
     page_data['type'] = page_path.parent.name

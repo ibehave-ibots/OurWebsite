@@ -5,14 +5,14 @@
 {% block body %}
 <articled>
     
-    <h1> {{ page.data.title }} </h1>
+    <h1> {{ page.title }} </h1>
     <section>
     {{ page.content | safe }}
     </section>
     
     <section>
         <h2>Our Materials </h2>
-        {% for our_material in page.data.our_materials %}
+        {% for our_material in page.our_materials %}
         <h3> {{ our_material.name }} </h3>
         <p><a href="{{ our_material.filepath }}">{{ our_material.filepath }}</a></p>
         <section>
@@ -29,7 +29,7 @@
     <section>
         <h2> External Resources </h2>
         <ul>
-            {% for resource in page.data.external_resources %}
+            {% for resource in page.external_resources %}
                 <li> <a href="{{ resource }}">{{ resource }}</a> </li>
             {% endfor %}
         </ul>                
