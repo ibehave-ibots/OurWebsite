@@ -1,6 +1,4 @@
 from typing import Any
-import shutil
-from pathlib import Path, PurePosixPath
 from typing import Any, Collection, Iterable
 
 
@@ -18,18 +16,6 @@ def multi_index(data: Collection, indices: list[int | str]) -> Any:
 
 def sort_by[T](data: Iterable[T], indices: list[int | str], reverse: bool = False) -> list[T]:
     return type(data)(sorted(data, key=lambda d: multi_index(d, indices), reverse=reverse))
-
-
-
-
-def copy_to(src: str, folder: str, fname: str = None) -> str:
-    save_path = Path(folder)
-    save_path /= fname if fname is not None else Path(src).name
-    if not save_path.exists():
-        save_path.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(src, folder)
-    
-    return str(PurePosixPath(save_path))
 
 
 

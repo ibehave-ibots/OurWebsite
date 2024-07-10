@@ -1,3 +1,4 @@
+import shutil
 import urllib.request
 from pathlib import Path, PurePosixPath
 
@@ -53,3 +54,18 @@ def prepend(path: str, base: str) -> str:
 
     new_path = PurePosixPath(base).joinpath(path)
     return str(new_path)
+
+
+def copy_to(src: str, folder: str, fname: str = None) -> str:
+    save_path = Path(folder)
+    save_path /= fname if fname is not None else Path(src).name
+    if not save_path.exists():
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, folder)
+
+    return str(PurePosixPath(save_path))
+
+
+
+def build_asset_pipeline()
+def assetize(src: str) -> str:
