@@ -1,67 +1,66 @@
+from dataclasses import dataclass, field
 import shutil
 import urllib.request
 from pathlib import Path, PurePosixPath
 
 from PIL import Image
 
-
-def redirect_path(prepend_path, arg_idx=0):
-    """
-    Decorator that redirects the path onto the first argument of the function for internel use, but keeps
-    the output path the same. 
-    """
-    def decorator(fun):
-        def wrapper(*args, **kwargs):
-            path = args[arg_idx]
-            if str(path).startswith('/'):
-                was_root = True
-                path = path[1:]
-            else:
-                was_root = False
-            if 'http' in str(path):
-                base_url = path[path.index('//') + 2:]
-                new_path = str(PurePosixPath(prepend_path) / 'downloads' / base_url)
-                Path(new_path).parent.mkdir(exist_ok=True, parents=True)
-                print(f"Downloading File: {path} -> {new_path}")
-                urllib.request.urlretrieve(path, new_path)
-            else:
-                new_path = str(PurePosixPath(prepend_path).joinpath(path))
-            new_args = list(args)
-            new_args[arg_idx] = new_path
-            new_args = tuple(new_args)
-            output_path = fun(*new_args, **kwargs)
-            new_path = str(PurePosixPath(Path(output_path).relative_to(prepend_path)))
-            if was_root:
-                new_path = '/' + new_path
-            return new_path
-        return wrapper
-    return decorator
+@dataclass(frozen=True)
+class ImageAssetManager:
+    template_dir: Path
+    src_basedir: Path = Path('./pages')
+    shared_static_dir: Path = Path('./shared/static')
+    build_basedir: Path = Path('./_output')
+    build_static_basedir: Path = Path('./_output/static')
+    _assetized: set[Path] = field(default_factory=set)
 
 
-def resize_image(fname: str, width: int, height: int) -> str:
-    path = Path(fname)
-    with Image.open(path) as img:
-        img2 = img.resize((width, height))
+    def asset(self, path: str) -> str:
+        orig_path = path
+        path = Path(path)
+        if 'http' in orig_path:
+            src_path = orig_path
+            target_path = self.build_basedir.joinpath('assets_external').joinpath(orig_path[orig_path.index('//') + 2:])
+            output_path = '/' + str(PurePosixPath(target_path.relative_to(self.build_basedir)))
+            method = 'download'
+        elif PurePosixPath(path).is_absolute():
+            src_path = self.shared_static_dir.joinpath(orig_path.lstrip('/'))
+            target_path = self.build_static_basedir.joinpath(orig_path.lstrip('/'))
+            output_path = orig_path
+            method = 'copy'
+            assert src_path.exists()
+        else:
+            src_path = Path(self.template_dir).joinpath(path)
+            target_path = self.build_basedir.joinpath(Path(self.template_dir).relative_to(self.src_basedir)).joinpath(path)
+            output_path = orig_path
+            method = 'copy'
+            assert src_path.exists()
+            
+        if not target_path.exists():
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            if method == 'download':
+                urllib.request.urlretrieve(src_path, target_path)
+            elif method == 'copy':
+                shutil.copyfile(src_path, target_path)
+        self._assetized.add(output_path)
+        return output_path
+    
+    def resize(self, path, width: int, height: int) -> str:
+        orig_path = path
+        path = Path(path)
+        if orig_path not in self._assetized:
+            raise ValueError(f"{path} must be assetized before resizing.  Call the `asset` filter first.")
+        if PurePosixPath(path).is_absolute():
+            src_path = self.build_basedir.joinpath(orig_path.lstrip('/'))
+            
+        else:
+            src_path = self.build_basedir.joinpath(Path(self.template_dir).relative_to(self.src_basedir)).joinpath(path)
+        
+        with Image.open(src_path) as img:
+            img2 = img.resize((width, height))
 
-    path2 = path.with_stem(path.stem + f"_{width}x{height}")
-    img2.save(path2)
-    return str(PurePosixPath(path2))
-
-
-def prepend(path: str, base: str) -> str:
-    if PurePosixPath(path).is_absolute() or Path(path).is_absolute():  # here we also use linux-style filenames in a windows environment.
-        raise ValueError(f"absolute path {path} cannot be prepended.")
-
-    new_path = PurePosixPath(base).joinpath(path)
-    return str(new_path)
-
-
-def copy_to(src: str, folder: str, fname: str = None) -> str:
-    save_path = Path(folder)
-    save_path /= fname if fname is not None else Path(src).name
-    if not save_path.exists():
-        save_path.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(src, folder)
-
-    return str(PurePosixPath(save_path))
-
+        new_stem = path.stem + f"_{width}x{height}"
+        target_path = src_path.with_stem(new_stem)
+        img2.save(target_path)
+        return str(PurePosixPath(orig_path).with_stem(new_stem))
+        

@@ -19,15 +19,24 @@ def build_jinja_environment(search_path: str | list[Path|str] | None = None) -> 
 
     # Include additional jinja filters
     env.filters.update({
-        'copy_to': f.redirect_path('./_output', arg_idx=1)(f.copy_to),
         'flatten_nested': f.flatten_nested_dict,
         'index': f.multi_index,
         'items': f.items,
-        'prepend': f.prepend,
         'promote_key': f.promote_key,
         'sort_by': f.sort_by,  
-        'resize': f.redirect_path('./_output')(f.resize_image), 
     })
+    if search_path:
+        assert len(search_path) == 2
+        template_path = search_path[-1]
+        image_manager = f.ImageAssetManager(
+            template_dir=Path(template_path), 
+            src_basedir=Path('./pages'), 
+            shared_static_dir=Path('./shared/static'), 
+            build_basedir=Path('./_output'),
+            build_static_basedir=Path('./_output/static'),
+        )
+        env.filters['asset'] = image_manager.asset
+        env.filters['imresize'] = image_manager.resize
 
     # Include additional jinja globals
     env.globals.update({
