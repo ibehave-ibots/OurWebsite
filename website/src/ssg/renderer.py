@@ -89,30 +89,6 @@ async def read_and_render_page_data(page_path, **render_data):
 
 
 
-    # for renderfile_path in config.pages_dir.glob('[!_]*/_render.yaml'):
-
-    #     for static_dir in renderfile_path.parent.glob(config.page_static_dirname):
-    #         await copy(static_dir, config.output_static_dir)
-
-    #     for page_render_data in big_r.page_instructions:
-    #         page_data = {}
-    #         for name, rel_path in page_render_data.page_data_files.items():
-    #             data_path = renderfile_path.parent.joinpath(rel_path)
-    #             data = await read_and_render_page_data(data_path, renderer, data=global_data)
-    #             page_data[name] = data
-
-    #         page_html = await renderer.render_named_template(
-    #             template_path=renderfile_path.parent.joinpath(page_render_data.template),
-    #             **dict(
-    #                 data=global_data,
-    #                 site=site_data,
-    #                 page=page_data | page_render_data.data | {'url': page_render_data.url}
-    #             )
-    #         )
-
-    #         await write_textfile(path=url_path, text=page_html)
-
-
 async def read_and_render_yaml_dir(base_dir: str | Path, env: jinja2.Environment, **render_data):
     data = {}
     async for path in AsyncPath(base_dir).glob('*.yaml'):
