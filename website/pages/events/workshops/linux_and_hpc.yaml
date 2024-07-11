@@ -1,0 +1,47 @@
+title: High Performance Computing and Performance Optimization
+summary: |
+    {{summary}}
+hours: {{hours}}
+sessions:
+    - date: 2024-11-20
+      start_time: 09:30
+      end_time: 17:00
+      location: online
+    - date: 2024-11-21
+      start_time: 09:30
+      end_time: 17:00
+      location: online
+    - date: 2024-11-22
+      start_time: 09:30
+      end_time: 17:00
+      location: online
+instructors:
+    - id: sangeetha
+      role: instructor
+    - id: bartosz
+      role: instructor
+github_repo: |
+    {{github_repo}}
+registration_link: |
+    {{registration_link}}
+format: online
+class_size: 25
+prerequisites:  |
+    People of all skill levels, experiences, and backgrounds are welcome!
+preparation_instructions: |
+    Software installation instructions will be sent before the start of the course.
+certificate_criteria: | 
+    At the end of the course, participants who attend at least 80% of the course certificates of participation.
+description: >
+  In this hands-on workshop, participants will explore the fundamentals of high-performance computing (HPC), 
+  focusing on using HPC clusters, optimizing code for single-core performance, and leveraging parallel processing and GPUs.
+
+  You'll start with the basics of Linux and bash scripting, and learn to navigate and manage resources on HPC systems. 
+  The workshop will cover job scripting, resource estimation, and monitoring, as well as the workings of parallel file systems.
+
+  Next, you'll dive into Python optimizations, profiling techniques, and memory/I/O management to overcome performance bottlenecks. 
+  Finally, you'll explore parallel execution, both on multi-core CPUs and GPUs, and learn how to use tools like Numba for performance 
+  improvements and understand algorithmic scaling.
+
+  By combining these technologies and skills, participants will be equipped to maximize the efficiency and performance of their computational tasks, 
+  making this workshop ideal for researchers and professionals in the field.

@@ -1,0 +1,44 @@
+title: Software Tools for Open and Reproducible Computational Science
+summary: |
+    {{summary}}
+hours: {{hours}}
+sessions:
+    - date: 2024-11-13
+      start_time: 09:30
+      end_time: 17:00
+      location: online
+    - date: 2024-11-14
+      start_time: 09:30
+      end_time: 17:00
+      location: online
+    - date: 2024-11-15
+      start_time: 09:30
+      end_time: 17:00
+      location: online
+instructors:
+    - id: nick
+      role: instructor
+    - id: malte
+      role: instructor
+github_repo: |
+    {{github_repo}}
+registration_link: |
+    {{registration_link}}
+format: online
+class_size: 25
+prerequisites:  |
+    People of all skill levels, experiences, and backgrounds are welcome!
+preparation_instructions: |
+    Software installation instructions will be sent before the start of the course.
+certificate_criteria: | 
+    At the end of the course, participants who attend at least 80% of the course certificates of participation.
+description: >
+  In this hands-on workshop, we will explore the fundamentals of collaborative 
+  software development and computational reproducibility. Using Git, GitHub, and Zenodo, participants will 
+  learn to update evolving code in a place they can share with others, both during development and after publication.
+  The workshop also covers professional practices for software management in the scientific community, 
+  including documentation with Markdown, software dependency management with Conda, and data dependency management with
+  DVC.  Finally, we'll dive into methods for organizing and automating multi-step data pipelines using scripts and Snakemake.
+  This combination of tools and practices ensures your work is consistent, well-documented, and easily shareable. 
+  Suitable for participants of all skill levels and backgrounds.
+  
