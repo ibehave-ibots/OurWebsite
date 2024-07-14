@@ -15,49 +15,27 @@ from PIL import Image
 @dataclass(frozen=True)
 class ImageAssetManager:
     webserver_root: Path
-    output_path: Path
+    asset_path: Path
     copyfun: Callable[[str, str], None] = shutil.copyfile
+    downloadfun: Callable[[str, str], None] = urllib.request.urlretrieve
     hashfun: Callable[[bytes], HASH] = hashlib.md5
 
 
-    def asset(self, path: str) -> str:
-        path = PurePosixPath(path)
-        hash_str = self.hashfun(Path(path).read_bytes()).hexdigest()[:6]
-        fname_out = path.with_stem(path.stem + '_' + hash_str).name
-        save_path = self.output_path.joinpath(fname_out)
-        self.copyfun(str(PurePosixPath(path)), str(PurePosixPath(save_path)))
-        relative_asset_path = self.output_path.relative_to(self.webserver_root)
+
+    def asset(self, path: str | Path) -> str:
+        is_url = str(path).startswith('http')
+        to_hash = path.encode() if is_url else Path(path).read_bytes()        
+        hash_str = self.hashfun(to_hash).hexdigest()[:6]
+        fname_out = Path(path).with_stem(Path(path).stem + '_' + hash_str).name
+        save_path = self.asset_path.joinpath(fname_out)
+        
+        savefun = self.downloadfun if is_url else self.copyfun
+        src = str(path if is_url else PurePosixPath(path))
+        savefun(src, str(PurePosixPath(save_path)))
+        relative_asset_path = self.asset_path.relative_to(self.webserver_root)
         return str(PurePosixPath('/').joinpath(relative_asset_path).joinpath(fname_out))
     
 
-        # orig_path = path
-        # path = Path(path)
-        # if 'http' in orig_path:
-        #     src_path = orig_path
-        #     target_path = self.build_basedir.joinpath('assets_external').joinpath(orig_path[orig_path.index('//') + 2:])
-        #     output_path = '/' + str(PurePosixPath(target_path.relative_to(self.build_basedir)))
-        #     method = 'download'
-        # elif PurePosixPath(path).is_absolute():
-        #     src_path = self.shared_static_dir.joinpath(orig_path.lstrip('/'))
-        #     target_path = self.build_static_basedir.joinpath(orig_path.lstrip('/'))
-        #     output_path = orig_path
-        #     method = 'copy'
-        #     assert src_path.exists()
-        # else:
-        #     src_path = Path(self.template_dir).joinpath(path)
-        #     target_path = self.build_basedir.joinpath(Path(self.template_dir).relative_to(self.src_basedir)).joinpath(path)
-        #     output_path = orig_path
-        #     method = 'copy'
-        #     assert src_path.exists()
-            
-        # if not target_path.exists():
-        #     target_path.parent.mkdir(parents=True, exist_ok=True)
-        #     if method == 'download':
-        #         urllib.request.urlretrieve(src_path, target_path)
-        #     elif method == 'copy':
-        #         shutil.copyfile(src_path, target_path)
-        # self._assetized.add(output_path)
-        # return output_path
     
     def resize(self, path, width: int, height: int) -> str:
         ...
