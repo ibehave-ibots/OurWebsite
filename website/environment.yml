@@ -3,8 +3,12 @@ name: ibots-site
 channels:
   - defaults
 dependencies: 
+  - pip
   - python=3.12
   - nodejs
+  - pip:
+    - -e .[dev]
+
   
 
 
