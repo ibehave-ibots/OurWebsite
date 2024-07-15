@@ -30,12 +30,15 @@ class AssetManager:
         to_hash = path.encode() if is_url else Path(path).read_bytes()        
         hash_str = self.hashfun(to_hash).hexdigest()[:6]
         fname_out = Path(path).with_stem(Path(path).stem + '_' + hash_str).name
-        save_path = str(PurePosixPath(self.asset_path.joinpath(fname_out)))
-        
+
+        save_path = self.asset_path.joinpath(fname_out)
+        save_path_str = str(PurePosixPath(save_path))
+        if save_path.exists():
+            return save_path_str
         savefun = self.downloadfun if is_url else self.copyfun
         src = str(path if is_url else PurePosixPath(path))
-        savefun(src, save_path)
-        return save_path
+        savefun(src, save_path_str)
+        return save_path_str
     
     def get_uri(self, path: str | Path) -> str:
         path_str = str(PurePosixPath(path))
