@@ -53,21 +53,11 @@ class AssetManager:
     
 
     
-# def resize(path, width: int, height: int) -> str:
-#     with Image.open(path) as img:
-#         img2 = img.resize((width, height))
-#     target_path = Path(path).with_stem(Path(path).stem + f'_{width}x{height}')
-#     img2.save(target_path)
+def resize(path: str | Path, width: int, height: int) -> str:
+    with Image.open(path) as img:
+        img2 = img.resize((width, height))
+    target_path = Path(path).with_stem(Path(path).stem + f'_{width}x{height}')
+    img2.save(target_path)
+    return str(PurePosixPath(target_path))
 
-        
-    # else:
-    #     src_path = self.build_basedir.joinpath(Path(self.template_dir).relative_to(self.src_basedir)).joinpath(path)
-    
-    # with Image.open(src_path) as img:
-    #     img2 = img.resize((width, height))
 
-    # new_stem = path.stem + f"_{width}x{height}"
-    # target_path = src_path.with_stem(new_stem)
-    # img2.save(target_path)
-    # return str(PurePosixPath(orig_path).with_stem(new_stem))
-    

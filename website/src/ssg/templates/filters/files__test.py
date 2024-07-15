@@ -73,11 +73,11 @@ def test_get_webserver_path_from_built_file(manager):
     assert uri == expected_uri
 
 
-# def test_image_resize(tmp_path):
+def test_image_resize(tmp_path):
     
-#     im = Image.fromarray(np.zeros((120, 240, 3), np.uint8))
-#     im.save(tmp_path / 'image.jpg')
+    im = Image.fromarray(np.zeros((120, 240, 3), np.uint8))
+    im.save(tmp_path / 'image.jpg')
 
-#     fpath = str(PurePosixPath(tmp_path / 'image.jpg'))
-#     fpath_out = files.resize(fpath, 60, 120)
-#     assert fpath_out == str(PurePosixPath(tmp_path / 'image_60x120.jpg'))
+    fpath = str(PurePosixPath(tmp_path / 'image.jpg'))
+    fpath_out = files.resize(fpath, 60, 120)
+    assert fpath_out == str(PurePosixPath(tmp_path / 'image_60x120.jpg'))

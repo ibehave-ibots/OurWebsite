@@ -23,7 +23,8 @@ def build_jinja_environment(search_path: str | list[Path|str] | None = None) -> 
         'index': f.multi_index,
         'items': f.items,
         'promote_key': f.promote_key,
-        'sort_by': f.sort_by,  
+        'sort_by': f.sort_by,
+        'resize': f.resize,
     })
     if search_path:
         assert len(search_path) == 2
@@ -36,7 +37,6 @@ def build_jinja_environment(search_path: str | list[Path|str] | None = None) -> 
             build_static_basedir=Path('./_output/static'),
         )
         env.filters['asset'] = image_manager.build
-        env.filters['imresize'] = image_manager.resize
 
     # Include additional jinja globals
     env.globals.update({
