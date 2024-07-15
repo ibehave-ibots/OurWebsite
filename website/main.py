@@ -14,9 +14,9 @@ from ssg.server import build_server
 from ssg.renderer import run_render_pipeline
 import shutil
 
-if not os.path.exists("data_consulting/"):
-    os.makedir('data_consulting')
-shutil.copy("../consulting_analysis/consult_repo/consulting_statistics.yaml", "data_consulting/")
+if not os.path.exists("stats/"):
+    os.makedirs('stats')
+shutil.copy("../consulting_analysis/consult_repo/consulting_statistics.yaml", "stats/")
 
 
 

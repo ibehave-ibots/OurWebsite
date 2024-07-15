@@ -23,10 +23,11 @@ async def run_render_pipeline():
 
     # Read Shared Data (no templating allowed)
     global_data = extract_global_data(base_path='./data')
+    stats_data = extract_global_data(base_path='./stats')
     
     # Read site-wide data
     env = build_jinja_environment()
-    shared_data = await read_and_render_yaml_dir(base_dir='./shared/data', env=env, data=global_data)
+    shared_data = await read_and_render_yaml_dir(base_dir='./shared/data', env=env, data=global_data, stats=stats_data)
     
     # Walk through each 'pages' directory and render the pages found inside
     async for page_path in AsyncPath('./pages').glob('**/[!_]*.md'):
@@ -37,7 +38,7 @@ async def run_render_pipeline():
 
         subpages_data = defaultdict(dict)
         async for subpage_path in page_path.parent.glob('[!_]*/[!_]*.md'):
-            subpage_data = await read_and_render_page_data('./pages', subpage_path, data=global_data, site=shared_data)
+            subpage_data = await read_and_render_page_data('./pages', subpage_path, data=global_data, site=shared_data, stats=stats_data)
             subpages_data[subpage_data['type']][subpage_data['id']] = subpage_data
         subpages_data = dict(subpages_data)
         
@@ -45,12 +46,13 @@ async def run_render_pipeline():
         # Render HTML Template
         env = build_jinja_environment(['./shared/templates', page_path.parent])
         template = env.get_template('template.html')
-        page_data = await read_and_render_page_data('./pages', page_path, data=global_data, site=shared_data)
+        page_data = await read_and_render_page_data('./pages', page_path, data=global_data, site=shared_data, stats=stats_data)
         page_html = await template.render_async(
             data=global_data, 
             site=shared_data, 
             page=page_data,
             subpages=subpages_data,
+            stats=stats_data,
         )
 
         output_path = Path('./_output').joinpath(page_data['url'])

@@ -9,6 +9,6 @@ _output
 *.egg-info
 *.bak
 /data
-/data_consulting
+/stats
 /theme
 /theme.7z
