@@ -1,4 +1,5 @@
 import os
+from pathlib import PurePosixPath
 from .data import extract_global_data
 
 
@@ -106,8 +107,8 @@ def test_gets_path_of_image_files(tmp_path):
     path.touch(exist_ok=True)
 
     data = extract_global_data(tmp_path)
-    assert data['animals']['dog']['dog'] == 'animals/dog/dog.jpg'
-    assert data['animals']['cat']['image'] == 'animals/cat/image.png'
+    assert 'animals/dog/dog.jpg' in str(PurePosixPath(data['animals']['dog']['dog']))
+    assert 'animals/cat/image.png' in str(PurePosixPath(data['animals']['cat']['image']))
 
 
 def test_gets_path_of_image_files_with_relative_paths(tmp_path):
@@ -120,7 +121,7 @@ def test_gets_path_of_image_files_with_relative_paths(tmp_path):
 
     os.chdir(tmp_path)
     data = extract_global_data(tmp_path)
-    assert data['animals']['dog']['dog'] == 'animals/dog/dog.jpg'
+    assert 'animals/dog/dog.jpg' in str(PurePosixPath(data['animals']['dog']['dog']))
 
 
 def test_no_subkey_is_added_if_fielname_is_only_yaml_extension(tmp_path):
@@ -156,4 +157,16 @@ def test_only_yaml_extension_can_provide_default_values_for_images(tmp_path):
     data = extract_global_data(tmp_path)
     assert data['dogs']['b'] == 5
     assert data['dogs']['pic'] == 'https://www.default.com/image.png'
-    assert data['dogs']['image'] == 'dogs/image.png'
+    assert 'dogs/image.png' in str(PurePosixPath(data['dogs']['image']))
+
+
+def test_absolute_paths_result_in_relative_paths(tmp_path):
+    fname = 'animals/pigs/.yaml'
+    yaml = "f: /myfile.png"
+    path = tmp_path.joinpath(fname)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(yaml)
+
+    data = extract_global_data(tmp_path)
+    assert data['animals']['pigs']['f'] == str(PurePosixPath(tmp_path.joinpath('myfile.png')))
+    # breakpoint()

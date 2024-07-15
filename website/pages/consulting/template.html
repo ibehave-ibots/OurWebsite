@@ -42,7 +42,7 @@
     {% if 'consulting' in person %}
     <div id="{{id}}" class="col">
       <div class="card card-body d-flex flex-row align-items-center card-hover bg-light border-0">
-        <img src="{{ person.image | asset }}" class="d-block rounded-circle" width="162" alt="Darrell Steward">
+        <img src="{{ person.image | asset | uri }}" class="d-block rounded-circle" width="162" alt="Darrell Steward">
         <div class="ps-4">
           <h5 class="fw-medium fs-lg mb-0">{{ person.name }}</h5>
           <p class="fs-sm mb-2">{{ person.field_of_study }}</p>
@@ -81,7 +81,7 @@
           <div class="card-body pt-3">
             
             <div class="d-inline-block bg-primary shadow-primary rounded-3 position-absolute top-0 translate-middle-y p-3">
-              <img src="assets/img/services/icons/cms.svg" class="d-block m-1" width="40" alt="Icon">
+              <img src="/assets/img/services/icons/cms.svg" class="d-block m-1" width="40" alt="Icon">
             </div>
             <h2 class="h4 d-inline-flex align-items-center">
               {{ topic.name }}
@@ -94,7 +94,7 @@
           <div class="position-absolute top-0 end-0 translate-middle-x mt-2 me-2 d-flex">
             {% for person_id, consultant in data.people.items() %}
             {% if 'consulting' in consultant and id in consultant.consulting.skills %}
-              <img src="{{ consultant.image | asset  }}" class="rounded-circle border border-white" width="40" height="40" alt="Person 1">             
+              <img src="{{ consultant.image | asset | uri  }}" class="rounded-circle border border-white" width="40" height="40" alt="Person 1">             
             {% endif %}
             {% endfor %}
             

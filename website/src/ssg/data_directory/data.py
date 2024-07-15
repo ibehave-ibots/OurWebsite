@@ -19,12 +19,24 @@ def _process_file(item: Path, base_path: Path, collections: Dict[str, Any]) -> N
     if '.yaml' in item.name:
         text = item.read_text()
         data = text_to_data(text, format='yaml')
+
+        # overwrite absolute filepath strings with the absolute path to the referenced file.
+        if isinstance(data, dict):
+            for key, value in data.items():
+                if isinstance(value, str) and value.startswith('/'):
+                    new_value = str(PurePosixPath(base_path).joinpath(value.lstrip('/')))
+                    data[key] = new_value
+        elif isinstance(data, list):
+            for idx, value in enumerate(data):
+                if isinstance(value, str) and value.startswith('/'):
+                    new_value = str(PurePosixPath(base_path).joinpath(value.lstrip('/')))
+                    data[idx] = new_value
         if item.name == '.yaml':  # Is only a YAML extension?  Read it and just stick the data onto the parent.
             collections.update(data)  
         else:
             collections[item.stem] = data
-    else:  # Not sure how to parse the file?  Then assign a relative filepath.
-        collections[item.stem] = str(PurePosixPath(item.relative_to(base_path)))
+    else:  # Not sure how to parse the file?  Then assign a filepath.
+        collections[item.stem] = str(PurePosixPath(item))
 
 
 def text_to_data(text, format: Literal['md', 'yaml']) -> Any:

@@ -26,7 +26,7 @@
                         {{ person_card(
                             name=person.name, 
                             position="Research Software Consultant", 
-                            image=person.image | prepend('data') | copy_to('static/people/' + person.id),
+                            image=person.image,
                             email=person.email, 
                             booking_url=person.booking_url,
                             )
@@ -89,7 +89,7 @@
                         {{ person_card(
                             name=person.name, 
                             position="Research Software Consultant", 
-                            image=person.image | prepend('data') | copy_to('static/people/' + person.id),
+                            image=person.image,
                             email=person.email, 
                             booking_url=person.booking_url,
                             )

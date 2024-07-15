@@ -1,3 +1,3 @@
-<img src="{{ 'pig.jpg' | asset | imresize(200, 200) }}">
-<img src="{{ 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Pig_farm_Vampula_1.jpg' | asset | imresize(200, 200)}}">
-<img src="{{ '/boar.jpg' | asset | imresize(200, 200) }}">
+<img src="{{ (TEMPLATE_DIR + 'pig.jpg') | asset | resize(200, 200) | uri }}">
+<!-- <img src="{# 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Pig_farm_Vampula_1.jpg' | asset | resize(200, 200) | uri #}"> -->
+<img src="{{ 'shared/static/boar.jpg' | asset | resize(200, 200) | uri }}">

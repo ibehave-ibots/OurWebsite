@@ -45,7 +45,6 @@ def test_asset_creates_hashed_asset_in_assets_dir(tmp_path, manager: files.Asset
         expected_output_path,
     )
     manager.downloadfun.assert_not_called()
-    assert output_path in manager.built_assets
 
 
 def test_downloaded_assets_create_hashed_asset_in_assets_dir_using_url(manager):    
@@ -59,7 +58,6 @@ def test_downloaded_assets_create_hashed_asset_in_assets_dir_using_url(manager):
         expected_output_path
     )
     manager.copyfun.assert_not_called()
-    assert output_path in manager.built_assets
 
     
 
@@ -67,7 +65,6 @@ def test_get_webserver_path_from_built_file(manager):
     filepath = manager.asset_path.joinpath('myfile.png')
     filepath.touch()
     filepath_str = str(PurePosixPath(filepath))
-    manager.built_assets.add(filepath_str)
     uri = manager.get_uri(filepath_str)
     expected_uri = '/static/myfile.png'
     assert uri == expected_uri

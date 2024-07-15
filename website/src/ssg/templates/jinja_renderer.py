@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import date, datetime
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import jinja2
 
 from . import filters as f
@@ -30,13 +30,15 @@ def build_jinja_environment(search_path: str | list[Path|str] | None = None) -> 
         assert len(search_path) == 2
         template_path = search_path[-1]
         image_manager = f.AssetManager(
-            template_dir=Path(template_path), 
-            src_basedir=Path('./pages'), 
-            shared_static_dir=Path('./shared/static'), 
-            build_basedir=Path('./_output'),
-            build_static_basedir=Path('./_output/static'),
+            webserver_root=Path('./_output'),
+            asset_path=Path('./_output/static'),
         )
-        env.filters['asset'] = image_manager.build
+        env.globals['TEMPLATE_DIR'] = str(PurePosixPath(template_path)) + '/'
+        env.filters.update({
+            'asset': image_manager.build,
+            'uri': image_manager.get_uri,
+        })
+        
 
     # Include additional jinja globals
     env.globals.update({

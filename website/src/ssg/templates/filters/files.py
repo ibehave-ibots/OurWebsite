@@ -19,15 +19,11 @@ class AssetManager:
     copyfun: Callable[[str, str], None] = shutil.copyfile
     downloadfun: Callable[[str, str], None] = urllib.request.urlretrieve
     hashfun: Callable[[bytes], HASH] = hashlib.md5
-    built_assets: set[str] = field(default_factory=set)
 
     def __post_init__(self):
         if not self.asset_path.is_relative_to(self.webserver_root):
             raise ValueError("asset_path must be inside webserver_path")
         self.asset_path.mkdir(parents=True, exist_ok=True)
-
-
-
 
     def build(self, path: str | Path) -> str:
         is_url = str(path).startswith('http')
@@ -39,18 +35,15 @@ class AssetManager:
         savefun = self.downloadfun if is_url else self.copyfun
         src = str(path if is_url else PurePosixPath(path))
         savefun(src, save_path)
-        self.built_assets.add(save_path)
         return save_path
     
     def get_uri(self, path: str | Path) -> str:
-        assert str(PurePosixPath(path)) in self.built_assets
-        assert Path(path).exists()
-        assert Path(path).is_relative_to(self.webserver_root)
+        path_str = str(PurePosixPath(path))
+        assert Path(path).exists(), path_str
+        assert Path(path).is_relative_to(self.webserver_root), path_str
         webserver_path = Path(path).relative_to(self.webserver_root)
         return '/' + str(PurePosixPath(webserver_path))
 
-
-    
 
     
 def resize(path: str | Path, width: int, height: int) -> str:

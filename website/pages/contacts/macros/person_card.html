@@ -3,19 +3,19 @@
 <div class="card card-body card-hover bg-light border-0 text-center">
     <picture>
         <source 
-            srcset="{{ image | resize(10, 10)   }}" 
+            srcset="{{ image | asset | resize(10, 10) | uri   }}" 
             media="(max-width: 576px)">
         <source 
-            srcset="{{ image | resize(30, 30)   }}" 
+            srcset="{{ image | asset | resize(30, 30) | uri   }}" 
             media="(max-width: 768px)">
         <source 
-        srcset="{{ image | resize(100, 100)   }}" 
+        srcset="{{ image | asset | resize(100, 100) | uri }}" 
             media="(max-width: 992px)">
         <source 
-        srcset="{{ image | resize(200, 200)   }}" 
+        srcset="{{ image | asset | resize(200, 200) | uri  }}" 
             media="(max-width: 1200px)">
         <img 
-            src="{{ image }}" 
+            src="{{ image | asset | uri }}" 
             class="d-block rounded-circle mx-auto mb-3" 
             width="162" 
             alt="{{ name }}"
