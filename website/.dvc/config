@@ -5,5 +5,3 @@
     url = webdavs://uni-bonn.sciebo.de/public.php/webdav
     user = hr0iaP7BJWNJpio
     password = ""
-['remote "gdrive"']
-    url = gdrive://1AKW6VY_vxnk1nUIF6qpZrCE6azrmS6qX
