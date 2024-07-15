@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %} Partners {% endblock %}
+
+{% block body %}
+
+<h1>{{ page.title }}</h1>
+{{ data.people.sangeetha.name }}
+<img src="{{ data.people.sangeetha.image | asset | resize(50,50) | uri}}">
+
+<!-- Basic table -->
+<div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Position</th>
+          <th scope="col">Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>John</td>
+          <td>Doe</td>
+          <td>CEO, Founder</td>
+          <td>+3 555 68 70</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Anna</td>
+          <td>Cabana</td>
+          <td>Designer</td>
+          <td>+3 434 65 93</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Kale</td>
+          <td>Thornton</td>
+          <td>Developer</td>
+          <td>+3 285 42 88</td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>Jane</td>
+          <td>Birkins</td>
+          <td>Support</td>
+          <td>+3 774 28 50</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}
