@@ -62,11 +62,12 @@ async def test_downloaded_assets_create_hashed_asset_in_assets_dir_using_url(man
 
     
 
-def test_get_webserver_path_from_built_file(manager):
+@pytest.mark.asyncio
+async def test_get_webserver_path_from_built_file(manager):
     filepath = manager.asset_path.joinpath('myfile.png')
     filepath.touch()
     filepath_str = str(PurePosixPath(filepath))
-    uri = manager.get_uri(filepath_str)
+    uri = await manager.get_uri(filepath_str)
     expected_uri = '/static/myfile.png'
     assert uri == expected_uri
 

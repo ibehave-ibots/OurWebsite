@@ -40,7 +40,7 @@ class AssetManager:
         savefun(src, save_path_str)
         return save_path_str
     
-    def get_uri(self, path: str | Path) -> str:
+    async def get_uri(self, path: str | Path) -> str:
         path_str = str(PurePosixPath(path))
         assert Path(path).exists(), path_str
         assert Path(path).is_relative_to(self.webserver_root), path_str
