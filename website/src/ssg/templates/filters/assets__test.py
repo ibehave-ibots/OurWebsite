@@ -1,15 +1,16 @@
 from pathlib import Path, PurePosixPath
 import pytest
-from . import files
 from unittest.mock import Mock
 from hashlib import md5
 from _hashlib import HASH
 from PIL import Image
 import numpy as np
 
+from . import assets
+
 
 @pytest.fixture
-def manager(tmp_path_factory) -> files.AssetManager:
+def manager(tmp_path_factory) -> assets.AssetManager:
     asset_path = tmp_path_factory.mktemp('assets')
     webserver_root = tmp_path_factory.mktemp('output')
     output_path = webserver_root / 'static'
@@ -23,7 +24,7 @@ def manager(tmp_path_factory) -> files.AssetManager:
     
     copyfun = Mock()
     downloadfun = Mock()
-    manager = files.AssetManager(
+    manager = assets.AssetManager(
         webserver_root=webserver_root, 
         asset_path=output_path, 
         copyfun=copyfun,
@@ -34,7 +35,7 @@ def manager(tmp_path_factory) -> files.AssetManager:
 
 
 @pytest.mark.asyncio
-async def test_asset_creates_hashed_asset_in_assets_dir(tmp_path, manager: files.AssetManager):
+async def test_asset_creates_hashed_asset_in_assets_dir(tmp_path, manager: assets.AssetManager):
     data_file = tmp_path.joinpath('data.file')    
     data_file.touch()
     output_path = await manager.build(data_file)
@@ -78,5 +79,5 @@ def test_image_resize(tmp_path):
     im.save(tmp_path / 'image.jpg')
 
     fpath = str(PurePosixPath(tmp_path / 'image.jpg'))
-    fpath_out = files.resize(fpath, 60, 120)
+    fpath_out = assets.resize(fpath, 60, 120)
     assert fpath_out == str(PurePosixPath(tmp_path / 'image_60x120.jpg'))
