@@ -33,11 +33,11 @@ def manager(tmp_path_factory) -> files.AssetManager:
     return manager
 
 
-
-def test_asset_creates_hashed_asset_in_assets_dir(tmp_path, manager: files.AssetManager):
+@pytest.mark.asyncio
+async def test_asset_creates_hashed_asset_in_assets_dir(tmp_path, manager: files.AssetManager):
     data_file = tmp_path.joinpath('data.file')    
     data_file.touch()
-    output_path = manager.build(data_file)
+    output_path = await manager.build(data_file)
     expected_output_path = str(PurePosixPath(manager.asset_path).joinpath('data_ABCDEF.file'))
     assert output_path == expected_output_path
     manager.copyfun.assert_called_once_with(
@@ -47,9 +47,10 @@ def test_asset_creates_hashed_asset_in_assets_dir(tmp_path, manager: files.Asset
     manager.downloadfun.assert_not_called()
 
 
-def test_downloaded_assets_create_hashed_asset_in_assets_dir_using_url(manager):    
+@pytest.mark.asyncio
+async def test_downloaded_assets_create_hashed_asset_in_assets_dir_using_url(manager):    
     url = 'http://website.com/dafadflkj/image.jpg'
-    output_path = manager.build(url)
+    output_path = await manager.build(url)
     expected_output_path = str(PurePosixPath(manager.asset_path.joinpath('image_ABCDEF.jpg')))
     assert output_path == expected_output_path
     

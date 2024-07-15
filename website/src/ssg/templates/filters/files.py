@@ -25,7 +25,7 @@ class AssetManager:
             raise ValueError("asset_path must be inside webserver_path")
         self.asset_path.mkdir(parents=True, exist_ok=True)
 
-    def build(self, path: str | Path) -> str:
+    async def build(self, path: str | Path) -> str:
         is_url = str(path).startswith('http')
         to_hash = path.encode() if is_url else Path(path).read_bytes()        
         hash_str = self.hashfun(to_hash).hexdigest()[:6]
