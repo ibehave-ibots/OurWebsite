@@ -28,14 +28,14 @@ def build_jinja_environment(search_path: str | list[Path|str] | None = None) -> 
     if search_path:
         assert len(search_path) == 2
         template_path = search_path[-1]
-        image_manager = f.ImageAssetManager(
+        image_manager = f.AssetManager(
             template_dir=Path(template_path), 
             src_basedir=Path('./pages'), 
             shared_static_dir=Path('./shared/static'), 
             build_basedir=Path('./_output'),
             build_static_basedir=Path('./_output/static'),
         )
-        env.filters['asset'] = image_manager.asset
+        env.filters['asset'] = image_manager.build
         env.filters['imresize'] = image_manager.resize
 
     # Include additional jinja globals
