@@ -5,7 +5,8 @@ import yaml
 def main():
     fs_raw = LocalFileSystem()
     if not fs_raw.exists('raw/', details=False):
-        sciebo_download = ScieboDataDownload(destination='raw/')
+        sciebo_download = ScieboDataDownload()
+        sciebo_download.download_reports(destination='raw/')
 
     template_doc = TemplateDocumentProcessor()
     reports = fs_raw.ls('raw/', detail=False)
