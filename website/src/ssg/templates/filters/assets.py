@@ -7,6 +7,7 @@ from typing import Callable
 import typing
 import urllib.request
 from pathlib import Path, PurePosixPath
+from aiopath import AsyncPath
 if typing.TYPE_CHECKING:
     from _hashlib import HASH
 
@@ -26,7 +27,10 @@ class AssetManager:
 
     async def build(self, path: str | Path) -> str:
         is_url = str(path).startswith('http')
-        to_hash = path.encode() if is_url else Path(path).read_bytes()        
+        if is_url:
+            to_hash = path.encode()
+        else:
+            to_hash = await AsyncPath(path).read_bytes()        
         hash_str = self.hashfun(to_hash).hexdigest()[:6]
         fname_out = Path(path).with_stem(Path(path).stem + '_' + hash_str).name
 
@@ -41,7 +45,7 @@ class AssetManager:
     
     async def get_uri(self, path: str | Path) -> str:
         path_str = str(PurePosixPath(path))
-        assert Path(path).exists(), path_str
+        assert await AsyncPath(path).exists(), path_str
         assert Path(path).is_relative_to(self.webserver_root), path_str
         webserver_path = Path(path).relative_to(self.webserver_root)
         return '/' + str(PurePosixPath(webserver_path))
