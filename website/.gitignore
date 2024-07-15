@@ -9,4 +9,5 @@ _output
 *.egg-info
 *.bak
 /data
-theme
+/theme
+/theme.7z
