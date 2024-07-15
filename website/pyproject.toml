@@ -14,6 +14,7 @@ dependencies = [
   "Pillow",
   "dvc",
   "dvc_webdav>=3.0",
+  "dvc-gdrive>=3.0",
   "wrapt>=1.16",
   "flask>=3.0",
   "requests>=2.32"
