@@ -8,7 +8,7 @@ from aiopath import AsyncPath
 import jinja2
 
 from .utils import copy, write_textfile
-from .data_directory import extract_global_data, text_to_data
+from yaml_dir_parser import load_dir, loads
 from .templates.jinja_renderer import build_jinja_environment
 
 
@@ -23,8 +23,8 @@ async def run_render_pipeline(basedir='.'):
     )
 
     # Read Shared Data (no templating allowed)
-    global_data = extract_global_data(base_path= basedir / 'data')
-    stats_data = extract_global_data(base_path = basedir / 'stats')
+    global_data = load_dir(base_path= basedir / 'data')
+    stats_data = load_dir(base_path = basedir / 'stats')
     
     # Read site-wide data
     env = build_jinja_environment()
@@ -76,12 +76,12 @@ async def read_and_render_page_data(basedir, page_path, **render_data):
         _, templated_yaml_text, md_text = page_text.split('---')
         template = env.from_string(templated_yaml_text)
         yaml_text = await template.render_async(**render_data)
-        yaml_data = text_to_data(yaml_text, format='yaml')
+        yaml_data = loads(yaml_text, format='yaml')
     else:
         yaml_data = {}
         md_text = page_text
 
-    md_html = text_to_data(md_text, 'md')                
+    md_html = loads(md_text, 'md')                
     page_data = yaml_data
     page_data['content'] = md_html
     page_data['url'] = url_from_path(basedir, page_path)
@@ -97,7 +97,7 @@ async def read_and_render_yaml_dir(base_dir: str | Path, env: jinja2.Environment
         text = await AsyncPath(path).read_text()
         template = env.from_string(text)
         text_to_load = await template.render_async(**render_data)
-        data[path.stem] = text_to_data(text_to_load, format='yaml')
+        data[path.stem] = loads(text_to_load, format='yaml')
     return data
 
 

@@ -17,6 +17,7 @@ dependencies = [
   "requests>=2.32",
   "aiopath",
   "aioshutil",
+  "ibots-yaml-dir-parser"
 ]
 requires-python = ">= 3.12"
 authors = [
