@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<h1>{{ page.title }}</h1>
+<h1>{{ page.title }}-Steps</h1>
 
 <div class="steps steps-sm steps-horizontal-md steps-center">
 
@@ -59,8 +59,41 @@
       <h5 class="mb-2">{{ stats.consulting_statistics.total_hrs }} hours of coding</h5>
     </div>
   </div>
+</div>
 
 
+<h1>{{ page.title }}-Table</h1>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th scope="row">Number of unique scholars</th>
+        <td>{{ stats.consulting_statistics.num_unique_scholars }}</td>
+      </tr>
+
+      <tr>
+        <th scope="row">Number of short chats</th>
+        <td>{{ stats.consulting_statistics.num_short_sessions }}</td>
+      </tr>
+
+      <tr>
+        <th scope="row">Number of hands-on sessions</th>
+        <td>{{ stats.consulting_statistics.num_hands_on_sessions }}</td>
+      </tr>
+
+      <tr>
+        <th scope="row">Total number of sessions</th>
+        <td>{{ stats.consulting_statistics.total_sessions }}</td>
+      </tr>
+
+      <tr>
+        <th scope="row">Total time spent coding (hrs)</th>
+        <td>{{ stats.consulting_statistics.total_hrs }}</td>
+      </tr>
+
+    </tbody>
+  </table>
 </div>
 
 {% endblock %}
