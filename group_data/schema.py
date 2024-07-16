@@ -2,11 +2,14 @@ from __future__ import annotations
 
 from pydantic import BaseModel, EmailStr, HttpUrl, FilePath
 from typing import Optional, Literal
-from yaml_dir_parser import load_dir
+
 
 class Data(BaseModel):
     people: dict[str, Person]
     orgs: Orgs
+    skills: dict[str, Skill]
+    technologies: dict[str, Technology]
+    images: dict[str, FilePath]
 
 
 class Person(BaseModel):
@@ -24,6 +27,7 @@ class Person(BaseModel):
 class Orgs(BaseModel):
     partners: list[Partner]
 
+
 class Partner(BaseModel):
     name: str
     url: HttpUrl
@@ -37,10 +41,20 @@ class Institute(BaseModel):
     url: HttpUrl
 
 
+class Skill(BaseModel):
+    name: str
+    icon: str
+    short_description: str
 
-data = load_dir('data')
-dd = {}
-dd['people'] = data['people']
-dd['orgs'] = data['orgs']
-Data.model_validate(dd)
-# UserModel.model_validate(data)
+
+class Technology(BaseModel):
+    name: str
+    icon: str
+    homepage: HttpUrl
+
+
+if __name__ == '__main__':
+    from yaml_dir_parser import load_dir
+
+    data = load_dir('data')
+    Data.model_validate(data)
