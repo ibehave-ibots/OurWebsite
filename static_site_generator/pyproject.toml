@@ -16,7 +16,7 @@ dependencies = [
   "flask>=3.0",
   "requests>=2.32",
   "aiopath",
-  "aioshutil"
+  "aioshutil",
 ]
 requires-python = ">= 3.12"
 authors = [
