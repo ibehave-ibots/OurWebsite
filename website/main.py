@@ -15,11 +15,11 @@ from ssg.renderer import run_render_pipeline
 import shutil
 
 if not os.path.exists('theme'):
-    if not os.path.exists('theme.7z'):
+    if not os.path.exists('remote_files/theme.7z'):
         raise FileNotFoundError("Need theme.7z.  Be sure to run dvc pull to get the file.")
     import py7zr
     print('extracting theme.7z to theme...')
-    with py7zr.SevenZipFile('theme.7z') as f:
+    with py7zr.SevenZipFile('remote_files/theme.7z') as f:
         f.extract('.', ['theme'], recursive=True)
 
 if not os.path.exists("stats/"):
