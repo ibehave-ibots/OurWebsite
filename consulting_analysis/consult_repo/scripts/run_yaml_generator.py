@@ -1,4 +1,5 @@
 import papermill as pm
+import shutil
 
 params = {
     'raw_dir': 'raw',
@@ -7,10 +8,11 @@ params = {
 
 
 in_notebook = 'reports_to_yaml.ipynb'
-out_notebook = 'output.ipynb'
+out_notebook = 'reports_papermill/output.ipynb'
 
 pm.execute_notebook(
     in_notebook,
     out_notebook,
     params
 )
+
