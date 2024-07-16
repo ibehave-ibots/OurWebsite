@@ -57,4 +57,6 @@ if __name__ == '__main__':
     from yaml_dir_parser import load_dir
 
     data = load_dir('data')
+    print('checking...', end='', flush=True)
     Data.model_validate(data)
+    print('...validated!')
