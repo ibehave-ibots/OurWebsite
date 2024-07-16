@@ -8,6 +8,22 @@
 {{ data.people.sangeetha.name }}
 <img src="{{ data.people.sangeetha.image | asset | resize(50,50) | uri}}">
 
+<div class="steps">
+
+  <div class="step">
+    <div class="step-number text-primary">
+      <div class="step-number-inner">
+        <i class="bx bx-user fs-1"></i>
+      </div>  
+    </div>
+
+    <div class="step-body">
+      <h5 class="mb-2">{{ stats.consulting_statistics.num_unique_scholars }} Unique Scholars</h5>
+    </div>
+
+  </div>
+</div>
+
 <!-- Basic table -->
 <div class="table-responsive">
     <table class="table">
