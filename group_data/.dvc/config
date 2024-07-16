@@ -4,4 +4,4 @@
 ['remote "dev"']
     url = webdavs://uni-bonn.sciebo.de/public.php/webdav
     user = IXgTv4yANMa0AIl
-    password = jikYHbPZ2JT8iCnqwakv
+    password = ${DB_PWD}
