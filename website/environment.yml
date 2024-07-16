@@ -7,7 +7,7 @@ dependencies:
   - python=3.12
   - nodejs
   - pip:
-    - ibots-static-site-generator
+    - -e ../static_site_generator
     - dvc
     - dvc_webdav
     - dvc-gdrive
