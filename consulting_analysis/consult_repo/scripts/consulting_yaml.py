@@ -12,6 +12,7 @@ def main():
     extracted_consultants = template_doc.process(reports_path=reports)
 
     consultants = extracted_consultants[1:]
+    num_consultants = len(consultants)
     num_short_sessions = sum(consultant.num_short_sessions for consultant in consultants)
     total_sessions = sum(consultant.num_total_sessions for consultant in consultants)
     num_unique_scholars = len(set().union(*[consultant.scholars for consultant in consultants]))
@@ -20,6 +21,7 @@ def main():
 
 
     consulting_stats = {
+        'num_consultants': num_consultants,
         'num_short_sessions': num_short_sessions,
         'total_sessions': total_sessions,
         'num_unique_scholars': num_unique_scholars,
