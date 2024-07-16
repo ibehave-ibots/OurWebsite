@@ -4,9 +4,8 @@ import yaml
 
 def main():
     fs_raw = LocalFileSystem()
-    if not fs_raw.exists('raw/', details=False):
-        sciebo_download = ScieboDataDownload()
-        sciebo_download.download_reports(destination='raw/')
+    sciebo_download = ScieboDataDownload()
+    sciebo_download.download_reports(destination='raw/')
 
     template_doc = TemplateDocumentProcessor()
     reports = fs_raw.ls('raw/', detail=False)
@@ -17,6 +16,7 @@ def main():
     total_sessions = sum(consultant.num_total_sessions for consultant in consultants)
     num_unique_scholars = len(set().union(*[consultant.scholars for consultant in consultants]))
     num_hands_on_sessions = sum(consultant.num_hands_on_sessions for consultant in consultants)
+    time_all_hrs = sum(consultant.time_all_hrs for consultant in consultants)
 
 
     consulting_stats = {
@@ -24,6 +24,7 @@ def main():
         'total_sessions': total_sessions,
         'num_unique_scholars': num_unique_scholars,
         'num_hands_on_sessions': num_hands_on_sessions,
+        'total_hrs': time_all_hrs,
     }
 
     with open('consulting_statistics.yaml', 'w') as f:
