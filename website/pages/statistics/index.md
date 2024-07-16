@@ -1,3 +1,3 @@
 ---
-title: Statistical Analysis Results
+title: Consulting Statistics
 ---
