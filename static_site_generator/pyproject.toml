@@ -12,9 +12,6 @@ dependencies = [
   "markdown2",
   "PyYAML",
   "Pillow",
-  "dvc",
-  "dvc_webdav>=3.0",
-  "dvc-gdrive>=3.0",
   "wrapt>=1.16",
   "flask>=3.0",
   "requests>=2.32",
@@ -24,9 +21,9 @@ dependencies = [
 requires-python = ">= 3.12"
 authors = [
   {name = "Nicholas A. Del Grosso", email = "delgrosso.nick@gmail.com"},
-  {name = "Sangeetha Nandakumar", email = "sangeetha.nandakumar@gmail.com"},
 ]
 readme = "README.md"
 
 [project.optional-dependencies]
 dev = ["pytest", "ipdb", "pytest-asyncio"]
+release = ["build", "twine"]

@@ -1,9 +1,0 @@
-static:
-  theme/assets: _output/assets
-  site/_static: _output/static
-pages_dir: pages
-global_data_dir: data
-site_data_dir: site
-output_dir: _output
-output_static_dir: _output/static
-page_static_dirname: _static
