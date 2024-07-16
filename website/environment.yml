@@ -11,6 +11,7 @@ dependencies:
     - dvc
     - dvc_webdav
     - dvc-gdrive
+    - py7zr
 
   
 

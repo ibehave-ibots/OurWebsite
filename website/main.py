@@ -14,6 +14,14 @@ from ssg.server import build_server
 from ssg.renderer import run_render_pipeline
 import shutil
 
+if not os.path.exists('theme'):
+    if not os.path.exists('theme.7z'):
+        raise FileNotFoundError("Need theme.7z.  Be sure to run dvc pull to get the file.")
+    import py7zr
+    print('extracting theme.7z to theme...')
+    with py7zr.SevenZipFile('theme.7z') as f:
+        f.extract('.', ['theme'], recursive=True)
+
 if not os.path.exists("stats/"):
     os.makedirs('stats')
 shutil.copy("../consulting_analysis/consult_repo/consulting_statistics.yaml", "stats/")
