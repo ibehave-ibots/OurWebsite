@@ -1,10 +1,10 @@
-md5: 11c2bd8b0311ecd53e07ca1a23f58c45
+md5: db983147f8184f830ed0d2af34172e52
 frozen: true
 deps:
 - path: data
   repo:
     url: ../group_data
-    rev_lock: c2ec3dc8b17d46238b6706136d971de16aa1b004
+    rev_lock: 1d02f36dbe0c3c5ad246e8b012de7a242c0f428a
 outs:
 - md5: 38a9794832cde8103bfefc39aafc4276.dir
   size: 339878
