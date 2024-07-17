@@ -1,11 +1,14 @@
+from __future__ import annotations
+
 from datetime import datetime
 from typing import Literal
 from pydantic import BaseModel
-import yaml
-from fsspec.implementations.local import LocalFileSystem
+from yaml_dir_parser import load_dir
 
+class Data(BaseModel):
+    consulting_reports: dict[str, ConsultingReport]
 
-class Reports(BaseModel):
+class ConsultingReport(BaseModel):
     consultant: str
     content: str
     date: datetime
@@ -13,12 +16,6 @@ class Reports(BaseModel):
     topic: str
     type: Literal['short', 'hands']
 
-fs = LocalFileSystem()
-reports = fs.ls('output_yaml', detail=False)
 
-
-for report in reports:
-    with open(report) as f:
-        report_dict = yaml.safe_load(f)
-        Reports(**report_dict)
-
+data = load_dir('output_yaml')
+Data.model_validate(data)
