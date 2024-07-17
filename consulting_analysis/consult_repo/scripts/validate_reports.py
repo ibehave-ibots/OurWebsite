@@ -14,7 +14,7 @@ class ConsultingReport(BaseModel):
     date: datetime
     scholar: str
     topic: str
-    type: str
+    type: Literal['short', 'hands']
 
 
 data = load_dir('output_yaml')
