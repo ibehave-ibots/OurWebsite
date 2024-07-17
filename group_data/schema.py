@@ -57,8 +57,8 @@ class Technology(BaseModel):
     homepage: HttpUrl
 
 
-def load() -> Data:
-    data_py: dict = load_dir(DATA_PATH)
+def load(path: Path = DATA_PATH) -> Data:
+    data_py: dict = load_dir(path)
     data = Data(**data_py)
     return data
 
