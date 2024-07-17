@@ -1,4 +1,5 @@
 from __future__ import annotations
+from datetime import datetime
 
 from pydantic import BaseModel, EmailStr, HttpUrl, FilePath
 from typing import Optional, Literal
@@ -10,6 +11,7 @@ class Data(BaseModel):
     skills: dict[str, Skill]
     technologies: dict[str, Technology]
     images: dict[str, FilePath]
+    consulting_reports: Optional[dict[str, ConsultingReport]] = None
 
 
 class Person(BaseModel):
@@ -52,3 +54,10 @@ class Technology(BaseModel):
     icon: str
     homepage: HttpUrl
 
+class ConsultingReport(BaseModel):
+    consultant: str
+    content: str
+    date: datetime
+    scholar: str
+    topic: str
+    type: str #Literal['short', 'hands']

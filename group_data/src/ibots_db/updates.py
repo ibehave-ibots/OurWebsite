@@ -3,18 +3,37 @@ from __future__ import annotations
 import shutil
 from pathlib import Path, PurePosixPath
 from tempfile import TemporaryDirectory
-from typing import get_args
+from typing import Any, Dict, Type, _GenericAlias, GenericAlias, get_args, get_origin
 
 import yaml
-from ibots_db.funs import DATA_PATH, check_for_validation_errors, load
 from pydantic import BaseModel
+
+from . import schema
+from .funs import DATA_PATH, check_for_validation_errors, load
+
+
+def find_the_dict(annotation: Any) -> None | _GenericAlias:
+    if not isinstance(annotation, (_GenericAlias, GenericAlias)):
+        print(f'1: {annotation}')
+        return None
+    if get_origin(annotation) is dict:
+        return annotation
+    for arg in get_args(annotation):
+        if find_the_dict(arg) is not None:
+            return arg
+
 
 
 def _validate_entry(base_model: BaseModel, key: str, data: dict[str, BaseModel]) -> None:
     """Prepares schema for checking and makes sure data to be entered is of the correct type."""
     base_model.model_rebuild()
     field = base_model.model_fields[key]
-    key_type, value_type = get_args(field.annotation)
+    dict_annotation = find_the_dict(field.annotation)
+    if dict_annotation is None:
+        print(field.annotation)
+        raise TypeError(f"Look, you've got us a dict.  We've got {dict_annotation} here.")
+    key_type, value_type = get_args(dict_annotation)
+
     if not isinstance(data, dict):
         raise TypeError(f'data has to be of type dict. Not {type(data)}')
     for key, value in data.items():
@@ -39,12 +58,11 @@ def _copy_db_to_tempdir(data_path: Path = DATA_PATH) -> Path:
     return temp_dir
 
 
-def update_all(base_model: BaseModel, key: str, data: dict[str, BaseModel], data_path: Path = DATA_PATH):
+def update_all(key: str, data: dict[str, BaseModel], base_model: Type[BaseModel] = schema.Data, data_path: Path = DATA_PATH):
     _validate_entry(base_model=base_model, key=key, data=data)
 
     # Write the data
     temp_dir = _copy_db_to_tempdir()
-    print(str(PurePosixPath(temp_dir)))
     single_file_mode = temp_dir.joinpath(key).with_suffix('.yaml').exists()
     if single_file_mode:
         yaml_text = _pydantic_to_yaml(data=data)

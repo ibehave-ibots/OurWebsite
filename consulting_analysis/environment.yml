@@ -19,6 +19,7 @@ dependencies:
       - python-dotenv
       - pandas
       - papermill
+      - -e ../group_data
 
 
 
