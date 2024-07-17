@@ -19,6 +19,6 @@
 
 The website is always using the last-used version of the database, even if the database has been updated since.  This is a safety feature--it prevents changes to the database from pushing breaking changes onto the website, and it allows developers to try out the latest database temporarily and go back to the last working version if they aren't able to get the site working with the newest data.  We do, however, want to use the latest version of the database whenever possible.  Here's how to do this manually:
 
-1. `dvc update`.  This checks for any differences between the website's used version of the data and the db's current version and updates the website's version to match.
+1. `dvc update data`.  This checks for any differences between the website's used version of the data and the db's current version and updates the website's version to match.
 
 If you want to roll back, just rollback the `data.dvc` file and run another `dvc pull`.
