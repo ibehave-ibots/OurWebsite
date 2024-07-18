@@ -10,8 +10,10 @@ except ImportError:
 
 
 import asyncio
+from dataclasses import dataclass
+from typing import Any, Coroutine
 from ssg.renderer import run_render_pipeline
-from ssg.server import build_server
+from ssg.server import build_server, TornadoEventLoopCallable
 import shutil
 
 if not os.path.exists('theme'):
@@ -27,17 +29,17 @@ if not os.path.exists('../group_data/data'):
     raise FileNotFoundError("Need group database.  Be sure to run dvc pull to get it.")
 
 
-async def build_output():
-    await run_render_pipeline()
+
+page_builders = asyncio.run(run_render_pipeline())
 
 
-asyncio.run(build_output())
-
+# breakpoint()
 
 
 server = build_server()
-server.watch('pages/**/*', lambda: asyncio.ensure_future(build_output()))
+for md_path, (coro, args) in page_builders.items():
+    server.watch(md_path, TornadoEventLoopCallable(coro, args), delay=3)
+    
 server.serve()
 
-# asyncio.run(build_server())
 

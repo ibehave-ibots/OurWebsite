@@ -2,8 +2,9 @@ from __future__ import annotations
 
 import asyncio
 from collections import defaultdict
+from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from typing import Coroutine
+from typing import Any, Coroutine
 
 from aiopath import AsyncPath
 import jinja2
@@ -13,15 +14,24 @@ from .templates.jinja_renderer import build_jinja_environment
 import ibots_db
 
 
-async def run_render_pipeline(basedir='.') -> dict[str, Coroutine]:
+async def run_render_pipeline(basedir='.') -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
     basedir = Path(basedir)
     await copy_static_dirs(basedir)
     page_builders = await generate_page_builders(basedir)
-    await asyncio.gather(*page_builders.values())
+
+    await asyncio.gather(*(coro(*args) for coro, args in page_builders.values()))
     return page_builders
 
 
-async def generate_page_builders(basedir) -> dict[str, Coroutine]:
+
+
+
+
+        
+
+        
+
+async def generate_page_builders(basedir) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
     global_data = ibots_db.load(basedir / 'data').model_dump(mode='json')
     
     # Read site-wide data
@@ -33,7 +43,8 @@ async def generate_page_builders(basedir) -> dict[str, Coroutine]:
     async for page_path in AsyncPath(basedir / 'pages').glob('**/[!_]*.md'):
         if page_path.parent.name.startswith('_'):
             continue
-        page_build_tasks[page_path] = build_page(basedir, global_data, shared_data, page_path)
+
+        page_build_tasks[str(PurePosixPath(page_path))] = (build_page, (basedir, global_data, shared_data, page_path))
 
     return page_build_tasks
     
