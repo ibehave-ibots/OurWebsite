@@ -3,9 +3,3 @@ __pycache__
 .pytest_cache
 *.env
 *.docx
-data_consulting_stats
-processed_data
-analysis_data
-reports_papermill
-.snakemake
-*.yaml
