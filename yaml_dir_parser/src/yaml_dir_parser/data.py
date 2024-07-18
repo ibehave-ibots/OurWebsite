@@ -1,13 +1,8 @@
-from typing import Any, Dict, Literal
+from typing import Any, Dict
 from pathlib import Path, PurePosixPath
 
-import markdown2
 import yaml 
 
-loaders = {
-    'md': lambda text: markdown2.Markdown().convert(text),
-    'yaml': lambda text: yaml.load(text, yaml.Loader),
-}
 
 def load_dir(base_path: Path | str) -> Dict[str, Any]:
     base_path = Path(base_path)
@@ -18,7 +13,7 @@ def load_dir(base_path: Path | str) -> Dict[str, Any]:
 def _process_file(item: Path, base_path: Path, collections: Dict[str, Any]) -> None:
     if '.yaml' in item.name:
         text = item.read_text()
-        data = loads(text, format='yaml')
+        data = yaml.load(text, yaml.Loader)
 
         # overwrite absolute filepath strings with the absolute path to the referenced file.
         if isinstance(data, dict):
@@ -38,15 +33,6 @@ def _process_file(item: Path, base_path: Path, collections: Dict[str, Any]) -> N
     else:  # Not sure how to parse the file?  Then assign a filepath.
         collections[item.stem] = str(PurePosixPath(item))
 
-
-def loads(text, format: Literal['md', 'yaml']) -> Any:
-    try:
-        loader = loaders[format]
-    except KeyError:
-        raise NotImplementedError(f"{format} files not yet supported. Supported formats: {list(loaders.keys())}")
-    
-    data = loader(text)
-    return data
 
 
 def _extract_recursive(path: Path, base_path: Path) -> Dict[str, Any]:

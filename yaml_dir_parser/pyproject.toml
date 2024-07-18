@@ -7,7 +7,6 @@ name = "ibots-yaml-dir-parser"
 description = "Parses a directory of yaml and markdown data into a single Python dictionary."
 version = "0.0.1"
 dependencies = [
-  "markdown2",
   "PyYAML",
 ]
 requires-python = ">= 3.11"
