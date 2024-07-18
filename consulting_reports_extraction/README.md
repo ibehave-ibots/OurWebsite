@@ -1,4 +1,4 @@
-# Update 
+# Write consulting reports as yaml files to group data
 
 ### Constructing your consulting report
 

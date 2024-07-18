@@ -1,4 +1,4 @@
-name: consulting-analysis
+name: consulting-reports
 channels:
   - defaults
 dependencies: 
