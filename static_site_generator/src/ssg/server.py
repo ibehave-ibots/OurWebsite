@@ -1,6 +1,11 @@
 
+import asyncio
+from dataclasses import dataclass, field
+from typing import Any, Coroutine
+
 from flask import Flask, redirect, send_from_directory
 from livereload import Server
+from tornado.ioloop import IOLoop
 
 from .vendor_patches import patch_livereload_to_fix_bug_around_wsgi_support
 
@@ -25,3 +30,18 @@ def build_server() -> Server:
     patch_livereload_to_fix_bug_around_wsgi_support()
     server = Server(app=app.wsgi_app)
     return server
+
+
+@dataclass
+class TornadoEventLoopCallable:
+    coro: Coroutine
+    args: tuple[Any, ...] = field(default_factory=tuple, repr=False)
+    kwargs: dict[str, Any] = field(default_factory=dict, repr=False)
+
+    def __call__(self):
+        loop = IOLoop.current().asyncio_loop
+        awaitable = self.coro(*self.args, **self.kwargs)
+        result = asyncio.run_coroutine_threadsafe(awaitable, loop)
+        return True
+
+
