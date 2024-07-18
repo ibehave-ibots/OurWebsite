@@ -1,6 +1,0 @@
-__pycache__/
-*.pytest_cache
-dist
-*.egg-info
-consulting_data
-.env
