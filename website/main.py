@@ -22,9 +22,6 @@ if not os.path.exists('theme'):
     with py7zr.SevenZipFile('remote_files/theme.7z') as f:
         f.extract('.', ['theme'], recursive=True)
 
-if not os.path.exists("stats/"):
-    os.makedirs('stats')
-shutil.copy("../consulting_analysis/consult_repo/consulting_statistics.yaml", "stats/")
 
 if not os.path.exists('../group_data/data'):
     raise FileNotFoundError("Need group database.  Go over to the group_data folder and run dvc pull to get it.")
