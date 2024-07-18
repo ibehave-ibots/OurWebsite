@@ -7,28 +7,23 @@ from pathlib import Path, PurePosixPath
 from aiopath import AsyncPath
 import jinja2
 
-from .utils import copy, write_textfile
-from yaml_dir_parser import load_dir, loads
+from .utils import copy, write_textfile, loads
 from .templates.jinja_renderer import build_jinja_environment
-
+import ibots_db
 
 
 async def run_render_pipeline(basedir='.'):
     basedir = Path(basedir)
-    
-    # Copy Static Files
-    await asyncio.gather(
-        copy(basedir / 'shared/static', basedir / '_output/static'),
-        copy(basedir / 'theme/assets', basedir / '_output/assets'),
-    )
+    await copy_static_dirs(basedir)
+    await build_all_pages(basedir)
 
-    # Read Shared Data (no templating allowed)
-    global_data = load_dir(base_path= basedir / 'data')
-    stats_data = load_dir(base_path = basedir / 'stats')
+
+async def build_all_pages(basedir):
+    global_data = ibots_db.load(basedir / 'data').model_dump(mode='json')
     
     # Read site-wide data
     env = build_jinja_environment()
-    shared_data = await read_and_render_yaml_dir(base_dir=basedir / 'shared/data', env=env, data=global_data, stats=stats_data)
+    shared_data = await read_and_render_yaml_dir(base_dir=basedir / 'shared/data', env=env, data=global_data)
     
     # Walk through each 'pages' directory and render the pages found inside
     async for page_path in AsyncPath(basedir / 'pages').glob('**/[!_]*.md'):
@@ -39,7 +34,7 @@ async def run_render_pipeline(basedir='.'):
 
         subpages_data = defaultdict(dict)
         async for subpage_path in page_path.parent.glob('[!_]*/[!_]*.md'):
-            subpage_data = await read_and_render_page_data(basedir / 'pages', subpage_path, data=global_data, site=shared_data, stats=stats_data)
+            subpage_data = await read_and_render_page_data(basedir / 'pages', subpage_path, data=global_data, site=shared_data)
             subpages_data[subpage_data['type']][subpage_data['id']] = subpage_data
         subpages_data = dict(subpages_data)
         
@@ -47,17 +42,23 @@ async def run_render_pipeline(basedir='.'):
         # Render HTML Template
         env = build_jinja_environment([basedir / 'shared/templates', page_path.parent])
         template = env.get_template('template.html')
-        page_data = await read_and_render_page_data(basedir / 'pages', page_path, data=global_data, site=shared_data, stats=stats_data)
+        page_data = await read_and_render_page_data(basedir / 'pages', page_path, data=global_data, site=shared_data)
         page_html = await template.render_async(
             data=global_data, 
             site=shared_data, 
             page=page_data,
             subpages=subpages_data,
-            stats=stats_data,
         )
 
         output_path = Path(basedir / '_output').joinpath(page_data['url'])
         await write_textfile(path=output_path, text=page_html)
+
+
+async def copy_static_dirs(basedir):
+    await asyncio.gather(
+        copy(basedir / 'shared/static', basedir / '_output/static'),
+        copy(basedir / 'theme/assets', basedir / '_output/assets'),
+    )
 
 
 

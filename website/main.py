@@ -10,7 +10,6 @@ except ImportError:
 
 
 import asyncio
-from ssg.server import build_server
 from ssg.renderer import run_render_pipeline
 import shutil
 

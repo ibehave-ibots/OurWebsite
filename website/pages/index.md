@@ -1,22 +1,5 @@
 ---
 title: Home
-milestones:
-    {% for milestone in data.group.milestones %}
-    - date: {{ milestone.date }}
-      name: {{ milestone.name }}
-      summary: {{ milestone.summary }}
-      icon: {{ milestone.icon }}
-    {% endfor %}
-consulting: 
-    n_sessions: {{ data.group.consulting_stats.num_consulting_sessions}}
-    n_clients: {{ data.group.consulting_stats.num_of_clients}}
-    n_labs: {{ data.group.consulting_stats.which_labs_have_used_ibots }}
-    total_hours: {{ data.group.consulting_stats.total_hours_consulting }}
-workshop:
-    n_workshops: {{ data.group.workshop_stats.num_workshops }}
-    n_students: {{ data.group.workshop_stats.num_of_students }}
-    total_hours: {{ data.group.workshop_stats.total_teaching_hours }}
-
 ---
 
 ## Our Mission

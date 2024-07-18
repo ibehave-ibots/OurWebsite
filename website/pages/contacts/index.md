@@ -10,7 +10,7 @@ people:
         {% if person.role == "current" %}
         - id: {{ id }}
           name: {{ person.name }}
-          email: {{ person.email }}
+          email: {{ person.email or ''}}
           booking_url: {{ person.booking_url }}
           image: {{ person.image }}
         {% endif %}
@@ -20,7 +20,7 @@ people:
         {% if person.role == "past" %}
         - id: {{ id }}
           name: {{ person.name }}
-          email: {{ person.email }}
+          email: {{ person.email or ''}}
           image: {{ person.image }}
         {% endif %}
         {% endfor %}
@@ -29,7 +29,7 @@ people:
         {% if person.role not in ["past", "current"] %}
         - id: {{ id }}
           name: {{ person.name }}
-          email: {{ person.email }}
+          email: {{ person.email or ''}}
           image: {{ person.image }}
         {% endif %}
         {% endfor %}
