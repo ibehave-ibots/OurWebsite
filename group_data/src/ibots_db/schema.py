@@ -6,12 +6,27 @@ from typing import Optional, Literal
 
 
 class Data(BaseModel):
-    people: dict[str, Person]
+    consulting_reports: Optional[dict[str, ConsultingReport]] = None
+    images: dict[str, FilePath]
     orgs: Orgs
+    people: dict[str, Person]
+    group: GroupInfo
     skills: dict[str, Skill]
     technologies: dict[str, Technology]
-    images: dict[str, FilePath]
-    consulting_reports: Optional[dict[str, ConsultingReport]] = None
+
+
+class GroupInfo(BaseModel):
+    short_description: str
+    address: str
+    email: EmailStr
+    mailing_list_subscribe_url: HttpUrl
+    history: list[MilestoneEvent]
+
+
+class MilestoneEvent(BaseModel):
+    date: datetime
+    name: str
+    short_description: str
 
 
 class Person(BaseModel):
