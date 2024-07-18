@@ -19,13 +19,17 @@ Here are some guidelines to make sure that our pipeline can extract all the info
 
 ### Installation and running the pipeline
 
-1. Navigate the the path with `environment.yml`
+1. Setting environment variables.
+
+The pipeline needs credentials to access sciebo folder with consulting reports. Create a file named `.env` and set the environmental variables REPORT_USR and REPORT_PWD. 
+
+2. Installation of packages: Navigate the the path with `environment.yml`.
 
 ``` shell
 conda env create -f environment.yml
 conda activate consulting-analysis
 ```
 
-This installs all relevant libraries needed to run the pipeline
+This installs all relevant libraries needed to run the pipeline.
 
-2. Run the jupyter notebook titled `consulting_reports_pipeline.ipynb` using `consulting-analysis` kernel.
+3. Run the jupyter notebook titled `consulting_reports_pipeline.ipynb` using `consulting-analysis` kernel.
