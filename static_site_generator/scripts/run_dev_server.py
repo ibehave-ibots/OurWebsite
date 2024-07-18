@@ -23,8 +23,6 @@ asyncio.run(build_output())
 #     tasks += [run_render_pipeline(config=config)]
 #     await asyncio.gather(*tasks)
 
-# config = Config.from_path('config.yaml')
-# asyncio.run(build_output(config=config))
 
 
 
