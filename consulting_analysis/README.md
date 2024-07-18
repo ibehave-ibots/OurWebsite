@@ -1,5 +1,10 @@
 ### Constructing your consulting report
 
+Every iBOTS team member has one document in our team sciebo consulting reports folder. Name of the document should be the name of the consultant.
+
+Here are some guidelines to make sure that our pipeline can extract all the information from the reports.
+
+## 
 1. Each session is in a different page (use page breaks).
 2. Has the following key words: </br>
     Type: [short, hands] </br>
@@ -10,27 +15,17 @@
 3. (Recommended) Copy and paste the topic created with calendly event.
 4. (Recommended) You can make content as descriptive as you like. 
 
+---
 
+### Installation and running the pipeline
 
-### Workflows
+1. Navigate the the path with `environment.yml`
 
-#### Download raw reports
-```shell
-cd workflows/workflow_download
-snakemake --cores 1
+``` shell
+conda env create -f environment.yml
+conda activate consulting-analysis
 ```
 
-Raw Data Download: The download_from_sciebo rule will check if the raw/ directory exists. If not, it will download the raw reports from Sciebo using ScieboDataDownload.
+This installs all relevant libraries needed to run the pipeline
 
-Timestamp Deletion: The delete_timestamp rule checks for and deletes a timestamp file in the raw/ directory, then logs the download completion time in download.log. Timestamp file is used by snakemake and has no relevance for any of our analysis.
-
-#### Analysis results of consulting reports
-
-```shell
-cd workflows/workflow_analysis
-snakemake --cores 1
-```
-
-Raw Data Download: The download_from_sciebo rule will check if the raw/ directory exists. If not, it will download the raw reports from Sciebo using ScieboDataDownload.
-
-Data Analysis and Upload: The analysis_and_upload_to_sciebo rule processes the downloaded raw data, analyzes it to extract various metrics, and uploads the results back to Sciebo. The analysis results are also logged in analysis.log.
+2. Run the jupyter notebook titled `consulting_reports_pipeline.ipynb` using `consulting-analysis` kernel.
