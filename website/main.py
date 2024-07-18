@@ -23,9 +23,7 @@ if not os.path.exists('theme'):
 
 
 if not os.path.exists('../group_data/data'):
-    raise FileNotFoundError("Need group database.  Go over to the group_data folder and run dvc pull to get it.")
-shutil.copytree('../group_data/data', './data', dirs_exist_ok=True)
-
+    raise FileNotFoundError("Need group database.  Be sure to run dvc pull to get it.")
 
 
 async def build_output():
