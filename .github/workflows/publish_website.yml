@@ -11,7 +11,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -54,8 +54,8 @@ jobs:
           run: |
             python main.py render
 
-        # - name: Setup Pages
-        #   uses: actions/configure-pages@v5
+        - name: Setup Pages
+          uses: actions/configure-pages@v5
 
         # - name: Upload artifact
         #   uses: actions/upload-pages-artifact@v3
