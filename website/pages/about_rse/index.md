@@ -22,7 +22,7 @@ sections:
           
       
     - title: What is a RSC/Teaching RSE?
-      image: /static/service_distribution.png
+      image: pages/about_rse/assets/service_distribution.png
       paragraphs: 
         - Morbi id mattis orci. Maecenas elit sapien, viverra in urna eu, ornare finibus eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non tristique lacus, nec dapibus dui.
         - Sed volutpat tempor nunc, et ullamcorper arcu ullamcorper in. Nulla facilisis in sapien ut porttitor. Mauris commodo sollicitudin nibh a cursus. Proin porttitor dictum libero vel rhoncus. Vestibulum enim enim, iaculis in massa eu, vulputate laoreet nulla.
@@ -35,7 +35,7 @@ sections:
           icon: icon.svg
 
     - title: What Do We Do?
-      image: /static/service_distribution.png
+      image: pages/about_rse/assets/service_distribution.png
       paragraphs: 
         - >
           Morbi id mattis orci. Maecenas elit sapien, viverra in urna eu, ornare finibus eros. Lorem ipsum dolor sit amet, >consectetur adipiscing elit. Ut non tristique lacus, nec dapibus dui.

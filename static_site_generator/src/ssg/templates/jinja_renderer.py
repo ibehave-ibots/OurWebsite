@@ -33,7 +33,7 @@ def build_jinja_environment(search_path: str | list[Path|str] | None = None) -> 
             webserver_root=Path('./_output'),
             asset_path=Path('./_output/static'),
         )
-        env.globals['TEMPLATE_DIR'] = str(PurePosixPath(template_path)) + '/'
+        env.globals['TEMPLATE_DIR'] = str(PurePosixPath(template_path))
         env.filters.update({
             'asset': image_manager.build,
             'uri': image_manager.get_uri,
