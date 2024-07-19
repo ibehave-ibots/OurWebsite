@@ -33,11 +33,12 @@ jobs:
             dvc remote modify --local dev user ${{ secrets.DB_USERNAME }}
             dvc remote modify --local dev password ${{ secrets.DB_PASSWORD }}
             cat .dvc/config.local
-            dvc pull -v
+            dvc pull
             cd ../website
 
         - name: Pull other data dependencies
           run: |
+            dvc import data
             dvc pull -v -r dev
 
         
