@@ -28,14 +28,18 @@ jobs:
     steps:
         - uses: actions/checkout@v4
         
-        - name: Setup Micromamba
-          uses: mamba-org/setup-micromamba@v1
+        - name: Set up Python
+          uses: actions/setup-python@v3
           with:
-            micromamba-version: '1.5.8-0' # any version from https://github.com/mamba-org/micromamba-releases
-            environment-file: ./website/environment.yml
-            init-shell: powershell
-            cache-environment: true
-            post-cleanup: 'none'
+            python-version: '3.12'
+
+        - name: Install Package installer
+          run: |
+            pip install uv
+
+        - name: Install Python Dependencies
+          run: |
+            python -m uv pip install -r requirements.txt
 
         - name: Get latest Group Database data
           run: |
