@@ -4,6 +4,7 @@ from argparse import ArgumentParser
 import py7zr
 
 from ssg.api import build_dev_server, build_output
+from ssg.config import Config
 
 
 if not os.path.exists('theme'):
@@ -20,13 +21,16 @@ if not os.path.exists('./data'):
 
 parser = ArgumentParser()
 parser.add_argument('command', choices=['serve', 'render'])
+parser.add_argument('--base_url', default='', type=str)
 args = parser.parse_args()
 
+config = Config(base_url=args.base_url)
+
 if args.command == 'serve':
-    server = build_dev_server()
+    server = build_dev_server(config=config)
     server.serve()
 elif args.command == 'render':
-    build_output()
+    build_output(config=config)
 else:
     raise ValueError("not a valid option.")
 

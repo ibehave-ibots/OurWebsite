@@ -4,7 +4,7 @@ import asyncio
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from typing import Any, Coroutine
+from typing import Any, Coroutine, TYPE_CHECKING
 
 from aiopath import AsyncPath
 import jinja2
@@ -13,11 +13,14 @@ from .utils import copy, write_textfile, loads
 from .templates.jinja_renderer import build_jinja_environment
 import ibots_db
 
+if TYPE_CHECKING:
+    from .config import Config
 
-async def run_render_pipeline(basedir='.') -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
+
+async def run_render_pipeline(config: Config, basedir='.') -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
     basedir = Path(basedir)
     await copy_static_dirs(basedir)
-    page_builders = await generate_page_builders(basedir)
+    page_builders = await generate_page_builders(config=config, basedir=basedir)
 
     await asyncio.gather(*(coro(*args) for coro, args in page_builders.values()))
     return page_builders
@@ -31,7 +34,9 @@ async def run_render_pipeline(basedir='.') -> dict[str, tuple[Coroutine, tuple[A
 
         
 
-async def generate_page_builders(basedir) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
+async def generate_page_builders(config: Config, basedir) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
+    config_data = config.model_dump(mode='json')
+    
     global_data = ibots_db.load(basedir / 'data').model_dump(mode='json')
     
     # Read site-wide data
@@ -44,17 +49,17 @@ async def generate_page_builders(basedir) -> dict[str, tuple[Coroutine, tuple[An
         if page_path.parent.name.startswith('_'):
             continue
 
-        page_build_tasks[str(PurePosixPath(page_path))] = (build_page, (basedir, global_data, shared_data, page_path))
+        page_build_tasks[str(PurePosixPath(page_path))] = (build_page, (basedir, config_data, global_data, shared_data, page_path))
 
     return page_build_tasks
     
 
 
-async def build_page(basedir, global_data, shared_data, page_path):
+async def build_page(basedir, config_data, global_data, shared_data, page_path):
     print(f'Start Rendering: {page_path}')
     subpages_data = defaultdict(dict)
     async for subpage_path in page_path.parent.glob('[!_]*/[!_]*.md'):
-        subpage_data = await read_and_render_page_data(basedir / 'pages', subpage_path, data=global_data, site=shared_data)
+        subpage_data = await read_and_render_page_data(basedir / 'pages', subpage_path, config=config_data, data=global_data, site=shared_data)
         subpages_data[subpage_data['type']][subpage_data['id']] = subpage_data
     subpages_data = dict(subpages_data)
         
@@ -62,8 +67,9 @@ async def build_page(basedir, global_data, shared_data, page_path):
         # Render HTML Template
     env = build_jinja_environment([basedir / 'shared/templates', page_path.parent])
     template = env.get_template('template.html')
-    page_data = await read_and_render_page_data(basedir / 'pages', page_path, data=global_data, site=shared_data)
+    page_data = await read_and_render_page_data(basedir / 'pages', page_path, config=config_data, data=global_data, site=shared_data)
     page_html = await template.render_async(
+            config=config_data,
             data=global_data, 
             site=shared_data, 
             page=page_data,

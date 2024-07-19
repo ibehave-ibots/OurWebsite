@@ -11,7 +11,7 @@
                 <p class="fs-sm pb-lg-3 mb-4">{{ data.group.short_description }} </p>
 
                 <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
-                    <a href="https://ibehave.nrw/"><img src="/static/images/iBehave_Logo.png" width="90" alt="Silicon"></a>
+                    <a href="https://ibehave.nrw/"><img src="{{ config.base_url }}/static/images/iBehave_Logo.png" width="90" alt="Silicon"></a>
                     an iBehave Platform
                 </div>
             </div>
@@ -23,10 +23,10 @@
                         </h6>
                         <div id="useful-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
                             <ul class="nav flex-column pb-lg-1 mb-lg-3">
-                                <li class="nav-item"><a href="/index.html" class="nav-link d-inline-block px-0 pt-1 pb-2">Home</a></li>
+                                <li class="nav-item"><a href="{{ config.base_url }}/index.html" class="nav-link d-inline-block px-0 pt-1 pb-2">Home</a></li>
                                 {% for header in site.navbar.menu %}
                                 <li class="nav-item">
-                                    <a href="{{ header.url if not 'children' in header else header.children[0].url }}" class="nav-link d-inline-block px-0 pt-1 pb-2">{{ header.title }}</a>
+                                    <a href="{{ config.base_url + header.url if not 'children' in header else config.base_url + header.children[0].url }}" class="nav-link d-inline-block px-0 pt-1 pb-2">{{ header.title }}</a>
                                 </li>
                                 {% endfor %}
                             </ul>
@@ -38,8 +38,8 @@
                         </h6>
                         <div id="social-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
                             <ul class="nav flex-column mb-2 mb-lg-0">
-                                <li class="nav-item"><a href="/terms-and-conditions.html" class="nav-link d-inline-block px-0 pt-1 pb-2">Terms &amp; Conditions</a></li>
-                                <li class="nav-item"><a href="/privacy-policy.html" class="nav-link d-inline-block px-0 pt-1 pb-2">Privacy Policy</a></li>
+                                <li class="nav-item"><a href="{{ config.base_url }}/terms_and_conditions/" class="nav-link d-inline-block px-0 pt-1 pb-2">Terms &amp; Conditions</a></li>
+                                <li class="nav-item"><a href="{{ config.base_url }}/privacy_policy/" class="nav-link d-inline-block px-0 pt-1 pb-2">Privacy Policy</a></li>
                             </ul>
                         </div>
                     </div>

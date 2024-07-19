@@ -57,7 +57,7 @@ jobs:
 
         - name: Run rendering engine
           run: |
-            python main.py render
+            python main.py render --base_url /OurWebsite
 
         - name: Setup Pages
           uses: actions/configure-pages@v5
