@@ -1,0 +1,32 @@
+name: Upload Python Package
+
+on: [push]
+    
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./website
+
+    
+    steps:
+        - uses: actions/checkout@v4
+        
+        - name: Setup Miniconda
+          uses: conda-incubator/setup-miniconda@v3.0.4
+          with:
+            activate-environment: ibots-site
+            environment-file: ./environment.yml
+        
+        - name: Check Conda works
+          run: |
+            conda info
+            conda env list
+        
+        
