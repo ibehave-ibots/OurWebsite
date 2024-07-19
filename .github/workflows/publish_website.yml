@@ -27,8 +27,12 @@ jobs:
             cache-environment: true
             post-cleanup: 'all'
 
-        - name: Check DVC is available
+        - name: Get latest Group Database data
           run: |
-            dvc pull -v -r dev
+            dvc update data
+
+        - name: Pull other data dependencies
+          run: |
+            dvc pull -r dev
 
         
