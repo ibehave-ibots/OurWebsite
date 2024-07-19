@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-6 order-md-2 pb-2 pb-md-0 mb-4 mb-md-0">
                 <div class="ps-lg-5">
-                    <img src="{{ img | asset | imresize(600, 600) }}" class="rounded-3" alt="{{title}}">
+                    <img src="{{ img | asset | resize(600, 600) | uri }}" class="rounded-3" alt="{{title}}">
                 </div>
             </div>
             <div class="col-md-6 ordr-md-1">
@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col-md-6 pb-2 pb-md-0 mb-4 mb-md-0">
                 <div class="pe-lg-5">
-                    <img src="{{ img | asset | imresize(600, 600) }}" class="rounded-3" alt="Image">
+                    <img src="{{ img | asset | resize(600, 600) | uri }}" class="rounded-3" alt="Image">
                 </div>
             </div>
             <div class="col-md-6">

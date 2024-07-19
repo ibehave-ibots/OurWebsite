@@ -1,3 +1,4 @@
+---
 title: About Us
 sections:
     - title: What is an RSE?
@@ -52,3 +53,5 @@ sections:
         - title: Teach One of Our Workshops
           sentence:
           icon: icon.svg
+
+---
