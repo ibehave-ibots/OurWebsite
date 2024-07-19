@@ -25,7 +25,7 @@ jobs:
             environment-file: ./website/environment.yml
             init-shell: powershell
             cache-environment: true
-            post-cleanup: 'all'
+            post-cleanup: 'none'
 
         - name: Get latest Group Database data
           run: |
