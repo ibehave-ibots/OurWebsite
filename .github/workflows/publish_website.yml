@@ -38,7 +38,7 @@ jobs:
 
         - name: Pull other data dependencies
           run: |
-            dvc import data
+            dvc update data
             dvc pull -v -r dev
 
         
