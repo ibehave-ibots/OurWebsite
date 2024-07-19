@@ -1,4 +1,4 @@
-name: Upload Python Package
+name: Publish Website
 
 on: [push]
     
@@ -18,15 +18,23 @@ jobs:
     steps:
         - uses: actions/checkout@v4
         
-        - name: Setup Miniconda
-          uses: conda-incubator/setup-miniconda@v3.0.4
+        # - name: Setup Miniconda
+        #   uses: conda-incubator/setup-miniconda@v3.0.4
+        #   with:
+        #     activate-environment: ibots-site
+        #     environment-file: ./website/environment.yml  
+        
+        # - name: Check Conda works
+        #   run: |
+        #     conda info
+        #     conda env list
+        
+        - name: Setup Micromamba
+          uses: mamba-org/setup-micromamba@v1
           with:
-            activate-environment: ibots-site
-            environment-file: ./website/environment.yml  
-        
-        - name: Check Conda works
-          run: |
-            conda info
-            conda env list
-        
-        
+            micromamba-version: '1.5.8-0' # any version from https://github.com/mamba-org/micromamba-releases
+            environment-file: environment.yml
+            init-shell: >-
+                powershell
+                cache-environment: true
+                post-cleanup: 'all'
