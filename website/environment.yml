@@ -7,12 +7,7 @@ dependencies:
   - python=3.12
   - nodejs
   - pip:
-    - -e ../static_site_generator
-    - -e ../group_data
-    - dvc
-    - dvc_webdav
-    - dvc-gdrive
-    - py7zr
+    - -r requirements.txt
 
   
 
