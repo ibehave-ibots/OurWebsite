@@ -34,7 +34,7 @@ jobs:
             micromamba-version: '1.5.8-0' # any version from https://github.com/mamba-org/micromamba-releases
             environment-file: ./website/environment.yml
             init-shell: powershell
-            cache-environment: true
+            cache-environment: false
             post-cleanup: 'none'
 
         - name: Get latest Group Database data
@@ -57,11 +57,11 @@ jobs:
         - name: Setup Pages
           uses: actions/configure-pages@v5
 
-        # - name: Upload artifact
-        #   uses: actions/upload-pages-artifact@v3
-        #   with:
-        #     # Upload entire repository
-        #     path: './_output'
+        - name: Upload artifact
+          uses: actions/upload-pages-artifact@v3
+          with:
+            # Upload entire repository
+            path: './_output'
 
         # - name: Deploy to GitHub Pages
         #   id: deployment
