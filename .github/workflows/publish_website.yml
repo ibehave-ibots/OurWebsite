@@ -11,7 +11,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -57,12 +57,6 @@ jobs:
         - name: Run rendering engine
           run: |
             python main.py render
-
-        # - name: Deploy
-        #   uses: peaceiris/actions-gh-pages@v4
-        #   with:
-        #     github_token: ${{ secrets.GITHUB_TOKEN }}
-        #     publish_dir: ./_output
 
         - name: Setup Pages
           uses: actions/configure-pages@v5
