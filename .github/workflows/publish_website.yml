@@ -29,7 +29,7 @@ jobs:
 
         - name: Get latest Group Database data
           run: |
-            dvc update -r dev data
+            dvc update data
 
         - name: Pull other data dependencies
           run: |
