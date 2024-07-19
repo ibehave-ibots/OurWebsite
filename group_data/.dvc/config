@@ -1,5 +1,5 @@
 [core]
-    remote = backup
+    remote = dev
     autostage = true
 ['remote "dev"']
     url = webdavs://uni-bonn.sciebo.de/public.php/webdav

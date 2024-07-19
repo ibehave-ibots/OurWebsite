@@ -1,0 +1,72 @@
+name: Publish Website
+
+on: 
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./website
+
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write
+      
+    steps:
+        - uses: actions/checkout@v4
+        
+        - name: Set up Python
+          uses: actions/setup-python@v3
+          with:
+            python-version: '3.12'
+
+        # UV is super fast--I've tested micromamba (90secs cached, 200secs build), but installing from UV is only 24 seconds.
+        - name: Install Package installer
+          run: |
+            pip install uv
+
+        - name: Install Python Dependencies
+          run: |
+            python -m uv pip install -r requirements.txt
+
+        - name: Get latest Group Database data
+          run: |
+            cd ../group_data
+            dvc remote modify --local dev user ${{ secrets.DB_USERNAME }}
+            dvc remote modify --local dev password ${{ secrets.DB_PASSWORD }}
+            dvc pull
+            cd ../website
+
+        - name: Pull other data dependencies
+          run: |
+            dvc update data
+            dvc pull -r dev
+
+        - name: Run rendering engine
+          run: |
+            python main.py render
+
+        - name: Setup Pages
+          uses: actions/configure-pages@v5
+
+        - name: Upload artifact
+          uses: actions/upload-pages-artifact@v3
+          with:
+            path: 'website/_output'
+
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v4
