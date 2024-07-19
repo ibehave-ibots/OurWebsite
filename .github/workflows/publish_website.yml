@@ -22,7 +22,7 @@ jobs:
           uses: conda-incubator/setup-miniconda@v3.0.4
           with:
             activate-environment: ibots-site
-            environment-file: ./environment.yml
+            environment-file: ./website/environment.yml  
         
         - name: Check Conda works
           run: |
