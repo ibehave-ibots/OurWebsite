@@ -29,4 +29,6 @@ jobs:
 
         - name: Check DVC is available
           run: |
-            dvc pull -r dev
+            dvc pull -v -r dev
+
+        
