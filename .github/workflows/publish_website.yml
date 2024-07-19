@@ -33,8 +33,9 @@ jobs:
             dvc config core.remote dev
             dvc remote modify dev user ${{ secrets.DB_USERNAME }}
             dvc remote modify dev user ${{ secrets.DB_PASSWORD }}
+            dvc pull
             cd ../website
-            dvc update data
+            
 
         - name: Pull other data dependencies
           run: |
