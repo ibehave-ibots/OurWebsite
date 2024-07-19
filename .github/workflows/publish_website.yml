@@ -18,17 +18,6 @@ jobs:
     steps:
         - uses: actions/checkout@v4
         
-        # - name: Setup Miniconda
-        #   uses: conda-incubator/setup-miniconda@v3.0.4
-        #   with:
-        #     activate-environment: ibots-site
-        #     environment-file: ./website/environment.yml  
-        
-        # - name: Check Conda works
-        #   run: |
-        #     conda info
-        #     conda env list
-        
         - name: Setup Micromamba
           uses: mamba-org/setup-micromamba@v1
           with:
@@ -40,4 +29,4 @@ jobs:
 
         - name: Check DVC is available
           run: |
-            dvc pull
+            dvc pull -r dev
