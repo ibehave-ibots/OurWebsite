@@ -30,10 +30,10 @@ jobs:
         - name: Get latest Group Database data
           run: |
             cd ../group_data
-            dvc config core.remote dev
-            dvc remote modify dev user ${{ secrets.DB_USERNAME }}
-            dvc remote modify dev user ${{ secrets.DB_PASSWORD }}
-            dvc pull
+            dvc config --local core.remote dev
+            dvc remote modify --local dev user ${{ secrets.DB_USERNAME }}
+            dvc remote modify --local dev user ${{ secrets.DB_PASSWORD }}
+            dvc pull -v
             cd ../website
             
 
