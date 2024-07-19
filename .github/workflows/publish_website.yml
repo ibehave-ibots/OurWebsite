@@ -32,7 +32,7 @@ jobs:
             cd ../group_data
             dvc config --local core.remote dev
             dvc remote modify --local dev user ${{ secrets.DB_USERNAME }}
-            dvc remote modify --local dev user ${{ secrets.DB_PASSWORD }}
+            dvc remote modify --local dev password ${{ secrets.DB_PASSWORD }}
             cat .dvc/config.local
             dvc pull -v
             cd ../website
