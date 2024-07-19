@@ -11,7 +11,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -24,10 +24,6 @@ jobs:
     permissions:
       pages: write      # to deploy to Pages
       id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
       
     steps:
         - uses: actions/checkout@v4
@@ -58,15 +54,15 @@ jobs:
           run: |
             python main.py render
 
-        - name: Setup Pages
-          uses: actions/configure-pages@v5
+        # - name: Setup Pages
+        #   uses: actions/configure-pages@v5
 
-        - name: Upload artifact
-          uses: actions/upload-pages-artifact@v3
-          with:
-            # Upload entire repository
-            path: './_output'
+        # - name: Upload artifact
+        #   uses: actions/upload-pages-artifact@v3
+        #   with:
+        #     # Upload entire repository
+        #     path: './_output'
 
-        - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v4
+        # - name: Deploy to GitHub Pages
+        #   id: deployment
+        #   uses: actions/deploy-pages@v4
