@@ -33,7 +33,7 @@ jobs:
             dvc config --local core.remote dev
             dvc remote modify --local dev user ${{ secrets.DB_USERNAME }}
             dvc remote modify --local dev user ${{ secrets.DB_PASSWORD }}
-            cat .cvd/config.local
+            cat .dvc/config.local
             dvc pull -v
             cd ../website
             
