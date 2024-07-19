@@ -30,7 +30,7 @@
               </a>  
               <ul class="dropdown-menu">
                   {% for item in header.children %}
-                  <li><a class="dropdown-item" href="{{ config.base_url }}/{{ item.url }}">{{ item.title }}</a></li>
+                  <li><a class="dropdown-item" href="{{ config.base_url }}{{ item.url }}">{{ item.title }}</a></li>
                   {% endfor %}
               </ul>
           </li> 
