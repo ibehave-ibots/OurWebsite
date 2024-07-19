@@ -33,6 +33,7 @@ jobs:
           with:
             python-version: '3.12'
 
+        # UV is super fast--I've tested micromamba (90secs cached, 200secs build), but installing from UV is only 24 seconds.
         - name: Install Package installer
           run: |
             pip install uv
@@ -66,6 +67,6 @@ jobs:
           with:
             path: 'website/_output'
 
-        # - name: Deploy to GitHub Pages
-        #   id: deployment
-        #   uses: actions/deploy-pages@v4
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v4
