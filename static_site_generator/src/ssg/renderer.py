@@ -11,7 +11,7 @@ import jinja2
 
 from .utils import copy, write_textfile, loads
 from .templates.jinja_renderer import build_jinja_environment
-import ibots_db
+from .config import App
 
 if TYPE_CHECKING:
     from .config import Config
@@ -26,7 +26,8 @@ async def run_render_pipeline(config: Config) -> dict[str, tuple[Coroutine, tupl
 
 
 async def generate_page_builders(config: Config) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
-    global_data = ibots_db.load(config.base_dir / 'data').model_dump(mode='json')
+    app = App.from_config(config=config)
+    global_data =   app.global_data_loader.load(path=config.global_data_path)
     
     # Read site-wide data
     env = build_jinja_environment()
