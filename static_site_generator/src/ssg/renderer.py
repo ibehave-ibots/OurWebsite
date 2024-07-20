@@ -26,8 +26,6 @@ async def run_render_pipeline(config: Config) -> dict[str, tuple[Coroutine, tupl
 
 
 async def generate_page_builders(config: Config) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
-    config_data = config.model_dump(mode='json')
-    
     global_data = ibots_db.load(config.base_dir / 'data').model_dump(mode='json')
     
     # Read site-wide data
@@ -40,25 +38,40 @@ async def generate_page_builders(config: Config) -> dict[str, tuple[Coroutine, t
         if page_path.parent.name.startswith('_'):
             continue
 
-        page_build_tasks[str(PurePosixPath(page_path))] = (build_page, (config.base_dir, config_data, global_data, shared_data, page_path))
+        page_build_tasks[str(PurePosixPath(page_path))] = (build_page, (config, global_data, shared_data, page_path))
 
     return page_build_tasks
     
 
 
-async def build_page(basedir, config_data, global_data, shared_data, page_path):
+async def build_page(config: Config, global_data, shared_data, page_path):
+    config_data = config.model_dump(mode='json')
     print(f'Start Rendering: {page_path}')
     subpages_data = defaultdict(dict)
     async for subpage_path in page_path.parent.glob('[!_]*/[!_]*.md'):
-        subpage_data = await read_and_render_page_data(basedir / 'pages', subpage_path, config=config_data, data=global_data, site=shared_data)
+        subpage_data = await read_and_render_page_data(
+            config.base_dir / 'pages', 
+            subpage_path, 
+            config=config_data, 
+            data=global_data, 
+            site=shared_data
+        )
         subpages_data[subpage_data['type']][subpage_data['id']] = subpage_data
     subpages_data = dict(subpages_data)
         
 
-        # Render HTML Template
-    env = build_jinja_environment([basedir / 'shared/templates', page_path.parent])
+    # Render Page Data from Markdown/YAML File
+    env = build_jinja_environment([config.base_dir / 'shared/templates', page_path.parent])
     template = env.get_template('template.html')
-    page_data = await read_and_render_page_data(basedir / 'pages', page_path, config=config_data, data=global_data, site=shared_data)
+    page_data = await read_and_render_page_data(
+        config.base_dir / 'pages', 
+        page_path, 
+        config=config_data, 
+        data=global_data, 
+        site=shared_data
+    )
+
+    # Render page from HTML Template
     page_html = await template.render_async(
             config=config_data,
             data=global_data, 
@@ -67,7 +80,7 @@ async def build_page(basedir, config_data, global_data, shared_data, page_path):
             subpages=subpages_data,
         )
 
-    output_path = Path(basedir / '_output').joinpath(page_data['url'])
+    output_path = Path(config.base_dir / '_output').joinpath(page_data['url'])
     await write_textfile(path=output_path, text=page_html)
     print(f'Done Rendering: {page_path}')
 
