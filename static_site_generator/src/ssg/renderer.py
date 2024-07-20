@@ -17,24 +17,16 @@ if TYPE_CHECKING:
     from .config import Config
 
 
-async def run_render_pipeline(config: Config, basedir='.') -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
-    basedir = Path(basedir)
-    await copy_static_dirs(basedir)
-    page_builders = await generate_page_builders(config=config, basedir=basedir)
+async def run_render_pipeline(config: Config) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
+    await copy_static_dirs(basedir=config.base_dir)
+    page_builders = await generate_page_builders(config=config)
 
     await asyncio.gather(*(coro(*args) for coro, args in page_builders.values()))
     return page_builders
 
 
-
-
-
-
-        
-
-        
-
-async def generate_page_builders(config: Config, basedir) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
+async def generate_page_builders(config: Config) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
+    basedir = config.base_dir
     config_data = config.model_dump(mode='json')
     
     global_data = ibots_db.load(basedir / 'data').model_dump(mode='json')
@@ -81,7 +73,7 @@ async def build_page(basedir, config_data, global_data, shared_data, page_path):
     print(f'Done Rendering: {page_path}')
 
 
-async def copy_static_dirs(basedir):
+async def copy_static_dirs(basedir: Path):
     await asyncio.gather(
         copy(basedir / 'shared/static', basedir / '_output/static'),
         copy(basedir / 'theme/assets', basedir / '_output/assets'),
