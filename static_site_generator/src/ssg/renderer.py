@@ -26,22 +26,21 @@ async def run_render_pipeline(config: Config) -> dict[str, tuple[Coroutine, tupl
 
 
 async def generate_page_builders(config: Config) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
-    basedir = config.base_dir
     config_data = config.model_dump(mode='json')
     
-    global_data = ibots_db.load(basedir / 'data').model_dump(mode='json')
+    global_data = ibots_db.load(config.base_dir / 'data').model_dump(mode='json')
     
     # Read site-wide data
     env = build_jinja_environment()
-    shared_data = await read_and_render_yaml_dir(base_dir=basedir / 'shared/data', env=env, data=global_data)
+    shared_data = await read_and_render_yaml_dir(base_dir=config.base_dir / 'shared/data', env=env, data=global_data)
     
     # Walk through each 'pages' directory and render the pages found inside
     page_build_tasks = {}
-    async for page_path in AsyncPath(basedir / 'pages').glob('**/[!_]*.md'):
+    async for page_path in AsyncPath(config.base_dir / 'pages').glob('**/[!_]*.md'):
         if page_path.parent.name.startswith('_'):
             continue
 
-        page_build_tasks[str(PurePosixPath(page_path))] = (build_page, (basedir, config_data, global_data, shared_data, page_path))
+        page_build_tasks[str(PurePosixPath(page_path))] = (build_page, (config.base_dir, config_data, global_data, shared_data, page_path))
 
     return page_build_tasks
     
