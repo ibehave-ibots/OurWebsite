@@ -17,57 +17,61 @@ if TYPE_CHECKING:
     from .config import Config
 
 
-async def run_render_pipeline(config: Config, basedir='.') -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
-    basedir = Path(basedir)
-    await copy_static_dirs(basedir)
-    page_builders = await generate_page_builders(config=config, basedir=basedir)
+async def run_render_pipeline(config: Config) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
+    await copy_static_dirs(basedir=config.base_dir)
+    page_builders = await generate_page_builders(config=config)
 
     await asyncio.gather(*(coro(*args) for coro, args in page_builders.values()))
     return page_builders
 
 
-
-
-
-
-        
-
-        
-
-async def generate_page_builders(config: Config, basedir) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
-    config_data = config.model_dump(mode='json')
-    
-    global_data = ibots_db.load(basedir / 'data').model_dump(mode='json')
+async def generate_page_builders(config: Config) -> dict[str, tuple[Coroutine, tuple[Any, ...]]]:
+    global_data = ibots_db.load(config.base_dir / 'data').model_dump(mode='json')
     
     # Read site-wide data
     env = build_jinja_environment()
-    shared_data = await read_and_render_yaml_dir(base_dir=basedir / 'shared/data', env=env, data=global_data)
+    shared_data = await read_and_render_yaml_dir(base_dir=config.base_dir / 'shared/data', env=env, data=global_data)
     
     # Walk through each 'pages' directory and render the pages found inside
     page_build_tasks = {}
-    async for page_path in AsyncPath(basedir / 'pages').glob('**/[!_]*.md'):
+    async for page_path in AsyncPath(config.base_dir / 'pages').glob('**/[!_]*.md'):
         if page_path.parent.name.startswith('_'):
             continue
 
-        page_build_tasks[str(PurePosixPath(page_path))] = (build_page, (basedir, config_data, global_data, shared_data, page_path))
+        page_build_tasks[str(PurePosixPath(page_path))] = (build_page, (config, global_data, shared_data, page_path))
 
     return page_build_tasks
     
 
 
-async def build_page(basedir, config_data, global_data, shared_data, page_path):
+async def build_page(config: Config, global_data, shared_data, page_path):
+    config_data = config.model_dump(mode='json')
     print(f'Start Rendering: {page_path}')
     subpages_data = defaultdict(dict)
     async for subpage_path in page_path.parent.glob('[!_]*/[!_]*.md'):
-        subpage_data = await read_and_render_page_data(basedir / 'pages', subpage_path, config=config_data, data=global_data, site=shared_data)
+        subpage_data = await read_and_render_page_data(
+            config.base_dir / 'pages', 
+            subpage_path, 
+            config=config_data, 
+            data=global_data, 
+            site=shared_data
+        )
         subpages_data[subpage_data['type']][subpage_data['id']] = subpage_data
     subpages_data = dict(subpages_data)
         
 
-        # Render HTML Template
-    env = build_jinja_environment([basedir / 'shared/templates', page_path.parent])
+    # Render Page Data from Markdown/YAML File
+    env = build_jinja_environment([config.base_dir / 'shared/templates', page_path.parent])
     template = env.get_template('template.html')
-    page_data = await read_and_render_page_data(basedir / 'pages', page_path, config=config_data, data=global_data, site=shared_data)
+    page_data = await read_and_render_page_data(
+        config.base_dir / 'pages', 
+        page_path, 
+        config=config_data, 
+        data=global_data, 
+        site=shared_data
+    )
+
+    # Render page from HTML Template
     page_html = await template.render_async(
             config=config_data,
             data=global_data, 
@@ -76,12 +80,12 @@ async def build_page(basedir, config_data, global_data, shared_data, page_path):
             subpages=subpages_data,
         )
 
-    output_path = Path(basedir / '_output').joinpath(page_data['url'])
+    output_path = Path(config.base_dir / '_output').joinpath(page_data['url'])
     await write_textfile(path=output_path, text=page_html)
     print(f'Done Rendering: {page_path}')
 
 
-async def copy_static_dirs(basedir):
+async def copy_static_dirs(basedir: Path):
     await asyncio.gather(
         copy(basedir / 'shared/static', basedir / '_output/static'),
         copy(basedir / 'theme/assets', basedir / '_output/assets'),
