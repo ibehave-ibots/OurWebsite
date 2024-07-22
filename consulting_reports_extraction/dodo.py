@@ -29,5 +29,4 @@ def task_upload():
             yield {
                 'name': f'{consultant_name}_{file.stem}_upload',
                 'actions': [f'papermill -p consultant_name {consultant_name} -p entry_num {file.stem} "Upload.ipynb" "papermill_reports/upload/{consultant_name}/{file.stem}.ipynb"'],
-
             }
