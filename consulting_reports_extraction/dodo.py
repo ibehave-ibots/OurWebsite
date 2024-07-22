@@ -17,6 +17,7 @@ def task_extract():
         yield {
             'name': f'{consultant_name}_extract',
             'actions': [f'papermill -p consultant_name {consultant_name} "Extract.ipynb" "papermill_reports/extract/{consultant_name}.ipynb"'],
+            'task_dep': ['download']
         }
 
 def task_upload():
@@ -29,4 +30,5 @@ def task_upload():
             yield {
                 'name': f'{consultant_name}_{file.stem}_upload',
                 'actions': [f'papermill -p consultant_name {consultant_name} -p entry_num {file.stem} "Upload.ipynb" "papermill_reports/upload/{consultant_name}/{file.stem}.ipynb"'],
+                'task_dep': ['extract']
             }
