@@ -1,0 +1,1 @@
+doit (unoptimized): 42 second
