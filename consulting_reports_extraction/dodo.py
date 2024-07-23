@@ -1,10 +1,13 @@
 from pathlib import Path
 import papermill as pm
+import yaml
 
 pm.execute_notebook('Consultants.ipynb', 'papermill_reports/consultants/Consultants.ipynb')
-with open('data/consultants.txt', 'r') as f:
-    names = f.readlines()
-consultant_names = [name.strip() for name in names]
+f_consultants = 'data/consultants.yaml'
+with open(f_consultants, 'r') as f:
+    consultant_file = yaml.safe_load(f)
+
+consultant_names = [k for k, v in consultant_file.items() if v['download']]
     
 def task_download():
     """Downloading consulting reports"""       
