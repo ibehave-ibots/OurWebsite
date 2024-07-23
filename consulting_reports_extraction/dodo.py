@@ -12,8 +12,6 @@ def task_download():
         yield {
             'name': f'{consultant_name}_download',
             'actions': [f'papermill -p consultant_name {consultant_name} "Download.ipynb" "papermill_reports/download/{consultant_name}.ipynb"'],
-            'targets': [f"papermill_reports/download/{consultant_name}.ipynb", f"data/raw/{consultant_name}.docx"],
-            'file_dep': ['data/consultants.txt']
         }
 
 def task_extract():
@@ -22,7 +20,6 @@ def task_extract():
         yield {
             'name': f'{consultant_name}_extract',
             'actions': [f'papermill -p consultant_name {consultant_name} "Extract.ipynb" "papermill_reports/extract/{consultant_name}.ipynb"'],
-            'task_dep': ['download']
         }
 
 def task_upload():
@@ -35,5 +32,4 @@ def task_upload():
             yield {
                 'name': f'{consultant_name}_{file.stem}_upload',
                 'actions': [f'papermill -p consultant_name {consultant_name} -p entry_num {file.stem} "Upload.ipynb" "papermill_reports/upload/{consultant_name}/{file.stem}.ipynb"'],
-                'task_dep': ['extract']
             }
