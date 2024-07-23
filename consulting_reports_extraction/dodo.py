@@ -1,14 +1,19 @@
 from pathlib import Path
+import papermill as pm
 
-consultant_names = ['sangeetha', 'mohammad', 'nick']
-
+pm.execute_notebook('Consultants.ipynb', 'papermill_reports/consultants/Consultants.ipynb')
+with open('data/consultants.txt', 'r') as f:
+    names = f.readlines()
+consultant_names = [name.strip() for name in names]
+    
 def task_download():
-    """Downloading consulting reports"""
-
+    """Downloading consulting reports"""       
     for consultant_name in consultant_names:
         yield {
             'name': f'{consultant_name}_download',
             'actions': [f'papermill -p consultant_name {consultant_name} "Download.ipynb" "papermill_reports/download/{consultant_name}.ipynb"'],
+            'targets': [f"papermill_reports/download/{consultant_name}.ipynb", f"data/raw/{consultant_name}.docx"],
+            'file_dep': ['data/consultants.txt']
         }
 
 def task_extract():
