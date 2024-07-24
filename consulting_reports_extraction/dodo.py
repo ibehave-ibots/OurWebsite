@@ -41,3 +41,19 @@ def task_extract():
             'clean': True
         }
     
+def task_upload():
+    """Uploading to group_data"""
+    in_notebook = "Upload.ipynb" 
+    for consultant_name in consultant_names:
+        Path(f'papermill_reports/upload/{consultant_name}').mkdir(exist_ok=True)
+        entry_nums = [file.stem for file in Path(f'data/entries/{consultant_name}/').glob('*.txt')]
+        for entry_num in entry_nums:
+            out_name = f"{consultant_name}_{str(entry_num).zfill(3)}_upload"
+            out_notebook = os.path.join(papermill_dir, "upload", consultant_name, f"{out_name}.ipynb")
+            yield {
+                'name': out_name,
+                'actions': [f'papermill -p consultant_name {consultant_name} -p entry_num {entry_num} {in_notebook} {out_notebook}'],
+                'task_dep': ["extract"],
+                'file_dep': [Path(file) for file in Path(f'data/entries/{consultant_name}/').glob('*.txt')],
+                'clean': True
+            }
