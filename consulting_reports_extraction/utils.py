@@ -26,5 +26,5 @@ def get_reports():
     flag = any([fs.ukey(r) != uk for (r, uk) in check_change.items()])
     if flag:
         return reports
-    return reports
+    return []
 
