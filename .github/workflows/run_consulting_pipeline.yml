@@ -41,7 +41,9 @@ jobs:
                 REPORT_PWD: ${{ secrets.REPORT_PWD }}
               if: github.ref == 'refs/heads/consult_pipeline'
               run: |
-                doit
+                doit download
+                doit extract
+                doit upload
 
 
             
