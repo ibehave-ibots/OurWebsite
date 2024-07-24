@@ -5,7 +5,8 @@ from pathlib import Path
 import yaml
 
 
-def flag_change():
+
+def get_reports():
     load_dotenv()
     USR = os.getenv('HASH_USR')
     PWD = os.getenv('HASH_PWD')
@@ -19,7 +20,11 @@ def flag_change():
         check_change = {r:fs.ukey(r) for r in reports}
         yaml_string = yaml.dump(check_change)
         fs.write_text('check_change.yaml', yaml_string)
-        exit()
+        return reports
 
     check_change = yaml.safe_load(fs.read_text(check_change_yaml[0]))
-    return any([fs.ukey(r) != uk for (r, uk) in check_change.items()])
+    flag = any([fs.ukey(r) != uk for (r, uk) in check_change.items()])
+    if flag:
+        return reports
+    return reports
+
