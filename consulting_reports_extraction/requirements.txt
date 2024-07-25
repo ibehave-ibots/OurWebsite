@@ -9,3 +9,5 @@ python-docx
 python-dotenv
 doit
 papermill
+jupyter
+ipykernel
