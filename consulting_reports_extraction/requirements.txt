@@ -1,0 +1,10 @@
+-e ../group_data
+livereload
+dvc
+dvc_webdav
+dvc-gdrive
+webdav4
+fsspec
+python-docx
+python-dotenv
+pydoit
