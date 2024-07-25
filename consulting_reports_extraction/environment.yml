@@ -12,6 +12,7 @@ dependencies:
       - python-docx
       - python-dotenv
       - doit
+      - papermill
       - -e ../group_data
 
 

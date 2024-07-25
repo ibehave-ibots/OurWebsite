@@ -8,3 +8,4 @@ fsspec
 python-docx
 python-dotenv
 doit
+papermill
