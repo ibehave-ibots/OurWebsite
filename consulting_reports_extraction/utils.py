@@ -25,6 +25,9 @@ def get_reports():
     check_change = yaml.safe_load(fs.read_text(check_change_yaml[0]))
     flag = any([fs.ukey(r) != uk for (r, uk) in check_change.items()])
     if flag:
+        change = {r:fs.ukey(r) for r in reports}
+        yaml_string = yaml.dump(change)
+        fs.write_text('check_change.yaml', yaml_string)
         return reports
     return []
 
