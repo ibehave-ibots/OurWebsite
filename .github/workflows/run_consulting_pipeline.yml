@@ -11,6 +11,11 @@ jobs:
                 working-directory: ./consulting_reports_extraction
         steps:
             - uses: actions/checkout@v4
+
+            - name: Setting Up Python (3.12)
+              uses: actions/setup-python@v3
+              with:
+                  python-version: '3.12'
               
             - name: Install Python Libraries
               run: |
