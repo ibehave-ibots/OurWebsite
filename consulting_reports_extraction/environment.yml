@@ -11,7 +11,7 @@ dependencies:
       - fsspec
       - python-docx
       - python-dotenv
-      - pydoit
+      - doit
       - -e ../group_data
 
 
