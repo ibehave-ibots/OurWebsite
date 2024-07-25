@@ -18,7 +18,8 @@ jobs:
                 auto-activate-base: false
                 
             - name: Create Conda Environment
-              run: conda env create -f environment.yml
+              run: | 
+                conda env create -f environment.yml
               
             - name: Activate Conda Environment
               run: |
