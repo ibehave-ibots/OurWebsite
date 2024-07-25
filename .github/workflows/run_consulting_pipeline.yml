@@ -11,20 +11,10 @@ jobs:
                 working-directory: ./consulting_reports_extraction
         steps:
             - uses: actions/checkout@v4
-
-            - name: Set up Miniconda
-              uses: conda-incubator/setup-miniconda@v2
-              with:
-                auto-activate-base: false
-                
-            - name: Create Conda Environment
-              run: | 
-                conda env create -f environment.yml
               
-            - name: Activate Conda Environment
+            - name: Install Python Libraries
               run: |
-                conda activate consulting-reports 
-                echo "Conda environment activated."
+                pip install -r requirements.txt 
 
             - name: Get latest Group Database data
               run: |
