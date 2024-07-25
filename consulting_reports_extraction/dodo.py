@@ -54,6 +54,6 @@ def task_upload():
                 'name': out_name,
                 'actions': [f'papermill -p consultant_name {consultant_name} -p entry_num {entry_num} {in_notebook} {out_notebook}'],
                 'task_dep': ["extract"],
-                'file_dep': [Path(file) for file in Path(f'data/entries/{consultant_name}/').glob('*.txt')],
+                'file_dep': Path(f'data/entries/{consultant_name}/').glob('*.txt'),
                 'clean': True
             }
