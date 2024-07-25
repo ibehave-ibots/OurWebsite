@@ -16,10 +16,15 @@ jobs:
               uses: actions/setup-python@v3
               with:
                   python-version: '3.12'
+
+            - name: Install Package installer
+              run: |
+                pip install uv
+                  
               
             - name: Install Python Libraries
               run: |
-                pip install -r requirements.txt 
+                python -m uv pip install -r requirements.txt 
 
             - name: Get latest Group Database data
               run: |
