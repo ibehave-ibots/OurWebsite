@@ -1,0 +1,51 @@
+name: Consulting Report Extraction
+
+on: 
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: windows-latest
+        defaults:
+            run:
+                working-directory: ./consulting_reports_extraction
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Set up Miniconda
+              uses: conda-incubator/setup-miniconda@v2
+              with:
+                auto-activate-base: false
+                
+            - name: Create Conda Environment
+              run: conda env create -f environment.yml
+              
+            - name: Activate Conda Environment
+              run: |
+                conda activate consulting-reports 
+                echo "Conda environment activated."
+
+            - name: Get latest Group Database data
+              run: |
+                cd ../group_data
+                dvc remote modify --local dev user ${{ secrets.DB_USERNAME }}
+                dvc remote modify --local dev password ${{ secrets.DB_PASSWORD }}
+                dvc pull
+                cd ../consulting_reports_extraction
+      
+            - name: Check branch and run script
+              env:
+                HASH_USR: ${{ secrets.HASH_USR }}
+                HASH_PWD: ${{ secrets.HASH_PWD }}
+                REPORT_USR: ${{ secrets.REPORT_USR }}
+                REPORT_PWD: ${{ secrets.REPORT_PWD }}
+              if: github.ref == 'refs/heads/consult_pipeline'
+              run: |
+                doit download
+                doit extract
+                doit upload
+
+
+            
+        
+                
