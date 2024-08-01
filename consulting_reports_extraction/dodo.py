@@ -3,16 +3,15 @@ import os
 from utils import get_reports
 
 
-papermill_dir = "papermill_reports/"
-data_dir = "data"
-os.makedirs('papermill_reports/', exist_ok=True)
-os.makedirs('papermill_reports/download', exist_ok=True)
-os.makedirs('papermill_reports/extract', exist_ok=True)
-os.makedirs('papermill_reports/upload', exist_ok=True)
 consultant_names = [Path(r).stem for r in get_reports()]
+
 
 def task_download():
     """Downloading raw reports (.docx) files"""
+    
+    data_dir = "data"
+    papermill_dir = "papermill_reports/"
+    Path('papermill_reports/download').mkdir(parents=True, exist_ok=True)
 
     for consultant_name in consultant_names:
         in_notebook = "Download.ipynb"        
@@ -26,8 +25,12 @@ def task_download():
             'clean': True
         }
 
+
 def task_extract():
     """Extracting entries from downloaded reports"""
+
+    papermill_dir = "papermill_reports/"
+    Path('papermill_reports/extract').mkdir(parents=True, exist_ok=True)
 
     for consultant_name in consultant_names:
         in_notebook = "Extract.ipynb"        
@@ -41,8 +44,13 @@ def task_extract():
             'clean': True
         }
     
+
 def task_upload():
     """Uploading to group_data"""
+
+    papermill_dir = "papermill_reports/"
+    Path('papermill_reports/upload').mkdir(parents=True, exist_ok=True)
+
     in_notebook = "Upload.ipynb" 
     for consultant_name in consultant_names:
         Path(f'papermill_reports/upload/{consultant_name}').mkdir(exist_ok=True)
