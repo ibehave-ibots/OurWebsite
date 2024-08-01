@@ -2,7 +2,7 @@
 title: Home
 ---
 
-## Our Mission a
+## Our Mission is ...
 Lorem ip ddor sitj, stetur adipiscing elit Vestibulum maximus porta ex, ac ultricies eros pellentesque ac.In hac habitasse platea dictumst. In velit magna, porta at luctus sit amet, consectetur a nisi.Proin sed risus quis libero finibus lobortis. Ut tristique nisi varius magna mattis pellentesque. Vivamus ullamcorper eros suscipit blandit volutpat. Aliquam eget sapie tincidunt, vulputate odio vitae, mattis dui. In hac habitasse platea dictumst.
 
 Cras lectus leo, volutpat eget lorem eu, rutrum finibus est. Maecenas in nulla malesuada, mattis augue quis, molestie mauris. Vestibulum ullamcorper a massa in faucibus. Pellentesque ultricies mauris et facilisis luctus. Aenean gravida consectetur arcu. Sed mattis massa sit amet felis mollis, nec auctor augue finibus. Integer lacinia vulputate dignissim. Aenean ac lacus mi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce lacinia est sed feugiat sollicitudin. Vivamus convallis ultricies sodales.
