@@ -1,2 +1,0 @@
-doit (notebooks per consultant): 42 second
-doit (notebooks per consultant per entry in Upload): 8 minute
