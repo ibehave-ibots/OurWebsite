@@ -1,5 +1,4 @@
 -e ../static_site_generator
--e ../group_data
 dvc
 dvc_webdav
 dvc-gdrive
