@@ -1,9 +1,0 @@
-[core]
-    remote = dev
-    autostage = true
-['remote "dev"']
-    url = webdavs://uni-bonn.sciebo.de/public.php/webdav
-    user = IXgTv4yANMa0AIl
-    password = ${DB_PWD}
-['remote "backup"']
-    url = gdrive://1n59ectPwYRJbyV6sngvKOpmAAfUkD9Ca
